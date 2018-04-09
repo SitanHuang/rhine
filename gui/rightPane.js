@@ -33,7 +33,7 @@ function showDivisionDetailOnFloat(i, td) {
   <td>${abbreviate(div.template.heavy, 2, false, false)}
   </table>
   `;
-  createFloatingDIV(buffer, td.getBoundingClientRect().left - 300,
+  createFloatingDIV(buffer, td.getBoundingClientRect().left - 350,
     td.getBoundingClientRect().top.clamp(0, window.innerHeight - 500));
 }
 
