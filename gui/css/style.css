@@ -1,0 +1,171 @@
+h1, h2, h3 {
+  font-family: 'Roboto Mono', Monaco, Consolas, Courier, monospace;
+  line-height: 2em;
+}
+
+#map-container > table td {
+  width: 28px;
+  height: 28px;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+  cursor: default;
+}
+
+#map-container > table td > terrain {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  height: 28px;
+  line-height: 28px;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+#map-container > table td > mark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    background: #5b5bec;
+}
+
+#map-container > table td > number {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 5px;
+  height: 28px;
+  line-height: 28px;
+  z-index: 3;
+  font-weight: bold;
+}
+
+#map-container > table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  user-select: none;
+}
+
+#left, #right {
+  width: 17.5%;
+  height: 100%;
+  min-width: 340px;
+  background: wheat;
+}
+
+#left .tabs {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  user-select: none;
+}
+
+#left .tabs > span:hover {
+  opacity: 0.5;
+}
+
+#left span, #left strong, #left-content, table.statistic, #right-content {
+  user-select: none;
+}
+
+#left .tabs > .active {
+  background: #4caf50;
+  color: white;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+table.divisions tr > td:first-child:not(.hp) {
+  white-space: nowrap;
+  overflow-x: hidden;
+  max-width: 220px;
+  text-overflow: ellipsis;
+  line-height: 32px;
+}
+
+table.divisions tr > td:last-child {
+  text-align: right;
+}
+
+table.divisions tr > td.hp {
+  height: 2px;
+}
+table.divisions tr > td.hp > div {
+  height: 100%;
+  transform: translateY(-250%);
+  image-rendering: pixelated;
+}
+
+table.statistic, table.divisions {
+  width: 100%;
+}
+
+table.statistic tr {
+  height: 1.5em;
+}
+
+table.statistic td {
+  text-align: right;
+  vertical-align: top;
+}
+
+table.statistic td.small {
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+table.statistic th {
+  text-align: left;
+  vertical-align: top;
+}
+
+#left .tabs > span {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 55px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #e2d6c0;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+#left-content, #right-content {
+  padding: 10px;
+  overflow-y: auto;
+  height: calc(100% - 62px)
+}
+
+#controls button {
+  width: 32px;
+  padding: 0 10px;
+}
+
+#playerID {
+  font-weight: bold;
+  cursor: default !important;
+}
+
+#map-container {
+  overflow: auto;
+  width: 65%;
+  height: 100%;
+}
+
+body {
+  overflow: auto;
+  font-family: Courier New, Courier, monospace;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-flow: row;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  transition: all .3s ease;
+}
