@@ -28,8 +28,9 @@ function createFloatingDIV(text, clientX, clientY) {
   return div;
 }
 
-document.onkeydown = function(evt) {
-  if (document.activeElement.tagName.toLowerCase() != 'body') return;
+window.onkeydown = function(evt) {
+  let tagName = document.activeElement.tagName.toLowerCase();
+  if (tagName == 'input') return;
   evt = evt || window.event;
   if (evt.keyCode == 27) {
     removeAllSelectedDivisions();
