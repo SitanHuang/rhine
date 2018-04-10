@@ -9,7 +9,7 @@ Features:
 * single player against AI
 * **NO INSTALL REQUIRED**
 
-## 1. [Download](https://github.com/SitanHuang/rhine/archive/v0.9.zip) and extract ZIP
+## 1. [Download](https://github.com/SitanHuang/rhine/releases/download/v0.9/rhine-0.9.zip) and extract ZIP
 ## 2. Open index.html in Google Chrome
 ## 3. Read [Tutorial](https://github.com/SitanHuang/rhine/wiki) and Play
 
