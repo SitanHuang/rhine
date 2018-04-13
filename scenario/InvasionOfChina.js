@@ -107,8 +107,11 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
   .split('\n').map((x, row) => (x.split('').map((v, col) => {
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
-    if (o == 1) slots = Array(55).fill('F');
+	  if (v == 'U'){
+	if (o == 1) slots = Array(55).fill('F');
     else slots = Array(5).fill('F');
+      
+	  }
     return {terrain: v, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
   
   })));
