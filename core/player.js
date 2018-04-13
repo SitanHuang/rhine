@@ -63,6 +63,7 @@ class Player {
     this.cities = MAP_DATA.reduce((a, b) => a.concat(b), [])
       .filter(col => {
         if (col.owner == that.playerID) {
+          if (col.terrain == '@') return false;
           this.factories += factoriesInProv(col);
           this.divisions += col.divisions.length;
 		  col.divisions.forEach(div => (that.averageStrength += div.hp))

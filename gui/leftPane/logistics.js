@@ -156,6 +156,6 @@ function updateLogistics() {
   <button onclick="toggleFactoriesOnClick(this)">Toggle Factories View</button><br><br>
   <button onclick="toggleSuppliesOnClick(this)">Toggle Supplies View</button><br>
   <br><br><br>
-  <p>V0.3.1</p>
+  <p>V0.4.1</p>
   `;
 }

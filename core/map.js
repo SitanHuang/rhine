@@ -42,6 +42,7 @@ window.TERRAINS = {
   },
   M: {
     name: 'Mountain',
+    color: 'green',
     defense: 3,
     attrition: 0.6,
     movement: 0.2, // 5
@@ -49,6 +50,7 @@ window.TERRAINS = {
   },
   D: {
     name: 'Desert',
+    color: '#a0a001',
     defense: 1.2,
     attrition: 0.4,
     movement: 0.1, // 10
@@ -56,6 +58,7 @@ window.TERRAINS = {
   },
   R: {
     name: 'River',
+    color: 'blue',
     defense: 2,
     attrition: 0.4,
     movement: 1, // 1
@@ -70,9 +73,18 @@ window.TERRAINS = {
   },
   U: {
     name: 'Urban',
+    color: '#db4437',
     defense: 5,
     attrition: 1.3,
     movement: 1,
     slots: 35
+  },
+  '@': {
+	name: 'Non-accessible',
+  color: 'transparent',
+	defense: 0,
+	attrition: 0,
+	movement: -10,
+	slots: 0
   }
 }

@@ -9,6 +9,8 @@ function unit_pathfind(start, end) {
           w += col.divisions.length * 2 + 10;
         }
       }
+      if (col.terrain == '@')
+        return 0;
       return 1 / terrain.movement * 2 + 1 + w;
     })
   }));
@@ -23,7 +25,7 @@ function unit_pathfind(start, end) {
 function unit_pathfind_friendly_only(start, end) {
   var graphWithWeight = new Graph(MAP_DATA.map(row => {
     return row.map(col => {
-      return col.owner == currentPlayerID ? 1 : 0;
+      return col.owner == currentPlayerID ? (col.terrain == '@' ? 0 : 1) : 0;
     })
   }));
   let startWithWeight = graphWithWeight.grid[start.row][start.col];

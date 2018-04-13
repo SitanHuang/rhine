@@ -3,6 +3,17 @@ h1, h2, h3 {
   line-height: 2em;
 }
 
+waiting {
+  position: fixed;
+  top: 25vh;
+  width: 50vw;
+  text-align: center;
+  min-height: 50vh;
+  background: wheat;
+  z-index: 100000000;
+  border: 20px solid #4caf50;
+}
+
 #map-container > table td {
   width: 28px;
   height: 28px;
@@ -80,7 +91,9 @@ h1, h2, h3 {
 table.divisions tr > td:first-child:not(.hp) {
   white-space: nowrap;
   overflow-x: hidden;
-  max-width: 220px;
+  width: 265px;
+  max-width: 265px;
+  min-width: 265px;
   text-overflow: ellipsis;
   line-height: 32px;
 }

@@ -12,6 +12,7 @@ class Ai {
       for (let col = 0; col < MAP_DATA[row].length; col++) {
         let p = pt(row, col);
         let prov = p.prov;
+        if (prov.terrain == '@') continue;
         if (p.owner != player) continue;
         if (p.adjacentNotToPlayer(player) > 0) {
           this.adjacentBlocks.push(p);

@@ -20,16 +20,22 @@ function handlePlayerOnPass() {
 }
 
 function pass() {
-  handlePlayerOnPass();
-  if (++currentPlayerID >= PLAYERS.length) currentPlayerID = 0;
-  currentPlayer = PLAYERS[currentPlayerID];
-  currentPlayer.calcCities();
-  currentPlayer.produce();
-  currentPlayer.growManpower();
+  let waiting = document.createElement('waiting');
+  waiting.innerHTML = '<h1>Processing</h1>';
+  document.body.append(waiting);
+  setTimeout(() => {
+    handlePlayerOnPass();
+    if (++currentPlayerID >= PLAYERS.length) currentPlayerID = 0;
+    currentPlayer = PLAYERS[currentPlayerID];
+    currentPlayer.calcCities();
+    currentPlayer.produce();
+    currentPlayer.growManpower();
 
-  // interface
-  repaintCanvas();
-  updateInterfaceOnPass();
+    // interface
+    repaintCanvas();
+    updateInterfaceOnPass();
+    waiting.remove();
+  }, 5);
 }
 
 pass();

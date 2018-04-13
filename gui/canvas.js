@@ -13,6 +13,7 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
   let pt = td.pt;
   let prov = pt.prov;
   let num = prov.divisions.length;
+  if (prov.terrain == '@') return;
   if (pt.owner == currentPlayer || pt.adjacentToPlayer(currentPlayer)) {
     if (num > 0) {
       let number = document.createElement('number');
@@ -65,7 +66,7 @@ function repaintProv(td) {
   let pt = td.pt;
   let prov = pt.prov;
   let player = pt.owner;
-  td.style.backgroundColor = player.color;
+  td.style.backgroundColor = player && prov.terrain != '@' ? player.color : 'white';
   td.style.cursor = 'default';
   td.style.borderRightWidth = td.style.borderBottomWidth = '1px';
   td.className = '';
@@ -114,6 +115,7 @@ function reinitCanvas() {
 
       let terr = document.createElement('terrain');
       terr.innerText = col.terrain;
+      terr.style.color = col.pt.terrain.color;
       td.appendChild(terr);
       td.pt = pt(rowIndex, colIndex)
 

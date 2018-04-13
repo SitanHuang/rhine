@@ -3,7 +3,9 @@ function factoriesInProv(prov) {
 }
 
 function getOrReturn(pt, callback) {
-  if (MAP_DATA[pt.row] && MAP_DATA[pt.row][pt.col]) {
+  let col = null;
+  if (MAP_DATA[pt.row] && (col = MAP_DATA[pt.row][pt.col])) {
+    if (col.terrain == '@') return;
     if (callback) callback(pt);
   }
 }
