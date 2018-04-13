@@ -181,4 +181,8 @@ body {
   padding: 0;
   margin: 0;
   transition: all .3s ease;
+  transition: all .3s ease;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+  text-rendering: optimizeSpeed;
 }
