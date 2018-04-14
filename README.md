@@ -35,7 +35,7 @@ Features:
 ## 1. Download and extract ZIP
 [Mainstream](https://github.com/SitanHuang/rhine/archive/master.zip)
 
-[Stable](https://github.com/SitanHuang/rhine/releases/download/v0.9/rhine-0.9.zip)
+[Stable](https://github.com/SitanHuang/rhine/releases/download/v0.5.0/rhine-v0.5.0.zip)
 ## 3. Choose 1 html file of the two in Google Chrome
 
 <img src="https://raw.githubusercontent.com/SitanHuang/rhine/master/gui/Screenshot%20from%202018-04-09%2017-17-34.png" width="400">
