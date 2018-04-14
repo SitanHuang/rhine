@@ -1,5 +1,6 @@
 var canvasTable = $('app');
-canvasTable.style.zoom = 1.49;
+let canvasTableTransformScaleFactor = 1.49;
+canvasTable.style.transform = 'scale(1.49)';
 
 REPAINTCANVAS_CALLBACK_FRIENDLY_CLICKABLE = td => {
   let pt = td.pt;
@@ -65,17 +66,11 @@ SHOW_GRID = false
 function repaintProv(td) {
   let pt = td.pt;
   let prov = pt.prov;
+  if (prov.terrain == '@') return;
   let player = pt.owner;
   td.style.backgroundColor = player && prov.terrain != '@' ? player.color : 'white';
   td.style.cursor = 'default';
-  td.style.borderRightWidth = td.style.borderBottomWidth = '1px';
   td.className = '';
-  if (SHOW_GRID) {
-    if (pt.row % 5 == 4)
-      td.style.borderBottomWidth = '2px';
-    if (pt.col % 5 == 4)
-      td.style.borderRightWidth = '2px';
-  }
   Array.from(td.children).forEach(child => {
     if (child.tagName.toLowerCase() != 'terrain') child.remove();
   })
@@ -94,8 +89,9 @@ let current_repaintcanvas_callback = DEFAULT_REPAINTCANVAS_CALLBACK;
 function repaintCanvas(callback) {
   current_repaintcanvas_callback = callback = callback ? callback : DEFAULT_REPAINTCANVAS_CALLBACK;
   let start = new Date().getTime();
-  for (var tr of canvasTable.children) {
-    for (td of tr.children) {
+  for (let tr of canvasTable.children) {
+    for (let td of tr.children) {
+      if (td.pt.terrain == '@') return;
       repaintProv(td);
       callback(td)
     }
@@ -114,7 +110,8 @@ function reinitCanvas() {
       td.innerText = ' ';
 
       let terr = document.createElement('terrain');
-      terr.innerText = col.terrain;
+      // terr.innerText = col.terrain;
+      terr.innerText = col.pt.terrain.render;
       terr.style.color = col.pt.terrain.color;
       td.appendChild(terr);
       td.pt = pt(rowIndex, colIndex)
@@ -131,14 +128,16 @@ function reinitCanvas() {
 }
 
 function zoomIn() {
-  canvasTable.style.zoom *= 1.5;
+  canvasTableTransformScaleFactor *= 1.5;
+  canvasTable.style.transform = `scale(${canvasTableTransformScaleFactor})`;
 }
 
 function zoomOut() {
-  canvasTable.style.zoom /= 1.5;
+  canvasTableTransformScaleFactor /= 1.5;
+  canvasTable.style.transform = `scale(${canvasTableTransformScaleFactor})`;
 }
 
 function toggleGrid() {
   SHOW_GRID = !SHOW_GRID;
-  repaintCanvas(current_repaintcanvas_callback)
+  canvasTable.className = 'SHOW_GRID' + SHOW_GRID;
 }

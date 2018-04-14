@@ -57,7 +57,8 @@ function repaintRightList() {
   SELECTED_UNITS.forEach((div, i) => {
     buffer += `
     <tr>
-    <td onmouseover="showDivisionDetailOnFloat(${i}, this)" onmouseout="removeFloatingDIV()">${div.name}
+    <td onmouseover="showDivisionDetailOnFloat(${i}, this)" onmouseout="removeFloatingDIV()"
+      onclick="SELECTED_UNITS = [SELECTED_UNITS[${i}]];repaintRightList();">${div.name}
     <td><button onclick="removeDivisionFromList(${i})">❌</button>
     <tr>
     <td class="hp"><div style="width: ${div.hp}%;background: ${getColorFromPercentage(div.hp/100)}"></div>

@@ -14,10 +14,13 @@ function battle(d1, d2, d1m) {
   let t1 = (_t1 + (_t1 - _t2)).min(0);
   let t2 = (_t2 + (_t2 - _t1)).min(0);
 
-  d1.men = (d1.men - t2).round().min(0);
-  d2.men = (d2.men - t1).round().min(0);
-  d1.player.casualties += t2.round();
-  d2.player.casualties += t1.round();
+  let rt1 = t1.round();
+  let rt2 = t2.round();
+
+  d1.men = (d1.men - rt2).min(0);
+  d2.men = (d2.men - rt1).min(0);
+  d1.player.casualties += rt2;
+  d2.player.casualties += rt1;
 
   let sum = t1 + t2;
   let difference = t1 - t2;
@@ -30,7 +33,6 @@ function battle(d1, d2, d1m) {
 
   return {
     casualties: [t2, t1, sum],
-    difference: difference,
     percentage: [d1.hp / d2.hp / sum, d2.hp / d1.hp / sum]
   };
 }
@@ -39,20 +41,17 @@ function combineBattleInfos(infos) {
   infos = infos.filter(x => x)
   let t = {
     casualties: [0, 0, 0],
-    difference: 0,
     percentage: [0, 0]
   };
   infos.forEach(info => {
     t.casualties[0] += info.casualties[0];
     t.casualties[1] += info.casualties[1];
     t.casualties[2] += info.casualties[2];
-    t.difference += info.difference;
     t.percentage[0] += info.percentage[0];
     t.percentage[1] += info.percentage[1];
   });
   return {
     casualties: t.casualties,
-    difference: t.difference / infos.length,
     percentage: [
       t.percentage[0] / infos.length,
       t.percentage[1] / infos.length,

@@ -35,6 +35,7 @@ if (window.MAP_JSON) {
 window.TERRAINS = {
   ' ': {
     name: 'Plain',
+    render: ' ',
     defense: 1,
     attrition: 0.9,
     movement: 0.9, // 1.11111111
@@ -42,6 +43,7 @@ window.TERRAINS = {
   },
   M: {
     name: 'Mountain',
+    render: '⛰️',
     color: 'green',
     defense: 3,
     attrition: 0.6,
@@ -50,6 +52,7 @@ window.TERRAINS = {
   },
   D: {
     name: 'Desert',
+    render: '🌁',
     color: '#a0a001',
     defense: 1.2,
     attrition: 0.4,
@@ -58,6 +61,7 @@ window.TERRAINS = {
   },
   R: {
     name: 'River',
+    render: '🌫️',
     color: 'blue',
     defense: 2,
     attrition: 0.4,
@@ -66,6 +70,7 @@ window.TERRAINS = {
   },
   P: {
     name: 'Port',
+    render: 'P',
     defense: 1.5,
     attrition: 1.3,
     movement: 1, // 1
@@ -73,14 +78,16 @@ window.TERRAINS = {
   },
   U: {
     name: 'Urban',
+    render: '🏙️',
     color: '#db4437',
     defense: 5,
     attrition: 1.3,
     movement: 1,
-    slots: 35
+    slots: 60
   },
   '@': {
 	name: 'Non-accessible',
+  render: '',
   color: 'transparent',
 	defense: 0,
 	attrition: 0,

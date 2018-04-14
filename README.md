@@ -2,6 +2,15 @@
 
 The game will have you play full military tactics and planning.
 
+## v0.5.0
+* HUGE optimizations
+  - **18x faster**
+  - hardware accelerated graphics
+* Added gridless map
+* Reworked terrain icons
+* "Unselect others" in unit selection
+* AI weights tuning
+
 ## v0.4.17
 * added new scenarios
 * added Waiting screen

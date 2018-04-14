@@ -7,16 +7,28 @@ window.currentPlayer = null;
 
 function handlePlayerOnPass() {
   if (!currentPlayer) return;
-  console.log(`handlePlayerOnPass(): PID=${currentPlayerID}`)
+  let start = new Date().getTime();
   let divs = [];
   for (let row of MAP_DATA) {
     for (let col of row) {
-      if (col.owner == currentPlayerID) {
-        col.divisions.forEach(div => divs.push(div))
+      if (col.owner != currentPlayerID) continue;
+      col.supply = 0;
+      if (col.terrain != '@'
+        && col.divisions.length) {
+        currentPlayer.cityList.forEach(p => {
+          if (p.eq(col.pt)) col.supply++;
+          if (col.supply > 0) return;
+          let path = unit_pathfind_friendly_only(col.pt, p).length;
+          if (path < 15 && path > 0) {
+            col.supply++;
+          }
+        })
+        col.divisions.forEach(div => divs.push(div));
       }
     }
   }
-  divs.forEach(div => div.move())
+  divs.forEach(div => div.move());
+  console.log(`handlePlayerOnPass(): PID=${currentPlayerID} ${new Date().getTime() - start}ms`)
 }
 
 function pass() {

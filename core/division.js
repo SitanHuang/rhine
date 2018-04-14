@@ -1,5 +1,5 @@
 class Division {
-  constructor (playerID, name, point, template) {
+  constructor(playerID, name, point, template) {
     this.playerID = playerID;
     this.name = name;
     this.loc = point;
@@ -14,8 +14,8 @@ class Division {
     this.prov.divisions.push(this);
 
     this.newInforced = 0;
-	this.supply = 4;
-	this.entrench = 1;
+    this.supply = 4;
+    this.entrench = 1;
   }
 
   reinforce() {
@@ -33,28 +33,22 @@ class Division {
     this.newInforced = 0;
     this.battleInfo = [];
     this.reinforce();
-	
-	let player = this.player;
-	let that = this;
-	this.supply = 0;
-	player.cityList.forEach(p => {
-	  let path = unit_pathfind_friendly_only(that.loc, p).length;
-	  if (p.eq(that.loc) || (path < 15 && path > 0)) {
-		that.supply++;
-	  }
-	})
-	
-	if (this.supply == 0) {
-		let a = this.men / 10;
-		this.men = (this.men - a).round().min(0);
-		player.casualties += a.round();
-	}
+
+    let player = this.player;
+    let that = this;
+    this.supply = this.loc.prov.supply;
+
+    if (this.supply == 0) {
+      let a = this.men / 10;
+      this.men = (this.men - a).round().min(0);
+      player.casualties += a.round();
+    }
 
     if (this.action.length == 0) {
       this.movementProgress = 0;
       return;
     }
-	this.movementProgress += this.speed;
+    this.movementProgress += this.speed;
     while (this.movementProgress >= 1 && this.action.length > 0) {
       this.movementProgress--;
       let nextPt = this.action[0];
@@ -87,7 +81,7 @@ class Division {
     this.loc = newLoc;
     this.prov.divisions.push(this);
     this.prov.owner = this.playerID;
-	this.entrench = 1;
+    this.entrench = 1;
   }
 
   remove() {
@@ -104,7 +98,7 @@ class Division {
       if (p.owner == that.player) provs.push(p)
     })
     if (provs.length == 0) return;
-    let dist = provs.sort((x, y) => (x.prov.divisions.length-y.prov.divisions.length))[0];
+    let dist = provs.sort((x, y) => (x.prov.divisions.length - y.prov.divisions.length))[0];
     this.updateLocation(dist);
     this.action = [];
     this.movementProgress = 0;

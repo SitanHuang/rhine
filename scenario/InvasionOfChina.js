@@ -52,13 +52,13 @@ var InvasionOfChinaOwners =
 .replace(/\|/g, '').replace(/^\n/, '').replace(/\n$/, '')
   .split('\n');
 
-var InvasionOfChinaTerrains = 
+var InvasionOfChinaTerrains =
 `DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD   D                   @|
 DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD  DMM D                   @|
 DDDDDDDDDDDDDDDDDDDDDDDDDDDDDU MMMDDD                MMM@|
 DDDDDDDDDDDDDDDDDDDDDDDDDDDDD MMM D D            U MMMMM@|
 DDDDDDDDDDDDDDDDDDDDDDDDDDDDDMMM DDDD U         MMMMMMM@@|
-DDDDDDDDMDDDDDDDDDDDDDDDDDDD DD DDDDD          MMM  MMM@@|
+DDDDDDDUMDDDDDDDDDDDDDDDDDDD DD DDDDD          MMM  MMM@@|
 DDDDDDDDMMMMMMDDDDDDDDDDDDDDDDDD    D        MM     MM@@@|
 DDDDDDDDDDDDDMMMDDMMMMMMMMMM DMMMMMMD        MM    UM@@@@|
 DDDDDDDDDD DD MMMMMMMMMMM D  MMRRRRM       @@M       @@@@|
@@ -110,12 +110,12 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
 	  if (v == 'U'){
 	if (o == 1) slots = Array(55).fill('F');
     else slots = Array(5).fill('F');
-      
+
 	  }
     return {terrain: v, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
-  
+
   })));
-  
+
 MAP_DATA = InvasionOfChinaTerrains;
 pt(25, 43).prov.slots = Array(35).fill('F'); // Nanjing
 pt(30, 35).prov.slots = Array(25).fill('F'); // Wuhan
@@ -123,7 +123,7 @@ pt(33, 22).prov.slots = Array(15).fill('F'); // Chongqing
 
 
 let p2 = new Player();
-p2.color = randomColor({alpha: 0.25, format: 'rgba', hue: 'blue'})
+p2.color = 'rgba(140, 193, 226, 0.25)'
 p2.retreatable = 50;
 p2.manpower = Math.floor(Math.random() * 50000 + 7500000);
 p2.light = 50;
@@ -139,14 +139,14 @@ p1.factoryInLight = 22;
 p1.savedTemplates = [{"troop":8000,"light":20,"heavy":5,"defaultName":"Infantry Division"},{"troop":23000,"light":5,"heavy":12,"defaultName":"T12 Heavy Tank Division"},{"troop":20000,"light":25,"heavy":10,"defaultName":"T49 Armored Infantry Division"},{"troop":10000,"light":5,"heavy":6,"defaultName":"Light Motorized Mountaineer Division"},{"troop":17000,"light":38,"heavy":6,"defaultName":"T67 Armored Infantry Mountaineer Division"},{"troop":39000,"light":25,"heavy":10,"defaultName":"T918 Heavy Armored Infantry Division"},{"troop":23000,"light":10,"heavy":12,"defaultName":"T24 Heavy Tank Division"},{"troop":23000,"light":20,"heavy":3,"defaultName":"T42 Heavy Calvary Mountaineer Division"}].map(x => {let t = new Template(x.troop, x.light, x.heavy);t.defaultName = x.defaultName;return t});
 p2.savedTemplates = [{"troop":8000,"light":20,"heavy":5,"defaultName":"Infantry Division"},{"troop":23000,"light":5,"heavy":12,"defaultName":"T12 Heavy Tank Division"},{"troop":20000,"light":25,"heavy":10,"defaultName":"T49 Armored Infantry Division"},{"troop":10000,"light":5,"heavy":6,"defaultName":"Light Motorized Mountaineer Division"},{"troop":17000,"light":38,"heavy":6,"defaultName":"T67 Armored Infantry Mountaineer Division"},{"troop":39000,"light":25,"heavy":10,"defaultName":"T918 Heavy Armored Infantry Division"},{"troop":23000,"light":10,"heavy":12,"defaultName":"T24 Heavy Tank Division"},{"troop":23000,"light":20,"heavy":3,"defaultName":"T42 Heavy Calvary Mountaineer Division"}].map(x => {let t = new Template(x.troop, x.light, x.heavy);t.defaultName = x.defaultName;return t});
 
-MAP_DATA.forEach((x, row) => (x.forEach((v, col) => { 
+MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
   if (v.terrain == '@') return;
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U')
     if (v.owner == 0)
-      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, '步兵师', pt(row, col), new Template(8000, 20, 7))))
+      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(8000, 20, 7))))
     else
-      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, '歩兵師団', pt(row, col), new Template(20000, 25, 10))))
+      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(20000, 25, 10))))
 })));
 // Shanghai
-pt(27, 46).prov.divisions = Array(25).fill(0).map(() => (new Division(1, '歩兵師団', pt(27, 46), new Template(20000, 25, 10))))
-  .concat(Array(10).fill(0).map(() => (new Division(1, '戦車師団', pt(27, 46), new Template(20000, 10, 10)))));
+pt(27, 46).prov.divisions = Array(15).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(20000, 25, 10))))
+  .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(20000, 10, 10)))));

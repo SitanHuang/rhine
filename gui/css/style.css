@@ -14,35 +14,41 @@ waiting {
   border: 20px solid #4caf50;
 }
 
-#map-container > table td {
+#map-container>table td {
   width: 28px;
   height: 28px;
-  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  border: 0 solid rgba(0, 0, 0, 0.3);
   position: relative;
   cursor: default;
 }
 
-#map-container > table td > terrain {
+#map-container>table.SHOW_GRIDtrue td {
+  border-width: 0.5px;
+}
+
+#map-container>table td>terrain {
   display: block;
   position: absolute;
   top: 0;
-  right: 10px;
+  /* right: 10px; */
   height: 28px;
   line-height: 28px;
   opacity: 0.5;
   z-index: 2;
+  text-align: center;
+  margin: auto;
 }
 
-#map-container > table td > mark {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 7px;
-    height: 7px;
-    background: #5b5bec;
+#map-container>table td>mark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  background: #5b5bec;
 }
 
-#map-container > table td > number {
+#map-container>table td>number {
   display: block;
   position: absolute;
   top: 0;
@@ -53,10 +59,11 @@ waiting {
   font-weight: bold;
 }
 
-#map-container > table {
+#map-container>table {
   border-spacing: 0;
   border-collapse: collapse;
   user-select: none;
+  transform-origin: top left;
 }
 
 #left, #right {
@@ -73,7 +80,7 @@ waiting {
   user-select: none;
 }
 
-#left .tabs > span:hover {
+#left .tabs>span:hover {
   opacity: 0.5;
 }
 
@@ -81,14 +88,14 @@ waiting {
   user-select: none;
 }
 
-#left .tabs > .active {
+#left .tabs>.active {
   background: #4caf50;
   color: white;
   font-weight: bold;
   opacity: 0.8;
 }
 
-table.divisions tr > td:first-child:not(.hp) {
+table.divisions tr>td:first-child:not(.hp) {
   white-space: nowrap;
   overflow-x: hidden;
   width: 265px;
@@ -98,14 +105,15 @@ table.divisions tr > td:first-child:not(.hp) {
   line-height: 32px;
 }
 
-table.divisions tr > td:last-child {
+table.divisions tr>td:last-child {
   text-align: right;
 }
 
-table.divisions tr > td.hp {
+table.divisions tr>td.hp {
   height: 2px;
 }
-table.divisions tr > td.hp > div {
+
+table.divisions tr>td.hp>div {
   height: 100%;
   transform: translateY(-250%);
   image-rendering: pixelated;
@@ -134,7 +142,7 @@ table.statistic th {
   vertical-align: top;
 }
 
-#left .tabs > span {
+#left .tabs>span {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 55px;
