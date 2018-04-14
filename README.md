@@ -33,15 +33,15 @@ Features:
 ### [Tutorial](https://github.com/SitanHuang/rhine/wiki)
 
 ## 0. Demo online
-[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html)
+[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=058)
 
-[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html)
+[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=058)
 ## 1. Download and extract ZIP
 [Mainstream](https://github.com/SitanHuang/rhine/archive/master.zip)
 
 [Stable](https://github.com/SitanHuang/rhine/releases/download/v0.5.0/rhine-v0.5.0.zip)
 ## 3. Choose 1 html file of the two in Google Chrome
 
-<img src="https://raw.githubusercontent.com/SitanHuang/rhine/master/gui/Screenshot%20from%202018-04-09%2017-17-34.png" width="400">
+<img src="https://raw.githubusercontent.com/SitanHuang/rhine/master/gui/Screenshot%20from%202018-04-09%2017-17-34.png?v=058" width="400">
 
 ## Feel free to fork it and add new features!
