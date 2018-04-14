@@ -37,6 +37,7 @@ waiting {
   z-index: 2;
   text-align: center;
   margin: auto;
+  opacity: 0.3;
 }
 
 #map-container>table td>mark {
