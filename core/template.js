@@ -19,7 +19,7 @@ class Template {
   }
 
   deployable(player) {
-    if (this.speed <= 0) return false;
+    if (this.speed <= 0.5) return false;
     if (!this.speed || !this.light || !this.heavy || !this.troop) return false;
     if (player.light < this.light || player.heavy < this.heavy
       || player.recruitable <= this.troop) return false;
