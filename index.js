@@ -5,6 +5,25 @@ reinitCanvas();
 window.currentPlayerID = -1;
 window.currentPlayer = null;
 
+function setAIFor(i, btn) {
+  btn.className = btn.className.length ? '' : 'active';
+  PLAYERS[i].setAI = !PLAYERS[i].setAI;
+}
+
+let playerSelection = document.createElement('waiting');
+let innerHTML = '<h1>Select players</h1><table style="width:70%;margin: auto;">';
+PLAYERS.forEach((p, i) => {
+  innerHTML += `
+  <tr>
+  <th>Player ${i}
+  <td style="background: ${p.color.replace('0.2', '1')}">&nbsp;
+  <td><button onclick='setAIFor(${i}, this)'>set AI</button>
+  `;
+})
+playerSelection.innerHTML += innerHTML + '</table>' +
+`<br><br><button onclick="playerSelection.remove();">Start Game</button>`;
+document.body.append(playerSelection);
+
 function handlePlayerOnPass() {
   if (!currentPlayer) return;
   let start = new Date().getTime();
@@ -31,9 +50,10 @@ function handlePlayerOnPass() {
   console.log(`handlePlayerOnPass(): PID=${currentPlayerID} ${new Date().getTime() - start}ms`)
 }
 
+let waiting = document.createElement('waiting');
+waiting.innerHTML = '<h1>Processing</h1>';
+
 function pass() {
-  let waiting = document.createElement('waiting');
-  waiting.innerHTML = '<h1>Processing</h1>';
   document.body.append(waiting);
   setTimeout(() => {
     handlePlayerOnPass();
@@ -42,6 +62,14 @@ function pass() {
     currentPlayer.calcCities();
     currentPlayer.produce();
     currentPlayer.growManpower();
+    if (currentPlayer.setAI) {
+      setTimeout(() => {
+        currentPlayer.ai.think();
+        waiting.remove();
+        pass();
+      }, 10)
+      return;
+    }
 
     // interface
     repaintCanvas();

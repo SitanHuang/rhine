@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+## v0.6.0 (In progress)
+* Player selection
+* Scenario tuning
+
 ## v0.5.0
 * HUGE optimizations
   - **18x faster**
