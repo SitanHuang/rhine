@@ -52,7 +52,7 @@ window.TERRAINS = {
   },
   D: {
     name: 'Desert',
-    render: '🌁',
+    render: '░░',
     color: '#a0a001',
     defense: 1.2,
     attrition: 0.4,
