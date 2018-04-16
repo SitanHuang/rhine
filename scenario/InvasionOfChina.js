@@ -83,7 +83,7 @@ DDDDDDDRMMM         MMM     U     U    R    RRR@@@@@@@@@@|
 DDDDDDMRMMM          MMMMMM           RR  M  RUR@@@@@@@@@|
 DDDDDDMRMMM  M MM MMMM    MMM        RR MMM    @@@@@@@@@@|
 DDDDDMMMRMMM MMMMMMMMM RRRR M        R MM        @@@@@@@@|
-DDDDDMMMRMRMM MMMMM  RRR  RRRRRR   URR           @@@@@@@@|
+DDDDDMMMRMRMM MMMMM URRR  RRRRRR   URR           @@@@@@@@|
 DDDDMMMMMMRR     M  RR      R  RRRRRR RR MMMMMM  @@@@@@@@|
 DDDMMMMMMMMMRR              R   UR     RRMMMMMMM @@@@@@@@|
 MMMMMMMMMMMMMR        U     R    RR   URR MMM   @@@@@@@@@|
@@ -94,7 +94,7 @@ MMMM   MMMM   R          RRU      R MMM  MM M  @@@@@@@@@@|
 RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
    RR RRM    R     MM          RR     MMMM M @@@@  @@@@@@|
    R R M    RR  MM MM         RR     MMMMMMM @@@@  @@@@@@|
-   R RRM   RR    MMMM         R    MMMMMM M @@@@   @@@@@@|
+   R RRM   RR    MMMM         R    MMMMMMUM @@@@   @@@@@@|
    R  R   R   U  MM M    MMM  R    MM    M  @@@@   @@@@@@|
   R  RM  RR       MMM      MMMMMM M      M @@@@@  @@@@@@@|
     RRM  R        MMM      MMMMMM U       @@@@@@@ @@@@@@@|
@@ -109,7 +109,7 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
 	  let slots = [];
 	  if (v == 'U'){
 	if (o == 1) slots = Array(55).fill('F');
-    else slots = Array(5).fill('F');
+    else slots = Array(3).fill('F');
 
 	  }
     return {terrain: v, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
@@ -143,9 +143,9 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
   if (v.terrain == '@') return;
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U')
     if (v.owner == 0)
-      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(8000, 20, 7))))
+      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(8000, 20, 5))))
     else
-      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(20000, 25, 10))))
+      v.divisions = Array(3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(20000, 25, 10))))
 })));
 // Shanghai
 pt(27, 46).prov.divisions = Array(15).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(20000, 25, 10))))
