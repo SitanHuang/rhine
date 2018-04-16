@@ -26,9 +26,9 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 30).round() * 1000 + 7000;
-          tem.heavy = (player.light * Math.random()).round().max(40);
-          tem.light = (player.heavy * Math.random()).round().max(40);
-          if (player.recruitable > tem.troop * 100) {
+          if (player.recruitable > tem.troop * 100 && player.divisions * 25000 / player.recruitable < 2) {
+            tem.heavy = (player.light * Math.random()).round().max(40);
+            tem.light = (player.heavy * Math.random()).round().max(40);
             while ((tem.heavy -= 1) > 0 && (tem.light -= 1) > 0) {
               tem.defaultName = tem.codeName;
               if (tem.deployable(player)) {
