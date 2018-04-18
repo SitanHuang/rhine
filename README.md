@@ -3,6 +3,11 @@
 The game will have you play full military tactics and planning.
 
 ## v0.6.0 (In progress)
+### v0.5.9
+* in-game date via speed & map distance
+* bug fixes
+
+### v0.5.8
 * Player selection
 * Scenario tuning
 
@@ -33,15 +38,15 @@ Features:
 ### [Tutorial](https://github.com/SitanHuang/rhine/wiki)
 
 ## 0. Demo online
-[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=059)
+[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=0591)
 
-[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=059)
+[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=0591)
 ## 1. Download and extract ZIP
-[Mainstream](https://github.com/SitanHuang/rhine/archive/master.zip?ncache=059)
+[Mainstream](https://github.com/SitanHuang/rhine/archive/master.zip?ncache=0591)
 
 [Stable](https://github.com/SitanHuang/rhine/releases/download/v0.5.0/rhine-v0.5.0.zip)
 ## 3. Choose 1 html file of the two in Google Chrome
 
-<img src="https://raw.githubusercontent.com/SitanHuang/rhine/master/gui/Screenshot%20from%202018-04-09%2017-17-34.png?v=059" width="400">
+<img src="https://raw.githubusercontent.com/SitanHuang/rhine/master/gui/Screenshot%20from%202018-04-09%2017-17-34.png?v=0591" width="400">
 
 ## Feel free to fork it and add new features!

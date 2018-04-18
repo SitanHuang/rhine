@@ -108,6 +108,7 @@ class Ai {
     while (units.length) {
       if (++i >= this.adjacentBlocks.length) i = 0;
       let end = that.adjacentBlocks[i];
+      if (!end) break;
       units = units.sort((x2, x1) => (Math.abs(x1.loc.row - end.row) + Math.abs(x1.loc.col - end.col)) - (Math.abs(x2.loc.row - end.row) + Math.abs(x2.loc.col - end.col)));
       let div = units.pop();
       let start = div.loc;

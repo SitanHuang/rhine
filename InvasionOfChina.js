@@ -1,3 +1,6 @@
+window.timestamp = -1025049600; // 7/9/1937
+window.timeIncrement = 518400; // 6 days
+
 var InvasionOfChinaOwners =
 `                                 111111111111111111111111|
                                  111111111111111111111111|

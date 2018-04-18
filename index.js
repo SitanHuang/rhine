@@ -5,6 +5,23 @@ reinitCanvas();
 window.currentPlayerID = -1;
 window.currentPlayer = null;
 
+window.timestamp = -1025049600; // 7/9/1937
+window.timeIncrement = 518400; // 6 days
+
+var $date_token = document.createElement('strong');
+
+$('controls').append($date_token);
+
+let _dateTempI = 0;
+
+function incrementAndUpdateDate() {
+  if (_dateTempI++ % 2 == 0) {
+    timestamp += timeIncrement + (Math.random() * 86400 * 5).round();
+  }
+  let date = new Date(timestamp * 1000);
+  $date_token.innerText = date.toLocaleDateString("en-US");
+}
+
 function setAIFor(i, btn) {
   btn.className = btn.className.length ? '' : 'active';
   PLAYERS[i].setAI = !PLAYERS[i].setAI;
@@ -23,6 +40,15 @@ PLAYERS.forEach((p, i) => {
 playerSelection.innerHTML += innerHTML + '</table>' +
 `<br><br><button onclick="playerSelection.remove();">Start Game</button>`;
 document.body.append(playerSelection);
+
+let aiThinkButton = document.createElement('button');
+aiThinkButton.onclick = () => {
+  currentPlayer.ai.think();pass();
+};
+aiThinkButton.style.width = 'auto';
+aiThinkButton.style.float = 'right';
+aiThinkButton.innerText = 'AI think';
+$('controls').append(aiThinkButton);
 
 function handlePlayerOnPass() {
   if (!currentPlayer) return;
@@ -57,6 +83,7 @@ function pass() {
   document.body.append(waiting);
   setTimeout(() => {
     handlePlayerOnPass();
+    incrementAndUpdateDate();
     if (++currentPlayerID >= PLAYERS.length) currentPlayerID = 0;
     currentPlayer = PLAYERS[currentPlayerID];
     currentPlayer.calcCities();
@@ -66,8 +93,8 @@ function pass() {
       setTimeout(() => {
         currentPlayer.ai.think();
         waiting.remove();
-        pass();
-      }, 10)
+        setTimeout(()=>{pass()}, 50)
+      }, 50)
       return;
     }
 
@@ -75,7 +102,7 @@ function pass() {
     repaintCanvas();
     updateInterfaceOnPass();
     waiting.remove();
-  }, 5);
+  }, 50);
 }
 
 pass();
