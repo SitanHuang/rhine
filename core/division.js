@@ -30,7 +30,7 @@ class Division {
   }
 
   get breakThrough() {
-    return (this.hard / (this.hard + this.soft) / 1.5).round(2).min(0).max(0.9);
+    return this.template.breakThrough;
   }
   
   move() {
