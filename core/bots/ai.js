@@ -16,10 +16,10 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.adjacentNotToPlayer > 0) {
           this.adjacentBlocks.push(p);
-          if (player.light > 30 && player.heavy > 60 && Math.random() > 0.9) {
+          if (player.light > 30 && player.heavy > 30 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
-              if (p.owner != player && pro.divisions.length > prov.divisions.length && player.light > 30 && player.heavy > 50
+              if (p.owner != player && pro.divisions.length > 3 && player.light > 30 && player.heavy > 30
                 && Math.random() > 0.5) {
                 player.light -= 10;
                 player.heavy -= 20;
@@ -37,7 +37,8 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 30).round() * 1000 + 7000;
-          if (player.recruitable > tem.troop * 100 && player.divisions * 25000 / player.recruitable < 2) {
+          if (player.recruitable > tem.troop * 100 && player.divisions * 25000 / player.recruitable < 2
+              && Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
             tem.light = (player.heavy * Math.random()).round().max(40);
             while ((tem.heavy -= 1) > 0 && (tem.light -= 1) > 0) {
