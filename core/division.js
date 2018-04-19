@@ -29,6 +29,10 @@ class Division {
     }
   }
 
+  get breakThrough() {
+    return (this.hard / (this.hard + this.soft) / 1.5).round(2).min(0).max(0.9);
+  }
+  
   move() {
     this.entrench = (this.entrench + 0.1).round(1).clamp(1, 2);
     this.newInforced = 0;
