@@ -25,6 +25,8 @@ function showDivisionDetailOnFloat(i, td) {
   <td>${abbreviate(div.hard, 2, false, false)}
   <tr><th>Speed
   <td>${div.speed.round(2)}${SPEED_UNIT}
+  <tr><th>Breakthrough
+  <td>${div.breakThrough.round(2)}
   <tr><th>Manpower
   <td>${abbreviate(div.men, 2, false, false)}/${abbreviate(div.template.manpower, 2, false, false)}
   <tr><th>Light Equipments
