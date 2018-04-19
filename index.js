@@ -68,7 +68,7 @@ function handlePlayerOnPass() {
             col.supply++;
           }
         })
-        col.divisions.forEach(div => divs.push(div));
+        col.divisions.forEach(div => {div.airStriked = false; divs.push(div)});
       }
     }
   }

@@ -35,6 +35,16 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
   } else {
     td.style.backgroundColor = pt.owner.color.replace('0.2', '0.5');
   }
+  if (num > 0) {
+    let as = prov.divisions.filter(x => x.airStriked).length;
+    if (as > 0) {
+      let mark = document.createElement('mark');
+      mark.innerText = ' ';
+      mark.title = `${as} divisions are air-striked.`
+      mark.className = 'airStrike';
+      td.appendChild(mark);
+    }
+  }
 }
 
 DEFAULT_REPAINTCANVAS_CALLBACK = td => {

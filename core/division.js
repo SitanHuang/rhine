@@ -16,6 +16,7 @@ class Division {
     this.newInforced = 0;
     this.supply = 4;
     this.entrench = 1;
+    this.airStriked = false;
   }
 
   reinforce() {

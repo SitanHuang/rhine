@@ -3,6 +3,10 @@
 The game will have you play full military tactics and planning.
 
 ## v0.6.0 (In progress)
+### v0.5.93
+* Air strikes
+* UI Redesign
+* Background music
 ### v0.5.9
 * in-game date via speed & map distance
 * bug fixes

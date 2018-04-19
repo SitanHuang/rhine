@@ -33,6 +33,34 @@ function saveTemplateOnClick() {
 	updateDeploy();
 }
 
+function airStrikeOnClick(button) {
+  let message_token = button.parentNode.parentNode.children[0];
+  if (currentPlayer.light < 10 || currentPlayer.heavy < 20) {
+    message_token.style.color = 'red';
+    message_token.innerText = 'Insufficient Equip.';
+  } else {
+    message_token.style.color = 'blue';
+    message_token.innerText = 'Select location';
+    repaintCanvas(td => {
+      REPAINTCANVAS_CALLBACK_UNITS(td);
+      let pt = td.pt;
+      if (pt.owner != currentPlayer)
+        td.style.cursor = 'pointer';
+      else
+        td.style.cursor = 'not-allowed';
+    });
+    colCallback = td => {
+      if (td.style.cursor != 'pointer') return;
+      let damages = airStrikeProv(td.pt.prov.divisions);
+      message_token.style.color = 'default';
+      message_token.innerText = `${abbreviate(damages, 1, false, false)} damages.`;
+      currentPlayer.light -= 10;
+      currentPlayer.heavy -= 20;
+      repaintCanvas();
+    }
+  }
+}
+
 function deployOnClick(button) {
   let template = currentPlayer.defaultTemplate;
   button.parentNode.children[1].style.display = 'none';
@@ -41,10 +69,10 @@ function deployOnClick(button) {
     repaintCanvas(td => {
       REPAINTCANVAS_CALLBACK_UNITS(td);
       let pt = td.pt;
-	  if (pt.owner == currentPlayer && pt.prov.terrain == 'U')
-		td.style.cursor = 'pointer';
-	  else
-		td.style.cursor = 'not-allowed';
+	    if (pt.owner == currentPlayer && pt.prov.terrain == 'U')
+        td.style.cursor = 'pointer';
+      else
+        td.style.cursor = 'not-allowed';
     });
     colCallback = td => {
       if (td.style.cursor != 'pointer') return;
@@ -61,7 +89,20 @@ function deployOnClick(button) {
 function updateDeploy() {
   setLeftPaneActiveTab(2);
   $left_content.innerHTML = `
-  <br><strong>Edit Division Template</strong><br>
+  <header>Air Strikes</header><br>
+  <table class="statistic">
+  <tr>
+  <th>Light Equipments
+  <td>10
+  <tr>
+  <th>Heavy Equipments
+  <td>20
+  <tr><td style="text-align: right;line-height: 2em;">
+  <td class="small">
+  <button class="shortcut" onclick="airStrikeOnClick(this)" data-key='s'>Deploy</button><br>
+  Key: S
+  </table>
+  <br><header>Edit Division Template</header><br>
   <table class="statistic">
   <tr>
   <th>Manpower
@@ -107,10 +148,12 @@ function updateDeploy() {
   <th colspan=2><input value="${currentPlayer.defaultTemplate.defaultName}" style="width: 100%" id="templateNameInput"
     onkeyup="onTemplateSpecsChange()">
   <tr><th><button onclick="$('templateNameInput').value = (currentPlayer.defaultTemplate.codeName);onTemplateSpecsChange()">AutoName</button><br>
-  <td><button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button><font color="red" style="display:none">Invalid Template</font>
+  <td class="small"><button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button><br>Key: D
+  <font color="red" style="display:none">Invalid Template</font>
   <font color="blue" style="display:none">Select city</font>
   <tr><th><td><button onclick="saveTemplateOnClick(this)">Save</button>
   </table>
+  <br><header>Saved Templates</header><br>
   <table class="statistic">
   ${renderSavedTemplates()}
   </table>
@@ -120,7 +163,7 @@ function updateDeploy() {
 
 
 function renderSavedTemplates() {
-  let buffer = '<tr><th><td><tr><th colspan=2 style="border-bottom: 1px solid black;">Saved Templates';
+  let buffer = '';
   currentPlayer.savedTemplates.forEach((tem, i) => {
     buffer += `<tr><th style="vertical-align: middle;border-bottom: 1px solid grey;">${tem.defaultName}<td width="100px">
 	<button onclick="currentPlayer.savedTemplates.splice(${i}, 1);updateDeploy()">❌</button>`+

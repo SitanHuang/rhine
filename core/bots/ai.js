@@ -16,6 +16,17 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.adjacentNotToPlayer > 0) {
           this.adjacentBlocks.push(p);
+          if (player.light > 30 && player.heavy > 60 && Math.random() > 0.9) {
+            p.adjacents((p) => {
+              let pro = p.prov;
+              if (p.owner != player && pro.divisions.length > prov.divisions.length && player.light > 30 && player.heavy > 50
+                && Math.random() > 0.5) {
+                player.light -= 10;
+                player.heavy -= 20;
+                airStrikeProv(pro.divisions);
+              }
+            })
+          }
         } else if (prov.terrain == 'U') {
           this.cities.push(p);
           this.adjacentBlocks.push(p);

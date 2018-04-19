@@ -3,6 +3,14 @@ h1, h2, h3 {
   line-height: 2em;
 }
 
+header {
+  font-weight: bold;
+  color: white;
+  background: #4caf50;
+  margin: 0 -10px;
+  padding: 10px;
+}
+
 waiting {
   position: fixed;
   top: 25vh;
@@ -49,6 +57,13 @@ waiting {
   background: #5b5bec;
 }
 
+#map-container>table td>mark.airStrike {
+  bottom: 0;
+  top: auto;
+  border-radius: 50%;
+  background: #db4437;
+}
+
 #map-container>table td>number {
   display: block;
   position: absolute;
@@ -85,7 +100,7 @@ waiting {
   opacity: 0.5;
 }
 
-#left span, #left strong, #left-content, table.statistic, #right-content {
+#left span, #left strong, #left-content, table.statistic, #right-content, #right {
   user-select: none;
 }
 

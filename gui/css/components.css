@@ -76,3 +76,37 @@ select {
 input[type=number] {
   width: 5em;
 }
+
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #b1ccb2;
+  border: 0px none #ffffff;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4caf50;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #409a44;
+}
+::-webkit-scrollbar-track {
+  background: wheat;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: wheat;
+}
+::-webkit-scrollbar-track:active {
+  background: wheat;
+}
+::-webkit-scrollbar-corner {
+  background: wheat;
+}
