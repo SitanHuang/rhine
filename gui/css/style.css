@@ -61,7 +61,7 @@ waiting {
   bottom: 0;
   top: auto;
   border-radius: 50%;
-  background: #db4437;
+  background: purple !important;
 }
 
 #map-container>table td>number {
