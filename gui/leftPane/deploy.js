@@ -10,6 +10,7 @@ function onTemplateSpecsChange() {
   $('softAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockSoft(terrain), 2, false, false);
   $('hardAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHard(terrain), 2, false, false);
   $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT;
+  $('breakThroughSpan').innerText = currentPlayer.defaultTemplate.breakThrough.round(2);
 }
 
 const REPAINT_DEPLOY_CALLBACK = td => {
@@ -142,6 +143,9 @@ function updateDeploy() {
   <th>Speed
   <td id="speedSpan">
   <tr><th><td class="small">(Regardless of HP & skill)
+  <tr>
+  <th>Breakthrough
+  <td id="breakThroughSpan"><br>
   <tr><th><td><br>
   <tr><th>Title:<td><br>
   <tr>
