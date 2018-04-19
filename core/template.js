@@ -9,6 +9,9 @@ class Template {
     this.defaultName = 'Infantry Division';
   }
 
+  get breakThrough() {
+    return (this.heavy / (this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
+  }
   get manpower() {
     return this.troop;
   }
