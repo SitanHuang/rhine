@@ -1,5 +1,5 @@
 function airStrike(div) {
-  let damage = (div.men / 10).round();
+  let damage = (div.men / 25).round();
   div.men = (div.men - damage).round().min(0);
   div.airStriked = true;
   div.player.casualties += damage;
