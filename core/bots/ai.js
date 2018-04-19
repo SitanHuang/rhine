@@ -8,7 +8,8 @@ class Ai {
     let player = this.player;
     this.cities = [];
     this.adjacentBlocks = [];
-    for (let row = 0; row < MAP_DATA.length; row++) {
+    let order = Math.random() > 0.5;
+    for (let row = order ? 0 : MAP_DATA.length - 1; order ? (row < MAP_DATA.length) : (row >= 0); order ? row++ : row --) {
       let rowData = MAP_DATA[row];
       for (let col = 0; col < rowData.length; col++) {
         let p = pt(row, col);
@@ -16,10 +17,10 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.adjacentNotToPlayer > 0) {
           this.adjacentBlocks.push(p);
-          if (player.light > 30 && player.heavy > 30 && Math.random() > 0.8) {
+          if (player.light > 10 && player.heavy > 20 && player.light < 50 && player.heavy < 100 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
-              if (p.owner != player && pro.divisions.length > 3 && player.light > 30 && player.heavy > 30
+              if (p.owner != player && pro.divisions.length > 3 && player.light > 10 && player.heavy > 20
                 && Math.random() > 0.5) {
                 player.light -= 10;
                 player.heavy -= 20;
