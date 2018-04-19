@@ -17,7 +17,7 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.adjacentNotToPlayer > 0) {
           this.adjacentBlocks.push(p);
-          if (player.light > 10 && player.heavy > 20 && player.light < 50 && player.heavy < 100 && Math.random() > 0.8) {
+          if (player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
               if (p.owner != player && pro.divisions.length > 3 && player.light > 10 && player.heavy > 20
