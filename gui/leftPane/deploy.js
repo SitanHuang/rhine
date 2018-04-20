@@ -152,7 +152,8 @@ function updateDeploy() {
   <th colspan=2><input value="${currentPlayer.defaultTemplate.defaultName}" style="width: 100%" id="templateNameInput"
     onkeyup="onTemplateSpecsChange()">
   <tr><th><button onclick="$('templateNameInput').value = (currentPlayer.defaultTemplate.codeName);onTemplateSpecsChange()">AutoName</button><br>
-  <td class="small"><button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button><br>Key: D
+  <td class="small">Key: D
+  <button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button>
   <font color="red" style="display:none">Invalid Template</font>
   <font color="blue" style="display:none">Select city</font>
   <tr><th><td><button onclick="saveTemplateOnClick(this)">Save</button>
