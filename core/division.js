@@ -30,11 +30,11 @@ class Division {
   }
 
   get breakThrough() {
-    return this.template.breakThrough;
+    return (this.template.breakThrough * this.player.tempSumAllGeneralTraits.b).round(2);
   }
   
   move() {
-    this.entrench = (this.entrench + 0.1).round(1).clamp(1, 2);
+    this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(1).clamp(1, 2);
     this.newInforced = 0;
     this.battleInfo = [];
     this.reinforce();
@@ -126,17 +126,20 @@ class Division {
   }
 
   get hard() {
-    let h = this.template.hard * TERRAINS[this.prov.terrain].attrition * this.skill * this.hp / 100 * this.entrench;
+    let h = this.template.hard * TERRAINS[this.prov.terrain].attrition * this.skill * this.hp / 100 * this.entrench
+      * this.player.tempSumAllGeneralTraits.o;
     return h - h * (this.adjacentPenalty / 4);
   }
 
   get speed() {
-    return (this.template.speed * TERRAINS[this.prov.terrain].movement).round(2);
+    return (this.template.speed * TERRAINS[this.prov.terrain].movement
+      * this.player.tempSumAllGeneralTraits.s).round(2);
   }
 
   get soft() {
     let terrain = TERRAINS[this.prov.terrain];
-    let s = this.template.soft * terrain.attrition * terrain.defense * this.skill * this.hp / 100 * this.entrench;
+    let s = this.template.soft * terrain.attrition * terrain.defense * this.skill * this.hp / 100 * this.entrench
+      * this.player.tempSumAllGeneralTraits.o;
     return s - s * (this.adjacentPenalty / 4)
   }
 }

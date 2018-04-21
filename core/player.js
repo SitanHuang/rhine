@@ -38,6 +38,20 @@ class Player {
   get mapDataFlattened() {
     return this._mapDataFlattened ? this._mapDataFlattened : this._mapDataFlattened = MAP_DATA.reduce((a, b) => a.concat(b), []);
   }
+  
+  get sumAllGeneralTraits() {
+    let template = {o: 1, s: 1, e: 1, b: 1};
+    Object.values(this.generals).forEach(rank => {
+      Object.values(rank).forEach(general => {
+        if (!general.selected) return;
+        for (let key in template) {
+          template[key] = (general.mod[key] * template[key]).round(3).min(0.1).max(2);
+        }
+      })
+    });
+    this.tempSumAllGeneralTraits = template;
+    return template;
+  }
 
   get factoryInHeavy() {
     let h = this.factories - this.factoryInLight;
