@@ -30,11 +30,11 @@ class Division {
   }
 
   get breakThrough() {
-    return (this.template.breakThrough * this.player.tempSumAllGeneralTraits.b).round(2);
+    return (this.template.breakThrough * this.player.tempSumAllGeneralTraits.b).round(2).clamp(0, 0.8);
   }
   
   move() {
-    this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(1).clamp(1, 2);
+    this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(2).clamp(1, 2);
     this.newInforced = 0;
     this.battleInfo = [];
     this.reinforce();
