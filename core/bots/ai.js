@@ -52,7 +52,7 @@ class Ai {
             }
           }
         } else {
-          if (Math.random() > 0.9 && player.constructionPoints > 750) {
+          if (Math.random() > 0.95 && player.constructionPoints > 750) {
             if (prov.slots.filter(x => (x == 'F')).length >= p.terrain.slots) return;
             player.constructionPoints -= 750;
             prov.slots.push('F');
@@ -68,7 +68,7 @@ class Ai {
       return a - b
     });
 
-    player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10).max(50);
+    player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10).max(40);
     player.factoryInLight = Math.floor(player.factories / 2);
   }
 
@@ -91,7 +91,7 @@ class Ai {
         let prov = p.prov;
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
-          let retreatable = Math.max(35, player.retreatable);
+          let retreatable = 60;
           if (div.action.length > 0 ||
               (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() > 0.5)) {
                 let lastAction = div.action.last();
@@ -105,7 +105,9 @@ class Ai {
             }
           } else if (div.adjacentNotToPlayer > 0 &&
             div.hp > retreatable) {
+            div.action = [];
             div.loc.adjacents(adj => {
+              if (div.action.length) return;
               if (adj.owner != player)
                 div.action = [adj];
             });

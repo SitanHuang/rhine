@@ -1,5 +1,5 @@
 function airStrike(div) {
-  let damage = (div.men / 25).round();
+  let damage = (div.men * 0.25).round();
   div.men = (div.men - damage).round().min(0);
   div.airStriked = true;
   div.player.casualties += damage;
@@ -17,11 +17,12 @@ function battle(d1, d2, d1m) {
   let s2 = d2.soft;
   let h1 = d1.hard;
   let h2 = d2.hard;
+  let factor = 4;
 
-  let as1 = (s1 - s2).min(0) + s1 * 10;
-  let as2 = (s2 - s1).min(0) + s2 * 10;
-  let ah1 = (h1 - h2).min(0) + h1 * 10;
-  let ah2 = (h2 - h1).min(0) + h2 * 10;
+  let as1 = (s1 - s2).min(0) + s1 * factor;
+  let as2 = (s2 - s1).min(0) + s2 * factor;
+  let ah1 = (h1 - h2).min(0) + h1 * factor;
+  let ah2 = (h2 - h1).min(0) + h2 * factor;
 
   let _t1 = Math.sqrt(as1 + ah1);
   let _t2 = Math.sqrt(as2 + ah2);
@@ -44,8 +45,8 @@ function battle(d1, d2, d1m) {
 
   let sum = t1 + t2;
   let difference = t1 - t2;
-  d1.skill = Math.sqrt(d1.skill + (difference / sum).min(0.05)).round(2)
-  d2.skill = Math.sqrt(d2.skill + ((t2 - t1) / sum).min(0.05)).round(2)
+  d1.skill = (d1.skill + (difference / sum / 10).min(0.05)).max(2.5).round(1)
+  d2.skill = (d2.skill + ((t2 - t1) / sum / 10).min(0.05)).max(2.5).round(1)
 
   sum = d1.hp / d2.hp + d2.hp / d1.hp;
 

@@ -22,7 +22,7 @@ class Division {
   reinforce() {
     if (this.hp < 100 && this.supply > 0) {
       let amount = this.template.troop - this.men;
-      amount = Math.min(Math.sqrt(amount * 100), this.player.recruitable / 100).round();
+      amount = Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500).round();
       this.newInforced += amount;
       this.player.manpower -= amount;
       this.men = (this.men + amount).round().clamp(0, this.template.troop);

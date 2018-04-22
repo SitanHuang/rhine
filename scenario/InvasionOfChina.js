@@ -124,20 +124,20 @@ pt(33, 22).prov.slots = Array(15).fill('F'); // Chongqing
 
 let p2 = new Player();
 p2.color = 'rgba(140, 193, 226, 0.25)'
-p2.retreatable = 50;
+p2.retreatable = 30;
 p2.manpower = Math.floor(Math.random() * 50000 + 10500000);
-p2.light = 50;
-p2.heavy = 50;
+p2.light = 100;
+p2.heavy = 200;
 p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = randomColor({alpha: 0.2, format: 'rgba', hue: 'red'})
-p1.manpower = Math.floor(Math.random() * 500000 + 5000000);
+p1.manpower = Math.floor(Math.random() * 50000 + 5000000);
 p1.light = 200;
-p1.heavy = 200;
-p1.retreatable = 50;
+p1.heavy = 400;
+p1.retreatable = 30;
 p1.factoryInLight = 22;
 p1.savedTemplates = [{"troop":8000,"light":20,"heavy":5,"defaultName":"Infantry Division"},{"troop":23000,"light":5,"heavy":12,"defaultName":"T12 Heavy Tank Division"},{"troop":20000,"light":25,"heavy":10,"defaultName":"T49 Armored Infantry Division"},{"troop":10000,"light":5,"heavy":6,"defaultName":"Light Motorized Mountaineer Division"},{"troop":17000,"light":38,"heavy":6,"defaultName":"T67 Armored Infantry Mountaineer Division"},{"troop":39000,"light":25,"heavy":10,"defaultName":"T918 Heavy Armored Infantry Division"},{"troop":23000,"light":10,"heavy":12,"defaultName":"T24 Heavy Tank Division"},{"troop":23000,"light":20,"heavy":3,"defaultName":"T42 Heavy Calvary Mountaineer Division"}].map(x => {let t = new Template(x.troop, x.light, x.heavy);t.defaultName = x.defaultName;return t});
-p2.savedTemplates = [{"troop":8000,"light":20,"heavy":5,"defaultName":"Infantry Division"},{"troop":23000,"light":5,"heavy":12,"defaultName":"T12 Heavy Tank Division"},{"troop":20000,"light":25,"heavy":10,"defaultName":"T49 Armored Infantry Division"},{"troop":10000,"light":5,"heavy":6,"defaultName":"Light Motorized Mountaineer Division"},{"troop":17000,"light":38,"heavy":6,"defaultName":"T67 Armored Infantry Mountaineer Division"},{"troop":39000,"light":25,"heavy":10,"defaultName":"T918 Heavy Armored Infantry Division"},{"troop":23000,"light":10,"heavy":12,"defaultName":"T24 Heavy Tank Division"},{"troop":23000,"light":20,"heavy":3,"defaultName":"T42 Heavy Calvary Mountaineer Division"}].map(x => {let t = new Template(x.troop, x.light, x.heavy);t.defaultName = x.defaultName;return t});
+p2.savedTemplates = [{"troop":8000,"light":20,"heavy":10,"defaultName":"Infantry Division"},{"troop":23000,"light":5,"heavy":12,"defaultName":"T12 Heavy Tank Division"},{"troop":20000,"light":25,"heavy":10,"defaultName":"T49 Armored Infantry Division"},{"troop":10000,"light":5,"heavy":6,"defaultName":"Light Motorized Mountaineer Division"},{"troop":17000,"light":38,"heavy":6,"defaultName":"T67 Armored Infantry Mountaineer Division"},{"troop":39000,"light":25,"heavy":10,"defaultName":"T918 Heavy Armored Infantry Division"},{"troop":23000,"light":10,"heavy":12,"defaultName":"T24 Heavy Tank Division"},{"troop":23000,"light":20,"heavy":3,"defaultName":"T42 Heavy Calvary Mountaineer Division"}].map(x => {let t = new Template(x.troop, x.light, x.heavy);t.defaultName = x.defaultName;return t});
 
 MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
   if (v.terrain == '@') return;

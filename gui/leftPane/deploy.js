@@ -45,7 +45,7 @@ function airStrikeOnClick(button) {
     repaintCanvas(td => {
       REPAINTCANVAS_CALLBACK_UNITS(td);
       let pt = td.pt;
-      if (pt.owner != currentPlayer)
+      if (pt.owner != currentPlayer && pt.prov.divisions.length && !pt.prov.divisions[0].airStriked)
         td.style.cursor = 'pointer';
       else
         td.style.cursor = 'not-allowed';
