@@ -79,4 +79,4 @@ window.ChineseGenerals = {
   }
 }
 
-PLAYERS.forEach(x => {x.generals = window.ChineseGenerals; x.sumAllGeneralTraits;})
+PLAYERS.forEach(x => {x.generals = JSON.parse(JSON.stringify(window.ChineseGenerals)); x.sumAllGeneralTraits;})
