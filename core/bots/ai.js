@@ -31,7 +31,7 @@ class Ai {
         } else if (prov.terrain == 'U') {
           this.cities.push(p);
           this.adjacentBlocks.push(p);
-          if (player.constructionPoints > 750 &&
+          if (player.constructionPoints > 750 && Math.random() > 0.7 &&
             prov.slots.filter(x => (x == 'F')).length < p.terrain.slots) {
             player.constructionPoints -= 750;
             prov.slots.push('F');
@@ -52,7 +52,7 @@ class Ai {
             }
           }
         } else {
-          if (Math.random() > 0.95 && player.constructionPoints > 750) {
+          if (player.constructionPoints > 1500 & Math.random() > 0.9) {
             if (prov.slots.filter(x => (x == 'F')).length >= p.terrain.slots) return;
             player.constructionPoints -= 750;
             prov.slots.push('F');
@@ -69,7 +69,7 @@ class Ai {
     });
 
     player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10).max(40);
-    player.factoryInLight = Math.floor(player.factories / 2);
+    player.factoryInLight = Math.floor(player.factories * (player.heavy / (player.heavy + player.light + 1)));
   }
 
   think() {
@@ -91,6 +91,10 @@ class Ai {
         let prov = p.prov;
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
+          if (div.skill < 1) {
+            div.action = [];
+            return;
+          }
           let retreatable = 60;
           if (div.action.length > 0 ||
               (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() > 0.5)) {
@@ -100,7 +104,6 @@ class Ai {
               (div.battleInfo.length && combineBattleInfos(div.battleInfo)[0] < 0.5) ||
               (lastAction && lastAction.owner == player && lastAction.prov.divisions.length > 3)) {
               div.action = [];
-              units.push(div);
               return;
             }
           } else if (div.adjacentNotToPlayer > 0 &&

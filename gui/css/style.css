@@ -121,6 +121,13 @@ table.divisions tr>td:first-child:not(.hp) {
   line-height: 32px;
 }
 
+table.divisions tr>td:first-child:not(.hp) > span {
+  font-weight: bold;
+  padding-right: 0.5em;
+  border-right: 1.6px solid rgba(0,0,0,0.8);
+  color: rgba(0,0,0,0.8);
+}
+
 table.divisions tr>td:last-child {
   text-align: right;
 }

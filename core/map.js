@@ -38,7 +38,7 @@ window.TERRAINS = {
     render: ' ',
     defense: 1,
     attrition: 0.9,
-    movement: 0.9, // 1.11111111
+    movement: 1, // 1.11111111
     slots: 5
   },
   M: {

@@ -138,12 +138,12 @@ function reinitCanvas() {
 }
 
 function zoomIn() {
-  canvasTableTransformScaleFactor *= 1.5;
+  canvasTableTransformScaleFactor *= 1.2;
   canvasTable.style.transform = `scale(${canvasTableTransformScaleFactor})`;
 }
 
 function zoomOut() {
-  canvasTableTransformScaleFactor /= 1.5;
+  canvasTableTransformScaleFactor /= 1.2;
   canvasTable.style.transform = `scale(${canvasTableTransformScaleFactor})`;
 }
 

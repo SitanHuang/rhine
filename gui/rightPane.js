@@ -60,7 +60,8 @@ function repaintRightList() {
     buffer += `
     <tr>
     <td onmouseover="showDivisionDetailOnFloat(${i}, this)" onmouseout="removeFloatingDIV()"
-      onclick="SELECTED_UNITS = [SELECTED_UNITS[${i}]];repaintRightList();">${div.name}
+      onclick="SELECTED_UNITS = [SELECTED_UNITS[${i}]];repaintRightList();">
+      <span>${div.skill.floor()}</span> ${div.name}
     <td><button onclick="removeDivisionFromList(${i})">❌</button>
     <tr>
     <td class="hp"><div style="width: ${div.hp}%;background: ${getColorFromPercentage(div.hp/100)}"></div>

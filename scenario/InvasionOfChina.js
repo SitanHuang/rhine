@@ -128,6 +128,7 @@ p2.retreatable = 30;
 p2.manpower = Math.floor(Math.random() * 50000 + 10500000);
 p2.light = 100;
 p2.heavy = 200;
+p2.growthRate *= 3;
 p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = randomColor({alpha: 0.2, format: 'rgba', hue: 'red'})

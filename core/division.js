@@ -34,6 +34,8 @@ class Division {
   }
   
   move() {
+    if (this.skill < 1) { this.skill += 0.1 }
+
     this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(2).clamp(1, 2);
     this.newInforced = 0;
     this.battleInfo = [];

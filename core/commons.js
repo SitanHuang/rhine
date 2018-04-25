@@ -23,6 +23,10 @@ Number.prototype.max = function(min) {
   return Math.min(this, min);
 }
 
+Number.prototype.floor = function() {
+  return Math.floor(this);
+};
+
 $ = (x) => {
   return document.getElementById(x);
 }

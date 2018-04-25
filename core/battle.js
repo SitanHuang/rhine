@@ -1,5 +1,5 @@
 function airStrike(div) {
-  let damage = (div.men * 0.25).round();
+  let damage = (div.men * 0.2).max(1000).round();
   div.men = (div.men - damage).round().min(0);
   div.airStriked = true;
   div.player.casualties += damage;
@@ -45,8 +45,8 @@ function battle(d1, d2, d1m) {
 
   let sum = t1 + t2;
   let difference = t1 - t2;
-  d1.skill = (d1.skill + (difference / sum / 10).min(0.05)).max(2.5).round(1)
-  d2.skill = (d2.skill + ((t2 - t1) / sum / 10).min(0.05)).max(2.5).round(1)
+  d1.skill = (d1.skill + (difference / sum / 20).min(0.01)).max(4).round(2)
+  d2.skill = (d2.skill + ((t2 - t1) / sum / 20).min(0.01)).max(4).round(2)
 
   sum = d1.hp / d2.hp + d2.hp / d1.hp;
 
@@ -54,7 +54,7 @@ function battle(d1, d2, d1m) {
 
   return {
     casualties: [t2, t1, sum],
-    percentage: [d1.hp / d2.hp / sum, d2.hp / d1.hp / sum]
+    percentage: [d1.hp / d2.hp.min(1) / sum, d2.hp / d1.hp.min(1) / sum]
   };
 }
 

@@ -62,7 +62,7 @@ class Template {
     player.light -= this.light;
     player.heavy -= this.heavy;
     player.manpower -= this.troop;
-    new Division(player.playerID, title, loc, this.deepClone());
+    new Division(player.playerID, title, loc, this.deepClone()).skill = 0.2;
   }
 
   deepClone() {
