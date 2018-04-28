@@ -2,6 +2,13 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.6.9
+* added Auto Command for selected units
+* Changing unit templates
+* beautify codes
+* bug fixes
+* improve AI, which now now to retreat smartly
+
 ### v0.6.4
 * fix generals pointers bug
 * new divisions will have low skill and will auto train
@@ -59,11 +66,11 @@ Features:
 ### [Tutorial](https://github.com/SitanHuang/rhine/wiki)
 
 ## 0. Demo online
-[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=06028)
+[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=06928)
 
-[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=06028)
+[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=06928)
 ## 1. Download and extract ZIP
-[Mainstream (v0.6.4)](https://github.com/SitanHuang/rhine/archive/master.zip?ncache=05918)
+[Mainstream (v0.6.4)](https://github.com/SitanHuang/rhine/archive/master.zip?ncache=6918)
 
 [v0.6.0](https://github.com/SitanHuang/rhine/releases/download/v0.6.0/rhine-v0.6.0.zip)
 

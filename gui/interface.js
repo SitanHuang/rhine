@@ -28,7 +28,7 @@ function createFloatingDIV(text, clientX, clientY) {
   return div;
 }
 
-window.onkeydown = function(evt) {
+window.onkeydown = function (evt) {
   let tagName = document.activeElement.tagName.toLowerCase();
   if (tagName == 'input') return;
   evt = evt || window.event;

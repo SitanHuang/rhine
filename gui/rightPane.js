@@ -51,6 +51,13 @@ function removeAllSelectedDivisions() {
 
 let tempRightListScrollTop = 0;
 
+function autoFightSelectedOnClick() {
+  if (SELECTED_UNITS.length) {
+    Ai.autoFight(currentPlayer, SELECTED_UNITS);
+    repaintRightList();
+  }
+}
+
 function repaintRightList() {
   removeFloatingDIV();
   tempRightListScrollTop = $right_content.scrollTop;
@@ -71,7 +78,7 @@ function repaintRightList() {
   $right_content.innerHTML = `
   <table class="divisions">
   <tr>
-  <td>
+  <td><button onclick="autoFightSelectedOnClick()">Auto Command Selection</button>
   <td><button onclick="removeAllSelectedDivisions()">❌ all</button>
   ${buffer}</table>
   `;

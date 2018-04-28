@@ -9,7 +9,7 @@ class Ai {
     this.cities = [];
     this.adjacentBlocks = [];
     let order = Math.random() > 0.5;
-    for (let row = order ? 0 : MAP_DATA.length - 1; order ? (row < MAP_DATA.length) : (row >= 0); order ? row++ : row --) {
+    for (let row = order ? 0 : MAP_DATA.length - 1; order ? (row < MAP_DATA.length) : (row >= 0); order ? row++ : row--) {
       let rowData = MAP_DATA[row];
       for (let col = 0; col < rowData.length; col++) {
         let p = pt(row, col);
@@ -20,8 +20,8 @@ class Ai {
           if (player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
-              if (p.owner != player && pro.divisions.length > 3 && player.light > 10 && player.heavy > 20
-                && Math.random() > 0.5) {
+              if (p.owner != player && pro.divisions.length > 3 && player.light > 10 && player.heavy > 20 &&
+                Math.random() > 0.5) {
                 player.light -= 10;
                 player.heavy -= 20;
                 airStrikeProv(pro.divisions);
@@ -38,8 +38,8 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 30).round() * 1000 + 7000;
-          if (player.recruitable > tem.troop * 100 && player.divisions * 25000 / player.recruitable < 2
-              && Math.random() > 0.5) {
+          if (player.recruitable > tem.troop * 100 && player.divisions * 25000 / player.recruitable < 2 &&
+            Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
             tem.light = (player.heavy * Math.random()).round().max(40);
             while ((tem.heavy -= 1) > 0 && (tem.light -= 1) > 0) {
@@ -97,8 +97,8 @@ class Ai {
           }
           let retreatable = 60;
           if (div.action.length > 0 ||
-              (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() > 0.5)) {
-                let lastAction = div.action.last();
+            (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() > 0.5)) {
+            let lastAction = div.action.last();
 
             if (div.hp < retreatable ||
               (div.battleInfo.length && combineBattleInfos(div.battleInfo)[0] < 0.5) ||
@@ -109,11 +109,37 @@ class Ai {
           } else if (div.adjacentNotToPlayer > 0 &&
             div.hp > retreatable) {
             div.action = [];
-            div.loc.adjacents(adj => {
-              if (div.action.length) return;
-              if (adj.owner != player)
-                div.action = [adj];
-            });
+            if (div.hp > 90)
+              div.loc.adjacents(adj => {
+                if (div.action.length) return;
+                if (adj.owner != player)
+                  div.action = [adj];
+              });
+            else
+              // div.loc.adjacents(adj => {
+              //   if (div.action.length) return;
+              //   let divs = adj.prov.divisions;
+              //   if (adj.owner != player && divs.length && divs[0].soft <= div.soft)
+              //     div.action = [adj];
+              // });
+              p.adjacents(adj => {
+                if (div.action.length) return;
+                let divs = adj.prov.divisions;
+                if (adj.owner != player && divs.length && divs[0].soft <= div.soft)
+                  div.action = [adj];
+                else if (prov.terrain != 'U') {
+                  let leastNum = prov.divisions.length;
+                  let leastDst = p;
+                  p.adjacents(a => {
+                    if (a.owner == player && a.prov.divisions.length <= leastNum) {
+                      leastNum = a.prov.divisions.length;
+                      leastDst = a;
+                    }
+                  });
+                  if (leastDst != location) div.action = [leastDst];
+                  else div.action = [];
+                }
+              });
           } else
             units.push(div);
         });

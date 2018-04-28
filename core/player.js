@@ -38,9 +38,14 @@ class Player {
   get mapDataFlattened() {
     return this._mapDataFlattened ? this._mapDataFlattened : this._mapDataFlattened = MAP_DATA.reduce((a, b) => a.concat(b), []);
   }
-  
+
   get sumAllGeneralTraits() {
-    let template = {o: 1, s: 1, e: 1, b: 1};
+    let template = {
+      o: 1,
+      s: 1,
+      e: 1,
+      b: 1
+    };
     Object.values(this.generals).forEach(rank => {
       Object.values(rank).forEach(general => {
         if (!general.selected) return;

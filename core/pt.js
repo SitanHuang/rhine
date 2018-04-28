@@ -1,5 +1,5 @@
 class Point {
-  constructor (row, col) {
+  constructor(row, col) {
     this.row = row;
     this.col = col;
   }
@@ -21,7 +21,7 @@ class Point {
   }
 
   get prov() {
-    return MAP_DATA[this.row][this.col];
+    return this._prov ? this._prov : (this._prov = MAP_DATA[this.row][this.col]);
   }
 
   adjacents(callback) {

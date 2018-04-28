@@ -87,6 +87,63 @@ function deployOnClick(button) {
   }
 }
 
+function convertSelectedOnClick(button) {
+  let msg = button.nextElementSibling;
+  if (SELECTED_UNITS.length == 0) {
+    msg.style.color = 'red';
+    msg.innerText = 'No selected units';
+    msg.style.display = 'block';
+    return;
+  }
+  let netman = 0;
+  let netlight = 0;
+  let netheavy = 0;
+  let dst = currentPlayer.defaultTemplate.deepClone();
+  if (!dst.deployable(currentPlayer)) {
+    msg.style.color = 'red';
+    msg.innerText = 'Invalid Template';
+    msg.style.display = 'block';
+    return;
+  }
+  SELECTED_UNITS.forEach(div => {
+    netman += div.template.troop - dst.troop;
+    netlight += div.template.light - dst.light;
+    netheavy += div.template.heavy - dst.heavy;
+  });
+  let needman = currentPlayer.recruitable + netman;
+  let needlight = currentPlayer.light + netlight;
+  let needheavy = currentPlayer.heavy + netheavy;
+  if (needman < 0 || needlight < 0 || needheavy < 0) {
+    msg.style.color = 'red';
+    let html = 'Need the following:<br>';
+    if (needman < 0)
+      html += `Manpower: ${abbreviate(-needman, 2, false, false)} more<br>`;
+    if (needlight < 0)
+      html += `Light Equip.: ${abbreviate(-needlight, 2, false, false)} more<br>`;
+    if (needheavy < 0)
+      html += `Heavy Equip.: ${abbreviate(-needheavy, 2, false, false)} more<br>`;
+    msg.style.display = 'block';
+    msg.innerHTML = html;
+    return;
+  }
+  msg.style.color = 'blue';
+  let html = 'Successful:<br>';
+  html += `Manpower: net ${abbreviate(netman, 2, false, false)}<br>`;
+  html += `Light Equip.: net ${abbreviate(netlight, 2, false, false)}<br>`;
+  html += `Heavy Equip.: net ${abbreviate(netheavy, 2, false, false)}<br>`;
+  msg.style.display = 'block';
+  currentPlayer.manpower += netman;
+  currentPlayer.light += netlight;
+  currentPlayer.heavy += netheavy;
+  SELECTED_UNITS.forEach(div => {
+    div.men = dst.troop;
+    div.name = dst.defaultName;
+    div.template = dst;
+  });
+  msg.innerHTML = html;
+  repaintRightList();
+}
+
 function updateDeploy() {
   setLeftPaneActiveTab(2);
   $left_content.innerHTML = `
@@ -156,7 +213,11 @@ function updateDeploy() {
   <button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button>
   <font color="red" style="display:none">Invalid Template</font>
   <font color="blue" style="display:none">Select city</font>
-  <tr><th><td><button onclick="saveTemplateOnClick(this)">Save</button>
+  <tr><td colspan=2>
+  <button onclick="convertSelectedOnClick(this)">Convert Selected</button>
+  <font style="display: none;"></font>
+  <tr><th><td>
+  <button onclick="saveTemplateOnClick(this)">Save</button>
   </table>
   <br><header>Saved Templates</header><br>
   <table class="statistic">

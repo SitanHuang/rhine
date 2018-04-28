@@ -22,7 +22,9 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
       number.title = prov.divisions.map(x => x.name).join('\n');
       td.appendChild(number)
       let battles = [];
-      prov.divisions.forEach(x => { battles = battles.concat(x.battleInfo) });
+      prov.divisions.forEach(x => {
+        battles = battles.concat(x.battleInfo)
+      });
       if (battles.length > 0) {
         let mark = document.createElement('mark');
         mark.innerText = ' ';

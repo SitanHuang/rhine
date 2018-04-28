@@ -12,7 +12,7 @@ const REPAINT_SHOW_FACTORIES_CALLBACK = td => {
   let num = factoriesInProv(prov);
   td.style.cursor = 'pointer';
   if (pt.owner == currentPlayer) {
-    if(num > 0) {
+    if (num > 0) {
       let number = document.createElement('number');
       number.innerText = num;
       td.appendChild(number)
@@ -29,7 +29,7 @@ const REPAINT_SHOW_SUPPLY_CALLBACK = td => {
   let prov = pt.prov;
   let num = prov.divisions.length;
   if (pt.owner == currentPlayer) {
-    if(num > 0) {
+    if (num > 0) {
       let number = document.createElement('number');
       number.innerText = prov.divisions[0].supply;
       td.appendChild(number)

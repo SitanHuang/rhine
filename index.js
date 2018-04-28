@@ -38,12 +38,13 @@ PLAYERS.forEach((p, i) => {
   `;
 })
 playerSelection.innerHTML += innerHTML + '</table>' +
-`<br><br><button onclick="playerSelection.remove();">Start Game</button>`;
+  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>`;
 document.body.append(playerSelection);
 
 let aiThinkButton = document.createElement('button');
 aiThinkButton.onclick = () => {
-  currentPlayer.ai.think();pass();
+  currentPlayer.ai.think();
+  pass();
 };
 aiThinkButton.style.width = 'auto';
 aiThinkButton.style.float = 'right';
@@ -58,8 +59,8 @@ function handlePlayerOnPass() {
     for (let col of row) {
       if (col.owner != currentPlayerID) continue;
       col.supply = 0;
-      if (col.terrain != '@'
-        && col.divisions.length) {
+      if (col.terrain != '@' &&
+        col.divisions.length) {
         currentPlayer.cityList.forEach(p => {
           if (p.eq(col.pt)) col.supply++;
           if (col.supply > 0) return;
@@ -68,7 +69,10 @@ function handlePlayerOnPass() {
             col.supply++;
           }
         })
-        col.divisions.forEach(div => {div.airStriked = false; divs.push(div)});
+        col.divisions.forEach(div => {
+          div.airStriked = false;
+          divs.push(div)
+        });
       }
     }
   }
@@ -93,7 +97,9 @@ function pass() {
       setTimeout(() => {
         currentPlayer.ai.think();
         waiting.remove();
-        setTimeout(()=>{pass()}, 50)
+        setTimeout(() => {
+          pass()
+        }, 50)
       }, 50)
       return;
     }
