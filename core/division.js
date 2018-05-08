@@ -70,10 +70,10 @@ class Division {
       } else {
         let that = this;
         divs.forEach(div => {
-          if (this.hp < this.player.retreatable) return;
+          if (this.hp < this.player.retreatable.min(30)) return;
           div.movementProgress = -2;
           let results = battle(that, div);
-          if (div.hp < div.player.retreatable) {
+          if (div.hp < div.player.retreatable.min(30) || (div.hp < 50 && Math.random() < this.breakThrough / 2)) {
             div.retreat();
           }
           that.battleInfo.push(results);
@@ -100,7 +100,7 @@ class Division {
   }
 
   retreat() {
-    if (this.hp > this.player.retreatable) throw 'FATAL';
+//     if (this.hp > this.player.retreatable) throw 'FATAL';
     let provs = [];
     let that = this;
     this.loc.adjacents(p => {
