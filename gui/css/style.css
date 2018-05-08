@@ -64,6 +64,16 @@ waiting {
   background: purple !important;
 }
 
+#map-container>table td>mark.fortified {
+  left: 0;
+  font-size: 12px;
+  width: 12px;
+  background: none;
+  font-weight: bold;
+  height: 14px;
+  z-index: 123123123;
+}
+
 #map-container>table td>number {
   display: block;
   position: absolute;

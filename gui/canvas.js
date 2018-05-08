@@ -86,6 +86,13 @@ function repaintProv(td) {
   Array.from(td.children).forEach(child => {
     if (child.tagName.toLowerCase() != 'terrain') child.remove();
   })
+  if (prov.fort) {
+    let fort = document.createElement('mark');
+    fort.className = 'fortified';
+    fort.title = 'Fortified. Strength + 50%. Could be taken by enemy.';
+    fort.innerText = '🛡️';
+    td.appendChild(fort)
+  }
   td.onclick = () => {
     console.log(`Click: ${td.pt}`)
     if (colCallback) colCallback(td);

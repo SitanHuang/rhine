@@ -93,6 +93,33 @@ function buildFactoryOnClick(button) {
   }
 }
 
+function buildFortOnClick(button) {
+  if (currentPlayer.constructionPoints < 250) {
+    button.parentNode.children[2].style.display = 'block';
+    return;
+  }
+  button.parentNode.children[3].style.display = 'block';
+  repaintCanvas((td) => {
+    let pt = td.pt;
+    let prov = pt.prov;
+    td.style.cursor = 'pointer';
+    if (pt.owner == currentPlayer && prov.fort || pt.owner != currentPlayer) {
+      td.style.cursor = 'not-allowed';
+    }
+  });
+  colCallback = (td) => {
+    let pt = td.pt;
+    let prov = pt.prov;
+    if (td.style.cursor == 'not-allowed') return;
+    prov.fort = true;
+    currentPlayer.constructionPoints -= 250;
+    colCallback = null;
+    button.parentNode.children[3].style.display = 'none';
+    updateLogistics();
+    repaintCanvas();
+  }
+}
+
 function updateLogistics() {
   setLeftPaneActiveTab(0);
   $left_content.innerHTML = `
@@ -147,6 +174,12 @@ function updateLogistics() {
   <td>${abbreviate(currentPlayer.constructionPoints, 2, false, false)}
   <tr>
   <th>
+  <button onclick="buildFortOnClick(this)">Build Fort</button><br>
+  <font style="display: none" color="red">Not enough pts</font>
+  <font style="display: none">Select location</font>
+  <td>250 pts
+  <tr>
+  <th>
   <button onclick="buildFactoryOnClick(this)">Build Factory</button><br>
   <font style="display: none" color="red">Not enough pts</font>
   <font style="display: none">Select location</font>
@@ -156,6 +189,6 @@ function updateLogistics() {
   <button onclick="toggleFactoriesOnClick(this)">Toggle Factories View</button><br><br>
   <button onclick="toggleSuppliesOnClick(this)">Toggle Supplies View</button><br>
   <br><br><br>
-  <p>V0.7.0</p>
+  <p>V0.7.2</p>
   `;
 }

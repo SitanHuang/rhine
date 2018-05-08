@@ -16,6 +16,10 @@ class Ai {
         let prov = p.prov;
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.adjacentNotToPlayer > 0) {
+          if (Math.random() > 0.6 && player.constructionPoints > 350 && !prov.fort && prov.terrain == 'U') {
+            player.constructionPoints -= 250;
+            prov.fort = true;
+          }
           this.adjacentBlocks.push(p);
           if (player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
@@ -38,7 +42,7 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 30).round() * 1000 + 7000;
-          if (player.recruitable > tem.troop * 100 && player.divisions * 25000 / player.recruitable < 2
+          if (player.recruitable > tem.troop * 100 && player.divisions * 35000 / player.recruitable < 2
             &&
             Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
@@ -97,7 +101,7 @@ class Ai {
             return;
           }
           let retreatable = 60;
-          if (player.casualties > player.manpower && Math.random() > 0.3 && div.adjacentNotToPlayer > 0) {
+          if (player.divisions * 35000 / player.recruitable > 2 && player.casualties > player.recruitable && Math.random() > 0.3 && div.adjacentNotToPlayer > 0) {
             div.action = [];
             return;
           } else if (div.action.length > 0 ||

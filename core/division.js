@@ -89,6 +89,8 @@ class Division {
     prov.divisions = prov.divisions.filter(x => (x != that));
     this.loc = newLoc;
     this.prov.divisions.push(this);
+    if (this.prov.owner != this.playerID)
+      this.prov.fort = false
     this.prov.owner = this.playerID;
     this.entrench = 1;
   }
@@ -130,8 +132,11 @@ class Division {
   }
 
   get hard() {
-    let h = this.template.hard * TERRAINS[this.prov.terrain].attrition * this.skill * this.hp / 100 * this.entrench *
+    let prov = this.prov;
+    let h = this.template.hard * TERRAINS[prov.terrain].attrition * this.skill * this.hp / 100 * this.entrench *
       this.player.tempSumAllGeneralTraits.o;
+    if (prov.fort)
+      h *= 1.5;
     return h - h * (this.adjacentPenalty / 4);
   }
 
@@ -141,9 +146,12 @@ class Division {
   }
 
   get soft() {
-    let terrain = TERRAINS[this.prov.terrain];
+    let prov = this.prov
+    let terrain = TERRAINS[prov.terrain];
     let s = this.template.soft * terrain.attrition * terrain.defense * this.skill * this.hp / 100 * this.entrench *
       this.player.tempSumAllGeneralTraits.o;
+    if (prov.fort)
+      s *= 1.5;
     return s - s * (this.adjacentPenalty / 4)
   }
 }

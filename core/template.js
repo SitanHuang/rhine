@@ -59,10 +59,13 @@ class Template {
   }
 
   deploy(player, loc, title) {
+    let men = Math.ceil(this.troop / 15);
     player.light -= this.light;
     player.heavy -= this.heavy;
-    player.manpower -= this.troop;
-    new Division(player.playerID, title, loc, this.deepClone()).skill = 0.2;
+    player.manpower -= men;
+    let div = new Division(player.playerID, title, loc, this.deepClone())
+    div.skill = 0.2;
+    div.men = men;
   }
 
   deepClone() {
