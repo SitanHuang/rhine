@@ -97,7 +97,7 @@ class Ai {
             return;
           }
           let retreatable = 60;
-          if (player.casualties * 2 > player.manpower && Math.random() > 0.3) {
+          if (player.casualties > player.manpower && Math.random() > 0.3 && div.adjacentNotToPlayer > 0) {
             div.action = [];
             return;
           } else if (div.action.length > 0 ||
