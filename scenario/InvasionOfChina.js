@@ -108,7 +108,7 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(55).fill('F');
+	if (o == 1) slots = Array(35).fill('F');
     else slots = Array(3).fill('F');
 
 	  }
@@ -117,8 +117,8 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
   })));
 
 MAP_DATA = InvasionOfChinaTerrains;
-pt(25, 43).prov.slots = Array(35).fill('F'); // Nanjing
-pt(30, 35).prov.slots = Array(25).fill('F'); // Wuhan
+pt(25, 43).prov.slots = Array(25).fill('F'); // Nanjing
+pt(30, 35).prov.slots = Array(15).fill('F'); // Wuhan
 pt(33, 22).prov.slots = Array(15).fill('F'); // Chongqing
 
 
@@ -143,10 +143,10 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
   if (v.terrain == '@') return;
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U')
     if (v.owner == 0)
-      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(8000, 20, 5))))
+      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(7000, 17, 5))))
     else
-      v.divisions = Array(3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(20000, 25, 10))))
+      v.divisions = Array(3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 20, 15))))
 })));
 // Shanghai
-pt(27, 46).prov.divisions = Array(15).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(20000, 25, 10))))
-  .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(20000, 10, 10)))));
+pt(27, 46).prov.divisions = Array(15).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(10000, 20, 15))))
+  .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(10000, 10, 10)))));
