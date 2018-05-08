@@ -136,7 +136,7 @@ function convertSelectedOnClick(button) {
   currentPlayer.light += netlight;
   currentPlayer.heavy += netheavy;
   SELECTED_UNITS.forEach(div => {
-    div.men = dst.troop;
+    // div.men = dst.troop;
     div.name = dst.defaultName;
     div.template = dst;
   });
