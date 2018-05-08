@@ -74,7 +74,8 @@ class Player {
   }
 
   growManpower() {
-    this.manpower *= this.growthRate + 1;
+    this.manpower = (this.manpower * (this.growthRate + 1)).round().max(this.cities * 2000000);
+    this.growthRate
   }
 
   get recruitable() {

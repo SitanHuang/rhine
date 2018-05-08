@@ -111,7 +111,7 @@ function updateLogistics() {
   </tr>
   <tr>
   <th>
-  <td>(+${currentPlayer.growthRate.round(3)}%)
+  <td>(+${(currentPlayer.growthRate * 100).round(3)}%)
   </tr>
   <tr>
   <th>Cities
@@ -156,6 +156,6 @@ function updateLogistics() {
   <button onclick="toggleFactoriesOnClick(this)">Toggle Factories View</button><br><br>
   <button onclick="toggleSuppliesOnClick(this)">Toggle Supplies View</button><br>
   <br><br><br>
-  <p>V0.6.9</p>
+  <p>V0.7.0</p>
   `;
 }
