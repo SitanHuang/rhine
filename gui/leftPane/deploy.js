@@ -128,15 +128,17 @@ function convertSelectedOnClick(button) {
   }
   msg.style.color = 'blue';
   let html = 'Successful:<br>';
-  html += `Manpower: net ${abbreviate(netman, 2, false, false)}<br>`;
   html += `Light Equip.: net ${abbreviate(netlight, 2, false, false)}<br>`;
   html += `Heavy Equip.: net ${abbreviate(netheavy, 2, false, false)}<br>`;
   msg.style.display = 'block';
-  currentPlayer.manpower += netman;
+  if (netman > 0) {
+    currentPlayer.manpower += netman;
+    html += `Manpower: net ${abbreviate(netman, 2, false, false)}<br>`;
+  }
   currentPlayer.light += netlight;
   currentPlayer.heavy += netheavy;
   SELECTED_UNITS.forEach(div => {
-    // div.men = dst.troop;
+    if (div.men > dst.troop) div.men = dst.troop;
     div.name = dst.defaultName;
     div.template = dst;
   });
