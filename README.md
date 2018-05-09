@@ -75,9 +75,9 @@ Features:
 ### [Tutorial](https://github.com/SitanHuang/rhine/wiki)
 
 ## 0. Demo online
-[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=072)
+[Scenario: InvasionOfChina](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Japanese%20Invasion%20of%20China.html?v=0721)
 
-[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=072)
+[Scenario: Shanghai Campaign](https://SitanHuang.github.io/rhine/Play%20Scenario%20-%20Communist%20Takeover%20In%20Nanjing.html?v=0721)
 ## 1. Download and extract ZIP
 [Mainstream (v0.7.2)](https://github.com/SitanHuang/rhine/archive/master.zip)
 
