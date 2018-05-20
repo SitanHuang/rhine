@@ -55,7 +55,7 @@ DEFAULT_REPAINTCANVAS_CALLBACK = td => {
     div.loc.td.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
     div.action.forEach((p, i) => {
       let td = p.td;
-      td.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+      td.style.background = 'rgba(0, 0, 0, 0.4)'
     })
   });
   colCallback = td => {
@@ -64,7 +64,10 @@ DEFAULT_REPAINTCANVAS_CALLBACK = td => {
     let num = prov.divisions.length;
     if (pt.owner == currentPlayer) {
       if (num > 0)
-        SELECTED_UNITS = SELECTED_UNITS.concat(prov.divisions);
+        if (shiftDown)
+          SELECTED_UNITS = SELECTED_UNITS.concat(prov.divisions);
+        else
+          SELECTED_UNITS = [].concat(prov.divisions)
       else
         SELECTED_UNITS = [];
     } else
@@ -82,6 +85,7 @@ function repaintProv(td) {
   let player = pt.owner;
   td.style.backgroundColor = player && prov.terrain != '@' ? player.color : 'white';
   td.style.cursor = 'default';
+  td.style.transform = 'none';
   td.className = '';
   Array.from(td.children).forEach(child => {
     if (child.tagName.toLowerCase() != 'terrain') child.remove();
@@ -93,6 +97,8 @@ function repaintProv(td) {
     fort.innerText = '🛡️';
     td.appendChild(fort)
   }
+
+
   td.onclick = () => {
     console.log(`Click: ${td.pt}`)
     if (colCallback) colCallback(td);

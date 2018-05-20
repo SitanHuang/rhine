@@ -64,15 +64,15 @@ DDDDDDDDDDDDDMMMDDMMMMMMMMMM DMMMMMMD        MM    UM@@@@|
 DDDDDDDDDD DD MMMMMMMMMMM D  MMRRRRM       @@M       @@@@|
 DDDDDDDDDDDD MMMMMMMMM   DDDMMRRMMRR      @@@  @ @    @@@|
 DMMMDDDDDDD DD    MMMDDDDDD MMRRMMMRR    @@@  @@@@     @@|
-MMMMMMDDDDDDDD DDD  DDD DDDDMMMMMU  RR   @@@ @@@@    U  @|
+MMMMMMDDDDDDDD DDD  DDD DDDDMMMMMU  RR   @@@P@@@@P   U  @|
 MMMMMMDDDDDDD DDDDDDDDMMMM DMMMMM     R@@@@@@@@@@@ @    @|
 DDMMMMMDD D DDDDDD  MMRRRRRMMMMU     U@@@@@@@@@@@@@@@    |
-DDDDMMMMD DD DDDDDMMMRRMMMRMMM      M  @@@@ @@@@@@@@     |
-DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     MM   R@@    @@@@@@    |
+DDDDMMMMD DD DDDDDMMMRRMMMRMMM      M P@@@@ @@@@@@@@     |
+DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     MM   R@@   P@@@@@@    |
 RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM  RR   U@@@@@@@@@   |
-DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU       RR   @@@@@@@@@@@  @|
+DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU       RR   @@@@@@@@@@@P @|
 DDDRDDDDDM RRRDDD RMMMDDDDRMMM       RR    @@@@@@@@@@@@@@|
-DDDRDU  DMMRRR DRRRMMMDDDRR MM    U RR  U  @@@@@@@@@@@@@@|
+DDDRDU  DMMRRR DRRRMMMDDDRR MM    U RR  U P@@@@@@@@@@@@@@|
 DDDRD   DDMMMRRRRMMMMDDDDR  M      RR     @@@@@@@@@@@@@@@|
 DDDRD    DDMMMMMMMMMMDDDDRRRRR   RR          @@@@@@@@@@@@|
 DDDRDD    DD       DDDDRR    RRRRR   U       @@@@@@@@@@@@|
@@ -80,7 +80,7 @@ RRRRRDDMM  D        RRR                  RR   @@@@@@@@@@@|
 RDDDDRDMMM   U                          RRRRR @@@@@@@@@@@|
 DDDDDDRMMMM         M                  RR  URRRR@@@@@@@@@|
 DDDDDDDRMMM         MMM     U     U    R    RRR@@@@@@@@@@|
-DDDDDDMRMMM          MMMMMM           RR  M  RUR@@@@@@@@@|
+DDDDDDMRMMM          MMMMMM           RR  M  RUP@@@@@@@@@|
 DDDDDDMRMMM  M MM MMMM    MMM        RR MMM    @@@@@@@@@@|
 DDDDDMMMRMMM MMMMMMMMM RRRR M        R MM        @@@@@@@@|
 DDDDDMMMRMRMM MMMMM URRR  RRRRRR   URR           @@@@@@@@|
@@ -98,10 +98,10 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
    R  R   R   U  MM M    MMM  R    MM    M  @@@@   @@@@@@|
   R  RM  RR       MMM      MMMMMM M      M @@@@@  @@@@@@@|
     RRM  R        MMM      MMMMMM U       @@@@@@@ @@@@@@@|
-    R M           MM          MMM      @@@@@@@@@@@@@@@@@@|
+    R M           MM          MMM     P@@@@@@@@@@@@@@@@@@|
    RRM            MM RRR            @ @@@@@@@@@@@@@@@@@@@|
    R MMMMMM      MMMM   RR         @@@@@@@@@@@@@@@@@@@@@@|
-     MMMMMMMMMMMMM MMM U R        @@@@@@@@@@@@@@@@@@@@@@@|
+     MMMMMMMMMMMMM MMM U R       P@@@@@@@@@@@@@@@@@@@@@@@|
      MMMMMMMMM       MMM  R    @@@@@@@@@@@@@@@@@@@@@@@@@@`
 	.replace(/\|/g, '').replace(/^\n/, '').replace(/\n$/, '')
   .split('\n').map((x, row) => (x.split('').map((v, col) => {
@@ -141,11 +141,13 @@ p2.savedTemplates = [{"troop":8000,"light":20,"heavy":10,"defaultName":"Infantry
 
 MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
   if (v.terrain == '@') return;
-  if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U')
+  if (v.terrain == 'P')
+    PORTS.push(pt(row, col));
+  if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U' || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(7000, 17, 5))))
+      v.divisions = Array(v.terrain == 'P' ? 5 : 2).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(7000, 17, 5))))
     else
-      v.divisions = Array(3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 20, 15))))
+      v.divisions = Array(v.terrain == 'U' ? 2 : 5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 20, 15))))
 })));
 // Shanghai
 pt(27, 46).prov.divisions = Array(15).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(10000, 20, 15))))

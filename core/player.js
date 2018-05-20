@@ -87,6 +87,7 @@ class Player {
     this.factories = 0;
     this.divisions = 0;
     this.cityList = [];
+    this.ports = [];
     this.averageStrength = 0;
     this.cities = this.mapDataFlattened
       .filter(col => {
@@ -101,6 +102,10 @@ class Player {
           });
           if (col.terrain == 'U') {
             that.cityList.push(col.pt)
+            return true;
+          }
+          if (col.terrain == 'P') {
+            that.ports.push(col.pt)
             return true;
           }
         }

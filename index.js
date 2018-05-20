@@ -68,6 +68,14 @@ function handlePlayerOnPass() {
           if (path < 15 && path > 0) {
             col.supply++;
           }
+        });
+        currentPlayer.ports.forEach(p => {
+          if (p.eq(col.pt)) col.supply++;
+          if (col.supply > 0) return;
+          let path = unit_pathfind_friendly_only(col.pt, p).length;
+          if (path < 15 && path > 0) {
+            col.supply++;
+          }
         })
         col.divisions.forEach(div => {
           div.airStriked = false;

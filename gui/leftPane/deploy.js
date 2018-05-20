@@ -34,6 +34,44 @@ function saveTemplateOnClick() {
 	updateDeploy();
 }
 
+function navalInvadeOnClick(button) {
+  let message_token = button.parentNode.parentNode.children[0];
+  let light = SELECTED_UNITS.length * 20;
+  let heavy = SELECTED_UNITS.length * 40;
+  if (SELECTED_UNITS.length == 0) {
+    message_token.style.color = 'red';
+    message_token.innerText = 'No selected units';
+  } else if (SELECTED_UNITS.filter(x => (x.loc.prov.terrain != 'P')).length) {
+    message_token.style.color = 'red';
+    message_token.innerText = 'Units not in ports.';
+  } else if (currentPlayer.light < light || currentPlayer.heavy < heavy) {
+    message_token.style.color = 'red';
+    message_token.innerText = 'Insufficient Equip.';
+  } else {
+    message_token.style.color = 'blue';
+    message_token.innerText = 'Select port';
+    repaintCanvas(td => {
+      REPAINTCANVAS_CALLBACK_UNITS(td);
+      let pt = td.pt;
+      if (pt.prov.terrain == 'P')
+        td.style.cursor = 'pointer';
+      else
+        td.style.cursor = 'not-allowed';
+    });
+    colCallback = td => {
+      if (td.style.cursor != 'pointer') return;
+      SELECTED_UNITS.forEach(x => {
+        x.action = [td.pt.navalInvasion];
+      })
+      message_token.style.color = 'default';
+      message_token.innerText = `Mission launched.`;
+      currentPlayer.light -= light;
+      currentPlayer.heavy -= heavy;
+      repaintCanvas();
+    }
+  }
+}
+
 function airStrikeOnClick(button) {
   let message_token = button.parentNode.parentNode.children[0];
   if (currentPlayer.light < 10 || currentPlayer.heavy < 20) {
@@ -149,7 +187,19 @@ function convertSelectedOnClick(button) {
 function updateDeploy() {
   setLeftPaneActiveTab(2);
   $left_content.innerHTML = `
-  <header>Air Strikes</header><br>
+  <header>Naval Transport</header><br>
+  <table class="statistic">
+  <tr>
+  <th>Light Equipments
+  <td>20 * N
+  <tr>
+  <th>Heavy Equipments
+  <td>40 * N
+  <tr><td style="text-align: right;line-height: 2em;">
+  <td class="small">
+  <button class="shortcut" onclick="navalInvadeOnClick(this)" data-key='s'>Deploy</button><br>
+  </table>
+  <br><header>Air Strikes</header><br>
   <table class="statistic">
   <tr>
   <th>Light Equipments

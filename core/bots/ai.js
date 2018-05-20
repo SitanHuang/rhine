@@ -32,7 +32,7 @@ class Ai {
               }
             })
           }
-        } else if (prov.terrain == 'U') {
+        } else if (prov.terrain == 'U' || prov.terrain == 'P') {
           this.cities.push(p);
           this.adjacentBlocks.push(p);
           if (player.constructionPoints > 750 && Math.random() > 0.7 &&
@@ -114,6 +114,15 @@ class Ai {
               div.action = [];
               return;
             }
+          } else if (div.hp > retreatable && div.action[0] && div.action[0]._navalInvasion) {
+            // skip
+          } else if (div.hp > 90 && prov.terrain == 'P' && Math.random() > 0.5 && player.light > 40 && player.heavy > 80) {
+            let enemy = PORTS.filter(x => (x.owner != currentPlayer)).sort((x, y) => (x.prov.divisions.length - y.prov.divisions.length));
+            if (enemy[0]) {
+              div.action = [enemy[0].navalInvasion];
+              player.light -= 20;
+              player.heavy -= 40;
+            }
           } else if (div.adjacentNotToPlayer > 0 &&
             div.hp > retreatable) {
             div.action = [];
@@ -121,7 +130,7 @@ class Ai {
               div.loc.adjacents(adj => {
                 if (div.action.length) return;
                 if (adj.owner != player)
-                  div.action = [adj];
+                div.action = [adj];
               });
             else
               // div.loc.adjacents(adj => {
@@ -135,7 +144,7 @@ class Ai {
                 let divs = adj.prov.divisions;
                 if (adj.owner != player && divs.length && divs[0].soft <= div.soft)
                   div.action = [adj];
-                else if (prov.terrain != 'U') {
+                else if (prov.terrain != 'U' && prov.terrain != 'P') {
                   let leastNum = prov.divisions.length;
                   let leastDst = p;
                   p.adjacents(a => {

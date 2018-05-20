@@ -24,6 +24,12 @@ class Point {
     return this._prov ? this._prov : (this._prov = MAP_DATA[this.row][this.col]);
   }
 
+  get navalInvasion() {
+    let p = pt(this.row, this.col);
+    p._navalInvasion = true;
+    return p;
+  }
+
   adjacents(callback) {
     return iterateAdjacent(this, callback);
   }

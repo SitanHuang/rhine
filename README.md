@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.7.4
+* naval invasion
+* hold shift to multi-select
+
 ### v0.7.2
 * new divisions now takes time to fully recruit men
 * forts can be built

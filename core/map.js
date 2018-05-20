@@ -32,6 +32,8 @@ if (window.MAP_JSON) {
   MAP_DATA = JSON.parse(MAP_JSON);
 }
 
+window.PORTS = [];
+
 window.TERRAINS = {
   ' ': {
     name: 'Plain',
@@ -70,7 +72,7 @@ window.TERRAINS = {
   },
   P: {
     name: 'Port',
-    render: 'P',
+    render: '⚓',
     defense: 1.5,
     attrition: 1.3,
     movement: 1, // 1
