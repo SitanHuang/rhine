@@ -197,7 +197,8 @@ function updateDeploy() {
   <td>40 * N
   <tr><td style="text-align: right;line-height: 2em;">
   <td class="small">
-  <button class="shortcut" onclick="navalInvadeOnClick(this)" data-key='s'>Deploy</button><br>
+  <button class="shortcut" onclick="navalInvadeOnClick(this)" data-key='n'>Deploy</button><br>
+  Key: N
   </table>
   <br><header>Air Strikes</header><br>
   <table class="statistic">
