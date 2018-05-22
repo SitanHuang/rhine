@@ -91,7 +91,15 @@ function handlePlayerOnPass() {
 let waiting = document.createElement('waiting');
 waiting.innerHTML = '<h1>Processing</h1>';
 
+let _passInterval = -1;
+
 function pass() {
+  if (PLAYERS.filter(x => (!x.setAI)).length == 0 && _passInterval == -1) {
+    waiting.style.display = 'none';
+    currentPlayer.setAI = false;
+    _passInterval = setInterval(() => {currentPlayer.ai.think(); pass()}, 1500);
+    return;
+  }
   document.body.append(waiting);
   setTimeout(() => {
     handlePlayerOnPass();

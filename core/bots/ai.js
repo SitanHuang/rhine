@@ -43,7 +43,7 @@ class Ai {
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 30).round() * 1000 + 7000;
           if (player.recruitable > tem.troop * 100 && player.divisions * 35000 / player.recruitable < 2
-            &&
+            && player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
             tem.light = (player.heavy * Math.random()).round().max(40);
@@ -117,7 +117,7 @@ class Ai {
           } else if (div.hp > retreatable && div.action[0] && div.action[0]._navalInvasion) {
             // skip
           } else if (div.hp > 90 && prov.terrain == 'P' && Math.random() > 0.5 && player.light > 40 && player.heavy > 80) {
-            let enemy = PORTS.filter(x => (x.owner != currentPlayer)).sort((x, y) => (x.prov.divisions.length - y.prov.divisions.length));
+            let enemy = PORTS.filter(x => (x.owner != currentPlayer)).sort((x, y) => (Math.random() - 0.5));
             if (enemy[0]) {
               div.action = [enemy[0].navalInvasion];
               player.light -= 20;

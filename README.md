@@ -2,6 +2,11 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.7.6
+* new behavior for ESC
+* hold shift to plan secondary routes
+* all AI battles
+
 ### v0.7.4
 * naval invasion
 * hold shift to multi-select

@@ -38,12 +38,12 @@ var InvasionOfChinaOwners =
                                               11111111111|
                                               11111111111|
                                               11111111111|
-                                             1111  111111|
-                                             1111  111111|
-                                            1111   111111|
-                                            1111   111111|
-                                           11111  1111111|
-                                          1111111 1111111|
+                                             111111111111|
+                                             111111111111|
+                                            1111111111111|
+                                            1111111111111|
+                                           11111111111111|
+                                          111111111111111|
                                        111111111111111111|
                                     1 1111111111111111111|
                                    1111111111111111111111|
@@ -92,11 +92,11 @@ MMMM   MMMM   R          RRU      R MMM  MM M  @@@@@@@@@@|
        RRMM   R         RR   U   RR U MMMMMM  @@@@@@@@@@@|
  RRRRRRRMMM   R         R       RR     MMMMM  @@@@@@@@@@@|
 RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
-   RR RRM    R     MM          RR     MMMM M @@@@  @@@@@@|
-   R R M    RR  MM MM         RR     MMMMMMM @@@@  @@@@@@|
-   R RRM   RR    MMMM         R    MMMMMMUM @@@@   @@@@@@|
-   R  R   R   U  MM M    MMM  R    MM    M  @@@@   @@@@@@|
-  R  RM  RR       MMM      MMMMMM M      M @@@@@  @@@@@@@|
+   RR RRM    R     MM          RR     MMMM M @@@@ U@@@@@@|
+   R R M    RR  MM MM         RR     MMMMMMM @@@@P @@@@@@|
+   R RRM   RR    MMMM         R    MMMMMMUM @@@@ MM@@@@@@|
+   R  R   R   U  MM M    MMM  R    MM    M  @@@@ M  @@@@@@|
+  R  RM  RR       MMM      MMMMMM M      M @@@@@MP@@@@@@@|
     RRM  R        MMM      MMMMMM U       @@@@@@@ @@@@@@@|
     R M           MM          MMM     P@@@@@@@@@@@@@@@@@@|
    RRM            MM RRR            @ @@@@@@@@@@@@@@@@@@@|
@@ -145,7 +145,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U' || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' ? 5 : 2).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(7000, 17, 5))))
+      v.divisions = Array(v.terrain == 'P' ? 5 : 3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(7000, 17, 5))))
     else
       v.divisions = Array(v.terrain == 'U' ? 2 : 5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 20, 15))))
 })));
