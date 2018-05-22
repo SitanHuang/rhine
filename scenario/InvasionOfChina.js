@@ -149,6 +149,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     else
       v.divisions = Array(v.terrain == 'U' ? 2 : 5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 20, 15))))
 })));
+PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
 pt(27, 46).prov.divisions = Array(15).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(10000, 20, 15))))
   .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(10000, 10, 10)))));
