@@ -41,7 +41,8 @@ window.onkeydown = function (evt) {
   evt = evt || window.event;
   shiftDown = evt.shiftKey;
   if (evt.keyCode == 27) {
-    removeAllSelectedDivisions();
+    SELECTED_UNITS.pop();
+    repaintRightList();
     return false;
   }
   var charCode = evt.which || evt.keyCode;
