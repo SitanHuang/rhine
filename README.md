@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.7.8
+* fix AI making long routes
+* drag to scroll
+
 ### v0.7.6
 * new behavior for ESC
 * hold shift to plan secondary routes
