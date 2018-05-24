@@ -175,6 +175,8 @@ class Ai {
       let start = div.loc;
       //u.forEach(div => {
       div.action = unit_pathfind(start, end);
+      if (div.action.filter(x => (x.prov.owner != currentPlayerID)).length > 4)
+        div.action = [];
       //})
     }
   }
