@@ -67,21 +67,21 @@ DMMMDDDDDDD DD    MMMDDDDDD MMRRMMMRR    @@@  @@@@     @@|
 MMMMMMDDDDDDDD DDD  DDD DDDDMMMMMU  RR   @@@P@@@@P   U  @|
 MMMMMMDDDDDDD DDDDDDDDMMMM DMMMMM     R@@@@@@@@@@@ @    @|
 DDMMMMMDD D DDDDDD  MMRRRRRMMMMU     U@@@@@@@@@@@@@@@    |
-DDDDMMMMD DD DDDDDMMMRRMMMRMMM      M P@@@@ @@@@@@@@     |
-DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     MM   R@@   P@@@@@@    |
-RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM  RR   U@@@@@@@@@   |
-DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU       RR   @@@@@@@@@@@P @|
-DDDRDDDDDM RRRDDD RMMMDDDDRMMM       RR    @@@@@@@@@@@@@@|
-DDDRDU  DMMRRR DRRRMMMDDDRR MM    U RR  U P@@@@@@@@@@@@@@|
+DDDDMMMMD DD DDDDDMMMRRMMMRMMM      M P@@@@M@@@@@@@@     |
+DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     MM   R@@M  P@@@@@@    |
+RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM  RR  MU@@@@@@@@@   |
+DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU       RR  M@@@@@@@@@@@P @|
+DDDRDDDDDM RRRDDD RMMMDDDDRMMM       RR MMM@@@@@@@@@@@@@@|
+DDDRDU  DMMRRR DRRRMMMDDDRR MM    U RR MU P@@@@@@@@@@@@@@|
 DDDRD   DDMMMRRRRMMMMDDDDR  M      RR     @@@@@@@@@@@@@@@|
 DDDRD    DDMMMMMMMMMMDDDDRRRRR   RR          @@@@@@@@@@@@|
-DDDRDD    DD       DDDDRR    RRRRR   U       @@@@@@@@@@@@|
-RRRRRDDMM  D        RRR                  RR   @@@@@@@@@@@|
-RDDDDRDMMM   U                          RRRRR @@@@@@@@@@@|
-DDDDDDRMMMM         M                  RR  URRRR@@@@@@@@@|
-DDDDDDDRMMM         MMM     U     U    R    RRR@@@@@@@@@@|
-DDDDDDMRMMM          MMMMMM           RR  M  RUP@@@@@@@@@|
-DDDDDDMRMMM  M MM MMMM    MMM        RR MMM    @@@@@@@@@@|
+DDDRDD    DD       DDDDRR   MRRRRR   U       @@@@@@@@@@@@|
+RRRRRDDMM  D        RRR   MM M           RR   @@@@@@@@@@@|
+RDDDDRDMMM   U    MMM  MMM   M          RRRRR @@@@@@@@@@@|
+DDDDDDRMMMM         M     MM           RR  URRRR@@@@@@@@@|
+DDDDDDDRMMM         MMM M   U  MM U    R    RRR@@@@@@@@@@|
+DDDDDDMRMMM          MMMMMM     MMMMM RR  M  RUP@@@@@@@@@|
+DDDDDDMRMMM  M MM MMMM    MMM      M RR MMM    @@@@@@@@@@|
 DDDDDMMMRMMM MMMMMMMMM RRRR M        R MM        @@@@@@@@|
 DDDDDMMMRMRMM MMMMM URRR  RRRRRR   URR           @@@@@@@@|
 DDDDMMMMMMRR     M  RR      R  RRRRRR RR MMMMMM  @@@@@@@@|
@@ -112,6 +112,7 @@ RR  RR  M    RR                 R      MMMM   @@@@@@@@@@@|
     else slots = Array(3).fill('F');
 
 	  }
+    if (!TERRAINS[v]) throw 'Not found.'
     return {terrain: v, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
 
   })));

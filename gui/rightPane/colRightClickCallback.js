@@ -11,5 +11,5 @@ colRightClickCallback = td => {
       div.action = unit_pathfind(start, end);
     });
   }
-  repaintCanvas()
+  repaintCanvas(null, true)
 }

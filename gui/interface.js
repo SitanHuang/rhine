@@ -32,19 +32,19 @@ let shiftDown = false;
 
 window.onkeyup = function (evt) {
   evt = evt || window.event;
-  shiftDown = evt.shiftKey;  
+  shiftDown = evt.shiftKey;
 }
 
 window.onkeydown = function (evt) {
-  let tagName = document.activeElement.tagName.toLowerCase();
-  if (tagName == 'input') return;
-  evt = evt || window.event;
-  shiftDown = evt.shiftKey;
   if (evt.keyCode == 27) {
     SELECTED_UNITS.pop();
     repaintRightList();
     return false;
   }
+  let tagName = document.activeElement.tagName.toLowerCase();
+  if (tagName == 'input') return;
+  evt = evt || window.event;
+  shiftDown = evt.shiftKey;
   var charCode = evt.which || evt.keyCode;
   var charStr = String.fromCharCode(charCode).toUpperCase();
   for (button of document.getElementsByClassName('shortcut')) {

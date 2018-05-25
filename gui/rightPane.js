@@ -83,11 +83,12 @@ function repaintRightList() {
   ${buffer}</table>
   `;
   $right_content.scrollTop = tempRightListScrollTop;
-  repaintCanvas(td => {
-    DEFAULT_REPAINTCANVAS_CALLBACK(td);
-    if (SELECTED_UNITS.filter(x => x.loc.eq(td.pt)).length)
-      td.style.backgroundColor = td.style.backgroundColor.replace('0.2', '0.7');
-  })
+  // repaintCanvas(td => {
+  //   DEFAULT_REPAINTCANVAS_CALLBACK(td);
+  //   if (SELECTED_UNITS.filter(x => x.loc.eq(td.pt)).length)
+  //     td.style.backgroundColor = td.style.backgroundColor.replace('0.2', '0.7');
+  // })
+  repaintCanvas(null, true)
 }
 
 function updateRightPaneOnPass() {

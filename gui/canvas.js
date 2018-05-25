@@ -29,13 +29,13 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
         let mark = document.createElement('mark');
         mark.innerText = ' ';
         let battleInfo = combineBattleInfos(battles);
-        mark.style.backgroundColor = getColorFromPercentage(battleInfo.percentage[0]);
+        mark.style.background = getColorFromPercentage(battleInfo.percentage[0]);
         mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory';
         td.appendChild(mark);
       }
     }
   } else {
-    td.style.backgroundColor = pt.owner.color.replace('0.2', '0.5');
+    td.style.background = pt.owner.color.replace('0.2', '0.5');
   }
   if (num > 0) {
     let as = prov.divisions.filter(x => x.airStriked).length;
@@ -51,13 +51,13 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
 
 DEFAULT_REPAINTCANVAS_CALLBACK = td => {
   REPAINTCANVAS_CALLBACK_UNITS(td);
-  SELECTED_UNITS.forEach(div => {
-    div.loc.td.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
-    div.action.forEach((p, i) => {
-      let td = p.td;
-      td.style.background = 'rgba(0, 0, 0, 0.4)'
-    })
-  });
+  // SELECTED_UNITS.forEach(div => {
+  //   div.loc.td.style.background = 'rgba(0, 0, 0, 0.6)';
+  //   div.action.forEach((p, i) => {
+  //     let td = p.td;
+  //     td.style.background = 'rgba(0, 0, 0, 0.4)'
+  //   })
+  // });
   colCallback = td => {
     let pt = td.pt;
     let prov = pt.prov;
@@ -83,7 +83,7 @@ function repaintProv(td) {
   let prov = pt.prov;
   if (prov.terrain == '@') return;
   let player = pt.owner;
-  td.style.backgroundColor = player && prov.terrain != '@' ? player.color : 'white';
+  td.style.background = player && prov.terrain != '@' ? player.color : 'white';
   td.style.cursor = 'default';
   td.style.transform = 'none';
   td.className = '';
@@ -111,17 +111,33 @@ function repaintProv(td) {
 
 let current_repaintcanvas_callback = DEFAULT_REPAINTCANVAS_CALLBACK;
 
-function repaintCanvas(callback) {
+function repaintCanvas(callback, quick) {
   current_repaintcanvas_callback = callback = callback ? callback : DEFAULT_REPAINTCANVAS_CALLBACK;
   let start = new Date().getTime();
   for (let tr of canvasTable.children) {
     for (let td of tr.children) {
-      if (td.pt.terrain == '@') return;
-      repaintProv(td);
-      callback(td)
+      let pt = td.pt;
+      let terrain = pt.prov.terrain;
+      if (terrain == '@') continue;
+      if (!quick) {
+        repaintProv(td);
+        callback(td)
+      } else {
+        if (pt.owner == currentPlayer || pt.adjacentToPlayer(currentPlayer)) {
+          td.style.background = terrain != '@' ? pt.owner.color : 'white';
+        } else {
+          td.style.background = pt.owner.color.replace('0.2', '0.5');
+        }
+      }
     }
   }
-  console.log(`repaintCanvas() ended in ${new Date().getTime() - start}ms`)
+  SELECTED_UNITS.forEach(div => {
+    div.loc.td.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    div.action.forEach(pt => {
+      pt.td.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+    })
+  })
+  console.log(`repaintCanvas(quick=${ !!quick }) ended in ${new Date().getTime() - start}ms`)
 }
 
 function reinitCanvas() {
