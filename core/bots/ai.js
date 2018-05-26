@@ -116,8 +116,8 @@ class Ai {
             }
           } else if (div.hp > retreatable && div.action[0] && div.action[0]._navalInvasion) {
             // skip
-          } else if (div.hp > 90 && prov.terrain == 'P' && Math.random() > 0.5 && player.light > 40 && player.heavy > 80) {
-            let enemy = PORTS.filter(x => (x.owner != currentPlayer)).sort((x, y) => (Math.random() - 0.5));
+          } else if (div.hp > 90 && prov.terrain == 'P' && Math.random() > 0.5 && player.light > 20 && player.heavy > 40) {
+            let enemy = PORTS.filter(x => (x.owner != currentPlayer || x.adjacentNotToPlayer(player))).sort((x, y) => (Math.random() - 0.5));
             if (enemy[0]) {
               div.action = [enemy[0].navalInvasion];
               player.light -= 20;
