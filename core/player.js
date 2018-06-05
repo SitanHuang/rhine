@@ -10,7 +10,7 @@ class Player {
     this.playerID = PLAYERS.length;
     this.manpower = Math.floor(Math.random() * 5000000 + 5000000);
     this.casualties = 0;
-    this.growthRate = Math.random() * 0.01 + 0.005;
+    this.growthRate = Math.random() * 0.007;
 
     this.originalCities = this.calcCities();
     this.factories = 0;
@@ -74,7 +74,7 @@ class Player {
   }
 
   growManpower() {
-    this.manpower = (this.manpower * (this.growthRate + 1) + 2000).round().max(this.cities * 2000000);
+    this.manpower = (this.manpower * (this.growthRate + 1) + 5000).round().max(this.cities * 2000000);
     this.growthRate = (0.00001 + this.growthRate).max(0.01)
   }
 
