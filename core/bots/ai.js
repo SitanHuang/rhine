@@ -41,13 +41,13 @@ class Ai {
             prov.slots.push('F');
           }
           let tem = player.defaultTemplate.deepClone();
-          tem.troop = (Math.random() * 30).round() * 1000 + 7000;
-          if (player.manpower > tem.troop * 100 && player.divisions * 35000 / player.manpower < 2
+          tem.troop = (Math.random() * 20).round() * 1000 + 6000;
+          if (player.recruitable > tem.troop * 100 && player.divisions * 35000 < player.manpower
             && player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
             tem.light = (player.heavy * Math.random()).round().max(40);
-            while ((tem.heavy -= 1) > 9 && (tem.light -= 1) > 9) {
+            while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 9) {
               tem.defaultName = tem.codeName;
               if (tem.deployable(player)) {
                 tem.deploy(player, p, tem.codeName);
