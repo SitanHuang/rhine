@@ -156,7 +156,7 @@ pt(27, 46).prov.divisions = Array(35).fill(0).map(() => (new Division(1, 'Infant
   .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(10000, 10, 10)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(7).fill(0).map(() => {
-  let d = new Division(1, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35))
+  let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35))
   d.skill = 4;
   return d;
 })
