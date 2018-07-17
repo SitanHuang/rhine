@@ -34,7 +34,7 @@ class Ai {
           }
         } else if (prov.terrain == 'U' || prov.terrain == 'P') {
           this.cities.push(p);
-          //this.adjacentBlocks.push(p);
+          if (prov.terrain == 'P') this.adjacentBlocks.push(p);
           if (player.constructionPoints > 750 && Math.random() > 0.7 &&
             prov.slots.filter(x => (x == 'F')).length < p.terrain.slots) {
             player.constructionPoints -= 750;
