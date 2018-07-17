@@ -34,7 +34,7 @@ class Ai {
           }
         } else if (prov.terrain == 'U' || prov.terrain == 'P') {
           this.cities.push(p);
-          this.adjacentBlocks.push(p);
+          //this.adjacentBlocks.push(p);
           if (player.constructionPoints > 750 && Math.random() > 0.7 &&
             prov.slots.filter(x => (x == 'F')).length < p.terrain.slots) {
             player.constructionPoints -= 750;
@@ -42,7 +42,7 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 20).round() * 1000 + 6000;
-          if (player.recruitable > tem.troop * 100 && player.divisions * 35000 < player.manpower
+          if (player.recruitable > tem.troop * 100 && player.divisions * 30000 < player.manpower
             && player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
