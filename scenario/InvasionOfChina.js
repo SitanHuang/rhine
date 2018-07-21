@@ -146,13 +146,13 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U' || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' ? 5 : 3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(7000, 17, 5))))
+      v.divisions = Array(v.terrain == 'P' ? 5 : 3).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(6500, 15, 5))))
     else
-      v.divisions = Array(v.terrain == 'U' ? 2 : 5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 20, 15))))
+      v.divisions = Array(v.terrain == 'U' ? 2 : 5).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(10000, 30, 25))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(35).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(10000, 20, 15))))
+pt(27, 46).prov.divisions = Array(35).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(10000, 30, 25))))
   .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(10000, 9, 15)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(5).fill(0).map(() => {
