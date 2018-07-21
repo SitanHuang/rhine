@@ -123,10 +123,10 @@ class Ai {
               player.light -= 20;
               player.heavy -= 40;
             }
-          } else if (div.adjacentNotToPlayer > 0 &&
-            div.hp > retreatable) {
+          } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer < 3 || Math.random() > 0.75) &&
+            (div.hp > 50)) {
             div.action = [];
-            if (div.hp > 90)
+            if (div.hp > 90 || div.skill > 1.75)
               div.loc.adjacents(adj => {
                 if (div.action.length) return;
                 if (adj.owner != player)
