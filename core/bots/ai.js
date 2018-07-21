@@ -42,7 +42,7 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 20).round() * 1000 + 6000;
-          if (player.recruitable > tem.troop * 100 && player.divisions * 30000 < player.manpower
+          if (player.recruitable > tem.troop * 100 && player.divisions * 20000 < player.manpower
             && player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.light * Math.random()).round().max(40);
@@ -123,8 +123,8 @@ class Ai {
               player.light -= 20;
               player.heavy -= 40;
             }
-          } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer < 3 || Math.random() > 0.75) &&
-            (div.hp > 50)) {
+          } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer < 2 || Math.random() > 0.65) &&
+            (div.hp > 60)) {
             div.action = [];
             if (div.hp > 90 || div.skill > 1.75)
               div.loc.adjacents(adj => {
