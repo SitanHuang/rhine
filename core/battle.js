@@ -48,6 +48,10 @@ function battle(d1, d2, d1m) {
   d1.skill = (d1.skill + (difference / sum / 20).min(0.01)).max(4).round(2)
   d2.skill = (d2.skill + ((t2 - t1) / sum / 20).min(0.01)).max(4).round(2)
 
+  d1.morale = (d1.morale + (difference / sum / 10)).max(2).min(0.25).round(2)
+  d2.morale = (d2.morale + ((t2 - t1) / sum / 10)).max(2).min(0.25).round(2)
+
+
   sum = d1.hp / d2.hp + d2.hp / d1.hp;
 
   if (d2.hp <= 2) d2.remove();

@@ -13,6 +13,8 @@ function showDivisionDetailOnFloat(i, td) {
   <td>${div.entrench.round(1)}
   <tr><th>Skill
   <td>${div.skill.round(2)}
+  <tr><th>Morale
+  <td>${div.morale.round(2)}
   <tr><th>Surround Penalty
   <td>-${div.adjacentPenalty/4*100}%
   <tr><th>Supply

@@ -17,6 +17,8 @@ class Division {
     this.supply = 4;
     this.entrench = 1;
     this.airStriked = false;
+
+    this.morale = 1;
   }
 
   reinforce() {
@@ -34,9 +36,10 @@ class Division {
   }
 
   move() {
-    if (this.skill < 1) {
-      this.skill += 0.1
-    }
+    if (this.skill < 1)
+      this.skill += 0.1;
+    if (this.morale < 1)
+      this.morale += 0.05;
 
     this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(2).clamp(1, 2);
     this.newInforced = 0;
@@ -53,7 +56,7 @@ class Division {
       player.casualties += a.round();
     }
 
-    if (this.action.length == 0) {
+    if (this.action.length == 0 || (this.hp < 80 && Math.random() < this.morale / 3 && this.morale < 1)) {
       this.movementProgress = 0;
       return;
     }
@@ -73,7 +76,7 @@ class Division {
           if (this.hp < this.player.retreatable.min(30)) return;
           div.movementProgress = -2;
           let results = battle(that, div);
-          if (div.hp < div.player.retreatable.min(30) || (div.hp < 50 && Math.random() < this.breakThrough / 3)) {
+          if (div.hp < div.player.retreatable.min(30) || (div.hp < 50 && Math.random() < this.breakThrough / 3) || (div.hp < 80 && Math.random() < div.morale / 3 && div.morale < 1)) {
             div.retreat();
           }
           that.battleInfo.push(results);

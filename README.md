@@ -2,6 +2,11 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.8.4
+* added Strength view
+* added Morale View
+* added Morale
+
 ### v0.8.0
 * major speed bost when selecting many units
 * scenario changes
