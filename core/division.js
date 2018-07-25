@@ -155,6 +155,6 @@ class Division {
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       s *= 1.5;
-    return s - s * (this.adjacentPenalty / 4)
+    return s * (this.morale).min(0.8).max(1.5) - s * (this.adjacentPenalty / 4)
   }
 }

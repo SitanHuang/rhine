@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.8.6
+* modified Morale View
+* modified Soft Attack formula based on Morale
+
 ### v0.8.4
 * added Strength view
 * added Morale View
