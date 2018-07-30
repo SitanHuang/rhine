@@ -125,12 +125,15 @@ function deployOnClick(button) {
   }
 }
 
+var MINIMAL_TEMPLATE = new Template(242, 1, 1);
+MINIMAL_TEMPLATE.defaultName = 'Temporary Squad';
+
 function convertSelectedOnClick(button) {
-  let msg = button.nextElementSibling;
+  let msg = button ? button.nextElementSibling : null;
   if (SELECTED_UNITS.length == 0) {
-    msg.style.color = 'red';
-    msg.innerText = 'No selected units';
-    msg.style.display = 'block';
+    if (msg) msg.style.color = 'red';
+    if (msg) msg.innerText = 'No selected units';
+    if (msg) msg.style.display = 'block';
     return;
   }
   let netman = 0;
@@ -138,9 +141,9 @@ function convertSelectedOnClick(button) {
   let netheavy = 0;
   let dst = currentPlayer.defaultTemplate.deepClone();
   if (!dst.deployable(currentPlayer)) {
-    msg.style.color = 'red';
-    msg.innerText = 'Invalid Template';
-    msg.style.display = 'block';
+    if (msg) msg.style.color = 'red';
+    if (msg) msg.innerText = 'Invalid Template';
+    if (msg) msg.style.display = 'block';
     return;
   }
   SELECTED_UNITS.forEach(div => {
@@ -152,7 +155,7 @@ function convertSelectedOnClick(button) {
   let needlight = currentPlayer.light + netlight;
   let needheavy = currentPlayer.heavy + netheavy;
   if (needman < 0 || needlight < 0 || needheavy < 0) {
-    msg.style.color = 'red';
+    if (msg) msg.style.color = 'red';
     let html = 'Need the following:<br>';
     if (needman < 0)
       html += `Manpower: ${abbreviate(-needman, 2, false, false)} more<br>`;
@@ -160,15 +163,15 @@ function convertSelectedOnClick(button) {
       html += `Light Equip.: ${abbreviate(-needlight, 2, false, false)} more<br>`;
     if (needheavy < 0)
       html += `Heavy Equip.: ${abbreviate(-needheavy, 2, false, false)} more<br>`;
-    msg.style.display = 'block';
-    msg.innerHTML = html;
+    if (msg) msg.style.display = 'block';
+    if (msg) msg.innerHTML = html;
     return;
   }
-  msg.style.color = 'blue';
+  if (msg) msg.style.color = 'blue';
   let html = 'Successful:<br>';
   html += `Light Equip.: net ${abbreviate(netlight, 2, false, false)}<br>`;
   html += `Heavy Equip.: net ${abbreviate(netheavy, 2, false, false)}<br>`;
-  msg.style.display = 'block';
+  if (msg) msg.style.display = 'block';
   if (netman > 0) {
     currentPlayer.manpower += netman;
     html += `Manpower: net ${abbreviate(netman, 2, false, false)}<br>`;
@@ -180,8 +183,8 @@ function convertSelectedOnClick(button) {
     div.name = dst.defaultName;
     div.template = dst;
   });
-  msg.innerHTML = html;
-  repaintRightList();
+  if (msg) msg.innerHTML = html;
+  if (msg) repaintRightList();
 }
 
 function updateDeploy() {

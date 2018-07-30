@@ -88,6 +88,7 @@ class Ai {
     let units = [];
     let player = this.player;
     let that = this;
+    SELECTED_UNITS = [];
 
     for (let row = 0; row < MAP_DATA.length; row++) {
       let rowData = MAP_DATA[row];
@@ -96,8 +97,18 @@ class Ai {
         let prov = p.prov;
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
-          if (div.skill < 1) {
+          if (div.skill < 1 && div.template.troop == MINIMAL_TEMPLATE.troop) {
             div.action = [];
+            return;
+          }
+          if (div.supply <= 0 && div.men < 10000 && Math.random() > 0.3) {
+            console.debug(`//Player ${player.playerID}: disbanded 1 unit in no supply`)
+            SELECTED_UNITS.push(div);
+            return;
+          }
+          if ((div.skill < 1.25 && div.hp < 25 && Math.random() > 0.7) ||
+            (player.divisions > 200 && player.averageStrength < 60 && div.hp < 50 && Math.random() > 0.75)) {
+            SELECTED_UNITS.push(div);
             return;
           }
           let retreatable = 60;
@@ -161,6 +172,12 @@ class Ai {
             units.push(div);
         });
       }
+    }
+
+    if (SELECTED_UNITS.length) {
+      console.debug(`Player ${player.playerID}:Disbanded ${SELECTED_UNITS.length} units`)
+      player.defaultTemplate = MINIMAL_TEMPLATE;
+      convertSelectedOnClick(null);
     }
 
     let i = 0;

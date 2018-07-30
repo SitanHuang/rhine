@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.8.8
+* AI now knows to disband and upgrade divisions
+* AI will disband unit if unit is surrounded
+
 ### v0.8.6
 * modified Morale View
 * modified Soft Attack formula based on Morale

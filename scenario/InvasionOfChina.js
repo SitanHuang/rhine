@@ -127,6 +127,7 @@ let p2 = new Player();
 p2.color = 'rgba(140, 193, 226, 0.25)'
 p2.retreatable = 30;
 p2.manpower = Math.floor(Math.random() * 50000 + 10000000);
+p2.growthRate = 0.0075;
 p2.light = 0;
 p2.heavy = 0;
 p2.factoryInLight = 40;
