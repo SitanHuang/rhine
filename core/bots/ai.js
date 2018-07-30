@@ -176,7 +176,7 @@ class Ai {
 
     if (SELECTED_UNITS.length) {
       console.debug(`Player ${player.playerID}:Disbanded ${SELECTED_UNITS.length} units`)
-      player.defaultTemplate = MINIMAL_TEMPLATE;
+      player.defaultTemplate = MINIMAL_TEMPLATE.deepClone();
       convertSelectedOnClick(null);
     }
 
