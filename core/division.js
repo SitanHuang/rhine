@@ -106,6 +106,7 @@ class Division {
 
   retreat() {
 //     if (this.hp > this.player.retreatable) throw 'FATAL';
+    if (this.hp <= 2 || this.men <= 400) this.remove();
     let provs = [];
     let that = this;
     this.loc.adjacents(p => {
