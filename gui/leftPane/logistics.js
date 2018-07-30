@@ -393,6 +393,6 @@ function updateLogistics() {
   <button onclick="toggleAverageSkillOnClick(this)">Toggle Average Skill View</button><br><br>
   <button onclick="toggleAverageMoraleOnClick(this)">Toggle Average Morale View</button><br><br>
   <br><br><br>
-  <p>V0.8.9</p>
+  <p>V0.9.0</p>
   `;
 }

@@ -66,6 +66,7 @@ function repaintRightList() {
   let buffer = '';
   SELECTED_UNITS = SELECTED_UNITS.uniq();
   SELECTED_UNITS.forEach((div, i) => {
+    let morale = div.morale.max(2).min(0) * 50;
     buffer += `
     <tr>
     <td onmouseover="showDivisionDetailOnFloat(${i}, this)" onmouseout="removeFloatingDIV()"
@@ -73,7 +74,10 @@ function repaintRightList() {
       <span>${div.skill.floor()}</span> ${div.name}
     <td><button onclick="removeDivisionFromList(${i})">❌</button>
     <tr>
-    <td class="hp"><div style="width: ${div.hp}%;background: ${getColorFromPercentage(div.hp/100)}"></div>
+    <td class="hp"><div style="width: ${div.hp}%;background: rgb(145,205,16)"></div>
+    <td>
+    <tr>
+    <td class="hp"><div style="width: ${morale}%;background: rgb(255,122,0)"></div>
     <td>
     `;
   })

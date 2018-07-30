@@ -142,7 +142,7 @@ table.divisions tr>td:last-child {
 }
 
 table.divisions tr>td.hp {
-  height: 2px;
+  height: 3px;
 }
 
 table.divisions tr>td.hp>div {

@@ -97,7 +97,7 @@ class Ai {
         let prov = p.prov;
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
-          if (div.skill < 1 && div.template.troop == MINIMAL_TEMPLATE.troop) {
+          if (div.skill < 1 && div.template.troop <= MINIMAL_TEMPLATE.troop) {
             div.action = [];
             return;
           }
@@ -105,8 +105,8 @@ class Ai {
             SELECTED_UNITS.push(div);
             return;
           }
-          if ((div.skill < 1.25 && div.morale < 1 && div.hp < 25 && Math.random() > 0.7) ||
-            (player.divisions > 200 && player.averageStrength < 60 && div.hp < 50 && Math.random() > 0.75)) {
+          if ((div.skill < 1.25 && div.morale < 1 && (div.hp < 25 || div.morale <= 0.25) && Math.random() > 0.7) ||
+            (player.divisions > 200 && player.averageStrength < 76 && div.hp < 60 && Math.random() > 0.75)) {
             SELECTED_UNITS.push(div);
             return;
           }
@@ -174,6 +174,7 @@ class Ai {
     }
 
     if (SELECTED_UNITS.length) {
+      console.log(`Player ${player.playerID} disbanded ${SELECTED_UNITS.length} units`);
       player.defaultTemplate = MINIMAL_TEMPLATE.deepClone();
       convertSelectedOnClick(null);
     }

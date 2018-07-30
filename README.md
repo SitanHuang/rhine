@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.9.0
+* Bug fixes
+* Added morale bar to right pane
+
 ### v0.8.9
 * Moving toward an organization-based battle system
 
