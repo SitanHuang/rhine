@@ -106,7 +106,7 @@ class Ai {
             SELECTED_UNITS.push(div);
             return;
           }
-          if ((div.skill < 1.25 && div.hp < 25 && Math.random() > 0.7) ||
+          if ((div.skill < 1.25 && div.morale < 1 && div.hp < 25 && Math.random() > 0.7) ||
             (player.divisions > 200 && player.averageStrength < 60 && div.hp < 50 && Math.random() > 0.75)) {
             SELECTED_UNITS.push(div);
             return;
