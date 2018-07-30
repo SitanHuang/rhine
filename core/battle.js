@@ -54,7 +54,7 @@ function battle(d1, d2, d1m) {
 
   sum = d1.hp / d2.hp + d2.hp / d1.hp;
 
-  if (d2.hp <= 2) d2.remove();
+  if (d2.hp <= 2 || d2.men <= 400 ) d2.remove();
 
   return {
     casualties: [t2, t1, sum],
