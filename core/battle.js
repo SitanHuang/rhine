@@ -17,7 +17,7 @@ function battle(d1, d2, d1m) {
   let s2 = d2.soft;
   let h1 = d1.hard;
   let h2 = d2.hard;
-  let factor = 4;
+  let factor = 1;
 
   let as1 = (s1 - s2).min(0) + s1 * factor;
   let as2 = (s2 - s1).min(0) + s2 * factor;
@@ -48,8 +48,8 @@ function battle(d1, d2, d1m) {
   d1.skill = (d1.skill + (difference / sum / 20).min(0.01)).max(4).round(2)
   d2.skill = (d2.skill + ((t2 - t1) / sum / 20).min(0.01)).max(4).round(2)
 
-  d1.morale = (d1.morale + (difference / sum / 10)).max(2).min(0.25).round(2)
-  d2.morale = (d2.morale + ((t2 - t1) / sum / 10)).max(2).min(0.25).round(2)
+  d1.morale = (d1.morale + (difference / sum / 3)).max(2).min(0.20).round(2)
+  d2.morale = (d2.morale + ((t2 - t1) / sum / 3)).max(2).min(0.20).round(2)
 
 
   sum = d1.hp / d2.hp + d2.hp / d1.hp;

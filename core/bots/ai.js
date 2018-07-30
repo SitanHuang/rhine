@@ -102,7 +102,6 @@ class Ai {
             return;
           }
           if (div.supply <= 0 && div.men < 10000 && Math.random() > 0.3) {
-            console.debug(`//Player ${player.playerID}: disbanded 1 unit in no supply`)
             SELECTED_UNITS.push(div);
             return;
           }
@@ -175,7 +174,6 @@ class Ai {
     }
 
     if (SELECTED_UNITS.length) {
-      console.debug(`Player ${player.playerID}:Disbanded ${SELECTED_UNITS.length} units`)
       player.defaultTemplate = MINIMAL_TEMPLATE.deepClone();
       convertSelectedOnClick(null);
     }

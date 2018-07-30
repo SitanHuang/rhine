@@ -74,12 +74,12 @@ class Player {
   }
 
   growManpower() {
-    this.manpower = (this.manpower * (this.growthRate + 1) + 5000).round().max(this.cities * 2000000);
+    this.manpower = (this.manpower * (this.growthRate + 1) + 5000).round().max(this.cities * 500000);
     this.growthRate = (0.00001 + this.growthRate).max(0.01)
   }
 
   get recruitable() {
-    return Math.floor(this.manpower * (this.cities / this.originalCities));
+    return Math.floor(this.manpower * (this.cities / this.originalCities / 1.5).min(1));
   }
 
   calcCities() {
