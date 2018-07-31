@@ -2,6 +2,11 @@
 
 The game will have you play full military tactics and planning.
 
+### v0.9.2
+* AI fixes
+* Added average HP view
+* Low Morale on no supply
+
 ### v0.9.0
 * Bug fixes
 * Added morale bar to right pane

@@ -38,6 +38,9 @@ String.prototype.deepClone = function () {
 Array.prototype.uniq = function () {
   return [...new Set(this)];
 }
+Array.prototype.sample = function () {
+  return this[(Math.random() * this.length).floor()];
+}
 
 Array.prototype.last = function () {
   return this[this.length - 1];

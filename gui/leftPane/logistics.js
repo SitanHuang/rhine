@@ -168,6 +168,45 @@ function toggleAverageStrengthOnClick(button) {
     });
   }
 }
+function toggleAverageStrengthHPOnClick(button) {
+  if (button.showing) {
+    button.className = '';
+    button.showing = false;
+    repaintCanvas();
+  } else {
+    button.className = 'active';
+    button.showing = true;
+    let oldCallback = colCallback;
+    colCallback = td => {
+    }
+    let max = 0;
+    MAP_DATA.forEach(row => {
+      row.forEach(col => {
+        if (col.owner == currentPlayerID && col.divisions.length > 0) {
+          let num = 0;
+          col.divisions.forEach(x => {num += x.hp});
+          max = Math.max(max, num / col.divisions.length);
+        }
+      })
+    });
+    repaintCanvas(function (td) {
+      let pt = td.pt;
+      let prov = pt.prov;
+      td.style.cursor = 'pointer';
+      if (pt.owner == currentPlayer) {
+        td.style.backgroundColor = 'white';
+        if(prov.divisions.length > 0) {
+          let num = 0;
+          prov.divisions.forEach(x => {num += x.hp});
+          num = num / prov.divisions.length;
+          td.style.backgroundColor = getColorFromPercentage(num / max, [{"pct":0,"color":{"r":180,"g":0,"b":0}},{"pct":0.5,"color":{"r":180,"g":180,"b":0}},{"pct":1,"color":{"r":32,"g":158,"b":32}}]);
+        }
+      } else {
+        td.style.backgroundColor = 'grey';
+      }
+    });
+  }
+}
 function toggleAverageSkillOnClick(button) {
   if (button.showing) {
     button.className = '';
@@ -387,12 +426,12 @@ function updateLogistics() {
   <br>
   <button onclick="toggleFactoriesOnClick(this)">Toggle Factories View</button><br><br>
   <button onclick="toggleSuppliesOnClick(this)">Toggle Supplies View</button><br><br>
-  <button onclick="toggleStrengthOnClick(this)">Toggle Strength View (By Attack)</button><br><br>
   <button onclick="toggleStrengthByMenOnClick(this)">Toggle Strength View (By Men)</button><br><br>
   <button onclick="toggleAverageStrengthOnClick(this)">Toggle Average Strength View (By men)</button><br><br>
+  <button onclick="toggleAverageStrengthHPOnClick(this)">Toggle Average Strength View (By HP)</button><br><br>
   <button onclick="toggleAverageSkillOnClick(this)">Toggle Average Skill View</button><br><br>
   <button onclick="toggleAverageMoraleOnClick(this)">Toggle Average Morale View</button><br><br>
   <br><br><br>
-  <p>V0.9.0</p>
+  <p>V0.9.2</p>
   `;
 }

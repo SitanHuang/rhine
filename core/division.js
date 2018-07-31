@@ -52,6 +52,7 @@ class Division {
 
     if (this.supply == 0) {
       let a = this.men / 10;
+      this.morale = (this.morale / 2).min(0.2);
       this.men = (this.men - a).round().min(0);
       player.casualties += a.round();
     }

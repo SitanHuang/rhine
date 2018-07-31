@@ -66,7 +66,7 @@ function repaintRightList() {
   let buffer = '';
   SELECTED_UNITS = SELECTED_UNITS.uniq();
   SELECTED_UNITS.forEach((div, i) => {
-    let morale = div.morale.max(2).min(0) * 50;
+    let morale = div.morale.max(1.5).min(0) * (100/1.5);
     buffer += `
     <tr>
     <td onmouseover="showDivisionDetailOnFloat(${i}, this)" onmouseout="removeFloatingDIV()"

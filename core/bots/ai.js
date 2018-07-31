@@ -136,11 +136,12 @@ class Ai {
           } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer < 2 || Math.random() > 0.65) &&
             (div.hp > 60)) {
             div.action = [];
-            if (div.hp > 90 || div.skill > 1.75)
+            if ((div.hp > 90 || div.skill > 1.75) && div.morale > 0.9)
               div.loc.adjacents(adj => {
                 if (div.action.length) return;
-                if (adj.owner != player)
-                div.action = [adj];
+                let divs = adj.prov.divisions;
+                if (adj.owner != player && ((divs.length == 0 && Math.random() > 0.65) || (divs.length && divs.sample().soft <= div.soft)))
+                  div.action = [adj];
               });
             else
               // div.loc.adjacents(adj => {
@@ -158,8 +159,10 @@ class Ai {
                   let leastNum = prov.divisions.length;
                   let leastDst = p;
                   p.adjacents(a => {
-                    if (a.owner == player && a.prov.divisions.length <= leastNum) {
-                      leastNum = a.prov.divisions.length;
+                    let sum = 0;
+                    a.prov.divisions.forEach(d => {sum += d.soft + d.hard;})
+                    if (a.owner == player && sum <= leastNum) {
+                      leastNum = sum;
                       leastDst = a;
                     }
                   });
