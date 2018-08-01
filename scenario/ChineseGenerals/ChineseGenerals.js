@@ -15,10 +15,10 @@ window.ChineseGenerals = {
       desc: 'Programmer',
       path: 'scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg',
       mod: {
-        o: 0.9,
-        b: 1.3,
+        o: 0.8,
+        b: 1.4,
         s: 1.2,
-        e: 0.9
+        e: 0.8
       }
     }
   },
@@ -27,10 +27,10 @@ window.ChineseGenerals = {
       desc: 'Eagle of the Northwest',
       path: 'scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg',
       mod: {
-        o: 1.2,
+        o: 1.3,
         b: 0.9,
         s: 0.8,
-        e: 1.2
+        e: 0.9
       },
       selected: true
     },
@@ -40,7 +40,7 @@ window.ChineseGenerals = {
       mod: {
         o: 1,
         b: 1.3,
-        s: 1,
+        s: 0.8,
         e: 1
       },
       selected: true
@@ -48,10 +48,10 @@ window.ChineseGenerals = {
     'Gao Zhi-hang': {
       desc: 'Modern Warfare Expert',
       mod: {
-        o: 1.2,
-        b: 1,
-        s: 1.1,
-        e: 0.9
+        o: 0.8,
+        b: 1.3,
+        s: 1.3,
+        e: 0.7
       },
       path: 'scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg',
       selected: true
@@ -59,7 +59,7 @@ window.ChineseGenerals = {
     'Zhu De': {
       desc: 'Pioneers of Liberation',
       mod: {
-        o: 1.2,
+        o: 1.3,
         b: 1.2,
         s: 0.9,
         e: 0.8
@@ -72,7 +72,7 @@ window.ChineseGenerals = {
         o: 1,
         b: 0.8,
         s: 0.7,
-        e: 1.3
+        e: 1.5
       },
       path: 'scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg'
     }

@@ -3,6 +3,7 @@ SPEED_UNIT = 'km/h'
 
 class Template {
   constructor(troop, light, heavy) {
+    this['#'] = 'Template';
     this.troop = troop;
     this.light = light;
     this.heavy = heavy;

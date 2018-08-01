@@ -1,5 +1,6 @@
 class Point {
   constructor(row, col) {
+    this['#'] = 'Point';
     this.row = row;
     this.col = col;
   }
@@ -21,7 +22,7 @@ class Point {
   }
 
   get prov() {
-    return this._prov ? this._prov : (this._prov = MAP_DATA[this.row][this.col]);
+    return MAP_DATA[this.row][this.col];
   }
 
   get navalInvasion() {

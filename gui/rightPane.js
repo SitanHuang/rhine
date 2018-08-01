@@ -60,6 +60,31 @@ function autoFightSelectedOnClick() {
   }
 }
 
+function rightPaneSetColorOnClick(button) {
+  SELECTED_UNITS.forEach(x => {
+    x.color = button.style.backgroundColor;
+  });
+  repaintRightList();
+  repaintCanvas();
+}
+
+function ArmyViewOnClick() {
+  let stylesheet = document.styleSheets[0];
+  stylesheet.cssRules[0].style.display = stylesheet.cssRules[0].style.display == 'block' ? 'none' : 'block';
+}
+
+function saveGameOnClick() {
+  let file = prompt('File name?', 'Saved Game 1.rhine');
+  if (!file || !file.length) return;
+  let waiting = document.createElement('waiting');
+  waiting.innerHTML = '<h1>Processing</h1>';
+  document.body.append(waiting);
+  setTimeout(function() {
+    localStorage['file_' + file] = serializeWorld();
+    waiting.remove();
+  }, 50);
+}
+
 function repaintRightList() {
   removeFloatingDIV();
   tempRightListScrollTop = $right_content.scrollTop;
@@ -72,20 +97,35 @@ function repaintRightList() {
     <td onmouseover="showDivisionDetailOnFloat(${i}, this)" onmouseout="removeFloatingDIV()"
       onclick="SELECTED_UNITS = [SELECTED_UNITS[${i}]];repaintRightList();">
       <span>${div.skill.floor()}</span> ${div.name}
+    <td style="border: 2px solid ${div.color};background: ${div.color}" class="army">
     <td><button onclick="removeDivisionFromList(${i})">❌</button>
     <tr>
     <td class="hp"><div style="width: ${div.hp}%;background: rgb(145,205,16)"></div>
-    <td>
+    <td><td>
     <tr>
     <td class="hp"><div style="width: ${morale}%;background: rgb(255,122,0)"></div>
-    <td>
+    <td><td>
     `;
   })
   $right_content.innerHTML = `
   <table class="divisions">
   <tr>
-  <td><button onclick="autoFightSelectedOnClick()">Auto Command Selection</button>
-  <td><button onclick="removeAllSelectedDivisions()">❌ all</button>
+  <td><button onclick="autoFightSelectedOnClick()">AI</button>
+  <button onclick="ArmyViewOnClick()">Army View</button>
+  <button onclick="saveGameOnClick()">Save</button>
+  <td>
+  <td><button onclick="removeAllSelectedDivisions()">❌</button>
+  <tr>
+  <td style="">
+    <button onclick="rightPaneSetColorOnClick(this)" style="background: #4a148c"> </button
+    ><button onclick="rightPaneSetColorOnClick(this)" style="background: #b71c1c"> </button
+    ><button onclick="rightPaneSetColorOnClick(this)" style="background: #0d47a1"> </button
+    ><button onclick="rightPaneSetColorOnClick(this)" style="background: #109020"> </button
+    ><button onclick="rightPaneSetColorOnClick(this)" style="background: #827717"> </button
+    ><button onclick="rightPaneSetColorOnClick(this)" style="background: #e65100"> </button
+    ><button onclick="rightPaneSetColorOnClick(this)" style="background: #302f2f "> </button>
+  <td>
+  <td><button onclick="rightPaneSetColorOnClick(this)" style="background: transparent ">❌</button>
   ${buffer}</table>
   `;
   $right_content.scrollTop = tempRightListScrollTop;

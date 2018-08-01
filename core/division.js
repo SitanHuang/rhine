@@ -1,5 +1,9 @@
 class Division {
   constructor(playerID, name, point, template) {
+    if (!name) return;
+
+    this['#'] = 'Division';
+
     this.playerID = playerID;
     this.name = name;
     this.loc = point;
@@ -17,6 +21,8 @@ class Division {
     this.supply = 4;
     this.entrench = 1;
     this.airStriked = false;
+
+    this.color = 'transparent';
 
     this.morale = 1;
   }
@@ -54,6 +60,10 @@ class Division {
       let a = this.men / 10;
       this.morale = (this.morale / 2).min(0.2);
       this.men = (this.men - a).round().min(0);
+      if (this.men <= 0) {
+        this.remove();
+        return;
+      }
       player.casualties += a.round();
     }
 
@@ -111,7 +121,7 @@ class Division {
     let provs = [];
     let that = this;
     this.loc.adjacents(p => {
-      if (p.owner == that.player) provs.push(p)
+      if (p.prov.owner == that.player.playerID) provs.push(p)
     })
     if (provs.length == 0) return;
     let dist = provs.sort((x, y) => (x.prov.divisions.length - y.prov.divisions.length))[0];

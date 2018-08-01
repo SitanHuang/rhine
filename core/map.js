@@ -48,7 +48,7 @@ window.TERRAINS = {
     render: '⛰️',
     color: 'green',
     defense: 3,
-    attrition: 0.6,
+    attrition: 0.9,
     movement: 0.2, // 5
     slots: 2
   },

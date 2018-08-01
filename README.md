@@ -2,10 +2,20 @@
 
 The game will have you play full military tactics and planning.
 
+### v1.0.0
+* AI fixes
+* Added concept of Armies
+* Changed style
+* Scenario fixes
+* Performance improved
+* Add DOJO.js & DOJOX
+* Add serialization
+
 ### v0.9.2
 * AI fixes
 * Added average HP view
 * Low Morale on no supply
+* Disable animation
 
 ### v0.9.0
 * Bug fixes

@@ -2,6 +2,7 @@ PLAYERS = [];
 
 class Player {
   constructor() {
+    this['#'] = 'Player';
     this.color = randomColor({
       luminosity: 'dark',
       format: 'rgba',

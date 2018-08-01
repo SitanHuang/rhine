@@ -72,17 +72,34 @@ waiting {
   height: 14px;
   z-index: 123123123;
 }
+#map-container>table td>army{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: 5px;
+  border-radius: 0 50% 0 0;
+  background: transparent;
+  z-index: 123123;
+}
+
+td.army {
+  width: 5px;
+}
 
 #map-container>table td>number {
   display: block;
   position: absolute;
   top: 0;
-  right: 5px;
+  right: 11px;
   height: 28px;
-  line-height: 28px;
+  line-height: 30px;
   z-index: 3;
+  font-size: 13px;
   font-weight: bold;
 }
+
+
 
 #map-container>table {
   border-spacing: 0;
@@ -123,9 +140,9 @@ waiting {
 table.divisions tr>td:first-child:not(.hp) {
   white-space: nowrap;
   overflow-x: hidden;
-  width: 265px;
-  max-width: 265px;
-  min-width: 265px;
+  width: 258px;
+  max-width: 258px;
+  min-width: 258px;
   text-overflow: ellipsis;
   line-height: 32px;
 }

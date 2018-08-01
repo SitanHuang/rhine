@@ -22,8 +22,10 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
       number.title = prov.divisions.map(x => x.name).join('\n');
       td.appendChild(number)
       let battles = [];
+      let color = 'transparent';
       prov.divisions.forEach(x => {
-        battles = battles.concat(x.battleInfo)
+        battles = battles.concat(x.battleInfo);
+        if (x.color != 'transparent') color = x.color;
       });
       if (battles.length > 0) {
         let mark = document.createElement('mark');
@@ -32,6 +34,12 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
         mark.style.background = getColorFromPercentage(battleInfo.percentage[0]);
         mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory';
         td.appendChild(mark);
+      }
+      if (color != 'transparent' && pt.owner == currentPlayer) {
+        let army = document.createElement('army');
+        army.innerText = ' ';
+        army.style.backgroundColor = color;
+        td.appendChild(army);
       }
     }
   } else {

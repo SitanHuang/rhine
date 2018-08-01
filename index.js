@@ -28,18 +28,49 @@ function setAIFor(i, btn) {
 }
 
 let playerSelection = document.createElement('waiting');
-let innerHTML = '<h1>Select players</h1><table style="width:70%;margin: auto;">';
-PLAYERS.forEach((p, i) => {
-  innerHTML += `
-  <tr>
-  <th>Player ${i}
-  <td style="background: ${p.color.replace('0.2', '1')}">&nbsp;
-  <td><button onclick='setAIFor(${i}, this)'>set AI</button>
+
+function openSavedFile(file) {
+  deserializeWorld(localStorage[file]);
+  repaintCanvas();
+  updateInterfaceOnPass();
+  playerSelection.remove();
+}
+
+function deleteSavedFile(file) {
+  delete localStorage[file];
+  playerSelectionScreen();
+}
+
+function playerSelectionScreen() {
+  playerSelection.remove();
+  playerSelection = document.createElement('waiting');
+  let innerHTML = '<h1>Select players</h1><table style="width:70%;margin: auto;">';
+  PLAYERS.forEach((p, i) => {
+    innerHTML += `
+    <tr>
+    <th>Player ${i}
+    <td style="background: ${p.color.replace('0.2', '1')}">&nbsp;
+    <td><button onclick='setAIFor(${i}, this)'>set AI</button>
+    `;
+  })
+  innerHTML += '</table>' +
+  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>
+  <br><br><table style="width:77%">
   `;
-})
-playerSelection.innerHTML += innerHTML + '</table>' +
-  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>`;
-document.body.append(playerSelection);
+  Object.entries(localStorage).forEach((e) => {
+    let k = e[0];
+    let v = e[1];
+    if (k.indexOf('file_') == 0) {
+      let kk = k.replace('file_', '');
+      innerHTML += `<tr><th>${escapeHtml(kk)}<td width=1><button onclick="openSavedFile(${escapeHtml(JSON.stringify(k))})">Open</button><td width=1><button onclick="deleteSavedFile(${escapeHtml(JSON.stringify(k))})">Delete</button>`;
+    }
+  });
+  playerSelection.innerHTML += innerHTML + '</table>';
+  document.body.append(playerSelection);
+}
+
+playerSelectionScreen();
+
 
 let aiThinkButton = document.createElement('button');
 aiThinkButton.onclick = () => {
@@ -109,6 +140,8 @@ function pass() {
     currentPlayer.calcCities();
     currentPlayer.produce();
     currentPlayer.growManpower();
+    defaultGraphWithWeight = null;
+    graphWithWeight = null;
     if (currentPlayer.setAI) {
       setTimeout(() => {
         currentPlayer.ai.think();
@@ -128,13 +161,3 @@ function pass() {
 }
 
 pass();
-
-if (typeof require != 'undefined') {
-  alert('Welcome to AncientKingdom: Rhine');
-  alert('It is a prototype version. Press 1 - 3 to switch tabs. Press 4 to Pass.');
-  alert('Pay attention to every word. Note: there is a right panel too')
-  alert('Be sure to click every button on every tab.')
-  var ngui = require('nw.gui');
-  var nwin = ngui.Window.get();
-  nwin.enterFullscreen();
-}

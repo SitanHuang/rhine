@@ -22,7 +22,7 @@ function iterateAdjacent(p, callback) {
 function adjacentToPlayer(pt, player) {
   let yes = 0;
   pt.adjacents(p => {
-    if (p.owner == player) yes++;
+    if (p.prov.owner == player.playerID) yes++;
   })
   return yes == 0 ? false : yes;
 }
@@ -30,7 +30,7 @@ function adjacentToPlayer(pt, player) {
 function adjacentNotToPlayerUnits(pt, player) {
   let yes = 0;
   pt.adjacents(p => {
-    if (p.owner != player) yes += p.prov.divisions.length;
+    if (p.prov.owner != player.playerID) yes += p.prov.divisions.length;
   })
   return yes == 0 ? false : yes;
 }
