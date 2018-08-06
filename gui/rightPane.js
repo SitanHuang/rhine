@@ -73,6 +73,14 @@ function ArmyViewOnClick() {
   stylesheet.cssRules[0].style.display = stylesheet.cssRules[0].style.display == 'block' ? 'none' : 'block';
 }
 
+function PoliticalViewOnClick() {
+  let stylesheet = document.styleSheets[0];
+  stylesheet.cssRules[1].style.display = stylesheet.cssRules[1].style.display == 'block' ? 'none' : 'block';
+  window.politicalView = !window.politicalView;
+  repaintCanvas();
+}
+
+
 function saveGameOnClick() {
   let file = prompt('File name?', 'Saved Game 1.rhine');
   if (!file || !file.length) return;
@@ -111,7 +119,8 @@ function repaintRightList() {
   <table class="divisions">
   <tr>
   <td><button onclick="autoFightSelectedOnClick()">AI</button>
-  <button onclick="ArmyViewOnClick()">Army View</button>
+  <button onclick="ArmyViewOnClick()">AV</button>
+  <button onclick="PoliticalViewOnClick()">PV</button>
   <button onclick="saveGameOnClick()">Save</button>
   <td>
   <td><button onclick="removeAllSelectedDivisions()">❌</button>

@@ -42,8 +42,9 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
         td.appendChild(army);
       }
     }
+    if (window.politicalView) td.style.background = pt.owner.color.replace('0.2', '0.5');
   } else {
-    td.style.background = pt.owner.color.replace('0.2', '0.5');
+    if (!window.politicalView) td.style.background = pt.owner.color.replace('0.2', '0.5');
   }
   if (num > 0) {
     let as = prov.divisions.filter(x => x.airStriked).length;
@@ -133,6 +134,7 @@ function repaintCanvas(callback, quick) {
       } else {
         if (pt.owner == currentPlayer || pt.adjacentToPlayer(currentPlayer)) {
           td.style.background = terrain != '@' ? pt.owner.color : 'white';
+          if (window.politicalView) td.style.background = pt.owner.color.replace('0.2', '0.5');
         } else {
           td.style.background = pt.owner.color.replace('0.2', '0.5');
         }

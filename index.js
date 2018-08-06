@@ -15,7 +15,7 @@ $('controls').append($date_token);
 let _dateTempI = 0;
 
 function incrementAndUpdateDate() {
-  if (_dateTempI++ % 2 == 0) {
+  if (_dateTempI++ % 3 == 0) {
     timestamp += timeIncrement + (Math.random() * 86400 * 5).round();
   }
   let date = new Date(timestamp * 1000);
