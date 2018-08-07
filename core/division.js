@@ -67,7 +67,7 @@ class Division {
       player.casualties += a.round();
     }
 
-    if (this.action.length == 0 || (this.hp < 80 && Math.random() < this.morale / 3 && this.morale < 1)) {
+    if (this.action.length == 0 || (this.hp < 80 && Math.random() > this.morale * 1.2 && this.morale < 1)) {
       this.movementProgress = 0;
       return;
     }
