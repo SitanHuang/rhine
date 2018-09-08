@@ -114,8 +114,38 @@ function repaintRightList() {
     <td class="hp"><div style="width: ${morale}%;background: rgb(255,122,0)"></div>
     <td><td>
     `;
-  })
+  });
+  let ds = {};
+  let dn = {};
+  let sum = 0;
+  let highestPerc = 0.0;
+  MAP_DATA.forEach(row => {
+	row.forEach(col => {
+	  if (col.owner == currentPlayerID) {
+		col.divisions.forEach(div => {
+		  if (div.color && (div.color.indexOf('rgb') >= 0 || div.color.indexOf('#') >= 0)) {
+			let t = div.soft + div.hard;
+			ds[div.color] = ds[div.color] || 0;
+			dn[div.color] = dn[div.color] || 0;
+			ds[div.color] += t;
+			dn[div.color]++;
+			sum += t;
+		  }
+		})
+	  }
+	})
+  });
+  Object.getOwnPropertyNames(ds).forEach(color => {
+	highestPerc = Math.max(ds[color] / (sum + 0.01), highestPerc);
+  });
+  let summaryHTML = '';
+  Object.getOwnPropertyNames(ds).forEach(color => {
+	summaryHTML += `<div style="width: ${ds[color] / (sum + 0.01) / highestPerc * 100}%;background: ${color};height: 5px;"> </div>
+	<span>${dn[color]} divs</span><br>
+	`;
+  });
   $right_content.innerHTML = `
+  ${summaryHTML}
   <table class="divisions">
   <tr>
   <td><button onclick="autoFightSelectedOnClick()">AI</button>

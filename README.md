@@ -2,6 +2,9 @@
 
 The game will have you play full military tactics and planning.
 
+### v1.0.2 9/7/18
+* added army summaries
+
 ### v1.0.2
 * saved game now remembers the date
 * add Political View
