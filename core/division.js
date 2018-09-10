@@ -87,7 +87,7 @@ class Division {
           if (this.hp < this.player.retreatable.min(30)) return;
           div.movementProgress = -2;
           let results = battle(that, div);
-          if (div.hp < div.player.retreatable.min(30) || (div.hp < 50 && Math.random() < this.breakThrough / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
+          if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.breakThrough / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
             div.retreat();
           }
           that.battleInfo.push(results);
