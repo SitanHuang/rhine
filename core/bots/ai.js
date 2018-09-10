@@ -52,8 +52,8 @@ class Ai {
             20000 < player.manpower &&
             player.divisions < 400 &&
             Math.random() > 0.5) {
-            tem.heavy = (player.light * Math.random()).round().max(40);
-            tem.light = (player.heavy * Math.random()).round().max(40);
+            tem.heavy = (player.heavy * Math.random()).round().max(40);
+            tem.light = (tem.heavy * Math.random()).round().max(40);
             while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 9) {
               tem.defaultName = tem.codeName;
               if (tem.deployable(player)) {
