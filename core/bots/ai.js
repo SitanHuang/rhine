@@ -54,7 +54,7 @@ class Ai {
             Math.random() > 0.5) {
             tem.heavy = (player.heavy * Math.random()).round().max(40);
             tem.light = (tem.heavy * Math.random()).round().max(40);
-            while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 9) {
+            while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 9 && tem.speed > 2.5) {
               tem.defaultName = tem.codeName;
               if (tem.deployable(player)) {
                 tem.deploy(player, p, tem.codeName);
