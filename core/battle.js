@@ -30,9 +30,9 @@ function battle(d1, d2, d1m) {
   let t2 = (_t2 + ((_t1 - _t2) / 3)).min(0);
 
   if (Math.random() < d1.breakThrough) {
-    t2 = 50;
+    t2 = 0.1;
   } else if (Math.random() < d2.breakThrough) {
-    t1 = 50;
+    t1 = 0.1;
   }
 
   let rt1 = t1.round();
