@@ -186,7 +186,7 @@ class Ai {
                     divs.sample().soft <= div.soft)))
                   div.action = [adj];
               });
-            else
+            else if ((div.morale < 1 && div.entrench > 1.5) || (div.morale >= 1 && div.entrench > 1.1))
               // div.loc.adjacents(adj => {
               //   if (div.action.length) return;
               //   let divs = adj.prov.divisions;
@@ -197,7 +197,7 @@ class Ai {
                 if (div.action.length) return;
                 let divs = adj.prov.divisions;
                 if (adj.owner != player && divs.length && divs[0].soft <=
-                  div.soft)
+                  div.soft && div.entrench > 1.5)
                   div.action = [adj];
                 else if (prov.terrain != 'U' && prov.terrain != 'P') {
                   let leastNum = prov.divisions.length;
