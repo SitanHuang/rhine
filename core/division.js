@@ -45,7 +45,7 @@ class Division {
     if (this.skill < 1)
       this.skill += 0.1;
     if (this.morale < 1)
-      this.morale += 0.05;
+      this.morale += 0.3 * Math.random();
 
     this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(2).clamp(1, 2);
     this.newInforced = 0;
