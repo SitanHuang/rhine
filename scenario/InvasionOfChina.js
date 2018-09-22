@@ -64,17 +64,17 @@ DDDDDDDDDDDDDMMMDDMMMMMMMMMM DMMMMMMD        MM    UM@@@@|
 DDDDDDDDDD DD MMMMMMMMMMM D  MMRRRRM       @@M       @@@@|
 DDDDDDDDDDDD MMMMMMMMM   DDDMMRRMMRR     U@@@  @ @    @@@|
 DMMMDDDDDDD DD    MMMDDDDDD MMRRMMMRR    @@@U @@@@     @@|
-MMMMMMDDDDDDDD DDD  DDD DDDDMMMMMU  RR   @@@P@@@@P   U  @|
+MMMMUMDDDDDDDD DDD  DDD DDDDMMMMMU  RR   @@@P@@@@P   U  @|
 MMMMMMDDDDDDD DDDDDDDDMMMM DMMMMM     R@@@@@@@@@@@ @    @|
 DDMMMMMDD D DDDDDD  MMRRRRRMMMMU     U@@@@@@@@@@@@@@@    |
 DDDDMMMMD DD DDDDDMMMRRMMMRMMM      M P@@@@M@@@@@@@@     |
 DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     MM   R@@M  P@@@@@@    |
-RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM  RR  MU@@@@@@@@@   |
+RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM  RR  MU@@@@@@@@@  U|
 DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU       RR  M@@@@@@@@@@@P @|
 DDDRDDDDDM RRRDDD RMMMDDDDRMMM       RR MMM@@@@@@@@@@@@@@|
 DDDRDU  DMMRRR DRRRMMMDDDRR MM    U RR MU P@@@@@@@@@@@@@@|
 DDDRD   DDMMMRRRRMMMMDDDDR  M      RR     @@@@@@@@@@@@@@@|
-DDDRD    DDMMMMMMMMMMDDDDRRRRR   RR          @@@@@@@@@@@@|
+DDDRD    DDMMMMMMMMMMDDDDRRRRR   RR       U  @@@@@@@@@@@@|
 DDDRDDU   DD       DDDDRR   MRRRRRM  U       @@@@@@@@@@@@|
 RRRRRDDMM  D        RRR   MM MMMMM       RR   @@@@@@@@@@@|
 RDDDDRDMMM   U    MMM  MMM   M   M      RRRRR @@@@@@@@@@@|
@@ -90,7 +90,7 @@ MMMMMMMMMMMMMR  M  MMMUM    RM  MRR   URR MMM   @@@@@@@@@|
 MMMMMMMMMMMM RR      MM   RRRM  MMR    R  M M  @@@@@@@@@@|
 MMMM   MMMM   R          RRU  MMMMR MMM  MM M  @@@@@@@@@@|
        RRMM   R         RR  MUMMMRR U MMMMMMU @@@@@@@@@@@|
- RRRRRRRMMM   R         R   MMMMRR     MMMMM  @@@@@@@@@@@|
+ RRRRRRRMMM   R         R   MMMMRR     MMMMM P@@@@@@@@@@@|
 RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
    RR RRM    R     MM         MRRMMM  MMMM M @@@@ U@@@@@@|
    R R M    RR  MM MM      MMMRRMM   MMMMMMM @@@@P @@@@@@|
@@ -108,7 +108,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(35).fill('F');
+	if (o == 1) slots = Array(20).fill('F');
     else slots = Array(3).fill('F');
 
 	  }
