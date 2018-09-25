@@ -109,7 +109,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let slots = [];
 	  if (v == 'U'){
 	if (o == 1) slots = Array(20).fill('F');
-    else slots = Array(3).fill('F');
+    else if(Math.random()>0.5) slots = Array(1).fill('F');
 
 	  }
     if (!TERRAINS[v]) throw 'Not found.'
