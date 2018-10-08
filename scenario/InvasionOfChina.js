@@ -109,7 +109,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let slots = [];
 	  if (v == 'U'){
 	if (o == 1) slots = Array(10).fill('F');
-    else if(Math.random()>0.5) slots = Array(1).fill('F');
+    else if(Math.random()>0.5) slots = Array(2).fill('F');
 
 	  }
     if (!TERRAINS[v]) throw 'Not found.'
@@ -128,7 +128,7 @@ p2.color = 'rgba(140, 193, 226, 0.25)'
 p2.retreatable = 30;
 p2.manpower = Math.floor(Math.random() * 50000 + 6000000);
 p2.growthRate = 0.0075;
-p2.light = -500;
+p2.light = 0;
 p2.heavy = -100;
 p2.factoryInLight = 40;
 let p1 = new Player();
