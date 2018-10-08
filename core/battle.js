@@ -17,7 +17,7 @@ function battle(d1, d2, d1m) {
   let s2 = d2.soft;
   let h1 = d1.hard;
   let h2 = d2.hard;
-  let factor = 1;
+  let factor = 2.5;
 
   let as1 = (s1 - s2).min(0) + s1 * factor;
   let as2 = (s2 - s1).min(0) + s2 * factor;
