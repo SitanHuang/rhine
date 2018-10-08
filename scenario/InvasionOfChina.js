@@ -108,7 +108,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(20).fill('F');
+	if (o == 1) slots = Array(10).fill('F');
     else if(Math.random()>0.5) slots = Array(1).fill('F');
 
 	  }
@@ -118,9 +118,9 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
   })));
 
 MAP_DATA = InvasionOfChinaTerrains;
-pt(25, 43).prov.slots = Array(25).fill('F'); // Nanjing
-pt(30, 35).prov.slots = Array(15).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(10).fill('F'); // Chongqing
+pt(25, 43).prov.slots = Array(10).fill('F'); // Nanjing
+pt(30, 35).prov.slots = Array(25).fill('F'); // Wuhan
+pt(33, 22).prov.slots = Array(5).fill('F'); // Chongqing
 
 
 let p2 = new Player();
@@ -133,7 +133,7 @@ p2.heavy = 0;
 p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = randomColor({alpha: 0.2, format: 'rgba', hue: 'red'})
-p1.manpower = Math.floor(Math.random() * 50000 + 5000000);
+p1.manpower = Math.floor(Math.random() * 50000 + 4000000);
 p1.light = 600;
 p1.heavy = 900;
 p1.retreatable = 30;
@@ -155,10 +155,10 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(13).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(9000, 11, 8))))
+pt(27, 46).prov.divisions = Array(13).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 15, 10))))
   .concat(Array(8).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(15000, 7, 20)))));
 // Nanjing
-pt(25, 43).prov.divisions = Array(5).fill(0).map(() => {
+pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
   let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35))
   d.skill = 0.9;
   return d;
