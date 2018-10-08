@@ -86,7 +86,7 @@ class Ai {
     player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10)
       .max(40);
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
-      player.heavy + player.light + 1)));
+      player.heavy + player.light + 1))).min(5).max(player.factories);
   }
 
   think() {
