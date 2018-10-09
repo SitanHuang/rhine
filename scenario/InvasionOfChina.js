@@ -72,13 +72,13 @@ DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     MM   R@@M  P@@@@@@    |
 RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM  RR  MU@@@@@@@@@  U|
 DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU       RR  M@@@@@@@@@@@P @|
 DDDRDDDDDM RRRDDD RMMMDDDDRMMM       RR MMM@@@@@@@@@@@@@@|
-DDDRDU  DMMRRR DRRRMMMDDDRR MM    U RR MU P@@@@@@@@@@@@@@|
-DDDRD   DDMMMRRRRMMMMDDDDR  M      RR     @@@@@@@@@@@@@@@|
-DDDRD    DDMMMMMMMMMMDDDDRRRRR   RR       U  @@@@@@@@@@@@|
-DDDRDDU   DD       DDDDRR   MRRRRRM  U       @@@@@@@@@@@@|
-RRRRRDDMM  D        RRR   MM MMMMM       RR   @@@@@@@@@@@|
-RDDDDRDMMM   U    MMM  MMM   M   M      RRRRR @@@@@@@@@@@|
-DDDDDDRMMMM         M     MM      MMM  RR  URRRR@@@@@@@@@|
+DDDRDU  DMMRRR DRRRMMMDDDRRDMDD   U RR MU P@@@@@@@@@@@@@@|
+DDDRD   DDMMMRRRRMMMMDDDDR DMDDD   RR     @@@@@@@@@@@@@@@|
+DDDRD    DDMMMMMMMMMMDDDDRRRRRDDDRR       U  @@@@@@@@@@@@|
+DDDRDDU   DD       DDDDRRD DMRRRRRM  U       @@@@@@@@@@@@|
+RRRRRDDMM  D        RRRD  MMDMMMMM       RR   @@@@@@@@@@@|
+RDDDDRDMMM   U    MMM  MMMDDDM   M      RRRRR @@@@@@@@@@@|
+DDDDDDRMMMM         M    DMMD     MMM  RR  URRRR@@@@@@@@@|
 DDDDDDDRMMM         MMM M   U  MM U MM R    RRR@@@@@@@@@@|
 DDDDDDMRMMM          MMMMMM     MMMMM RR  M  RUP@@@@@@@@@|
 DDDDDDMRMMM  M MM MMMM    MMM      M RR MMM    @@@@@@@@@@|
@@ -149,7 +149,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U' || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(4000, 7, 2))))
+      v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.6 ? 5000 : 4000, 7, 3))))
     else
       v.divisions = Array(v.terrain == 'U' ? 2 : Math.ceil(Math.random() * 5)).fill(0).map(() => (new Division(v.owner, 'Infantry Regiment', pt(row, col), new Template(11000, 11, 10))))
 })));
