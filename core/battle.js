@@ -26,8 +26,8 @@ function battle(d1, d2, d1m) {
 
   let _t1 = Math.sqrt(as1 + ah1);
   let _t2 = Math.sqrt(as2 + ah2);
-  let t1 = (_t1 + ((_t1 - _t2) / 5)).min(0);
-  let t2 = (_t2 + ((_t2 - _t1) / 5)).min(0);
+  let t1 = (_t1 + ((_t1 - _t2) / 10)).min(0);
+  let t2 = (_t2 + ((_t2 - _t1) / 10)).min(0);
 
   if (Math.random() < d1.breakThrough) {
     t2 /= 4;
