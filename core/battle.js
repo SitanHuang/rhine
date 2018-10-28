@@ -26,13 +26,13 @@ function battle(d1, d2, d1m) {
 
   let _t1 = Math.sqrt(as1 + ah1);
   let _t2 = Math.sqrt(as2 + ah2);
-  let t1 = (_t1 + ((_t1 - _t2) / 15)).min(0);
-  let t2 = (_t2 + ((_t2 - _t1) / 15)).min(0);
+  let t1 = (_t1).min(0);
+  let t2 = (_t2).min(0);
 
   if (Math.random() < d1.breakThrough) {
-    t2 /= 5;
+    t2 /= 4;
   } else if (Math.random() < d2.breakThrough) {
-    t1 /= 5;
+    t1 /= 4;
   }
 
   let rt1 = t1.round();
