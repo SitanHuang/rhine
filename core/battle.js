@@ -1,6 +1,7 @@
 function airStrike(div) {
-  let damage = (div.men * 0.2).max(1000).round();
+  let damage = (div.men * 0.2).max(700).round();
   div.men = (div.men - damage).round().min(0);
+  div.morale -= 0.2;
   div.airStriked = true;
   div.player.casualties += damage;
   return damage.round().min(0);
