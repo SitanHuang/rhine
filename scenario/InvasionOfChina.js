@@ -109,7 +109,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let slots = [];
 	  if (v == 'U'){
 	if (o == 1) slots = Array(10).fill('F');
-    else if(Math.random()>0.6) slots = Array(2).fill('F');
+    else if(Math.random()>0.3) slots = Array(1).fill('F');
 
 	  }
     if (!TERRAINS[v]) throw 'Not found.'
@@ -149,14 +149,14 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'U' || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.6 ? 5000 : 4000, 7, 3))))
+      v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.6 ? 5000 : 4000, 6, 3))))
     else
       v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 5)).fill(0).map(() => (new Division(v.owner, 'Infantry Regiment', pt(row, col), new Template(11000, 11, 10))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
 pt(27, 46).prov.divisions = Array(13).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 15, 10))))
-  .concat(Array(8).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(19000, 9, 20)))));
+  .concat(Array(8).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(23000, 9, 25)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
   let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35))
