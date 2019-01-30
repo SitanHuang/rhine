@@ -205,7 +205,7 @@ class Ai {
                   p.adjacents(a => {
                     let sum = 0;
                     a.prov.divisions.forEach(d => {
-                      sum += (d.soft + d.hard) * d.breakThrough * d.morale;
+                      sum += (d.soft + d.hard);
                     })
                     if (a.owner == player && sum <= leastNum) {
                       leastNum = sum;
