@@ -418,6 +418,14 @@ function updateLogistics() {
   <th>Divisions
   <td>${currentPlayer.divisions}
   </tr>
+  <tr>
+  <th>Field Manpower
+  <td>${abbreviate(currentPlayer.divisionMen, 3, false, false)}
+  </tr>
+  <tr>
+  <th>Total Damage
+  <td>${abbreviate(currentPlayer.divisionDamage, 3, false, false)}
+  </tr>
   <tr></tr><tr></tr>
   <tr>
   <th>Factories
