@@ -87,6 +87,8 @@ class Player {
     let that = this;
     this.factories = 0;
     this.divisions = 0;
+    this.divisionMen = 0;
+    this.divisionDamage = 0;
     this.cityList = [];
     this.ports = [];
     this.averageStrength = 0;
@@ -96,6 +98,7 @@ class Player {
           if (col.terrain == '@') return false;
           this.factories += factoriesInProv(col);
           this.divisions += col.divisions.length;
+          col.divisions.forEach(div => { this.divisionMen += div.men; this.divisionDamage += div.soft + div.hard; });
           col.adjacentNotToPlayer = col.pt.adjacentNotToPlayer(that)
           col.divisions.forEach(div => {
             that.averageStrength += div.hp;
