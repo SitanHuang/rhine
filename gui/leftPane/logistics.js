@@ -31,7 +31,7 @@ const REPAINT_SHOW_SUPPLY_CALLBACK = td => {
   if (pt.owner == currentPlayer) {
     if(num > 0) {
       let number = document.createElement('number');
-      number.innerText = ((prov.divisions[0].supply) * 15 * 100).round();
+      number.innerText = ((prov.divisions[0].supply) * 10).round();
       td.appendChild(number)
     }
   }
