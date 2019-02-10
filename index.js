@@ -97,7 +97,8 @@ function handlePlayerOnPass() {
           if (col.supply > 0) return;
           let path = unit_pathfind_friendly_only(col.pt, p).length;
           if (path < 15 && path > 0) {
-            col.supply++;
+            //col.supply++;
+            col.supply = Math.max(col.supply, (1 - (path / 15)).round(2)).min(0).max(1);
           }
         });
         currentPlayer.ports.forEach(p => {
@@ -105,7 +106,8 @@ function handlePlayerOnPass() {
           if (col.supply > 0) return;
           let path = unit_pathfind_friendly_only(col.pt, p).length;
           if (path < 15 && path > 0) {
-            col.supply++;
+            //col.supply++;
+            col.supply = Math.max(col.supply, (1 - (path / 15)).round(2)).min(0).max(1);
           }
         })
         col.divisions.forEach(div => {
