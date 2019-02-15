@@ -124,7 +124,7 @@ function repaintRightList() {
 	  if (col.owner == currentPlayerID) {
 		col.divisions.forEach(div => {
 		  if (div.color && (div.color.indexOf('rgb') >= 0 || div.color.indexOf('#') >= 0)) {
-			let t = div.morale * div.hp * div.skill;
+			let t = (div.soft + div.hard) * div.breakThrough * div.morale;
 			ds[div.color] = ds[div.color] || 0;
 			dn[div.color] = dn[div.color] || 0;
 			ds[div.color] += t;
