@@ -90,7 +90,8 @@ function handlePlayerOnPass() {
     for (let col of row) {
       if (col.owner != currentPlayerID) continue;
       if (col.terrain != '@' &&
-        col.divisions.length && (col.supply == 0 || Math.random() > 0.5)) {
+        col.divisions.length) {
+        if (col.supply == 0 || Math.random() > 0.5) {
         col.supply = 0;
         currentPlayer.cityList.forEach(p => {
           if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
@@ -110,6 +111,7 @@ function handlePlayerOnPass() {
             col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement).round(2)).min(0).max(1);
           }
         })
+        }
         col.divisions.forEach(div => {
           div.airStriked = false;
           divs.push(div)
