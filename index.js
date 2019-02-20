@@ -91,26 +91,26 @@ function handlePlayerOnPass() {
       if (col.owner != currentPlayerID) continue;
       if (col.terrain != '@' &&
         col.divisions.length) {
-        if (col.supply == 0 || Math.random() > 0.5) {
-        col.supply = 0;
-        currentPlayer.cityList.forEach(p => {
-          if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
-          //if (col.supply > 0) return;
-          let path = unit_pathfind_friendly_only(col.pt, p).length;
-          if (path < 15 && path > 0) {
-            //col.supply++;
-            col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement * 1.2).round(2)).min(0).max(1);
-          }
-        });
-        currentPlayer.ports.forEach(p => {
-          if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
-          //if (col.supply > 0) return;
-          let path = unit_pathfind_friendly_only(col.pt, p).length;
-          if (path < 15 && path > 0) {
-            //col.supply++;
-            col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement).round(2)).min(0).max(1);
-          }
-        })
+        if (Math.random() > 0.5 || !col.supply) {
+          col.supply = 0;
+          currentPlayer.cityList.forEach(p => {
+            if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
+            //if (col.supply > 0) return;
+            let path = unit_pathfind_friendly_only(col.pt, p).length;
+            if (path < 15 && path > 0) {
+              //col.supply++;
+              col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement * 1.2).round(2)).min(0).max(1);
+            }
+          });
+          currentPlayer.ports.forEach(p => {
+            if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
+            //if (col.supply > 0) return;
+            let path = unit_pathfind_friendly_only(col.pt, p).length;
+            if (path < 15 && path > 0) {
+              //col.supply++;
+              col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement).round(2)).min(0).max(1);
+            }
+          })
         }
         col.divisions.forEach(div => {
           div.airStriked = false;
