@@ -166,5 +166,4 @@ pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
 Array(8).fill(0).map(() => {
   let d = new Division(0, 'Nanjing Garrisons', pt(25, 43), new Template(10000, 10, 5))
   d.skill = 2;
-  pt(25, 43).prov.divisions.push(d)
 })
