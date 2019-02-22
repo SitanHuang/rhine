@@ -149,7 +149,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 10 ? 1 : Math.ceil(Math.random() * 9 + 5)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.6 ? 7000 : 4000, 7, 1))))
+      v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 10 ? 1 : Math.ceil(Math.random() * 9 + 8)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 4000, 7, 1))))
     else
       v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 5)).fill(0).map(() => (new Division(v.owner, 'Infantry Regiment', pt(row, col), new Template(11000, 11, 10))))
 })));
@@ -161,5 +161,10 @@ pt(27, 46).prov.divisions = Array(13).fill(0).map(() => (new Division(1, 'Infant
 pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
   let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35))
   d.skill = 0.9;
+  return d;
+})
+pt(25, 43).prov.divisions = Array(8).fill(0).map(() => {
+  let d = new Division(0, 'Infantry Division', pt(25, 43), new Template(10000, 10, 3))
+  d.skill = 2;
   return d;
 })
