@@ -56,12 +56,13 @@ class Division {
     let that = this;
     this.supply = this.loc.prov.supply;
 
-    if (this.supply == 0) {
-      let a = this.men / 10;
+    if (this.supply.round(2) <= 0) {
+      let a = this.men * 0.8;
       this.morale = (this.morale / 2).min(0.2);
       this.men = (this.men - a).round().min(0);
-      if (this.men <= 0) {
+      if (this.men <= 1000) {
         this.remove();
+        player.casualties += (this.men + a).round();
         return;
       }
       player.casualties += a.round();
