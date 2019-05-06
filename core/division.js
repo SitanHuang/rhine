@@ -34,6 +34,9 @@ class Division {
       this.newInforced += amount;
       this.player.manpower -= amount;
       this.men = (this.men + amount).round().clamp(0, this.template.troop);
+      //if (this.morale < 1)
+      this.morale += 0.5 * Math.random() * this.supply;
+      this.morale = this.morale.min(0.01).max(1);
     }
   }
 
@@ -44,8 +47,6 @@ class Division {
   move() {
     if (this.skill < 1)
       this.skill += 0.1;
-    if (this.morale < 1)
-      this.morale += 0.3 * Math.random();
 
     this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(2).clamp(1, 2);
     this.newInforced = 0;
