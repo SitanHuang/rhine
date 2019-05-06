@@ -99,7 +99,7 @@ function handlePlayerOnPass() {
             let path = unit_pathfind_friendly_only(col.pt, p).length;
             if (path < 15 && path > 0) {
               //col.supply++;
-              col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement * 1.2).round(2)).min(0).max(1);
+              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.5) - (path / 15.0)).round(2)).min(0).max(1);
             }
           });
           currentPlayer.ports.forEach(p => {
@@ -108,7 +108,7 @@ function handlePlayerOnPass() {
             let path = unit_pathfind_friendly_only(col.pt, p).length;
             if (path < 15 && path > 0) {
               //col.supply++;
-              col.supply = Math.max(col.supply, (1 - (path / 15) * col.pt.terrain.movement).round(2)).min(0).max(1);
+              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.2) - (path / 10.0)).round(2)).min(0).max(1);
             }
           })
         }
