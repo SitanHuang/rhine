@@ -28,12 +28,14 @@ class Division {
   }
 
   reinforce() {
-    if (this.hp < 100 && this.supply.round(2) > 0) {
-      let amount = this.template.troop - this.men;
-      amount = Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500).round() * (this.supply).max(1).min(0);
-      this.newInforced += amount;
-      this.player.manpower -= amount;
-      this.men = (this.men + amount).round().clamp(0, this.template.troop);
+    if (this.supply.round(2) > 0) {
+      if (this.hp < 100) {
+        let amount = this.template.troop - this.men;
+        amount = Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500).round() * (this.supply).max(1).min(0);
+        this.newInforced += amount;
+        this.player.manpower -= amount;
+        this.men = (this.men + amount).round().clamp(0, this.template.troop);
+      }
       //if (this.morale < 1)
       this.morale += 0.5 * Math.random() * this.supply;
       this.morale = this.morale.min(0.01).max(1);
