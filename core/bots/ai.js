@@ -48,7 +48,7 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 24).round() * 1000 + 6000;
-          if (player.recruitable > tem.troop * 100 && player.divisions *
+          if (player.recruitable.min(player.manpower) > tem.troop * 50 && player.divisions *
             10000 < player.manpower &&
             player.divisions < 400 &&
             Math.random() > 0.5) {
