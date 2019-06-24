@@ -200,7 +200,7 @@ function loadWWIIScenario() {
   
   // ============= misc ==============
   window.timestamp = -900241200; // 6/22/1941
-  window.timeIncrement = 518400; // 6 days
+  window.timeIncrement = 518400 / 2; // 3 days
   
   reinitCanvas();
   updateInterfaceOnPass();
