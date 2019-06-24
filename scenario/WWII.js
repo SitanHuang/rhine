@@ -72,10 +72,10 @@ var WWIITerrains = `
 @@@@fm   @@@mm m @@@@@@@@@@@@@@   @@@@@@@@@@f  @@  f  ffrrrrrf fc f ff rrrrrrrrrfff fff f|
 @fffff   @@ mm   p@@@@@@@@@@@@@        @@  ff cr    f fffffffff f f fffffffff fff        |
 @mmfm   @@@@@mC m @@@@@@@@@@@@@r           ffff rff   ff ff c fffff ffffff ffffff        |
-@        @ @Cm    @@@@@@@@@@@ prr C f     ff   rr       fffff  frrrffffffffffff          |
+@        @ @Cm    @@@@@@@@@@@ prr c f     ff   rr       fffff  frrrffffffffffff          |
 @@  mff @@ mm     p@@@@@@@      rrrrff C  ff  rr        c  f frrr ffff ff ff f           |
 @@   fcp@@  m     C p@@@@@       ffrfffffff   rc f  c      ff r fffffcff cfffff          |
-@   ff  @@@ m        @@@@  c  C    rrmm fC  f rrrff          frffffffffffffffff          |
+@   ff  @@@ m        @@@@  c  c    rrmm fC  f rrrff          frffffffffffffffff          |
 @m mff@@@ mm  rr Crp@@@@ rrr      Cmrrrmf ff  ffrr           frrffff fffffff         fff |
 @@ p@@@@@  m   rrrr@@@@    rrrmm    m rf f ff  f rrr      c  ffrrf ffff        ffff      |
 @@@@@@@@@@@C      p@@ p   fffrmmm   mmrr           rrr        f rrf    f                 |
@@ -83,7 +83,7 @@ var WWIITerrains = `
 @@@@@@@@@  p@@@@@@@@     mmf  crm  m  fmmmrmm   f    r        f  frr      f   c      fff |
 @@@@@@@@p @@@@@@@@@     ffffmrrr mm  fmm cr  mm      rc        c f rr   ff         ffff  |
 @@@@@@@@@@@@@@@ @@        fmmrmfff   ffm  r  fmfff   rrrr    f   f  rrf   f  f         C |
-@@@@@@@@@@@@@@@ p   C      m rrfmf mm mfm r  mmmmfffffffrrrrr        rr         f        |
+@@@@@@@@@@@@@@@ p   c      m rrfmf mm mfm r  mmmmfffffffrrrrr        rr         f        |
 @@@@@@@@@@  f         f   fffmrfmrrrrrrfmmm mfmmmmmmmmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff        ff  c ffmrmmrfc  rfffffmmmmmmmfmmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff       fmm  ffm rrrrfff rmmffffff    fm     mmmfr         r  c             |
@@ -92,7 +92,7 @@ var WWIITerrains = `
 @@@@@@@@@@@@@@rrrrrr   rr     mmmmmmmmmmmrrf         mmm  fmmffr    rrr     @            |
 @@@@@@@@@@@@@@@      f cr f rrrfmmmmmmmm fr          fff  fmff rr  @r    @@@@@       fff |
 @@@@@@@@@@@@@@@f   fmf  r  rrmmfffmmffm ffr c       mfffff m    r @@@@@r@@@@@       fff  |
-@@@@@@@@@@@@@@@fff mmfmfrmrrrmmc ffffC@f fr          mffmfmmC rrr@@@@   ff r             |
+@@@@@@@@@@@@@@@fff mmfmfrmrrrmmc ffffC@f fr          mffmfmmc rrr@@@@   ff r             |
 @@@@@@@@@@@@@@@fcf fffffmrrmmm rrrrr  @@ffrrrmm  m    mmmmm  rr  @@@@@@ ff@@   cf  f  f  |
 @@@@@@@@@@@@@@fffffm mfmrrfmmfffff rr @@@ mfrf       mmm    rrff@@@@@@ c@@@@@@     ff fff|
 @@@@@@@@@@@@@mmff   ffmmrfmmmff@@fmmrr@@@  frrfc  m m      rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
