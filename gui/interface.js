@@ -5,7 +5,7 @@ const $map_container = $('map-container');
 window.colCallback = null;
 window.colRightClickCallback = null;
 
-document.body.style.zoom = window.innerWidth / 1900;
+document.body.style.zoom = (window.innerWidth / 1900).max(1);
 
 function updateInterfaceOnPass() {
   updateLeftPaneOnPass();
