@@ -148,8 +148,10 @@ function loadWWIIScenario() {
   PLAYERS[1].manpower = 7500000;
   PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
   
-  PLAYERS[1].light = 1000;
-  PLAYERS[1].heavy = 2000;
+  PLAYERS[0].light = 1000;
+  PLAYERS[0].heavy = 2000;
+  PLAYERS[1].light = -100;
+  PLAYERS[1].heavy = -100;
   
   PLAYERS[1].generals["Generalissimo"]["Chiang Kai-Shek"].selected=false;
   PLAYERS[1].generals["Generalissimo"]["Game Founder"].selected=true;
