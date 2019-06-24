@@ -171,7 +171,7 @@ function loadWWIIScenario() {
   let british = new Template(12100, 18, 9, 'Division');
   let american = new Template(11600, 18, 8, 'US Infantry Division');
   let german = new Template(14300, 22, 9, 'Infanterie-Division');
-  let italian = new Template(14300, 22, 9, 'Intalian Infantry Division');
+  let italian = new Template(8900, 16, 6, 'Intalian Infantry Division');
   let germanPanzer = new Template(17800, 12, 30, 'Panzer Corps');
   let soviet = new Template(13100, 12, 10, 'Rifle Division');
   let sovietMilitia = new Template(12000, 9, 4, 'Militia Division');
@@ -189,7 +189,7 @@ function loadWWIIScenario() {
       if (v.terrain == 'P' || v.terrain == 'U')
         v.divisions = Array((Math.random() * 3).round() + 2).fill(0).map(() => (new Division(v.owner, ++british_i + 'th ' + type.defaultName, pt(row, col), type)));
     } else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
-      if (v.owner == 1) {
+      if (v.owner == 1 && v.terrain != 'U') {
         let type = Math.random() < 0.9 ? (Math.random() < 0.7 ? german : italian) : germanPanzer;
         v.divisions = Array((Math.random() * 2).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
       } else if (v.owner == 2) {
