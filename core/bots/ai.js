@@ -87,6 +87,8 @@ class Ai {
       .max(40);
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
       player.heavy + player.light + 1))).min(1).max(player.factories);
+    if (player.light < 0)
+      player.factoryInLight = player.factories;
   }
 
   think() {
