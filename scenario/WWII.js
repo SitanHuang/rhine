@@ -73,7 +73,7 @@ var WWIITerrains = `
 @fffff   @@ mm   p@@@@@@@@@@@@@        @@  ff cr    f fffffffff f f fffffffff fff        |
 @mmfm   @@@@@mC m @@@@@@@@@@@@@r           ffff rff   ff ff c fffff ffffff ffffff        |
 @        @ @Cm    @@@@@@@@@@@ prr C f     ff   rr       fffff  frrrffffffffffff          |
-@@  mff @@ mm     p@@@@@@@      rrrrff C  ff  rr           f frrr ffff ff ff f           |
+@@  mff @@ mm     p@@@@@@@      rrrrff C  ff  rr        c  f frrr ffff ff ff f           |
 @@   fcp@@  m     C p@@@@@       ffrfffffff   rc f  c      ff r fffffcff cfffff          |
 @   ff  @@@ m        @@@@  c  C    rrmm fC  f rrrff          frffffffffffffffff          |
 @m mff@@@ mm  rr Crp@@@@ rrr      Cmrrrmf ff  ffrr           frrffff fffffff         fff |
@@ -85,7 +85,7 @@ var WWIITerrains = `
 @@@@@@@@@@@@@@@ @@        fmmrmfff   ffm  r  fmfff   rrrr    f   f  rrf   f  f         C |
 @@@@@@@@@@@@@@@ p   C      m rrfmf mm mfm r  mmmmfffffffrrrrr        rr         f        |
 @@@@@@@@@@  f         f   fffmrfmrrrrrrfmmm mfmmmmmmmmmmmfffrr fff    rrr f  f           |
-@@@@@@@@  cff        ff  c ffmrmmrfc  rfffffmmmmmmmfmmmmmmmffrrf        r           f    |
+@@@@@@@@  cff        ff  c ffmrmmrfc  rfffffmmmmmmmfmmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff       fmm  ffm rrrrfff rmmffffff    fm     mmmfr         r  c             |
 @@@@@@@@@@@@   c    f m  ffmm  mmmmmmmrrcffff             m mfr c      rr        f  C    |
 @@@@@@@@@@@@@p     rrrrr f     mmmmmmmmrrrmff    c         mmmrr      rr  f   C          |
