@@ -41,6 +41,8 @@ class Player {
   }
 
   get sumAllGeneralTraits() {
+    if (!this.generals)
+      this.generals = ChineseGenerals;
     let template = {
       o: 1,
       s: 1,

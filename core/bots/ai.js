@@ -49,8 +49,8 @@ class Ai {
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 24).round() * 1000 + 6000;
           if (player.recruitable > tem.troop * 100 && player.divisions *
-            20000 < player.manpower &&
-            player.divisions < 600 &&
+            10000 < player.manpower &&
+            player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.heavy * Math.random()).round().max(40) + 1;
             tem.light = (tem.heavy * Math.random() * Math.random()).round().max(30) + 1;
@@ -86,7 +86,7 @@ class Ai {
     player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10)
       .max(40);
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
-      player.heavy + player.light + 1))).min(5).max(player.factories);
+      player.heavy + player.light + 1))).min(1).max(player.factories);
   }
 
   think() {
@@ -165,10 +165,13 @@ class Ai {
             // skip
           } else if (div.hp > 90 && prov.terrain == 'P' && Math.random() >
             0.5 && player.light > 20 && player.heavy > 40) {
-            let enemy = PORTS.filter(x => (x.owner != currentPlayer || x.adjacentNotToPlayer(
-              player))).sort((x, y) => (Math.random() - 0.5));
-            if (enemy[0]) {
-              div.action = [enemy[0].navalInvasion];
+            let enemy = PORTS.filter(x => ((x.owner != currentPlayer || x.adjacentNotToPlayer(
+              player)) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
+            let landed = PORTS.filter(x => (x.owner == currentPlayer && x.adjacentNotToPlayer(
+              player) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
+            let dest = Math.random() < 0.7 ? landed[0] || enemy[0] : enemy[0];
+            if (dest) {
+              div.action = [dest.navalInvasion];
               player.light -= 20;
               player.heavy -= 40;
             }

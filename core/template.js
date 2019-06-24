@@ -2,12 +2,12 @@ MAX_SPEED = 8
 SPEED_UNIT = 'km/h'
 
 class Template {
-  constructor(troop, light, heavy) {
+  constructor(troop, light, heavy, name) {
     this['#'] = 'Template';
     this.troop = troop;
     this.light = light;
     this.heavy = heavy;
-    this.defaultName = 'Infantry Division';
+    this.defaultName = name || 'Infantry Division';
   }
 
   get breakThrough() {

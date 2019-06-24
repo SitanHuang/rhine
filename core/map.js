@@ -39,7 +39,7 @@ window.TERRAINS = {
     name: 'Plain',
     render: ' ',
     defense: 1,
-    attrition: 0.9,
+    attrition: 1,
     movement: 1, // 1.11111111
     slots: 5
   },
@@ -48,9 +48,18 @@ window.TERRAINS = {
     render: '⛰️',
     color: 'green',
     defense: 3,
-    attrition: 0.9,
+    attrition: 0.7,
     movement: 0.2, // 5
     slots: 2
+  },
+  F: {
+    name: 'Forest',
+    render: '🌲',
+    color: 'green',
+    defense: 1,
+    attrition: 0.8,
+    movement: 0.5, // 2
+    slots: 5
   },
   D: {
     name: 'Desert',

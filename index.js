@@ -41,10 +41,12 @@ function deleteSavedFile(file) {
   playerSelectionScreen();
 }
 
-function playerSelectionScreen() {
+function playerSelectionScreen(alreadyWWII) {
   playerSelection.remove();
   playerSelection = document.createElement('waiting');
   let innerHTML = '<h1>Select players</h1><table style="width:70%;margin: auto;">';
+  if (!alreadyWWII)
+    innerHTML = '<h1>Scenario:</h1><p><button onclick="loadWWIIScenario();playerSelectionScreen(1)">Load WWII Europe scenario</button></p>' + innerHTML;
   PLAYERS.forEach((p, i) => {
     innerHTML += `
     <tr>
@@ -99,7 +101,7 @@ function handlePlayerOnPass() {
             let path = unit_pathfind_friendly_only(col.pt, p).length;
             if (path < 15 && path > 0) {
               //col.supply++;
-              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.5) - (path / 15.0)).round(2)).min(0).max(1);
+              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.5) - (path / 15.0)).round(2)).min(0).max(col.pt.terrain.attrition * 10).max(1);
             }
           });
           currentPlayer.ports.forEach(p => {
@@ -108,7 +110,7 @@ function handlePlayerOnPass() {
             let path = unit_pathfind_friendly_only(col.pt, p).length;
             if (path < 15 && path > 0) {
               //col.supply++;
-              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.2) - (path / 10.0)).round(2)).min(0).max(1);
+              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.2) - (path / 10.0)).round(2)).min(0).max(col.pt.terrain.attrition * 10).max(1);
             }
           })
         }
@@ -152,8 +154,8 @@ function pass() {
         waiting.remove();
         setTimeout(() => {
           pass()
-        }, 50)
-      }, 50)
+        }, 0)
+      }, 0)
       return;
     }
 
@@ -161,7 +163,7 @@ function pass() {
     repaintCanvas();
     updateInterfaceOnPass();
     waiting.remove();
-  }, 50);
+  }, 0);
 }
 
 pass();
