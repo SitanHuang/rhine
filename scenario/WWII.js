@@ -82,13 +82,13 @@ var WWIITerrains = `
 @@@@@@@@@@      p@@@@    cfffrrr   m   rrrrmm  f c  fr        f  rr  c ff     f   f      |
 @@@@@@@@@  p@@@@@@@@     mmf  crm  m  fmmmrmm   f    r        f  frr      f   c      fff |
 @@@@@@@@p @@@@@@@@@     ffffmrrr mm  fmm cr  mm      rc        c f rr   ff         ffff  |
-@@@@@@@@@@@@@@@ @@        fmmrmfff   ffm  r  fmfff   rrrr    f   f  rrf   f  f         C |
+@@@@@@@@@@@@@@@ @@        fmmrmfff   ffm  r  fmfff   rrrr    f   f  rrf   f  f         c |
 @@@@@@@@@@@@@@@ p   c      m rrfmf mm mfm r  mmmmfffffffrrrrr        rr         f        |
 @@@@@@@@@@  f         f   fffmrfmrrrrrrfmmm mfmmmmmmmmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff        ff  c ffmrmmrfc  rfffffmmmmmmmfmmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff       fmm  ffm rrrrfff rmmffffff    fm     mmmfr         r  c             |
-@@@@@@@@@@@@   c    f m  ffmm  mmmmmmmrrcffff             m mfr c      rr        f  C    |
-@@@@@@@@@@@@@p     rrrrr f     mmmmmmmmrrrmff    c         mmmrr      rr  f   C          |
+@@@@@@@@@@@@   c    f m  ffmm  mmmmmmmrrcffff             m mfr c      rr        f  c    |
+@@@@@@@@@@@@@p     rrrrr f     mmmmmmmmrrrmff    c         mmmrr      rr  f   c          |
 @@@@@@@@@@@@@@rrrrrr   rr     mmmmmmmmmmmrrf         mmm  fmmffr    rrr     @            |
 @@@@@@@@@@@@@@@      f cr f rrrfmmmmmmmm fr          fff  fmff rr  @r    @@@@@       fff |
 @@@@@@@@@@@@@@@f   fmf  r  rrmmfffmmffm ffr c       mfffff m    r @@@@@r@@@@@       fff  |
@@ -175,7 +175,7 @@ function loadWWIIScenario() {
   let italian = new Template(8900, 16, 6, 'Intalian Infantry Division');
   let germanPanzer = new Template(17800, 12, 30, 'Panzer Corps');
   let soviet = new Template(13100, 12, 10, 'Rifle Division');
-  let sovietMilitia = new Template(12000, 9, 4, 'Militia Division');
+  let sovietMilitia = new Template(9000, 9, 4, 'Militia Division');
   
   let british_i = 0;
   let german_i = 0;
