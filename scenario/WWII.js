@@ -194,7 +194,7 @@ function loadWWIIScenario() {
         let type = Math.random() < 0.9 ? (Math.random() < 0.8 ? german : italian) : germanPanzer;
         v.divisions = Array((Math.random() * 3).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
       } else if (v.owner == 2) {
-        let type = Math.random() < 0.6 ? soviet : sovietMilitia;
+        let type = Math.random() < 0.4 ? soviet : sovietMilitia;
         v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
       }
   })));
