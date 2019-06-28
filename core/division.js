@@ -49,14 +49,14 @@ class Division {
     if (this.skill < 1)
       this.skill += 0.1;
 
-    this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e).round(2).clamp(1, 2);
+    this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e * this.template.entrenchBuff).round(2).clamp(1, 2);
     this.newInforced = 0;
     this.battleInfo = [];
     this.reinforce();
 
     let player = this.player;
     let that = this;
-    this.supply = this.loc.prov.supply;
+    this.supply = this.loc.prov.supply * this.template.supplyBuff;
 
     if (this.supply.round(2) <= 0) {
       let a = this.men * 0.8;

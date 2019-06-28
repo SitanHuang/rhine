@@ -53,13 +53,13 @@ function battle(d1, d2, d1m) {
   d2.morale = (d2.morale + ((t2 - t1) / sum / 3)).max(2).min(0.20).round(2)
 
 
-  sum = d1.hp / d2.hp + d2.hp / d1.hp;
+  sum = d1.morale + d2.morale;
 
   if (d2.hp <= 2 || d2.men <= 400 ) d2.remove();
 
   return {
     casualties: [t2, t1, sum],
-    percentage: [d1.hp / d2.hp.min(1) / sum, d2.hp / d1.hp.min(1) / sum]
+    percentage: [d1.morale / sum.min(0.1), d2.morale / sum.min(0.1)]
   };
 }
 

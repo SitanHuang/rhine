@@ -1,16 +1,26 @@
 function onTemplateSpecsChange() {
   let manpower = parseInt($('deployManpowerInput').value)
-  let light = parseInt($('deployLightInput').value)
-  let heavy = parseInt($('deployHeavyInput').value)
+  let light = parseInt($('deployLightInput').value);
+  let heavy = parseInt($('deployHeavyInput').value);
+  let support = parseInt($('deploySupportInput').value).max(light / 2).floor();
+  let motorized = parseInt($('deployMotorizedInput').value).max(heavy / 2).floor();
+  
+  $('deploySupportInput').value = support;
+  $('deployMotorizedInput').value = motorized;
+  
   currentPlayer.defaultTemplate.troop = manpower;
   currentPlayer.defaultTemplate.light = light;
   currentPlayer.defaultTemplate.heavy = heavy;
+  currentPlayer.defaultTemplate.support = support;
+  currentPlayer.defaultTemplate.motorized = motorized;
   currentPlayer.defaultTemplate.defaultName = $('templateNameInput').value.deepClone();
   let terrain = TERRAINS[$('templateTerrainSelect').value];
   $('softAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockSoft(terrain), 2, false, false);
   $('hardAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHard(terrain), 2, false, false);
-  $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT;
+  $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT + ` (x${currentPlayer.defaultTemplate.speedBuff.round(2)})`;
   $('breakThroughSpan').innerText = currentPlayer.defaultTemplate.breakThrough.round(2);
+  $('supplyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.supplyBuff, 2, false, false);
+  $('entrenchBuff').innerText = abbreviate(currentPlayer.defaultTemplate.entrenchBuff, 2, false, false);
 }
 
 const REPAINT_DEPLOY_CALLBACK = td => {
@@ -125,7 +135,7 @@ function deployOnClick(button) {
   }
 }
 
-var MINIMAL_TEMPLATE = new Template(242, 1, 1);
+var MINIMAL_TEMPLATE = new Template(242, 1, 1, '', 0.1, 0.1);
 MINIMAL_TEMPLATE.defaultName = 'Temporary Squad';
 
 function convertSelectedOnClick(button) {
@@ -139,6 +149,8 @@ function convertSelectedOnClick(button) {
   let netman = 0;
   let netlight = 0;
   let netheavy = 0;
+  let nets = 0;
+  let netm = 0;
   let dst = currentPlayer.defaultTemplate.deepClone();
   if (!dst.deployable(currentPlayer)) {
     if (msg) msg.style.color = 'red';
@@ -150,10 +162,12 @@ function convertSelectedOnClick(button) {
     netman += div.template.troop - dst.troop;
     netlight += div.template.light - dst.light;
     netheavy += div.template.heavy - dst.heavy;
+    nets += div.template.support - dst.support;
+    netm += div.template.motorized - dst.motorized;
   });
   let needman = currentPlayer.recruitable + netman;
-  let needlight = currentPlayer.light + netlight;
-  let needheavy = currentPlayer.heavy + netheavy;
+  let needlight = currentPlayer.light + netlight + nets;
+  let needheavy = currentPlayer.heavy + netheavy + netm;
   if (needman < 0 || needlight < 0 || needheavy < 0) {
     if (msg) msg.style.color = 'red';
     let html = 'Need the following:<br>';
@@ -176,8 +190,8 @@ function convertSelectedOnClick(button) {
     currentPlayer.manpower += netman;
     html += `Manpower: net ${abbreviate(netman, 2, false, false)}<br>`;
   }
-  currentPlayer.light += netlight;
-  currentPlayer.heavy += netheavy;
+  currentPlayer.light += netlight + nets;
+  currentPlayer.heavy += netheavy + netm;
   SELECTED_UNITS.forEach(div => {
     if (div.men > dst.troop) div.men = dst.troop;
     div.name = dst.defaultName;
@@ -223,13 +237,23 @@ function updateDeploy() {
   <td><input type=number value="${currentPlayer.defaultTemplate.troop}"
     id="deployManpowerInput" oninput="onTemplateSpecsChange()">
   <tr>
-  <th>Light Equipments
+  <th>Light Equip.
   <td><input type=number value="${currentPlayer.defaultTemplate.light}"
     id="deployLightInput" oninput="onTemplateSpecsChange()">
   <tr>
-  <th>Heavy Equipments
+  <th>Heavy Equip.
   <td><input type=number value="${currentPlayer.defaultTemplate.heavy}"
     id="deployHeavyInput" oninput="onTemplateSpecsChange()">
+  <tr>
+  <th>Support Equip.
+  <td><input type=number value="${currentPlayer.defaultTemplate.support}"
+    id="deploySupportInput" oninput="onTemplateSpecsChange()">
+  <tr>
+  <th>Motorized Equip.
+  <td><input type=number value="${currentPlayer.defaultTemplate.motorized}"
+    id="deployMotorizedInput" oninput="onTemplateSpecsChange()">
+  <tr>
+  <tr><th><td><br>
   <tr>
   <th>View Specs Under:<td>
   <tr>
@@ -247,18 +271,21 @@ function updateDeploy() {
   <tr>
   <th>Soft Attack
   <td id="softAttackSpan"><br>
-  <tr><th><td class="small">(Regardless of HP & skill)
   <tr>
   <th>Hard Attack
   <td id="hardAttackSpan">
-  <tr><th><td class="small">(Regardless of HP & skill)
   <tr>
   <th>Speed
   <td id="speedSpan">
-  <tr><th><td class="small">(Regardless of HP & skill)
   <tr>
   <th>Breakthrough
   <td id="breakThroughSpan"><br>
+  <tr>
+  <th>Supply factor
+  <td id="supplyBuff"><br>
+  <tr>
+  <th>Entrench factor
+  <td id="entrenchBuff"><br>
   <tr><th><td><br>
   <tr><th>Title:<td><br>
   <tr>

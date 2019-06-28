@@ -87,7 +87,7 @@ var WWIITerrains = `
 @@@@@@@@@@  f         f   fffmrfmrrrrrrfmmm mfmmmmmmmmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff        ff  c ffmrmmrfc  rfffffmmmmmmmfmmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff       fmm  ffm rrrrfff rmmffffff    fm     mmmfr         r  c             |
-@@@@@@@@@@@@   c    f m  ffmm  mmmmmmmrrcffff             m mfr c      rr        f  c    |
+@@@@@@@@@@@@   c    f m  ffmm  mmmmmmmrrcffff             m mfr c      rr        f  C    |
 @@@@@@@@@@@@@p     rrrrr f     mmmmmmmmrrrmff    c         mmmrr      rr  f   c          |
 @@@@@@@@@@@@@@rrrrrr   rr     mmmmmmmmmmmrrf         mmm  fmmffr    rrr     @            |
 @@@@@@@@@@@@@@@      f cr f rrrfmmmmmmmm fr          fff  fmff rr  @r    @@@@@       fff |
@@ -147,7 +147,7 @@ function loadWWIIScenario() {
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
   PLAYERS[1].manpower = 3000000;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
-  PLAYERS[1].growthRate = 0.0029563933;
+  PLAYERS[1].growthRate = 0.003;
   
   PLAYERS[0].light = 1000;
   PLAYERS[0].heavy = 2000;
@@ -171,11 +171,15 @@ function loadWWIIScenario() {
   
   let british = new Template(12100, 18, 9, 'Division');
   let american = new Template(11600, 18, 8, 'US Infantry Division');
-  let german = new Template(14300, 22, 10, 'Infanterie-Division');
+  let german = new Template(14300, 22, 10, 'Infanterie-Division', 11, 5);
   let italian = new Template(8900, 16, 6, 'Intalian Infantry Division');
-  let germanPanzer = new Template(17800, 12, 30, 'Panzer Corps');
-  let soviet = new Template(13100, 12, 10, 'Rifle Division');
-  let sovietMilitia = new Template(9000, 9, 4, 'Militia Division');
+  let germanPanzer = new Template(17800, 12, 30, 'Panzer Corps', 6, 15);
+  let soviet = new Template(13100, 16, 10, 'Rifle Division');
+  let sovietMilitia = new Template(9000, 9, 4, 'Militia Division', 0.1, 0.1);
+  
+  PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
+  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
+  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone()];
   
   let british_i = 0;
   let german_i = 0;

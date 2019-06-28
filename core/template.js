@@ -2,16 +2,19 @@ MAX_SPEED = 8
 SPEED_UNIT = 'km/h'
 
 class Template {
-  constructor(troop, light, heavy, name) {
+  constructor(troop, light, heavy, name, support, motorized) {
     this['#'] = 'Template';
     this.troop = troop;
     this.light = light;
     this.heavy = heavy;
     this.defaultName = name || 'Infantry Division';
+    
+    this.support = (support || (this.light / 10)).max(this.light / 2).floor();
+    this.motorized = (motorized || (this.heavy / (this.heavy + this.light) * 10)).max(this.heavy / 2).floor();
   }
 
   get breakThrough() {
-    return (this.heavy / (this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
+    return ((this.motorized + this.heavy) / (this.motorized + this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
   }
   get manpower() {
     return this.troop;
@@ -19,13 +22,25 @@ class Template {
 
   get soft() {
     return this.troop / 100 *
-      (this.light);
+      (this.light) + this.support * 100;
+  }
+  
+  get supplyBuff() {
+    return this.speedBuff.min(1) * this.entrenchBuff;
+  }
+  
+  get entrenchBuff() {
+    return this.support / (this.troop / 1000) + 0.9;
+  }
+  
+  get speedBuff() {
+    return this.motorized / (this.troop / 2000) + 0.9;
   }
 
   deployable(player) {
     if (this.speed <= 0.5) return false;
-    if (!this.speed || !this.light || !this.heavy || !this.troop) return false;
-    if (player.light < this.light || player.heavy < this.heavy ||
+    if (!this.speed || !this.light || !this.heavy || !this.troop || !this.support || !this.motorized) return false;
+    if (player.light < (this.light + this.support) || player.heavy < (this.motorized + this.heavy) ||
       player.recruitable <= this.troop) return false;
     return true;
   }
@@ -48,7 +63,7 @@ class Template {
       title = title.replace('()', 'Artillery');
     else
       title = title.replace('()', 'Infantry');
-    if (this.mockSoft(TERRAINS.M) + this.mockHard(TERRAINS.M) > this.hard + this.soft)
+    if (this.mockSpeed(TERRAINS.M) > 1.5)
       title = title.replace(' Division', ' Mountaineer Division');
     if (this.hard > 2000)
       title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison');
@@ -61,8 +76,8 @@ class Template {
 
   deploy(player, loc, title) {
     let men = Math.ceil(this.troop / 15);
-    player.light -= this.light;
-    player.heavy -= this.heavy;
+    player.light -= this.light + this.support;
+    player.heavy -= this.heavy + this.motorized;
     player.manpower -= men;
     let div = new Division(player.playerID, title, loc, this.deepClone())
     div.skill = 0.2;
@@ -72,6 +87,8 @@ class Template {
   deepClone() {
     let t = new Template(this.troop, this.light, this.heavy);
     t.defaultName = this.defaultName.deepClone();
+    t.support = this.support;
+    t.motorized = this.motorized;
     return t;
   }
 
@@ -93,7 +110,7 @@ class Template {
 
   get speed() {
     return (MAX_SPEED - this.light / this.troop * 1000 - this.heavy / this.troop * 800 -
-      this.troop / 8000).clamp(0, MAX_SPEED).round(2);
+      this.troop / 5000 / this.speedBuff).clamp(0, MAX_SPEED).round(2);
   }
 
   get inspect() {

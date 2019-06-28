@@ -10,7 +10,7 @@ function showDivisionDetailOnFloat(i, td) {
   <tr><th>HP
   <td>${div.hp.round(2)}%<br>(reinforced ${abbreviate(div.newInforced, 2, false, false)})
   <tr><th>Entrenchment
-  <td>${div.entrench.round(1)}
+  <td>${div.entrench.round(1)} (x${div.template.entrenchBuff.round(2)})
   <tr><th>Skill
   <td>${div.skill.round(2)}
   <tr><th>Morale
@@ -18,7 +18,7 @@ function showDivisionDetailOnFloat(i, td) {
   <tr><th>Surround Penalty
   <td>-${div.adjacentPenalty/4*100}%
   <tr><th>Supply
-  <td>${div.supply}
+  <td>${div.supply.round(2)} (${div.prov.supply?  div.prov.supply.round(2) : ''}x${div.template.supplyBuff.round(2)})
   <tr><th><br><td><br>
   <tr><th><u> Specs </u><td class="small"><u>(Terrain ${div.loc.terrain.name})</u>
   <tr><th>Soft Attack
@@ -35,6 +35,10 @@ function showDivisionDetailOnFloat(i, td) {
   <td>${abbreviate(div.template.light, 2, false, false)}
   <tr><th>Heavy Equipments
   <td>${abbreviate(div.template.heavy, 2, false, false)}
+  <tr><th>Support Equipments
+  <td>${abbreviate(div.template.support, 2, false, false)}
+  <tr><th>Motorized Equipments
+  <td>${abbreviate(div.template.motorized, 2, false, false)}
   </table>
   `;
   createFloatingDIV(buffer, td.getBoundingClientRect().left - 350,

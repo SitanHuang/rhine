@@ -54,8 +54,12 @@ class Ai {
             Math.random() > 0.5) {
             tem.heavy = (player.heavy * Math.random()).round().max(40) + 1;
             tem.light = (tem.heavy * Math.random() * Math.random()).round().max(30) + 1;
+            tem.support = (tem.light / 2 * Math.random()).round();
+            tem.motorized = (tem.heavy / 2 * Math.random()).round();
             while ((tem.heavy -= 1) > 10 && (tem.light -= 1) > 5) {
               tem.defaultName = tem.codeName;
+              tem.support = (tem.light / 2).floor();
+              tem.motorized = (tem.heavy / 2).floor();
               if (tem.deployable(player)) {
                 tem.deploy(player, p, tem.codeName);
                 player.defaultTemplate = tem;
@@ -137,8 +141,8 @@ class Ai {
             SELECTED_UNITS.push(div);
             return;
           }
-          if ((div.skill < 1.25 && div.morale < 1 && (div.hp < 25 || div.morale <=
-              0.25) && Math.random() > 0.7) ||
+          if ((div.skill < 1.25 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
+              0.25) && Math.random() > 0.5) ||
             (player.divisions > 200 && player.averageStrength < 76 && div
               .hp < 60 && Math.random() > 0.75) && (player.divisions > 100 || Math.random() > 0.9)) {
             SELECTED_UNITS.push(div);
@@ -156,7 +160,7 @@ class Ai {
 
             if (div.hp < retreatable ||
               (div.battleInfo.length && combineBattleInfos(div.battleInfo)[
-                0] < 0.5) ||
+                0] < 0.4) ||
               (lastAction && lastAction.owner == player && lastAction.prov
                 .divisions.length > 3)) {
               div.action = [];
