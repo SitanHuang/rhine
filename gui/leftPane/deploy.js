@@ -183,7 +183,7 @@ function convertSelectedOnClick(button) {
   }
   if (msg) msg.style.color = 'blue';
   let html = 'Successful:<br>';
-  html += `Light Equip.: net ${abbreviate(netlight + netes, 2, false, false)}<br>`;
+  html += `Light Equip.: net ${abbreviate(netlight + nets, 2, false, false)}<br>`;
   html += `Heavy Equip.: net ${abbreviate(netheavy + netm, 2, false, false)}<br>`;
   if (msg) msg.style.display = 'block';
   if (netman > 0) {
