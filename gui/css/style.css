@@ -110,7 +110,7 @@ td.army {
 
 #left, #right {
   width: 17.5%;
-  height: 100%;
+  height: 100vh;
   min-width: 340px;
   background: wheat;
 }
@@ -222,7 +222,7 @@ table.statistic th {
 #map-container {
   overflow: auto;
   width: 65%;
-  height: 100%;
+  height: 100vh;
 }
 
 body {
