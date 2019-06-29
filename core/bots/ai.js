@@ -123,6 +123,7 @@ class Ai {
     SELECTED_UNITS = [];
     let dai = 0;
     let dainterval = player.divisions.min(1) / ARMY_COLORS.length;
+    let currentNavalInvasion = null;
 
     for (let row = 0; row < MAP_DATA.length; row++) {
       let rowData = MAP_DATA[row];
@@ -176,8 +177,9 @@ class Ai {
             let landed = PORTS.filter(x => (x.owner == currentPlayer && x.adjacentNotToPlayer(
               player) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
             let dest = Math.random() < 0.7 ? landed[0] || enemy[0] : enemy[0];
-            if (dest) {
-              div.action = [dest.navalInvasion];
+            currentNavalInvasion = currentNavalInvasion || dest;
+            if (currentNavalInvasion) {
+              div.action = [currentNavalInvasion.navalInvasion];
               player.light -= 20;
               player.heavy -= 40;
             }
