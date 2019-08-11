@@ -80,11 +80,11 @@ class Ai {
 
     this.adjacentBlocks = this.adjacentBlocks.sort((p1, p2) => {
       // p.prov.terrain == 'U' ? -0.1 : p.prov.divisions.length
-      let a = p1.prov.terrain == 'U' ? (p1.prov.slots.length) : 55 + p1.prov
-        .divisions.length + Math.random();
-      let b = p2.prov.terrain == 'U' ? (p2.prov.slots.length) : 55 + p2.prov
-        .divisions.length + Math.random();
-      return a - b
+      //let a = p1.prov.terrain == 'U' ? (p1.prov.slots.length) : 55 + p1.prov
+      //  .divisions.length + Math.random();
+      //let b = p2.prov.terrain == 'U' ? (p2.prov.slots.length) : 55 + p2.prov
+      //  .divisions.length + Math.random();
+      return p2.prov.terrain.movement - p1.prov.terrain.movement
     });
 
     player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10)
