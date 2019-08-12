@@ -13,6 +13,10 @@ function airStrikeProv(divs) {
   return damages;
 }
 
+function getCasualtyReductionFromSupport(div) {
+  return (1-div.template.support/div.template.manpower*1000).min(0).max(0.8);
+}
+
 function battle(d1, d2, d1m) {
   let s1 = d1.soft;
   let s2 = d2.soft;
@@ -36,8 +40,8 @@ function battle(d1, d2, d1m) {
     t1 /= 4;
   }
 
-  let rt1 = t1.round();
-  let rt2 = t2.round();
+  let rt1 = (t1 - t1 * getCasualtyReductionFromSupport(div2)).round();
+  let rt2 = (t2 - t2 * getCasualtyReductionFromSupport(div1)).round();
 
   d1.men = (d1.men - rt2).min(0);
   d2.men = (d2.men - rt1).min(0);
