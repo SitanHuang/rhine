@@ -14,7 +14,7 @@ function airStrikeProv(divs) {
 }
 
 function getCasualtyReductionFromSupport(div) {
-  return (1-div.template.support/div.template.manpower*1000).min(0).max(0.8);
+  return (div.template.support/div.template.manpower*1000).min(0).max(0.8);
 }
 
 function battle(d1, d2, d1m) {
