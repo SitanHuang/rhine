@@ -8,7 +8,7 @@ function showDivisionDetailOnFloat(i, td) {
   <u><b>${div.name}</b></u><br><br>
   <table class="statistic">
   <tr><th>HP
-  <td>${div.hp.round(2)}%<br>(reinforced ${abbreviate(div.newInforced, 2, false, false)})
+  <td>${div.hp.round(2)}%<br>(reinforced ${abbreviate(div.newInforced, 2, false, false)}, -${getCasualtyReductionFromSupport(div).round(2)}x)
   <tr><th>Entrenchment
   <td>${div.entrench.round(1)} (x${div.template.entrenchBuff.round(2)})
   <tr><th>Skill
