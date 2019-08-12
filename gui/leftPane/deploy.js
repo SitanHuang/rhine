@@ -20,6 +20,7 @@ function onTemplateSpecsChange() {
   $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT + ` (x${currentPlayer.defaultTemplate.speedBuff.round(2)})`;
   $('breakThroughSpan').innerText = currentPlayer.defaultTemplate.breakThrough.round(2);
   $('supplyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.supplyBuff, 2, false, false);
+  $('casualtyBuff').innerText = abbreviate((1-currentPlayer.defaultTemplate.support/currentPlayer.defaultTemplate.manpower*1000).min(0).max(0.8), 2, false, false);
   $('entrenchBuff').innerText = abbreviate(currentPlayer.defaultTemplate.entrenchBuff, 2, false, false);
 }
 
@@ -283,6 +284,9 @@ function updateDeploy() {
   <tr>
   <th>Supply factor
   <td id="supplyBuff"><br>
+  <tr>
+  <th>Casualty factor
+  <td id="casualtyBuff"><br>
   <tr>
   <th>Entrench factor
   <td id="entrenchBuff"><br>
