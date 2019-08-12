@@ -40,8 +40,8 @@ function battle(d1, d2, d1m) {
     t1 /= 4;
   }
 
-  let rt1 = (t1 - t1 * getCasualtyReductionFromSupport(div2)).round();
-  let rt2 = (t2 - t2 * getCasualtyReductionFromSupport(div1)).round();
+  let rt1 = (t1 - t1 * getCasualtyReductionFromSupport(d2)).round();
+  let rt2 = (t2 - t2 * getCasualtyReductionFromSupport(d1)).round();
 
   d1.men = (d1.men - rt2).min(0);
   d2.men = (d2.men - rt1).min(0);
