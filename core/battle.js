@@ -24,7 +24,7 @@ function battle(d1, d2, d1m) {
   let h2 = d2.hard;
   let factor = 2.5;
 
-  let as1 = (s1 - s2).min(0) + s1 * factor;
+  /*let as1 = (s1 - s2).min(0) + s1 * factor;
   let as2 = (s2 - s1).min(0) + s2 * factor;
   let ah1 = (h1 - h2).min(0) + h1 * factor;
   let ah2 = (h2 - h1).min(0) + h2 * factor;
@@ -32,7 +32,17 @@ function battle(d1, d2, d1m) {
   let _t1 = Math.sqrt(as1 + ah1);
   let _t2 = Math.sqrt(as2 + ah2);
   let t1 = (_t1 + ((_t1 - _t2) / 10)).min(0);
-  let t2 = (_t2 + ((_t2 - _t1) / 10)).min(0);
+  let t2 = (_t2 + ((_t2 - _t1) / 10)).min(0);*/
+  
+  let as1 = s1 * factor;
+  let as2 = s2 * factor;
+  let ah1 = h1 * factor;
+  let ah2 = h2 * factor;
+
+  let _t1 = Math.sqrt(as1 + ah1 * 2);
+  let _t2 = Math.sqrt(as2 + ah2 * 2);
+  let t1 = _t1.min(0);
+  let t2 = _t2.min(0);
 
   if (Math.random() < d1.breakThrough) {
     t2 /= 4;
