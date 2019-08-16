@@ -77,7 +77,7 @@ class Player {
   }
 
   growManpower() {
-    this.manpower = (this.manpower * (this.growthRate + 1) + 5000).round().max(this.cities * 500000);
+    this.manpower = (this.manpower * (this.growthRate + 1) + this.cities * 100000 * (this.growthRate)).round().max(this.cities * 500000);
     this.growthRate = (0.00001 + this.growthRate).max(0.01)
   }
 
