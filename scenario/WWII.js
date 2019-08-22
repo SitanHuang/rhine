@@ -145,7 +145,7 @@ function loadWWIIScenario() {
   PLAYERS[0].manpower = 5500000;
   PLAYERS[0].growthRate = 139187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 3000000;
+  PLAYERS[1].manpower = 3500000;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
   PLAYERS[1].growthRate = 0.003;
   
@@ -196,7 +196,7 @@ function loadWWIIScenario() {
     } else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
       if (v.owner == 1 && v.terrain != 'U') {
         let type = Math.random() < 0.9 ? (Math.random() < 0.8 ? german : italian) : germanPanzer;
-        v.divisions = Array((Math.random() * 3).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
       } else if (v.owner == 2) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
         v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
