@@ -397,7 +397,7 @@ function updateLogistics() {
   <tr>
   <th>Recruitable Manpower
   <td>${abbreviate(currentPlayer.recruitable, 2, false, false)}
-<br><small><br>${abbreviate(currentPlayer._populationData.growth[0], 1, false, false)} ${abbreviate(currentPlayer._populationData.death, 1, false, false)}<br>
+<br><small><br>${abbreviate(currentPlayer._populationData.growth[0], 1, false, false)} -${abbreviate(-(currentPlayer._populationData.death.max(0)), 1, false, false)}<br>
 = ${abbreviate(currentPlayer._populationData.net, 1, false, false)}</small><br>
   </tr>
   <tr>
