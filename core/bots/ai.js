@@ -135,7 +135,7 @@ class Ai {
         prov.divisions.forEach(div => {
           div.color = ARMY_COLORS[(dai++ / dainterval).floor().min(0)] ||
             'transparent';
-          if (div.skill < 0.9) {
+          if (div.skill < 0.8) {
             div.action = [];
             return;
           }
@@ -152,7 +152,7 @@ class Ai {
             return;
           }
           let retreatable = 60;
-          if ((player._populationData.net < 0) && Math.random() > 0.4 && div.adjacentNotToPlayer >
+          if (player._populationData.net < 0 && Math.random() > 0.7 && div.adjacentNotToPlayer >
             0) {
             div.action = [];
             return;
@@ -163,9 +163,9 @@ class Ai {
 
             if (div.hp < retreatable ||
               (div.battleInfo.length && combineBattleInfos(div.battleInfo)[
-                0] < 0.4) ||
+                0] < 0.3) /*||
               (lastAction && lastAction.owner == player && lastAction.prov
-                .divisions.length > 3)) {
+                .divisions.length > 3)*/) {
               div.action = [];
               return;
             }
@@ -199,7 +199,8 @@ class Ai {
                     divs.sample().soft <= div.soft)))
                   div.action = [adj];
               });
-            else if ((div.morale < 1 && div.entrench > 1.5) || (div.morale >= 1 && div.entrench > 1.1))
+            //else if ((div.morale < 1 && div.entrench > 1.5) || (div.morale >= 1 && div.entrench > 1.1))
+            else
               // div.loc.adjacents(adj => {
               //   if (div.action.length) return;
               //   let divs = adj.prov.divisions;
