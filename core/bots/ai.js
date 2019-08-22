@@ -49,7 +49,7 @@ class Ai {
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 24).round() * 1000 + 6000;
           if (player.recruitable.min(player.manpower) > tem.troop * 50 && player.divisions *
-            10000 < player.manpower &&
+            10000 < player.manpower && player._populationData.net > tem.troop &&
             player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.heavy * Math.random()).round().max(40) + 1;
@@ -135,7 +135,7 @@ class Ai {
         prov.divisions.forEach(div => {
           div.color = ARMY_COLORS[(dai++ / dainterval).floor().min(0)] ||
             'transparent';
-          if (div.skill < 1 && div.template.troop <= MINIMAL_TEMPLATE.troop) {
+          if (div.skill < 1 || div.template.troop <= MINIMAL_TEMPLATE.troop) {
             div.action = [];
             return;
           }
@@ -152,7 +152,7 @@ class Ai {
             return;
           }
           let retreatable = 60;
-          if (player.manpower < 1500000 && Math.random() > 0.3 && div.adjacentNotToPlayer >
+          if ((player._populationData.net < 1000) && Math.random() > 0.4 && div.adjacentNotToPlayer >
             0) {
             div.action = [];
             return;
