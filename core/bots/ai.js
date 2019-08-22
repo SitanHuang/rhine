@@ -161,8 +161,7 @@ class Ai {
               0.5)) {
             let lastAction = div.action.last();
 
-            if (div.hp < retreatable ||
-              (div.battleInfo.length && combineBattleInfos(div.battleInfo)[
+            if ((div.battleInfo.length && combineBattleInfos(div.battleInfo)[
                 0] < 0.3) /*||
               (lastAction && lastAction.owner == player && lastAction.prov
                 .divisions.length > 3)*/) {
@@ -187,9 +186,9 @@ class Ai {
             }
           } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer <
               2 || Math.random() > 0.65) &&
-            (div.hp > 60)) {
+            (div.hp > 40)) {
             div.action = [];
-            if ((div.hp > 90 || div.skill > 1.75) && div.morale > 0.9)
+            if ((div.hp > 60 || div.skill > 1.1) && div.morale > 0.6)
               div.loc.adjacents(adj => {
                 if (div.action.length) return;
                 let divs = adj.prov.divisions;
@@ -226,8 +225,7 @@ class Ai {
                       leastDst = a;
                     }
                   });
-                  if (leastDst != location) div.action = [leastDst];
-                  else div.action = [];
+                  div.action = [leastDst];
                 }
               });
           } else
