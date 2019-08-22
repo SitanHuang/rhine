@@ -70,7 +70,7 @@ class Ai {
         } else {
           if (player.constructionPoints > 1500 & Math.random() > 0.9) {
             if (prov.slots.filter(x => (x == 'F')).length >= p.terrain.slots)
-              return;
+              break;
             player.constructionPoints -= 750;
             prov.slots.push('F');
           }
