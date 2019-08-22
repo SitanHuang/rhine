@@ -92,8 +92,9 @@ class Player {
     
     this.__populationData = {
       net: this.manpower - this._populationData.last,
-      death: (this.manpower - this._populationData.last - (growthFromRate.round() + fixedGrowth.round())).min(0).round(),
+      death: (this.manpower - this._populationData.last - (growthFromRate.round() + fixedGrowth.round())).round(),
       growth: [(growthFromRate.round() + fixedGrowth.round()), growthFromRate.round(), fixedGrowth.round()],
+      actualLast: this._populationData.last,
       last: this.manpower
     }
   }
