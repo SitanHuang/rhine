@@ -39,6 +39,14 @@ class Player {
   get mapDataFlattened() {
     return this._mapDataFlattened ? this._mapDataFlattened : this._mapDataFlattened = MAP_DATA.reduce((a, b) => a.concat(b), []);
   }
+  
+  get _populationData() {
+    return this.__populationData || {
+      net: 0,
+      growth: [0, 0, 0],
+      last: this.manpower
+    };
+  }
 
   get sumAllGeneralTraits() {
     if (!this.generals)
@@ -77,8 +85,17 @@ class Player {
   }
 
   growManpower() {
-    this.manpower = (this.manpower * (this.growthRate + 1) + this.cities * 100000 * (this.growthRate)).round().max(this.cities * 500000);
-    this.growthRate = (0.00001 + this.growthRate).max(0.01)
+    let growthFromRate = this.manpower * this.growthRate;
+    let fixedGrowth = this.cities * 100000 * (this.growthRate);
+    this.manpower = (this.manpower + growthFromRate + fixedGrowth).round().max(this.cities * 500000);
+    this.growthRate = (0.00001 + this.growthRate).max(0.01);
+    
+    this.__populationData = {
+      net: this.manpower - this._populationData.last,
+      death: (this.manpower - this._populationData.last - (growthFromRate.round() + fixedGrowth.round())).min(0).round()
+      growth: [(growthFromRate.round() + fixedGrowth.round()), growthFromRate.round(), fixedGrowth.round()],
+      last: this.manpower
+    }
   }
 
   get recruitable() {
