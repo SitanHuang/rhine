@@ -135,7 +135,7 @@ class Ai {
         prov.divisions.forEach(div => {
           div.color = ARMY_COLORS[(dai++ / dainterval).floor().min(0)] ||
             'transparent';
-          if (div.skill < 1 || div.template.troop <= MINIMAL_TEMPLATE.troop) {
+          if (div.skill < 0.9) {
             div.action = [];
             return;
           }
@@ -152,7 +152,7 @@ class Ai {
             return;
           }
           let retreatable = 60;
-          if ((player._populationData.net < 1000) && Math.random() > 0.4 && div.adjacentNotToPlayer >
+          if ((player._populationData.net < 0) && Math.random() > 0.4 && div.adjacentNotToPlayer >
             0) {
             div.action = [];
             return;
