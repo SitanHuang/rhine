@@ -120,7 +120,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 MAP_DATA = InvasionOfChinaTerrains;
 pt(25, 43).prov.slots = Array(20).fill('F'); // Nanjing
 pt(30, 35).prov.slots = Array(10).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(20).fill('F'); // Chongqing
+pt(33, 22).prov.slots = Array(40).fill('F'); // Chongqing
 
 
 let p2 = new Player();
@@ -134,6 +134,7 @@ p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = randomColor({alpha: 0.2, format: 'rgba', hue: 'red'})
 p1.manpower = Math.floor(Math.random() * 500000 + 5500000);
+p1.growthRate = 0.0029;
 p1.light = 60;
 p1.heavy = 40;
 p1.retreatable = 30;
