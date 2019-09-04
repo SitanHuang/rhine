@@ -120,7 +120,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 MAP_DATA = InvasionOfChinaTerrains;
 pt(25, 43).prov.slots = Array(20).fill('F'); // Nanjing
 pt(30, 35).prov.slots = Array(10).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(40).fill('F'); // Chongqing
+pt(33, 22).prov.slots = Array(26).fill('F'); // Chongqing
 
 
 let p2 = new Player();
