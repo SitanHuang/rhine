@@ -133,6 +133,7 @@ class Ai {
         let prov = p.prov;
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
+          if (div.color == 'black') return;
           div.color = ARMY_COLORS[(dai++ / dainterval).floor().min(0)] ||
             'transparent';
           if (div.skill < 0.8) {
