@@ -61,9 +61,9 @@ var WWIIOwners = `
 var WWIITerrains = `
 @@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffCfffffffffffffffffffffffff|
 @@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@c@@fffffffffffffffffff  f ff  f ffff|
-@@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffff@ffff fffff ff fff  fff    fffff  |
+@@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffff@ffffcfffff ff fff  fff    fffff  |
 @@@@@@@mmmmmmff@@@@@@@@@@@@@@@@   @@@       @@ @@@@ffffffffffffffff ffff  fff c  fff fff |
-@@@@@@@mmmcmmc@@@@@@@@@@@@@@@@    @@@@      @@@@@@@fffffffffff fffffffffff ff          ff|
+@@@@@@@mmmcmmc@@@@@@@@@@@@@@@@    @@@@      @@@@@@@fffffffffff fffcfffffff ff          ff|
 @@@@@@p@@ffmm @@@@@@@@@@p@@@@@     @@@     p@@@@@@@ ffcfff  ffffffffffffffffffff  ff ffff|
 @@@@@@@@@fmm  @@@@@@@@@@@@@@@@    @@@@   @@@@@@@@@@ffffffffffrrrrrrrrff fffffffffffffffff|
 @@@@@@@@@@     @@@@@@@@@@@@@@@p    c r @@@@@@@@@@@@ffffffffffrf fff rrff ffff  ffffffrrrr|
