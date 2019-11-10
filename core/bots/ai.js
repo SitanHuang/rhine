@@ -26,7 +26,7 @@ class Ai {
             prov.fort = true;
           }
           this.adjacentBlocks.push(p);
-          if (player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
+          if (player.factories > 90 && player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
               if (p.owner != player && pro.divisions.length > 3 && player
