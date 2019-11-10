@@ -47,19 +47,19 @@ class Ai {
             prov.slots.push('F');
           }
           let tem = player.defaultTemplate.deepClone();
-          tem.troop = (Math.random() * 24).round() * 1000 + 6000;
+          tem.troop = (Math.random() * 20).round() * 1000 + 10000;
           if (player.recruitable.min(player.manpower) > tem.troop * 50 && player.divisions *
             10000 < player.manpower && (player._populationData.net > 1000 || -player._populationData.death == player._populationData.growth[0]) &&
             player.divisions < 400 &&
             Math.random() > 0.5) {
             tem.heavy = (player.heavy * Math.random()).round().max(40) + 1;
-            tem.light = (tem.heavy * Math.random() * Math.random()).round().max(30) + 1;
+            tem.light = (player.light * Math.random()).round().max(40) + 1;
             tem.support = (tem.light / 2 * Math.random()).round();
             tem.motorized = (tem.heavy / 2 * Math.random()).round();
-            while ((tem.heavy -= 1) > 10 && (tem.light -= 1) > 5) {
+            while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 5) {
               tem.defaultName = tem.codeName;
-              tem.support = (tem.light / 2).floor();
-              tem.motorized = (tem.heavy / 2).floor();
+              tem.support = tem.support.max((tem.light / 2).floor());
+              tem.motorized = tem.motorized.max((tem.heavy / 2).floor());
               if (tem.deployable(player)) {
                 tem.deploy(player, p, tem.codeName);
                 player.defaultTemplate = tem;
@@ -144,14 +144,14 @@ class Ai {
             SELECTED_UNITS.push(div);
             return;
           }
-          if ((div.skill > 1.5 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
+          /*if ((div.skill > 1.5 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
               0.25) && Math.random() > 0.7) ||
             (player.divisions > 200 && player.averageStrength < 76 && div
               .hp < 60 && Math.random() > 0.75) && (player.divisions > 100 || Math.random() > 0.9)) {
             if (player.divisions > 150)
               SELECTED_UNITS.push(div);
             return;
-          }
+          }*/
           let retreatable = 60;
           if (player._populationData.net < 0 && Math.random() > 0.7 && div.adjacentNotToPlayer >
             0) {
