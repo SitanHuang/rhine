@@ -59,7 +59,7 @@ var WWIIOwners = `
 
 
 var WWIITerrains = `
-@@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffCfffffffffffffffffffffffff|
+@@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffcfffffffffffffffffffffffff|
 @@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@c@@fffffffffffffffffff  f ff  f ffff|
 @@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffff@ffffcfffff ff fff  fff    fffff  |
 @@@@@@@mmmmmmff@@@@@@@@@@@@@@@@   @@@       @@ @@@@ffffffffffffffff ffff  fff c  fff fff |
@@ -162,8 +162,8 @@ function loadWWIIScenario() {
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
-  p3.light = -1000;
-  p3.heavy = -500;
+  p3.light = -1200;
+  p3.heavy = -600;
   p3.factoryInLight = 1;
   p3.sumAllGeneralTraits;
   
