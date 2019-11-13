@@ -142,8 +142,8 @@ function loadWWIIScenario() {
   // ============== players =================
   
   PLAYERS[0].color = "rgba(140, 193, 226, 0.2)";
-  PLAYERS[0].manpower = 5500000;
-  PLAYERS[0].growthRate = 139187/47080000; // 0.0029563933
+  PLAYERS[0].manpower = 7500000;
+  PLAYERS[0].growthRate = 149187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
   PLAYERS[1].manpower = 3500000;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
