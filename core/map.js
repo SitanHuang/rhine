@@ -39,8 +39,8 @@ window.TERRAINS = {
     name: 'Plain',
     render: ' ',
     defense: 1,
-    attrition: 1,
-    movement: 1, // 1.11111111
+    attrition: 0.9,
+    movement: 0.75, // 1.11111111
     slots: 5
   },
   M: {
@@ -50,7 +50,7 @@ window.TERRAINS = {
     defense: 3,
     attrition: 0.7,
     movement: 0.2, // 5
-    slots: 2
+    slots: 1
   },
   F: {
     name: 'Forest',
@@ -59,7 +59,7 @@ window.TERRAINS = {
     defense: 1,
     attrition: 0.8,
     movement: 0.5, // 2
-    slots: 5
+    slots: 0
   },
   D: {
     name: 'Desert',
@@ -68,7 +68,7 @@ window.TERRAINS = {
     defense: 1.2,
     attrition: 0.4,
     movement: 0.1, // 10
-    slots: 1
+    slots: 0
   },
   R: {
     name: 'River',
@@ -76,7 +76,16 @@ window.TERRAINS = {
     color: 'blue',
     defense: 2,
     attrition: 0.4,
-    movement: 1, // 1
+    movement: 1.5, // 1
+    slots: 0
+  },
+  '*': {
+    name: 'Rail',
+    render: '🛤️',
+    color: 'wheat',
+    defense: 3,
+    attrition: 1.3,
+    movement: 1.5, // 1
     slots: 0
   },
   P: {
@@ -84,7 +93,7 @@ window.TERRAINS = {
     render: '⚓',
     defense: 1.5,
     attrition: 1.3,
-    movement: 1, // 1
+    movement: 1.2, // 1
     slots: 30
   },
   U: {
