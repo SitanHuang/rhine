@@ -129,7 +129,7 @@ function loadWWIIScenario() {
 	  } else if (v == 'C') {
       terrain = 'U';
       slots = Array(25).fill('F');
-    } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r') {
+    } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
       terrain = v.toUpperCase();
     }
     if (!TERRAINS[terrain]) throw 'Not found ' + v;
