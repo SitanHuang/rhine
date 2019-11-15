@@ -60,46 +60,46 @@ var WWIIOwners = `
 
 var WWIITerrains = `
 @@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffcfffffffffffffffffffffffff|
-@@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@c@@fffffffffffffffffff  f ff  f ffff|
-@@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffff@ffffcfffff ff fff  fff    fffff  |
-@@@@@@@mmmmmmff@@@@@@@@@@@@@@@@   @@@       @@ @@@@ffffffffffffffff ffff  fff c  fff fff |
-@@@@@@@mmmcmmc@@@@@@@@@@@@@@@@    @@@@      @@@@@@@fffffffffff fffcfffffff ff          ff|
-@@@@@@p@@ffmm @@@@@@@@@@p@@@@@     @@@     p@@@@@@@ ffcfff  ffffffffffffffffffff  ff ffff|
-@@@@@@@@@fmm  @@@@@@@@@@@@@@@@    @@@@   @@@@@@@@@@ffffffffffrrrrrrrrff fffffffffffffffff|
-@@@@@@@@@@     @@@@@@@@@@@@@@@p    c r @@@@@@@@@@@@ffffffffffrf fff rrff ffff  ffffffrrrr|
-@@@@@@@@@@m  m  @@@@@@@@@@@@@@@     @@@@@@@@@@@@@@@ffff fcffrrfff  ffrrfff  C  fffrrrrfff|
-@@@@fm  @@   mm @@@@@@@@@@@@@@@     @@@@@@@@@@ @@ cf fffffffrf f   f frrff     rrrrfffff |
-@@@@fm   @@@mm m @@@@@@@@@@@@@@   @@@@@@@@@@f  @@  f  ffrrrrrf fc f ff rrrrrrrrrfff fff f|
-@fffff   @@ mm   p@@@@@@@@@@@@@        @@  ff cr    f fffffffff f f fffffffff fff        |
-@mmfm   @@@@@mC m @@@@@@@@@@@@@r           ffff rff   ff ff c fffff ffffff ffffff        |
-@        @ @Cm    @@@@@@@@@@@ prr c f     ff   rr       fffff  frrrffffffffffff          |
-@@  mff @@ mm     p@@@@@@@      rrrrff C  ff  rr        c  f frrr ffff ff ff f           |
-@@   fcp@@  m     C p@@@@@       ffrfffffff   rc f  c      ff r fffffcff cfffff          |
-@   ff  @@@ m        @@@@  c  c    rrmm fC  f rrrff          frffffffffffffffff          |
-@m mff@@@ mm  rr Crp@@@@ rrr      Cmrrrmf ff  ffrr           frrffff fffffff         fff |
-@@ p@@@@@  m   rrrr@@@@    rrrmm    m rf f ff  f rrr      c  ffrrf ffff        ffff      |
-@@@@@@@@@@@C      p@@ p   fffrmmm   mmrr           rrr        f rrf    f                 |
-@@@@@@@@@@      p@@@@    cfffrrr   m   rrrrmm  f c  fr        f  rr  c ff     f   f      |
-@@@@@@@@@  p@@@@@@@@     mmf  crm  m  fmmmrmm   f    r        f  frr      f   c      fff |
-@@@@@@@@p @@@@@@@@@     ffffmrrr mm  fmm cr  mm      rc        c f rr   ff         ffff  |
-@@@@@@@@@@@@@@@ @@        fmmrmfff   ffm  r  fmfff   rrrr    f   f  rrf   f  f         c |
-@@@@@@@@@@@@@@@ p   c      m rrfmf mm mfm r  mmmmfffffffrrrrr        rr         f        |
-@@@@@@@@@@  f         f   fffmrfmrrrrrrfmmm mfmmmmmmmmmmmfffrr fff    rrr f  f           |
-@@@@@@@@  cff        ff  c ffmrmmrfc  rfffffmmmmmmmfmmmmmmcffrrf        r           f    |
-@@@@@@@@@@ffff       fmm  ffm rrrrfff rmmffffff    fm     mmmfr         r  c             |
-@@@@@@@@@@@@   c    f m  ffmm  mmmmmmmrrcffff             m mfr c      rr        f  C    |
-@@@@@@@@@@@@@p     rrrrr f     mmmmmmmmrrrmff    c         mmmrr      rr  f   c          |
-@@@@@@@@@@@@@@rrrrrr   rr     mmmmmmmmmmmrrf         mmm  fmmffr    rrr     @            |
-@@@@@@@@@@@@@@@      f cr f rrrfmmmmmmmm fr          fff  fmff rr  @r    @@@@@       fff |
-@@@@@@@@@@@@@@@f   fmf  r  rrmmfffmmffm ffr c       mfffff m    r @@@@@r@@@@@       fff  |
-@@@@@@@@@@@@@@@fff mmfmfrmrrrmmc ffffC@f fr          mffmfmmc rrr@@@@   ff r             |
-@@@@@@@@@@@@@@@fcf fffffmrrmmm rrrrr  @@ffrrrmm  m    mmmmm  rr  @@@@@@ ff@@   cf  f  f  |
-@@@@@@@@@@@@@@fffffm mfmrrfmmfffff rr @@@ mfrf       mmm    rrff@@@@@@ c@@@@@@     ff fff|
-@@@@@@@@@@@@@mmff   ffmmrfmmmff@@fmmrr@@@  frrfc  m m      rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
-@@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@mmmm c@@@  rr  mfff          @@@@@@@@@@@@@@@@@@  mmcmmm|
-@@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@fffmm @@@@p rrrrr f        p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
-@@@@@@@@@@@@@@@@@@mmmmm@@@@@@@@ff@@fffmm@@@@@@  ffrrrr  c     @@@@@@@@@@@@@@@@@@@@@@@@@@@|
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fp@@@fCfm  @@@@@@ fc frrrm    f@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+@@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@c@@fff*****fffffffffff  f ff  f ffff|
+@@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ff**@fff*cfffff ff fff  fff    fffff  |
+@@@@@@@mmmmmmff@@@@@@@@@@@@@@@@ **@@@       @@ @@@@fff*ff***fffffff ffff  ****c  fff fff |
+@@@@@@@mmmcmmc@@@@@@@@@@@@@@@@  * @@@@      @@@@@@@fff****ffff fffc********ff          ff|
+@@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@     p@@@@@@@ ffcfff  ffffffffffffffffffff  ff ffff|
+@@@@@@@@@fmm**@@@@@@@@@@@@@@@@ ** @@@@   @@@@@@@@@@fff*ffffffrrrrrrrrff fffffffffffffffff|
+@@@@@@@@@@  *  @@@@@@@@@@@@@@@p*   c r @@@@@@@@@@@@fff*ffffffrf fff rrff ffff  ffffffrrrr|
+@@@@@@@@@@m *m  @@@@@@@@@@@@@@@*    @@@@@@@@@@@@@@@******cffrrfff  ffrrfff  C  fffrrrrfff|
+@@@@fm  @@ m*mm @@@@@@@@@@@@@@@**   @@@@@@@@@@ @@*cf fffffffrf f   f frrff  *  rrrrfffff |
+@@@@fm   @@@*mmm @@@@@@@@@@@@@@ * @@@@@@@@@@f  @@* f  ffrrrrrf fc******rrrrrrrrrfff fff f|
+@fffff   @@m***  p@@@@@@@@@@@@@ *      @@  ff*cr**  f fffffffff** f fffffffff*fff        |
+@mmfm   @@@@@mC m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff        |
+@        @ @Cm**  @@@@@@@@@@@ prr c*f     ff * rr       ff**f  frrrffffffffff*f          |
+@@  mff @@ mm  *  p@@@@@@@      rrr****C  ff *rr      **c**f frrr ffff ff ****           |
+@@   fcp@@  m  ***C p@@@@@       f**fff*fff****c****c**    ff r fffffc***c*ffff          |
+@   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff          frfffffffffff*ffff          |
+@m mff@@@ mm  rr Crp@@@@ rrr  ****Cmrrrmf *f  ffrr           frrffff fffff*f         fff |
+@@ p@@@@@  m   rrrr@@@@    rrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
+@@@@@@@@@@@C******p@@ p   fffrmmm** mmrr  *        rrr**********rrf    f   ***           |
+@@@@@@@@@@ *    p@@@@    cfffrrr** m   rrrrmm  f c**fr        f******c*ff    *f   f      |
+@@@@@@@@@  p@@@@@@@@     m****c*m  m  fmmmrmm   f  * r        f  frr  ****f***c      fff |
+@@@@@@@@p @@@@@@@@@     f**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
+@@@@@@@@@@@@@@@ @@       *fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
+@@@@@@@@@@@@@@@ p    c**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
+@@@@@@@@@@  f       **f*  fffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
+@@@@@@@@  cff      **ff**c ffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
+@@@@@@@@@@ffff   *** fmm  ffm rrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
+@@@@@@@@@@@@   c**  f m  ffmm  mmmmmmmrrcffff    *        m mfr c***** rr  **    f**C    |
+@@@@@@@@@@@@@p   * rrrrr f     mmmmmm****rmff    c         mmmrr      rr  f **c****      |
+@@@@@@@@@@@@@@rrr*rr   rr     mmmmm***mmmrrf     *   mmm  fmmffr    rrr*    @            |
+@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
+@@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
+@@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fC@***r          mffmfmmc rrr@@@@  *ff r             |
+@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@*ff@@   cf  f  f  |
+@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@ c@@@@@@     ff fff|
+@@@@@@@@@@@@@mmff   **********f@@fm*rr@@@  frrfc  m m     *rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
+@@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@m*mm c@@@  rr  mfff     *    @@@@@@@@@@@@@@@@@@  mmcmmm|
+@@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@p rrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
+@@@@@@@@@@@@@@@@@@mmmmm@@@@@@@@ff@@f**mm@@@@@@  ffrrrr  c     @@@@@@@@@@@@@@@@@@@@@@@@@@@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fp@@@fCfm  @@@@@@ fc**rrrm    f@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fc@@@@pfmm  @@@@@ f  m  rfffff @@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ mfm c @@@ mm fmmrrrrrr@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ c@@@@@@@cmm   @@ fff m m @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
