@@ -79,8 +79,8 @@ class Player {
   }
 
   produce() {
-    this.light += Math.round(this.factoryInLight * Math.random() * 3);
-    this.heavy += Math.round(this.factoryInHeavy * Math.random() * 2);
+    this.light += Math.round(this.factoryInLight * Math.random() * 2);
+    this.heavy += Math.round(this.factoryInHeavy * Math.random() * 1.5);
     this.constructionPoints += Math.round(this.factoryInLight * Math.random() * 2 + this.factoryInHeavy / 2);
   }
 
