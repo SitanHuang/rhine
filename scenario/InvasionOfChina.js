@@ -152,7 +152,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     if (v.owner == 0)
       v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 10 ? 1 : Math.ceil(Math.random() * 9 + 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 6000, 8, 1, 'Division', 0.1, 0.1))))
     else
-      v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(12000, 17, 10))))
+      v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(12000, 18, 10, 'Division', 9, 5))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
