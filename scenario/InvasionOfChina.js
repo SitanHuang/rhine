@@ -133,8 +133,8 @@ p2.heavy = 0;
 p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = randomColor({alpha: 0.2, format: 'rgba', hue: 'red'})
-p1.manpower = Math.floor(Math.random() * 500000 + 5500000);
-p1.growthRate = 0.0029;
+p1.manpower = Math.floor(Math.random() * 500000 + 5700000);
+p1.growthRate = 0.0033;
 p1.light = 60;
 p1.heavy = 40;
 p1.retreatable = 30;
@@ -152,11 +152,11 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     if (v.owner == 0)
       v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 10 ? 1 : Math.ceil(Math.random() * 9 + 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 6000, 8, 1, 'Division', 0.1, 0.1))))
     else
-      v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(12000, 18, 10, 'Division', 9, 5))))
+      v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 2)+6).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(12000, 18, 10, 'Division', 9, 5))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(18).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 15, 10))))
+pt(27, 46).prov.divisions = Array(18).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 16, 10, 'Divsion', 8, 5))))
   .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(23000, 9, 25)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
