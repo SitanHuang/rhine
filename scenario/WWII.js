@@ -59,10 +59,10 @@ var WWIIOwners = `
 
 
 var WWIITerrains = `
-@@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffcfffffffffffffffffffffffff|
+@@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffCfffffffffffffffffffffffff|
 @@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@c@@fff*****fffffffffff  f ff  f ffff|
 @@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ff**@fff*cfffff ff fff  fff    fffff  |
-@@@@@@@mmmmmmff@@@@@@@@@@@@@@@@ **@@@       @@ @@@@fff*ff***fffffff ffff  ****c  fff fff |
+@@@@@@@mmmmmmff@@@@@@@@@@@@@@@@ **@@@       @@ @@@@fff*ff***fffffff ffff  ****C  fff fff |
 @@@@@@@mmmcmmc@@@@@@@@@@@@@@@@  * @@@@      @@@@@@@fff****ffff fffc********ff          ff|
 @@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@     p@@@@@@@ ffcfff  ffffffffffffffffffff  ff ffff|
 @@@@@@@@@fmm**@@@@@@@@@@@@@@@@ ** @@@@   @@@@@@@@@@fff*ffffffrrrrrrrrff fffffffffffffffff|
@@ -169,9 +169,9 @@ function loadWWIIScenario() {
   
   // ============== military =================
   
-  let british = new Template(12100, 18, 9, 'Division');
-  let american = new Template(11600, 18, 8, 'US Infantry Division');
-  let german = new Template(14300, 22, 10, 'Infanterie-Division', 11, 5);
+  let british = new Template(12100, 18, 9, 'Division', 9, 3);
+  let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
+  let german = new Template(16300, 24, 12, 'Infanterie-Division', 12, 6);
   let italian = new Template(8900, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzer = new Template(17800, 14, 32, 'Panzer Corps', 7, 16);
   let soviet = new Template(13100, 16, 10, 'Rifle Division');
@@ -198,7 +198,7 @@ function loadWWIIScenario() {
         let type = Math.random() < 0.9 ? (Math.random() < 0.8 ? german : italian) : germanPanzer;
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
       } else if (v.owner == 2) {
-        let type = Math.random() < 0.3 ? soviet : sovietMilitia;
+        let type = Math.random() < 0.4 ? soviet : sovietMilitia;
         v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
       }
   })));
