@@ -81,8 +81,8 @@ window.TERRAINS = {
   },
   '*': {
     name: 'Rail',
-    render: '🛤️',
-    color: 'wheat',
+    render: '#',
+    color: 'black',
     defense: 3,
     attrition: 1.3,
     movement: 1.5, // 1
