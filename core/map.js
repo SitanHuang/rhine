@@ -76,7 +76,7 @@ window.TERRAINS = {
     color: 'blue',
     defense: 2,
     attrition: 0.4,
-    movement: 1.5, // 1
+    movement: 2, // 1
     slots: 0
   },
   '*': {
@@ -85,7 +85,7 @@ window.TERRAINS = {
     color: 'black',
     defense: 3,
     attrition: 1.3,
-    movement: 1.5, // 1
+    movement: 3, // 1
     slots: 0
   },
   P: {
