@@ -72,7 +72,7 @@ function battle(d1, d2, d1m) {
   if (d2.hp <= 2 || d2.men <= 400 ) d2.remove();
 
   return {
-    casualties: [t2, t1, sum],
+    casualties: [rt2, rt1, sum],
     percentage: [d1.morale / sum.min(0.1), d2.morale / sum.min(0.1)]
   };
 }
