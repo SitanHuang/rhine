@@ -32,7 +32,8 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
         mark.innerText = ' ';
         let battleInfo = combineBattleInfos(battles);
         mark.style.background = getColorFromPercentage(battleInfo.percentage[0]);
-        mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory';
+        mark.style.zIndex = 3;
+        mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory, Casualtis: ' + battleInfo.casualties[0].round() + '-' + battleInfo.casualties[1].round() + '(' + (battleInfo.casualties[0] / battleInfo.casualties[2]).round(2) + ')';
         td.appendChild(mark);
       }
       if (color != 'transparent' && pt.owner == currentPlayer) {
