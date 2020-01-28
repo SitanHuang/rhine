@@ -162,8 +162,8 @@ function loadWWIIScenario() {
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
-  p3.light = -1200;
-  p3.heavy = -600;
+  p3.light = 0;
+  p3.heavy = 0;
   p3.factoryInLight = 1;
   p3.sumAllGeneralTraits;
   
