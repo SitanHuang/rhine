@@ -1,15 +1,45 @@
 ARMY_COLORS = ['#4a148c', '#b71c1c', '#0d47a1', '#109020', '#827717', '#e65100',
   '#302f2f'];
+  
 class Ai {
   constructor(player) {
     this.player = player;
     this.reCalc();
+  }
+  
+  handleBudget() {
+    let budget = {
+      newRecruits: [],
+      airStrike: []
+    };
+    // save 10%
+    let available = (Math.min(this.player.light, this.player.heavy) * 0.9).floor().min(0);
+    let rate = 1;
+    //if (this.player.divisions < 150) rate = 1;
+    //else if (this.player.divisions < 250) rate = 0.9;
+    //else if (this.player.divisions < 300) rate = 0.6;
+    //else rate = 0.4;
+    if (this.player.divisions > 250) rate = 0.4;
+    
+    if (this.isLosingPopulation()) rate = 0;
+    
+    budget.newRecruits = [(available * rate).floor(), (available * rate).floor()];
+    budget.airStrike = (available - budget.newRecruits[0]) / 20;
+    
+    return budget;
+  }
+  
+  isLosingPopulation() {
+    return this.player._populationData.net < -2500;
   }
 
   reCalc() {
     let player = this.player;
     this.cities = [];
     this.adjacentBlocks = [];
+    let budget = this.handleBudget();
+    let airStrikedCount = 0;
+    
     let order = Math.random() > 0.5;
     for (let row = order ? 0 : MAP_DATA.length - 1; order ? (row < MAP_DATA.length) :
       (row >= 0); order ? row++ : row--) {
@@ -25,13 +55,11 @@ class Ai {
             player.constructionPoints -= 250;
             prov.fort = true;
           }
-          this.adjacentBlocks.push(p);
+          if (!prov.divisions.length || prov.divisions.length && prov.supply > 0.1) this.adjacentBlocks.push(p);
           if (player.factories > 90 && player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
-              if (p.owner != player && pro.divisions.length > 3 && player
-                .light > 10 && player.heavy > 20 &&
-                Math.random() > 0.5) {
+              if (airStrikedCount++ < budget.airStrike) {
                 player.light -= 10;
                 player.heavy -= 20;
                 airStrikeProv(pro.divisions);
@@ -48,20 +76,20 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 20).round() * 1000 + 10000;
-          if (player.recruitable.min(player.manpower) > tem.troop * 50 && player.divisions *
-            10000 < player.manpower && (player._populationData.net > 1000 || -player._populationData.death == player._populationData.growth[0]) &&
-            player.divisions < 400 &&
-            Math.random() > 0.5) {
-            tem.heavy = (player.heavy * Math.random()).round().max(40) + 1;
-            tem.light = (player.light * Math.random()).round().max(40) + 1;
+          if (player.divisions < 400) {
+            tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(40) + 1;
+            tem.light = (budget.newRecruits[0] * Math.random()).round().max(40) + 1;
             tem.support = (tem.light / 2 * Math.random()).round();
             tem.motorized = (tem.heavy / 2 * Math.random()).round();
+            
             while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 5) {
               tem.defaultName = tem.codeName;
               tem.support = tem.support.max((tem.light / 2).floor());
               tem.motorized = tem.motorized.max((tem.heavy / 2).floor());
-              if (tem.deployable(player)) {
+              if (tem.deployable(player) && budget.newRecruits[1] >= tem.heavy + tem.motorized && budget.newRecruits[0] >= tem.light + tem.support) {
                 tem.deploy(player, p, tem.codeName);
+                budget.newRecruits[1] -= tem.heavy + tem.motorized;
+                budget.newRecruits[0] -= tem.light + tem.support;
                 player.defaultTemplate = tem;
                 break;
               }
@@ -77,19 +105,8 @@ class Ai {
         }
       }
     }
-
-    this.adjacentBlocks = this.adjacentBlocks.sort((p1, p2) => {
-      // p.prov.terrain == 'U' ? -0.1 : p.prov.divisions.length
-      let a = p1.prov.terrain == 'U' ? (p1.prov.slots.length) : 55 + p1.prov
-        .divisions.length + Math.random();
-      let b = p2.prov.terrain == 'U' ? (p2.prov.slots.length) : 55 + p2.prov
-        .divisions.length + Math.random();
-      return a-b;
-      //return p2.prov.terrain.movement - p1.prov.terrain.movement
-    });
-
-    player.retreatable = ((100 - player.averageStrength) + 5).round(2).min(10)
-      .max(40);
+    
+    player.retreatable = 0;
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
       player.heavy + player.light + 1))).min(1).max(player.factories);
     if (player.light < 0)
@@ -153,9 +170,10 @@ class Ai {
             return;
           }*/
           let retreatable = 60;
-          if (player._populationData.net < 0 && Math.random() > 0.7 && div.adjacentNotToPlayer >
-            0) {
-            div.action = [];
+          if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {
+            if (!div.action[0] && div.action[
+              0]._navalInvasion)
+              div.action = [];
             return;
           } else if (div.action.length > 0 ||
             (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() >
@@ -169,11 +187,13 @@ class Ai {
               div.action = [];
               return;
             }
+          } else if (div.prov.terrain == 'P' && Math.random() > 0.6) {
+            // skip
           } else if (div.hp > retreatable && div.action[0] && div.action[
               0]._navalInvasion) {
             // skip
-          } else if (div.hp > 90 && prov.terrain == 'P' && Math.random() >
-            0.5 && player.light > 20 && player.heavy > 40) {
+          } else if (div.hp > 90 && div.entrench > 1.5 && prov.terrain == 'P' && Math.random() >
+            0.5 && player.light > 60 && player.heavy > 120) {
             let enemy = PORTS.filter(x => ((x.owner != currentPlayer || x.adjacentNotToPlayer(
               player)) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
             let landed = PORTS.filter(x => (x.owner == currentPlayer && x.adjacentNotToPlayer(
@@ -189,7 +209,7 @@ class Ai {
               2 || Math.random() > 0.65) &&
             (div.hp > 40)) {
             div.action = [];
-            if ((div.hp > 60 || div.skill > 1.1) && div.morale > 0.6)
+            if ((div.hp > 60 || div.skill > 1.1) && div.morale > 0.8)
               div.loc.adjacents(adj => {
                 if (div.action.length) return;
                 let divs = adj.prov.divisions;
