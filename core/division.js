@@ -49,7 +49,7 @@ class Division {
     if (this.skill < 1)
       this.skill += 0.1;
 
-    this.entrench = (this.entrench + 0.1 * this.player.tempSumAllGeneralTraits.e * this.template.entrenchBuff).round(2).clamp(1, 2);
+    this.entrench = (this.entrench + 0.25 * this.player.tempSumAllGeneralTraits.e * this.template.entrenchBuff).round(2).clamp(1, 2);
     this.newInforced = 0;
     this.battleInfo = [];
     this.reinforce();
@@ -82,6 +82,8 @@ class Division {
       let divs = nextProv.divisions;
 
       if (nextPt.owner == this.player || divs.length == 0) {
+        if (nextPt.owner != this.player)
+          this.movementProgress--;
         this.updateLocation(nextPt);
         this.action.shift();
       } else {
