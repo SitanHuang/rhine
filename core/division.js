@@ -76,21 +76,21 @@ class Division {
     }
     this.movementProgress += this.speed;
     while (this.movementProgress >= 1 && this.action.length > 0) {
-      this.movementProgress--;
+      this.movementProgress-=0.5;
       let nextPt = this.action[0];
       let nextProv = nextPt.prov;
       let divs = nextProv.divisions;
 
       if (nextPt.owner == this.player || divs.length == 0) {
         if (nextPt.owner != this.player)
-          this.movementProgress--;
+          this.movementProgress-=1.5;
         this.updateLocation(nextPt);
         this.action.shift();
       } else {
         let that = this;
         divs.forEach(div => {
           if (this.hp < this.player.retreatable.min(30)) return;
-          div.movementProgress = -2;
+          div.movementProgress = -1;
           let results = battle(that, div);
           if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.breakThrough / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
             div.retreat();
