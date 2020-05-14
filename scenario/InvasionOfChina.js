@@ -150,18 +150,18 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 10 ? 1 : Math.ceil(Math.random() * 9 + 9)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 6000, 8, 1, 'Division', 0.1, 0.1))))
+      v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 10 ? 1 : Math.ceil(Math.random() * 9 + 10)).fill(0).map(() => (new Division(v.owner, `Regiment, ${((++divisions)/2).floor()}th Division`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 10, 2, 'Division', 2, 1))))
     else
-      v.divisions = Array(v.terrain == 'U' ? 3 : Math.ceil(Math.random() * 2)+6).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(12000, 18, 10, 'Division', 9, 5))))
+      v.divisions = Array(v.terrain == 'U' ? 5 : Math.ceil(Math.random() * 2)+8).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(12000, 16, 10, 'Division', 8, 5))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(18).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 16, 10, 'Divsion', 8, 5))))
+pt(27, 46).prov.divisions = Array(22).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 16, 10, 'Divsion', 8, 5))))
   .concat(Array(10).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(23000, 9, 25)))));
 // Nanjing
-pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
-  let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35))
-  d.skill = 0.9;
+pt(25, 43).prov.divisions = Array(3).fill(0).map(() => {
+  let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35, '', 10, 10))
+  d.skill = 1.5;
   return d;
 })
 Array(8).fill(0).map(() => {
