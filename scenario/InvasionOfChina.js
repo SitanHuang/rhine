@@ -53,16 +53,16 @@ var InvasionOfChinaOwners =
   .split('\n');
 
 var InvasionOfChinaTerrains =
-`DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD   D                   @|
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD  DMM D                   @|
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDU MMMDDD                MMM@|
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDD MMM D D            U MMMMM@|
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDMMM DDDD U         MMMMMMM@@|
-DDDDDDDUMDDDDDDDDDDDDDDUDDDD DD DDDDD          MMM  MMM@@|
-DDDDDDDDMMMMMMDDDDDDDDDDDDDDDDDD U  D        MM     MM@@@|
-DDDDDDDDDDDDDMMMDDMMMMMMMMMM DMMM   D        MM    UM@@@@|
-DDDDDDDDDD DD MMMMMMMMMMM D  MMDDD         @@M       @@@@|
-DDDDDDDDDDDD MMMMMMMMM   DDDMMDDMM       U@@@  @ @    @@@|
+`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                 @|
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@DU MMMDDD                MMM@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@DDD MMM D D            U MMMMM@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@DDDMMM DDDD U         MMMMMMM@@|
+DDDDDDDUMDD@@@@@@@@@@@@@DDDD DD DDDDD          MMM  MMM@@|
+DDDDDDDDMMMMMMDD@@@@@@@UDDDDDDDD U  D        MM     MM@@@|
+DDDDDDDDDDDDDMMMDD@@@@MMMMMM DMMM   D        MM    UM@@@@|
+DDDDDDDDDD DD MMM@@@@@@MM D  MMDDD         @@M       @@@@|
+DDDDDDDDDDDD MMMMM@@@MU  DDDMMDDMM       U@@@  @ @    @@@|
 DMMMDDDDDDD DD    MMMD****D MMDDMMM      @@@U @@@@     @@|
 MMMMUMDDDDDDDD DDD  DDD D******MMU       @@@P@@@@P   U  @|
 MMMMMMDDDDDDD DDDDDDDDMMMMDMM******    @@@@@@@@@@@ @    @|
