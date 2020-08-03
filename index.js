@@ -56,7 +56,7 @@ function playerSelectionScreen(alreadyWWII) {
     `;
   })
   innerHTML += '</table>' +
-  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>
+  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>  <button onclick="observeMode();">Observe Game</button>
   <br><br><table style="width:77%">
   `;
   Object.entries(localStorage).forEach((e) => {
@@ -141,13 +141,21 @@ function pass() {
   setTimeout(() => {
     handlePlayerOnPass();
     incrementAndUpdateDate();
-    if (++currentPlayerID >= PLAYERS.length) currentPlayerID = 0;
+    if (++currentPlayerID >= PLAYERS.length) {
+      currentPlayerID = 0;
+    }
     currentPlayer = PLAYERS[currentPlayerID];
     currentPlayer.calcCities();
     currentPlayer.produce();
     currentPlayer.growManpower();
     defaultGraphWithWeight = null;
     graphWithWeight = null;
+
+    if (currentPlayerID == 0) {
+      updateData();
+      if (window.observing) observeMode();
+    }
+
     if (currentPlayer.setAI) {
       setTimeout(() => {
         currentPlayer.ai.think();

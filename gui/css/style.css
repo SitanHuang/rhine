@@ -244,3 +244,19 @@ body {
   image-rendering: pixelated;
   text-rendering: optimizeSpeed;
 }
+
+.auto-collapse {
+  display: block;
+  position: absolute;
+  top: 0;
+  height: auto !important;
+  z-index: 100;
+}
+
+#left.auto-collapse {
+  left: 0;
+}
+
+#right.auto-collapse {
+  right: 0;
+}

@@ -45,12 +45,12 @@ var WWIIOwners = `
 00000000000000000000000000000001100000001111110011111111100000000000000000000000000000000|
 00000000000000000000000000000001100000000111110001111111100000000000000000000000000000000|
 00000000000000000000000000000001100000000011100001111100000000000000000000000000000000000|
-00000000000000000000000000000001100000000001100000111111000000000000000000000000000000000|
-00000000000000000000000000000000000000000001000000111111100000000000000000000000000000000|
-00000000000000000000000000000000000000101111000000111111100000000000000000000000000000000|
-00000000000000000000000000000000000001111100000000001001100000000000000000000000000000000|
-00000000000000000000000000000000000000011100000000001111000000000000000000000000000000000|
-00000000000000000000000000000000000000000100000000001100000000000000000000000000000000000|
+00000000000000000000000000000001100000000001100000111110000000000000000000000000000000000|
+00000000000000000000000000000000000000000001000000111110000000000000000000000000000000000|
+00000000000000000000000000000000000000101111000000110000000000000000000000000000000000000|
+00000000000000000000000000000000000001111100000000000000000000000000000000000000000000000|
+00000000000000000000000000000000000000011100000000000000000000000000000000000000000000000|
+00000000000000000000000000000000000000000100000000000000000000000000000000000000000000000|
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000|
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000|
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000|`
@@ -71,12 +71,12 @@ var WWIITerrains = `
 @@@@fm  @@ m*mm @@@@@@@@@@@@@@@**   @@@@@@@@@@ @@*cf fffffffrf f   f frrff  *  rrrrfffff |
 @@@@fm   @@@*mmm @@@@@@@@@@@@@@ * @@@@@@@@@@f  @@* f  ffrrrrrf fc******rrrrrrrrrfff fff f|
 @fffff   @@m***  p@@@@@@@@@@@@@ *      @@  ff*cr**  f fffffffff** f fffffffff*fff        |
-@mmfm   @@@@@mC m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff        |
+@mmfm   @@@@@mC m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff       c|
 @        @ @Cm**  @@@@@@@@@@@ prr c*f     ff * rr       ff**f  frrrffffffffff*f          |
 @@  mff @@ mm  *  p@@@@@@@      rrr****C  ff *rr      **c**f frrr ffff ff ****           |
 @@   fcp@@  m  ***C p@@@@@       f**fff*fff****c****c**    ff r fffffc***c*ffff          |
 @   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff          frfffffffffff*ffff          |
-@m mff@@@ mm  rr Crp@@@@ rrr  ****Cmrrrmf *f  ffrr           frrffff fffff*f         fff |
+@m mff@@@ mm  rr Crp@@@@ rrr  ****cmrrrmf *f  ffrr           frrffff fffff*f         fff |
 @@ p@@@@@  m   rrrr@@@@    rrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
 @@@@@@@@@@@C******p@@ p   fffrmmm** mmrr  *        rrr**********rrf    f   ***           |
 @@@@@@@@@@ *    p@@@@    cfffrrr** m   rrrrmm  f c**fr        f******c*ff    *f   f      |
@@ -86,15 +86,15 @@ var WWIITerrains = `
 @@@@@@@@@@@@@@@ p    c**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
 @@@@@@@@@@  f       **f*  fffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff      **ff**c ffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
-@@@@@@@@@@ffff   *** fmm  ffm rrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
+@@@@@@@@@@ffff   *** fmm  ffm rrrrfff rm*ffffff  ***m     mmmfr      ***r**C             |
 @@@@@@@@@@@@   c**  f m  ffmm  mmmmmmmrrcffff    *        m mfr c***** rr  **    f**C    |
 @@@@@@@@@@@@@p   * rrrrr f     mmmmmm****rmff    c         mmmrr      rr  f **c****      |
 @@@@@@@@@@@@@@rrr*rr   rr     mmmmm***mmmrrf     *   mmm  fmmffr    rrr*    @            |
 @@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
 @@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
 @@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fC@***r          mffmfmmc rrr@@@@  *ff r             |
-@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@*ff@@   cf  f  f  |
-@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@ c@@@@@@     ff fff|
+@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   cf  f  f  |
+@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@c @@@@@@     ff fff|
 @@@@@@@@@@@@@mmff   **********f@@fm*rr@@@  frrfc  m m     *rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
 @@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@m*mm c@@@  rr  mfff     *    @@@@@@@@@@@@@@@@@@  mmcmmm|
 @@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@p rrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
@@ -116,8 +116,9 @@ var WWIITerrains = `
 @@@@@@@c         mmmmmmmmmmmmmmmdd c@@@@@@@@@@@@@@@@@@@@mpcm@@@@@@@@@mcp@@@@@@@@@@@@@@@@@|`
 .replace(/\|/g, '').replace(/^\n/, '').replace(/\n$/, '')
   .split('\n');
-  
+
 function loadWWIIScenario() {
+  clearData();
   // ============== map =================
   MAP_DATA = WWIITerrains.map((x, row) => (x.split('').map((v, col) => {
 	  let o = parseInt(WWIIOwners[row][col]);
@@ -135,56 +136,63 @@ function loadWWIIScenario() {
     if (!TERRAINS[terrain]) throw 'Not found ' + v;
     return {terrain: terrain, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
   })));
-  
+
   window.PORTS = [];
   PLAYERS.forEach(x => delete x._mapDataFlattened);
-  
+
   // ============== players =================
-  
+
   PLAYERS[0].color = "rgba(140, 193, 226, 0.2)";
   PLAYERS[0].manpower = 7500000;
+  PLAYERS[0].casualties = 0;
+  PLAYERS[0].divisionMen = 0;
+  PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 149187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 3500000;
+  PLAYERS[1].manpower = 5500000;
+  PLAYERS[1].casualties = 0;
+  PLAYERS[1].divisionMen = 0;
+  PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
   PLAYERS[1].growthRate = 0.003;
-  
+
   PLAYERS[0].light = 1000;
   PLAYERS[0].heavy = 2000;
   PLAYERS[1].light = -100;
   PLAYERS[1].heavy = -100;
-  
+
   PLAYERS[1].generals["Generalissimo"]["Chiang Kai-Shek"].selected=false;
   PLAYERS[1].generals["Generalissimo"]["Game Founder"].selected=true;
   PLAYERS[1].sumAllGeneralTraits;
-  
+
   window.p3 = new Player();
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
   p3.light = 0;
+  p3.factories = 0;
   p3.heavy = 0;
   p3.factoryInLight = 1;
   p3.sumAllGeneralTraits;
-  
+
   // ============== military =================
-  
+
   let british = new Template(12100, 18, 9, 'Division', 9, 3);
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
   let german = new Template(16300, 24, 12, 'Infanterie-Division', 12, 6);
   let italian = new Template(8900, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzer = new Template(17800, 14, 32, 'Panzer Corps', 7, 16);
-  let soviet = new Template(13100, 16, 10, 'Rifle Division');
+  let soviet = new Template(14100, 16, 10, 'Rifle Division', 7, 5);
   let sovietMilitia = new Template(9000, 9, 4, 'Militia Division', 0.1, 0.1);
-  
+
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
   PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone()];
-  
+
   let british_i = 0;
   let german_i = 0;
   let soviet_i = 0;
-  
+
   MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     if (v.terrain == '@') return;
     if (v.terrain == 'P')
@@ -193,20 +201,24 @@ function loadWWIIScenario() {
       let type = Math.random() < 0.7 ? british : american;
       if (v.terrain == 'P' || v.terrain == 'U')
         v.divisions = Array((Math.random() * 3).round() + 2).fill(0).map(() => (new Division(v.owner, ++british_i + 'th ' + type.defaultName, pt(row, col), type)));
+      else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0)
+        v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++british_i + 'th Greek Division', pt(row, col), soviet)));
     } else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
       if (v.owner == 1 && v.terrain != 'U') {
         let type = Math.random() < 0.9 ? (Math.random() < 0.8 ? german : italian) : germanPanzer;
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
       } else if (v.owner == 2) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
-        v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 4).round() + 1).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
       }
+
+    v.divisions.forEach(x => x.supply = 4);
   })));
-  
+
   // ============= misc ==============
   window.timestamp = -900241200; // 6/22/1941
   window.timeIncrement = 518400 / 2; // 3 days
-  
+
   reinitCanvas();
   updateInterfaceOnPass();
 }

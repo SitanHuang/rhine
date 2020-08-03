@@ -15,7 +15,19 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
   let prov = pt.prov;
   let num = prov.divisions.length;
   if (prov.terrain == '@') return;
-  if (pt.owner == currentPlayer || pt.adjacentToPlayer(currentPlayer)) {
+  if (window.observing) {
+    if (prov.divisions.length) {
+      let army = document.createElement('army');
+      army.innerText = ' ';
+      army.style.width = '5px';
+      army.style.height = '5px';
+      army.style.left = '10px';
+      army.style.top = '10px';
+      army.style.borderRadius = '25%';
+      army.style.backgroundColor = pt.owner.color.replace('0.2', '1');
+      td.appendChild(army);
+    }
+  } else if (pt.owner == currentPlayer || pt.adjacentToPlayer(currentPlayer)) {
     if (num > 0) {
       let number = document.createElement('number');
       number.innerText = num;

@@ -1,12 +1,12 @@
 ARMY_COLORS = ['#4a148c', '#b71c1c', '#0d47a1', '#109020', '#827717', '#e65100',
   '#302f2f'];
-  
+
 class Ai {
   constructor(player) {
     this.player = player;
     this.reCalc();
   }
-  
+
   handleBudget() {
     let budget = {
       newRecruits: [],
@@ -20,15 +20,15 @@ class Ai {
     //else if (this.player.divisions < 300) rate = 0.6;
     //else rate = 0.4;
     if (this.player.divisions > 250) rate = 0.4;
-    
+
     if (this.isLosingPopulation()) rate = 0;
-    
+
     budget.newRecruits = [(available * rate).floor(), (available * rate).floor()];
     budget.airStrike = (available - budget.newRecruits[0]) / 20;
-    
+
     return budget;
   }
-  
+
   isLosingPopulation() {
     return this.player._populationData.net < -2500;
   }
@@ -39,7 +39,7 @@ class Ai {
     this.adjacentBlocks = [];
     let budget = this.handleBudget();
     let airStrikedCount = 0;
-    
+
     let order = Math.random() > 0.5;
     for (let row = order ? 0 : MAP_DATA.length - 1; order ? (row < MAP_DATA.length) :
       (row >= 0); order ? row++ : row--) {
@@ -81,15 +81,23 @@ class Ai {
             tem.light = (budget.newRecruits[0] * Math.random()).round().max(40) + 1;
             tem.support = (tem.light / 2 * Math.random()).round();
             tem.motorized = (tem.heavy / 2 * Math.random()).round();
-            
+
             if (player.divisions < 250 && Math.random() > 0.2) { // need quantity over quality
-              tem.troop = (Math.random() * 6).round() * 1000 + 6500;
+              tem.troop = (Math.random() * 6).round() * 1000 + 8500;
               tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(11) + 1;
               tem.light = (budget.newRecruits[0] * Math.random()).round().max(15) + 1;
               tem.support = (tem.light / 2 * Math.random()).round();
               tem.motorized = (tem.heavy / 2 * Math.random()).round();
+
+              if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
+                tem.troop = (Math.random() * 6).round() * 1000 + 6500;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(5) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(10) + 1;
+                tem.support = (tem.light / 2 * Math.random()).round();
+                tem.motorized = (tem.heavy / 2 * Math.random()).round();
+              }
             }
-            
+
             while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 5) {
               tem.defaultName = tem.codeName;
               tem.support = tem.support.max((tem.light / 2).floor());
@@ -113,7 +121,7 @@ class Ai {
         }
       }
     }
-    
+
     player.retreatable = 0;
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
       player.heavy + player.light + 1))).min(1).max(player.factories);
