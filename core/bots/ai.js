@@ -82,6 +82,14 @@ class Ai {
             tem.support = (tem.light / 2 * Math.random()).round();
             tem.motorized = (tem.heavy / 2 * Math.random()).round();
             
+            if (player.divisions < 250 && Math.random() > 0.2) { // need quantity over quality
+              tem.troop = (Math.random() * 6).round() * 1000 + 6500;
+              tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(11) + 1;
+              tem.light = (budget.newRecruits[0] * Math.random()).round().max(15) + 1;
+              tem.support = (tem.light / 2 * Math.random()).round();
+              tem.motorized = (tem.heavy / 2 * Math.random()).round();
+            }
+            
             while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 5) {
               tem.defaultName = tem.codeName;
               tem.support = tem.support.max((tem.light / 2).floor());
