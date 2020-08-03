@@ -342,7 +342,7 @@ function toggleSuppliesOnClick(button) {
 }
 
 function buildFactoryOnClick(button) {
-  if (currentPlayer.constructionPoints < 750) {
+  if (currentPlayer.constructionPoints < 550) {
     button.parentNode.children[2].style.display = 'block';
     return;
   }
@@ -355,7 +355,7 @@ function buildFactoryOnClick(button) {
     if (td.style.cursor == 'not-allowed') return;
     prov.slots.push('F');
     currentPlayer.factories++;
-    currentPlayer.constructionPoints -= 750;
+    currentPlayer.constructionPoints -= 550;
     colCallback = null;
     button.parentNode.children[3].style.display = 'none';
     updateLogistics();
@@ -364,7 +364,7 @@ function buildFactoryOnClick(button) {
 }
 
 function buildFortOnClick(button) {
-  if (currentPlayer.constructionPoints < 250) {
+  if (currentPlayer.constructionPoints < 150) {
     button.parentNode.children[2].style.display = 'block';
     return;
   }
@@ -382,7 +382,7 @@ function buildFortOnClick(button) {
     let prov = pt.prov;
     if (td.style.cursor == 'not-allowed') return;
     prov.fort = true;
-    currentPlayer.constructionPoints -= 250;
+    currentPlayer.constructionPoints -= 150;
     colCallback = null;
     button.parentNode.children[3].style.display = 'none';
     updateLogistics();
@@ -457,13 +457,13 @@ function updateLogistics() {
   <button onclick="buildFortOnClick(this)">Build Fort</button><br>
   <font style="display: none" color="red">Not enough pts</font>
   <font style="display: none">Select location</font>
-  <td>250 pts
+  <td>150 pts
   <tr>
   <th>
   <button onclick="buildFactoryOnClick(this)">Build Factory</button><br>
   <font style="display: none" color="red">Not enough pts</font>
   <font style="display: none">Select location</font>
-  <td>750 pts
+  <td>550 pts
   </table>
   <br>
   <button onclick="toggleFactoriesOnClick(this)">Toggle Factories View</button><br><br>

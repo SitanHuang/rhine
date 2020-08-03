@@ -50,9 +50,9 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.divisions.length && prov.divisions[0].supply == 0) continue;
         if (prov.adjacentNotToPlayer > 0) {
-          if (Math.random() > 0.6 && player.constructionPoints > 350 && !prov
+          if (Math.random() > 0.7 && player.constructionPoints > 350 && !prov
             .fort && prov.terrain == 'U') {
-            player.constructionPoints -= 250;
+            player.constructionPoints -= 150;
             prov.fort = true;
           }
           if (!prov.divisions.length || prov.divisions.length && prov.supply > 0.1) this.adjacentBlocks.push(p);
@@ -69,9 +69,9 @@ class Ai {
         } else if (prov.terrain == 'U' || prov.terrain == 'P') {
           this.cities.push(p);
           if (prov.terrain == 'P') this.adjacentBlocks.push(p);
-          if (player.constructionPoints > 750 && Math.random() > 0.7 &&
+          if (player.constructionPoints > 550 && Math.random() > 0.7 &&
             prov.slots.filter(x => (x == 'F')).length < p.terrain.slots) {
-            player.constructionPoints -= 750;
+            player.constructionPoints -= 550;
             prov.slots.push('F');
           }
           let tem = player.defaultTemplate.deepClone();
@@ -99,7 +99,7 @@ class Ai {
           if (player.constructionPoints > 1500 & Math.random() > 0.9) {
             if (prov.slots.filter(x => (x == 'F')).length >= p.terrain.slots)
               break;
-            player.constructionPoints -= 750;
+            player.constructionPoints -= 550;
             prov.slots.push('F');
           }
         }
