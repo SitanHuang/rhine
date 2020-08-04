@@ -15,11 +15,11 @@ class Ai {
     // save 10%
     let available = (Math.min(this.player.light, this.player.heavy) * 0.9).floor().min(0);
     let rate = 1;
-    //if (this.player.divisions < 150) rate = 1;
-    //else if (this.player.divisions < 250) rate = 0.9;
-    //else if (this.player.divisions < 300) rate = 0.6;
-    //else rate = 0.4;
-    if (this.player.divisions > 250) rate = 0.4;
+    if (this.player.divisions < 150) rate = 1;
+    else if (this.player.divisions < 250) rate = 0.9;
+    else if (this.player.divisions < 300) rate = 0.6;
+    else rate = 0.4;
+    //if (this.player.divisions > 250) rate = 0.4;
 
     if (this.isLosingPopulation()) rate = 0;
 
@@ -60,8 +60,8 @@ class Ai {
             p.adjacents((p) => {
               let pro = p.prov;
               if (airStrikedCount++ < budget.airStrike) {
-                player.light -= 10;
-                player.heavy -= 20;
+                player.light -= 5;
+                player.heavy -= 10;
                 airStrikeProv(pro.divisions);
               }
             })
@@ -82,8 +82,8 @@ class Ai {
             tem.support = (tem.light / 2 * Math.random()).round();
             tem.motorized = (tem.heavy / 2 * Math.random()).round();
 
-            if (player.divisions < 250 && Math.random() > 0.2) { // need quantity over quality
-              tem.troop = (Math.random() * 12).round() * 1000 + 1000;
+            if (player.divisions < 230 && Math.random() > 0.2) { // need quantity over quality
+              tem.troop = (Math.random() * 12).round() * 1000 + 11000;
               tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(11) + 1;
               tem.light = (budget.newRecruits[0] * Math.random()).round().max(15) + 1;
               tem.support = (tem.light / 2 * Math.random()).round();
@@ -218,8 +218,8 @@ class Ai {
             currentNavalInvasion = currentNavalInvasion || dest;
             if (currentNavalInvasion) {
               div.action = [currentNavalInvasion.navalInvasion];
-              player.light -= 20;
-              player.heavy -= 40;
+              player.light -= 10;
+              player.heavy -= 15;
             }
           } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer <
               2 || Math.random() > 0.65) &&
