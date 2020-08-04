@@ -62,18 +62,18 @@ DDDDDDDUMDD@@@@@@@@@@@@@DDDD DD DDDDD          MMM  MMM@@|
 DDDDDDDDMMMMMMDD@@@@@@@UDDDDDDDD U  D        MM     MM@@@|
 DDDDDDDDDDDDDMMMDD@@@@MMMMMM DMMM   D        MM    UM@@@@|
 DDDDDDDDDD DD MMM@@@@@@MM D  MMDDD         @@M       @@@@|
-DDDDDDDDDDDD MMMMM@@@MU  DDDMMDDMM       U@@@  @ @    @@@|
+DDDDDDDDDDDD MMMMM@@@MU  DDUMMDDMM       U@@@  @ @    @@@|
 DMMMDDDDDDD DD    MMMD****D MMDDMMM      @@@U @@@@     @@|
 MMMMUMDDDDDDDD DDD  DDD D******MMU       @@@P@@@@P   U  @|
 MMMMMMDDDDDDD DDDDDDDDMMMMDMM******    @@@@@@@@@@@ @    @|
 DDMMMMMDD D DDDDDD  MMRRRRRMMMMU   **U@@@@@@@@@@@@@@@    |
 DDDDMMMMD DD DDDDDMMMRRMMMRMMM      * P@@@@M@@@@@@@@     |
-DDDDDMMMDDDDD DDUDMRRMMMDDRMMM     M**  RMMM  P@@@@@@    |
+DDDDDMMMDDDDD DDUDMRRMMMDDRMMM    UM**  RMMM  P@@@@@@    |
 RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM* RR**MU@@@@@@@@@  U|
 DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU    *******M@@@@@@@@@@@P @|
 DDDRDDDDDM RRRDDD RMMMDDDDRMMM     * RR*MMM@@@@@@@@@@@@@@|
 DDDRDU  DMMRRR DRRRMMMDDDRRDMDD   U*RR *U P@@@@@@@@@@@@@@|
-DDDRD   DDMMMRRRRMMMMDDDDR DMDDD  *RR  *  @@@@@@@@@@@@@@@|
+DDDRD   DDMMMRRRRMMMMDDDUR DMDDD  *RR  *  @@@@@@@@@@@@@@@|
 DDDRD    DDMMMMMMMMMMDDDDRRRRRDDDR**   *  U  @@@@@@@@@@@@|
 DDDRDDU   DD       DDDDRRD DMRRRRRM* U ***   @@@@@@@@@@@@|
 RRRRRDDMM  D        RRRD  MMDMMMMM *     **   @@@@@@@@@@@|
@@ -119,7 +119,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 
 MAP_DATA = InvasionOfChinaTerrains;
 pt(25, 43).prov.slots = Array(20).fill('F'); // Nanjing
-pt(30, 35).prov.slots = Array(10).fill('F'); // Wuhan
+pt(30, 35).prov.slots = Array(20).fill('F'); // Wuhan
 pt(33, 22).prov.slots = Array(26).fill('F'); // Chongqing
 
 
