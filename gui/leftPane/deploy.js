@@ -47,8 +47,8 @@ function saveTemplateOnClick() {
 
 function navalInvadeOnClick(button) {
   let message_token = button.parentNode.parentNode.children[0];
-  let light = SELECTED_UNITS.length * 20;
-  let heavy = SELECTED_UNITS.length * 40;
+  let light = SELECTED_UNITS.length * 10;
+  let heavy = SELECTED_UNITS.length * 15;
   if (SELECTED_UNITS.length == 0) {
     message_token.style.color = 'red';
     message_token.innerText = 'No selected units';
@@ -85,7 +85,7 @@ function navalInvadeOnClick(button) {
 
 function airStrikeOnClick(button) {
   let message_token = button.parentNode.parentNode.children[0];
-  if (currentPlayer.light < 10 || currentPlayer.heavy < 20) {
+  if (currentPlayer.light < 5 || currentPlayer.heavy < 10) {
     message_token.style.color = 'red';
     message_token.innerText = 'Insufficient Equip.';
   } else {
@@ -104,8 +104,8 @@ function airStrikeOnClick(button) {
       let damages = airStrikeProv(td.pt.prov.divisions);
       message_token.style.color = 'default';
       message_token.innerText = `${abbreviate(damages, 1, false, false)} damages.`;
-      currentPlayer.light -= 10;
-      currentPlayer.heavy -= 20;
+      currentPlayer.light -= 5;
+      currentPlayer.heavy -= 10;
       repaintCanvas();
     }
   }
@@ -209,10 +209,10 @@ function updateDeploy() {
   <table class="statistic">
   <tr>
   <th>Light Equipments
-  <td>20 * N
+  <td>10 * N
   <tr>
   <th>Heavy Equipments
-  <td>40 * N
+  <td>15 * N
   <tr><td style="text-align: right;line-height: 2em;">
   <td class="small">
   <button class="shortcut" onclick="navalInvadeOnClick(this)" data-key='n'>Deploy</button><br>
@@ -222,10 +222,10 @@ function updateDeploy() {
   <table class="statistic">
   <tr>
   <th>Light Equipments
-  <td>10
+  <td>5
   <tr>
   <th>Heavy Equipments
-  <td>20
+  <td>10
   <tr><td style="text-align: right;line-height: 2em;">
   <td class="small">
   <button class="shortcut" onclick="airStrikeOnClick(this)" data-key='s'>Deploy</button><br>
