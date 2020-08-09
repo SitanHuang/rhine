@@ -108,7 +108,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(10).fill('F');
+	if (o == 1) slots = Array(9).fill('F');
     else if(Math.random()>0.3) slots = Array(1).fill('F');
 
 	  }
@@ -118,9 +118,9 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
   })));
 
 MAP_DATA = InvasionOfChinaTerrains;
-pt(25, 43).prov.slots = Array(20).fill('F'); // Nanjing
-pt(30, 35).prov.slots = Array(20).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(26).fill('F'); // Chongqing
+pt(25, 43).prov.slots = Array(5).fill('F'); // Nanjing
+pt(30, 35).prov.slots = Array(25).fill('F'); // Wuhan
+pt(33, 22).prov.slots = Array(38).fill('F'); // Chongqing
 
 
 let p2 = new Player();
