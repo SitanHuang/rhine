@@ -8,31 +8,32 @@ class Template {
     this.light = light;
     this.heavy = heavy;
     this.defaultName = name || 'Infantry Division';
-    
+
     this.support = (support || (this.light / 10)).max(this.light / 2).floor();
     this.motorized = (motorized || (this.heavy / (this.heavy + this.light) * 10)).max(this.heavy / 2).floor();
   }
 
-  get breakThrough() {
-    return ((this.motorized + this.heavy) / (this.motorized + this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
+  get hardness() {
+    // return ((this.motorized + this.heavy) / (this.motorized + this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
+    return (1.3 * Math.pow(this.heavy / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
   }
   get manpower() {
     return this.troop;
   }
 
   get soft() {
-    return this.troop / 100 *
-      (this.light) + this.support * 100;
+    return (this.troop / 100 *
+      (this.light) + this.support * 100) + this.hard / 2;
   }
-  
+
   get supplyBuff() {
     return this.speedBuff.min(1) * this.entrenchBuff;
   }
-  
+
   get entrenchBuff() {
     return this.support / (this.troop / 1000) + 0.9;
   }
-  
+
   get speedBuff() {
     return this.motorized / (this.troop / 2000) + 0.9;
   }
@@ -65,11 +66,11 @@ class Template {
       title = title.replace('()', 'Infantry');
     if (this.mockSpeed(TERRAINS.M) > 1.5)
       title = title.replace(' Division', ' Mountaineer Division');
-    if (this.hard > 2000)
-      title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison');
-    if (this.heavy > 10)
+    if (this.hardness > 0.7)
       title = title.replace('Calvary', 'Tank');
-    else if (this.heavy > 5)
+    else if (this.hardness > 0.5)
+      title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison');
+    else if (this.hardness > 0.35)
       title = title.replace('Calvary', 'Motorized');
     return `Type ${(this.troop / 1000).round()}${(this.light / 10).round()}${(this.heavy / 10).round()} ${title}`;
   }
@@ -93,7 +94,7 @@ class Template {
   }
 
   get hard() {
-    return this.soft / 5 * (this.heavy);
+    return (this.troop / 100 + this.motorized * 100) / 20 + 500 * this.heavy;
   }
 
   mockHard(terrain) {

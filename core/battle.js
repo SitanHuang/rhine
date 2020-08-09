@@ -22,7 +22,7 @@ function battle(d1, d2, d1m) {
   let s2 = d2.soft;
   let h1 = d1.hard;
   let h2 = d2.hard;
-  let factor = 2.5;
+  let factor = 2.5 * 2;
 
   /*let as1 = (s1 - s2).min(0) + s1 * factor;
   let as2 = (s2 - s1).min(0) + s2 * factor;
@@ -33,22 +33,22 @@ function battle(d1, d2, d1m) {
   let _t2 = Math.sqrt(as2 + ah2);
   let t1 = (_t1 + ((_t1 - _t2) / 10)).min(0);
   let t2 = (_t2 + ((_t2 - _t1) / 10)).min(0);*/
-  
-  let as1 = s1 * factor;
-  let as2 = s2 * factor;
-  let ah1 = h1 * factor;
-  let ah2 = h2 * factor;
 
-  let _t1 = Math.sqrt(as1 + ah1 * 2);
-  let _t2 = Math.sqrt(as2 + ah2 * 2);
+  let as1 = s1 * factor * (1 - d2.hardness);
+  let as2 = s2 * factor * (1 - d1.hardness);
+  let ah1 = h1 * factor * (d2.hardness);
+  let ah2 = h2 * factor * (d1.hardness);
+
+  let _t1 = Math.sqrt(as1 + ah1);
+  let _t2 = Math.sqrt(as2 + ah2);
   let t1 = _t1.min(0);
   let t2 = _t2.min(0);
 
-  if (Math.random() < d1.breakThrough) {
-    t2 /= 4;
-  } else if (Math.random() < d2.breakThrough) {
-    t1 /= 4;
-  }
+  // if (Math.random() < d1.hardness) {
+  //   t2 /= 4;
+  // } else if (Math.random() < d2.hardness) {
+  //   t1 /= 4;
+  // }
 
   let rt1 = (t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)).round();
   let rt2 = (t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)).round();
@@ -63,8 +63,8 @@ function battle(d1, d2, d1m) {
   d1.skill = (d1.skill + (difference / sum / 20).min(0.01)).max(4).round(2)
   d2.skill = (d2.skill + ((t2 - t1) / sum / 20).min(0.01)).max(4).round(2)
 
-  d1.morale = (d1.morale + (difference / sum / 3)).max(2).min(0.20).round(2)
-  d2.morale = (d2.morale + ((t2 - t1) / sum / 3)).max(2).min(0.20).round(2)
+  d1.morale = (d1.morale + (difference / sum / 2)).max(2).min(0.05).round(2)
+  d2.morale = (d2.morale + ((t2 - t1) / sum / 2)).max(2).min(0.05).round(2)
 
 
   sum = d1.morale + d2.morale;

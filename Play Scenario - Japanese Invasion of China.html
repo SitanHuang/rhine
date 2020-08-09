@@ -10,6 +10,12 @@
     number, mark {
      display: block;
     }
+    .hpIndicator {
+      display: none;
+    }
+    td:hover .hpIndicator {
+      display: block;
+    }
   </style>
   <link rel="stylesheet" href="gui/css/style.css">
   <link rel="stylesheet" href="gui/css/components.css">
@@ -59,11 +65,13 @@
       <span onclick="updateDeploy()" class="shortcut" data-key="3">Deploy</span>
       <span onclick="pass()" class="shortcut" data-key="4">Pass</span>
     </div>
-    <div id="left-content">
+    <div id="left-wrap">
+      <div id="left-content">
 
-    </div>
-    <div id="graph-content" style="display: none;">
+      </div>
+      <div id="graph-content" style="display: none;">
 
+      </div>
     </div>
   </div>
   <div id="map-container" class="dragscroll">

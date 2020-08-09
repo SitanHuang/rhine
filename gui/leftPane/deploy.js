@@ -18,7 +18,7 @@ function onTemplateSpecsChange() {
   $('softAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockSoft(terrain), 2, false, false);
   $('hardAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHard(terrain), 2, false, false);
   $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT + ` (x${currentPlayer.defaultTemplate.speedBuff.round(2)})`;
-  $('breakThroughSpan').innerText = currentPlayer.defaultTemplate.breakThrough.round(2);
+  $('hardnessSpan').innerText = currentPlayer.defaultTemplate.hardness.round(2);
   $('supplyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.supplyBuff, 2, false, false);
   $('casualtyBuff').innerText = abbreviate(getCasualtyReductionFromSupport({template: currentPlayer.defaultTemplate}), 2, false, false);
   $('entrenchBuff').innerText = abbreviate(currentPlayer.defaultTemplate.entrenchBuff, 2, false, false);
@@ -279,8 +279,8 @@ function updateDeploy() {
   <th>Speed
   <td id="speedSpan">
   <tr>
-  <th>Breakthrough
-  <td id="breakThroughSpan"><br>
+  <th>Hardness
+  <td id="hardnessSpan"><br>
   <tr>
   <th>Supply factor
   <td id="supplyBuff"><br>

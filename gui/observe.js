@@ -26,12 +26,16 @@ function updateData() {
   _casualtiesData.push(mp);
 }
 
-function observeMode() {
+function startObserveMode() {
   window.observing = true;
   window.politicalView = true;
   jQuery('#right').addClass('auto-collapse');
   $('map-container').style.width = "100%";
   $('left-content').style.display = "none";
+}
+
+function observeMode() {
+
   $('graph-content').style.display = "block";
 
   let width = $('left').clientWidth;

@@ -56,7 +56,7 @@ function playerSelectionScreen(alreadyWWII) {
     `;
   })
   innerHTML += '</table>' +
-  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>  <button onclick="observeMode();">Observe Game</button>
+  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>  <button onclick="startObserveMode();observeMode();">Observe Game</button>
   <br><br><table style="width:77%">
   `;
   Object.entries(localStorage).forEach((e) => {
@@ -153,7 +153,8 @@ function pass() {
 
     if (currentPlayerID == 0) {
       updateData();
-      if (window.observing) observeMode();
+      // if (window.observing)
+      observeMode();
     }
 
     if (currentPlayer.setAI) {

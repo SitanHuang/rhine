@@ -134,7 +134,7 @@ function loadWWIIScenario() {
       terrain = v.toUpperCase();
     }
     if (!TERRAINS[terrain]) throw 'Not found ' + v;
-    return {terrain: terrain, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
+    return {supply: 4, terrain: terrain, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
   })));
 
   window.PORTS = [];
@@ -143,6 +143,7 @@ function loadWWIIScenario() {
   // ============== players =================
 
   PLAYERS[0].color = "rgba(140, 193, 226, 0.2)";
+  PLAYERS[0].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8}}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":false},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[0].manpower = 7500000;
   PLAYERS[0].casualties = 0;
   PLAYERS[0].divisionMen = 0;
@@ -161,8 +162,7 @@ function loadWWIIScenario() {
   PLAYERS[1].light = -100;
   PLAYERS[1].heavy = -100;
 
-  PLAYERS[1].generals["Generalissimo"]["Chiang Kai-Shek"].selected=false;
-  PLAYERS[1].generals["Generalissimo"]["Game Founder"].selected=true;
+  PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":false},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":true},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[1].sumAllGeneralTraits;
 
   window.p3 = new Player();
@@ -173,6 +173,7 @@ function loadWWIIScenario() {
   p3.factories = 0;
   p3.heavy = 0;
   p3.factoryInLight = 1;
+  p3.generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg"},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
   p3.sumAllGeneralTraits;
 
   // ============== military =================
@@ -181,19 +182,20 @@ function loadWWIIScenario() {
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
   let german = new Template(16300, 24, 12, 'Infanterie-Division', 12, 6);
   let italian = new Template(8900, 16, 6, 'Intalian Infantry Division', 8, 3);
-  let germanPanzer = new Template(17800, 14, 32, 'Panzer Corps', 7, 16);
-  let soviet = new Template(14100, 16, 10, 'Rifle Division', 7, 5);
-  let sovietMilitia = new Template(9000, 9, 4, 'Militia Division', 0.1, 0.1);
+  let germanPanzer = new Template(17950, 6, 40, 'Panzer Corps', 3, 20);
+  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 3);
+  let sovietMilitia = new Template(12000, 8, 2, 'Militia Division', 0.1, 0.1);
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
   PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone()];
 
-  let british_i = 0;
+    let british_i = 0;
   let german_i = 0;
   let soviet_i = 0;
 
   MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
+    v.supply = 4;
     if (v.terrain == '@') return;
     if (v.terrain == 'P')
       PORTS.push(pt(row, col));
@@ -209,7 +211,7 @@ function loadWWIIScenario() {
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
       } else if (v.owner == 2) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
-        v.divisions = Array((Math.random() * 4).round() + 1).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
       }
 
     v.divisions.forEach(x => x.supply = 4);

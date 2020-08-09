@@ -35,10 +35,18 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
       td.appendChild(number)
       let battles = [];
       let color = 'transparent';
+      let avgHP = 0;
+      let avgMorale = 0;
       prov.divisions.forEach(x => {
+        avgHP += x.hp.min(0);
+        avgMorale += x.morale.min(0) * 100;
         battles = battles.concat(x.battleInfo);
         if (x.color != 'transparent') color = x.color;
       });
+      avgHP /= num;
+      avgMorale /= num;
+      td.appendChild(jQuery("<div class='hpIndicator' style='width: " + avgHP  + "%;height: 2px;position: absolute; top: 2;left: 2px;max-width: calc(100% - 2px); background: green;'> </div>")[0]);
+      td.appendChild(jQuery("<div class='hpIndicator' style='width: " + avgMorale  + "%;height: 2px;position: absolute; top: 4;left: 2px;max-width: calc(100% - 2px);background: orange;'> </div>")[0]);
       if (battles.length > 0) {
         let mark = document.createElement('mark');
         mark.innerText = ' ';

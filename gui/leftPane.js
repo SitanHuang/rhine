@@ -1,6 +1,6 @@
 const $playerID = $('playerID');
 const $left_content = $('left-content');
-const $left_tabs = $left_content.parentNode.children[0];
+const $left_tabs = $left_content.parentNode.parentNode.children[0];
 
 function setLeftPaneActiveTab(num) {
   Array.from($left_tabs.children).forEach(x => (x.className = 'shortcut'));

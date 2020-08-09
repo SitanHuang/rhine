@@ -204,10 +204,15 @@ table.statistic th {
   cursor: pointer;
 }
 
+
 #left-content, #right-content {
   padding: 10px;
+}
+
+#left-wrap, #right-content {
   overflow-y: auto;
-  height: calc(100% - 62px)
+  overflow-x: hidden;
+  height: calc(100% - 62px);
 }
 
 #controls button {

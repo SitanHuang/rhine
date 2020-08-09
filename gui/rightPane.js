@@ -27,8 +27,8 @@ function showDivisionDetailOnFloat(i, td) {
   <td>${abbreviate(div.hard, 2, false, false)}
   <tr><th>Speed
   <td>${div.speed.round(2)}${SPEED_UNIT}
-  <tr><th>Breakthrough
-  <td>${div.breakThrough.round(2)}
+  <tr><th>Hardness
+  <td>${div.hardness.round(2)}
   <tr><th>Manpower
   <td>${abbreviate(div.men, 2, false, false)}/${abbreviate(div.template.manpower, 2, false, false)}
   <tr><th>Light Equipments
@@ -83,6 +83,11 @@ function PoliticalViewOnClick() {
   window.politicalView = !window.politicalView;
   repaintCanvas();
 }
+function StrengthIndicatorsViewOnClick() {
+  let stylesheet = document.styleSheets[0];
+  stylesheet.cssRules[2].style.display = stylesheet.cssRules[2].style.display == 'block' ? 'none' : 'block';
+  repaintCanvas();
+}
 
 
 function saveGameOnClick() {
@@ -128,7 +133,7 @@ function repaintRightList() {
 	  if (col.owner == currentPlayerID) {
 		col.divisions.forEach(div => {
 		  if (div.color) {
-			let t = (div.soft + div.hard) * div.breakThrough * div.morale;
+			let t = (div.soft + div.hard) * div.hardness * div.morale;
 			ds[div.color] = ds[div.color] || 0;
 			dn[div.color] = dn[div.color] || 0;
 			ds[div.color] += t;
@@ -152,9 +157,11 @@ function repaintRightList() {
   ${summaryHTML}
   <table class="divisions">
   <tr>
-  <td><button onclick="autoFightSelectedOnClick()">AI</button>
-  <button onclick="ArmyViewOnClick()">AV</button>
-  <button onclick="PoliticalViewOnClick()">PV</button>
+  <td>
+  <!--<button onclick="autoFightSelectedOnClick()">AI</button>-->
+  <button onclick="ArmyViewOnClick()">A</button>
+  <button onclick="StrengthIndicatorsViewOnClick()">S</button>
+  <button onclick="PoliticalViewOnClick()">P</button>
   <button onclick="saveGameOnClick()">Save</button>
   <td>
   <td><button onclick="removeAllSelectedDivisions()">❌</button>

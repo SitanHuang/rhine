@@ -24,7 +24,7 @@ function updatePolicy() {
     switch (modName) {
       case 'o': displayName = 'Offense'; break;
       case 's': displayName = 'Speed'; break;
-      case 'b': displayName = 'Breakthrough'; break;
+      case 'b': displayName = 'Hardness'; break;
       case 'e': displayName = 'Entrench'; break;
     }
     html += `${displayName} <font color="${mod < 1 ? 'red' : 'green'}">x${mod}</font><br>`;
@@ -44,7 +44,7 @@ function updatePolicy() {
         switch (modName) {
           case 'o': displayName = 'Offense'; break;
           case 's': displayName = 'Speed'; break;
-          case 'b': displayName = 'Breakthrough'; break;
+          case 'b': displayName = 'Hardness'; break;
           case 'e': displayName = 'Entrench'; break;
         }
         html += `${displayName} <font color="${mod < 1 ? 'red' : 'green'}">x${mod}</font>\n`;
