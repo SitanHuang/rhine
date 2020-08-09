@@ -108,7 +108,7 @@ RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(9).fill('F');
+	if (o == 1) slots = Array(10).fill('F');
     else if(Math.random()>0.3) slots = Array(1).fill('F');
 
 	  }
@@ -152,7 +152,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     if (v.owner == 0)
       v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 15 ? 4 : Math.ceil(Math.random() * 9 + 20)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 13000 : 10000, 12, 3, 'Division', 4, 1))))
     else
-      v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 10, 'Division', 10, 5))))
+      v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 12, 'Division', 10, 5))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
