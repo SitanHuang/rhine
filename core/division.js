@@ -69,6 +69,8 @@ class Division {
       }
       player.casualties += a.round();
     }
+    
+    this.action = this.action.filter(x => x.prov.terrain != '@');
 
     if (this.action.length == 0 || (this.hp < 80 && Math.random() > this.morale * 1.2 && this.morale < 1)) {
       this.movementProgress = 0;
@@ -79,6 +81,7 @@ class Division {
       this.movementProgress-=0.5;
       let nextPt = this.action[0];
       let nextProv = nextPt.prov;
+      if (nextProv.terrain == '@') break;
       let divs = nextProv.divisions;
 
       if (nextPt.owner == this.player || divs.length == 0) {

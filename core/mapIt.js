@@ -5,7 +5,7 @@ function factoriesInProv(prov) {
 function getOrReturn(pt, callback) {
   let col = null;
   if (MAP_DATA[pt.row] && (col = MAP_DATA[pt.row][pt.col])) {
-    if (col.terrain == '@') return;
+    if (col.terrain == '@' && !col.waitUntil) return;
     if (callback) callback(pt);
   }
 }
@@ -18,6 +18,7 @@ function iterateAdjacent(p, callback) {
     () => {getOrReturn(pt(p.row, p.col - 1), callback);}
   ].sort(() => (Math.random() - 0.5)).forEach(x => x())
 }
+
 
 function adjacentToPlayer(pt, player) {
   let yes = 0;

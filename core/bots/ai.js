@@ -16,8 +16,8 @@ class Ai {
     let available = (Math.min(this.player.light, this.player.heavy) * 0.9).floor().min(0);
     let rate = 1;
     if (this.player.divisions < 150) rate = 1;
-    else if (this.player.divisions < 250) rate = 0.9;
-    else if (this.player.divisions < 300) rate = 0.6;
+    else if (this.player.divisions < 250) rate = 0.95;
+    else if (this.player.divisions < 300) rate = 0.9;
     else rate = 0.4;
     //if (this.player.divisions > 250) rate = 0.4;
 
@@ -47,6 +47,14 @@ class Ai {
       for (let col = 0; col < rowData.length; col++) {
         let p = pt(row, col);
         let prov = p.prov;
+        if (p.owner != player && (prov.terrain == 'U' || prov.terrain == 'P') && prov.divisions.length >= 3 && Math.random() > 0.8) {
+          let pro = p.prov;
+          if (airStrikedCount++ < budget.airStrike) {
+            player.light -= 5;
+            player.heavy -= 10;
+            airStrikeProv(pro.divisions);
+          }
+        }
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.divisions.length && prov.divisions[0].supply == 0) continue;
         if (prov.adjacentNotToPlayer > 0) {
@@ -209,7 +217,7 @@ class Ai {
               0]._navalInvasion) {
             // skip
           } else if (div.hp > 90 && div.entrench > 1.5 && prov.terrain == 'P' && Math.random() >
-            0.5 && player.light > 60 && player.heavy > 120) {
+            0.5 && player.light > 60 && player.heavy > 120 & player.averageStrength > 75) {
             let enemy = PORTS.filter(x => ((x.owner != currentPlayer || x.adjacentNotToPlayer(
               player)) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
             let landed = PORTS.filter(x => (x.owner == currentPlayer && x.adjacentNotToPlayer(
@@ -225,8 +233,9 @@ class Ai {
               2 || Math.random() > 0.65) &&
             (div.hp > 40)) {
             div.action = [];
-            if ((div.hp > 60 || div.skill > 1.1) && div.morale > 0.8)
+            if ((div.hp > 70 || div.skill > 1.1) && div.morale > 0.8)
               div.loc.adjacents(adj => {
+                if (adj.terrain == '@') return;
                 if (div.action.length) return;
                 let divs = adj.prov.divisions;
                 if (adj.owner != player && ((divs.length == 0 && Math.random() >
@@ -244,6 +253,7 @@ class Ai {
               //     div.action = [adj];
               // });
               p.adjacents(adj => {
+                if (adj.terrain == '@') return;
                 if (div.action.length) return;
                 let divs = adj.prov.divisions;
                 if (adj.owner != player && divs.length && divs[0].soft <=

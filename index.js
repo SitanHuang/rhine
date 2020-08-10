@@ -46,7 +46,7 @@ function playerSelectionScreen(alreadyWWII) {
   playerSelection = document.createElement('waiting');
   let innerHTML = '<h1>Select players</h1><table style="width:70%;margin: auto;">';
   if (!alreadyWWII)
-    innerHTML = '<h1>Scenario:</h1><p><button onclick="loadWWIIScenario();playerSelectionScreen(1)">Load WWII Europe scenario</button></p>' + innerHTML;
+    innerHTML = '<h1>Scenarios:</h1><p><button onclick="load1941Scenario();playerSelectionScreen(1)">Load 1941 Europe scenario</button></p><p><button onclick="load1939Scenario();playerSelectionScreen(1)">Load 1939 Europe scenario</button></p>' + innerHTML;
   PLAYERS.forEach((p, i) => {
     innerHTML += `
     <tr>
@@ -90,6 +90,26 @@ function handlePlayerOnPass() {
   let divs = [];
   for (let row of MAP_DATA) {
     for (let col of row) {
+      if (col.waitUntil) {
+        if (window.timestamp >= col.waitUntil.time) {
+          let source = col.waitUntil.col;
+          delete col.waitUntil;
+          Object.assign(col, source);
+        }
+      }
+      if (col.transferOwner) {
+        if (col.transferOwner.cityFalls) {
+          let city = MAP_DATA[col.transferOwner.cityFalls[0]][col.transferOwner.cityFalls[1]];
+          if (city.owner == col.transferOwner.cityFalls[2]) {
+            if (col.owner != col.transferOwner.newOwner) {
+              col.divisions.forEach(x => {PLAYERS[col.transferOwner.newOwner].manpower += x.men});
+              col.divisions = [];
+              col.owner = col.transferOwner.newOwner;
+            }
+            delete col.transferOwner;
+          }
+        }
+      }
       if (col.owner != currentPlayerID) continue;
       if (col.terrain != '@' &&
         col.divisions.length) {
