@@ -183,8 +183,8 @@ function loadWWIIScenario() {
   let german = new Template(16300, 24, 12, 'Infanterie-Division', 12, 6);
   let italian = new Template(8900, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzer = new Template(17950, 6, 40, 'Panzer Corps', 3, 20);
-  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 3);
-  let sovietMilitia = new Template(12000, 8, 2, 'Militia Division', 0.1, 0.1);
+  let soviet = new Template(14100, 14, 9, 'Rifle Division', 5, 3);
+  let sovietMilitia = new Template(10000, 8, 2, 'Militia Division', 0.1, 0.1);
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];

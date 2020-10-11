@@ -19,9 +19,9 @@ function getCasualtyReductionFromSupport(div) {
 
 function battle(d1, d2, d1m) {
   let s1 = d1.soft;
-  let s2 = d2.soft;
+  let s2 = d2.soft * _weather.defenseCx;
   let h1 = d1.hard;
-  let h2 = d2.hard;
+  let h2 = d2.hard * _weather.defenseCx;
   let factor = 2.5 * 2;
 
   /*let as1 = (s1 - s2).min(0) + s1 * factor;

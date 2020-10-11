@@ -56,7 +56,7 @@ class Division {
 
     let player = this.player;
     let that = this;
-    this.supply = this.loc.prov.supply * this.template.supplyBuff;
+    this.supply = this.loc.prov.supply * this.template.supplyBuff * _weather.supplyCx;
 
     if (this.supply.round(2) <= 0) {
       let a = this.men * 0.8;
@@ -76,7 +76,7 @@ class Division {
       this.movementProgress = 0;
       return;
     }
-    this.movementProgress += this.speed;
+    this.movementProgress += this.speed * _weather.movementCx;
     while (this.movementProgress >= 1 && this.action.length > 0) {
       this.movementProgress-=0.5;
       let nextPt = this.action[0];
@@ -100,7 +100,7 @@ class Division {
             div.retreat();
           }
           that.battleInfo.push(results);
-        })
+        });
         break;
       }
     }

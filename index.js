@@ -19,7 +19,11 @@ function incrementAndUpdateDate() {
     timestamp += timeIncrement + (Math.random() * 86400 * 5).round();
   }
   let date = new Date(timestamp * 1000);
-  $date_token.innerText = date.toLocaleDateString("en-US");
+  $date_token.innerHTML = date.toLocaleDateString("en-US");
+  if (!window._weather) return;
+  $date_token.title = `Supply: ${((_weather.supplyCx - 1) * 100).round().explicitSign()}%
+Movement: ${((_weather.movementCx - 1) * 100).round().explicitSign()}%
+Defense: ${((_weather.defenseCx - 1) * 100).round().explicitSign()}%`;
 }
 
 function setAIFor(i, btn) {
@@ -85,6 +89,7 @@ aiThinkButton.innerText = 'AI think';
 $('controls').append(aiThinkButton);
 
 function handlePlayerOnPass() {
+  weather_update();
   if (!currentPlayer) return;
   let start = new Date().getTime();
   let divs = [];

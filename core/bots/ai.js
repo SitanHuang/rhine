@@ -18,7 +18,7 @@ class Ai {
     if (this.player.divisions < 150) rate = 1;
     else if (this.player.divisions < 250) rate = 0.95;
     else if (this.player.divisions < 300) rate = 0.9;
-    else rate = 0.4;
+    else rate = 0.3;
     //if (this.player.divisions > 250) rate = 0.4;
 
     if (this.isLosingPopulation()) rate = 0;
@@ -84,7 +84,7 @@ class Ai {
           }
           let tem = player.defaultTemplate.deepClone();
           tem.troop = (Math.random() * 20).round() * 1000 + 10000;
-          if (player.divisions < 400) {
+          if (player.divisions < 800) {
             tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(40) + 1;
             tem.light = (budget.newRecruits[0] * Math.random()).round().max(40) + 1;
             tem.support = (tem.light / 2 * Math.random()).round();
@@ -106,7 +106,7 @@ class Ai {
               }
             }
 
-            while ((tem.heavy -= 1) > 5 && (tem.light -= 1) > 5) {
+            while ((tem.heavy = (tem.heavy / 5 - 1).floor() * 5) > 5 && (tem.light = (tem.light / 5 - 1).floor() * 5) > 5) {
               tem.defaultName = tem.codeName;
               tem.support = tem.support.max((tem.light / 2).floor());
               tem.motorized = tem.motorized.max((tem.heavy / 2).floor());
@@ -163,6 +163,7 @@ class Ai {
     let player = this.player;
     let that = this;
     SELECTED_UNITS = [];
+    let wcurve = (weather_curve() + 1) / 2;
     let dai = 0;
     let dainterval = player.divisions.min(1) / ARMY_COLORS.length;
     let currentNavalInvasion = null;
@@ -194,7 +195,11 @@ class Ai {
             return;
           }*/
           let retreatable = 60;
-          if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {
+          let battleInfo = combineBattleInfos(div.battleInfo);
+          if (div.battleInfo.length && (battleInfo.casualties[0] / battleInfo.casualties[1]) > 3) {
+              div.action = [];
+              return;
+          } else if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {
             if (!div.action[0] && div.action[
               0]._navalInvasion)
               div.action = [];
@@ -203,9 +208,9 @@ class Ai {
             (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() >
               0.5)) {
             let lastAction = div.action.last();
+            let battleInfo = combineBattleInfos(div.battleInfo);
 
-            if ((div.battleInfo.length && combineBattleInfos(div.battleInfo)[
-                0] < 0.3) /*||
+            if ((div.battleInfo.length && (battleInfo.casualties[0] / battleInfo.casualties[1]) > 3) /*||
               (lastAction && lastAction.owner == player && lastAction.prov
                 .divisions.length > 3)*/) {
               div.action = [];
@@ -229,9 +234,9 @@ class Ai {
               player.light -= 10;
               player.heavy -= 15;
             }
-          } else if (div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer <
+          } else if ((player.averageStrength > 75 && Math.random() < wcurve + 0.1) && div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer <
               2 || Math.random() > 0.65) &&
-            (div.hp > 40)) {
+            (div.hp > 60)) {
             div.action = [];
             if ((div.hp > 70 || div.skill > 1.1) && div.morale > 0.8)
               div.loc.adjacents(adj => {

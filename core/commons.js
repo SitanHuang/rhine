@@ -22,6 +22,9 @@ Number.prototype.min = function (min) {
 Number.prototype.max = function (min) {
   return Math.min(this, min);
 }
+Number.prototype.explicitSign = function () {
+  return this > 0 ? '+' + this : this.toString();
+}
 
 Number.prototype.floor = function () {
   return Math.floor(this);
