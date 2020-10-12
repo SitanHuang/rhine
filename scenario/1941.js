@@ -148,14 +148,14 @@ function load1941Scenario() {
   PLAYERS[0].casualties = 0;
   PLAYERS[0].divisionMen = 0;
   PLAYERS[0].factories = 0;
-  PLAYERS[0].growthRate = 149187/47080000; // 0.0029563933
+  PLAYERS[0].growthRate = 149187/47080000 + 0.00395; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
   PLAYERS[1].manpower = 5500000;
   PLAYERS[1].casualties = 0;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
-  PLAYERS[1].growthRate = 0.003;
+  PLAYERS[1].growthRate = 0.006168;
 
   PLAYERS[0].light = 1000;
   PLAYERS[0].heavy = 2000;
