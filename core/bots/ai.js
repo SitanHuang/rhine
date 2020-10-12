@@ -63,7 +63,7 @@ class Ai {
             player.constructionPoints -= 150;
             prov.fort = true;
           }
-          if (!prov.divisions.length || prov.divisions.length && prov.supply > 0.1) this.adjacentBlocks.push(p);
+          if (prov.supply > 0.1) this.adjacentBlocks.push(p);
           if (player.factories > 90 && player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
