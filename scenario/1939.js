@@ -198,11 +198,11 @@ function load1939Scenario() {
   let british = new Template(12100, 18, 9, 'British Division', 9, 3);
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
-  let german = new Template(16300, 24, 12, 'Infanterie-Division', 12, 6);
-  let italian = new Template(8900, 16, 6, 'Intalian Infantry Division', 8, 3);
+  let german = new Template(16300, 24, 14, 'Infanterie-Division', 12, 7);
+  let italian = new Template(9400, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzer = new Template(17950, 6, 40, 'Panzer Corps', 3, 20);
   let soviet = new Template(12100, 14, 5, 'Rifle Division', 4, 2);
-  let sovietMilitia = new Template(10000, 7, 1, 'Militia Division', 0.1, 0.1);
+  let sovietMilitia = new Template(8000, 7, 1, 'Militia Division', 0.1, 0.1);
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
@@ -234,9 +234,7 @@ function load1939Scenario() {
           type = germanPanzer;
         }
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
-        //if (type == germanPanzer) {
-          v.divisions.map(x => {x.skill = 1 + Math.random();x.morale = 2;});
-        //}
+        v.divisions.map(x => {x.skill = type == (germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
         v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
