@@ -202,7 +202,7 @@ function load1939Scenario() {
   let italian = new Template(9400, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzer = new Template(17950, 6, 40, 'Panzer Corps', 3, 20);
   let soviet = new Template(12100, 14, 5, 'Rifle Division', 4, 2);
-  let sovietMilitia = new Template(8000, 7, 1, 'Militia Division', 0.1, 0.1);
+  let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
@@ -247,7 +247,7 @@ function load1939Scenario() {
   pass();pass();pass();
 
   // ============= misc ==============
-  window.timestamp = -946771200; // 1/1/1940
+  window.timestamp = -935539200; // 5/10/1940
   window.timeIncrement = 518400 / 2; // 3 days
 
   reinitCanvas();
