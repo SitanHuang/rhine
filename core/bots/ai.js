@@ -18,10 +18,11 @@ class Ai {
     if (this.player.divisions < 150) rate = 1;
     else if (this.player.divisions < 250) rate = 0.95;
     else if (this.player.divisions < 300) rate = 0.9;
-    else rate = 0.3;
+    else if (this.player.divisions < 400) rate = 0.3;
+    else rate = 0.1;
     //if (this.player.divisions > 250) rate = 0.4;
 
-    if (this.isLosingPopulation()) rate = 0;
+    if (this.player._populationData.net < -100) rate = 0.01;
 
     budget.newRecruits = [(available * rate).floor(), (available * rate).floor()];
     budget.airStrike = (available - budget.newRecruits[0]) / 20;
@@ -64,7 +65,7 @@ class Ai {
             prov.fort = true;
           }
           if (prov.supply > 0.1) this.adjacentBlocks.push(p);
-          if (player.factories > 90 && player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
+          if (p.owner != player && player.factories > 90 && player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
               if (airStrikedCount++ < budget.airStrike) {
@@ -129,6 +130,12 @@ class Ai {
         }
       }
     }
+
+//    if (Math.random() < 0.05) this.adjacentBlocks = this.adjacentBlocks.sort((p1, p2) => {
+//      let a = -(p1.prov.slots.length) + p1.prov.divisions.length - p1.prov.terrain.defense;
+//    let b = -(p2.prov.slots.length) + p2.prov.divisions.length - p2.prov.terrain.defense;
+//    return a - b;
+//  });
 
     player.retreatable = 0;
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
@@ -210,19 +217,19 @@ class Ai {
             let lastAction = div.action.last();
             let battleInfo = combineBattleInfos(div.battleInfo);
 
-            if ((div.battleInfo.length && (battleInfo.casualties[0] / battleInfo.casualties[1]) > 3) /*||
+            if ((div.battleInfo.length && (battleInfo.casualties[0] / battleInfo.casualties[1]) > 2) /*||
               (lastAction && lastAction.owner == player && lastAction.prov
                 .divisions.length > 3)*/) {
               div.action = [];
               return;
             }
-          } else if (div.prov.terrain == 'P' && Math.random() > 0.6) {
+          } else if ((div.prov.terrain == 'P' && Math.random() > 0.55)) {
             // skip
           } else if (div.hp > retreatable && div.action[0] && div.action[
               0]._navalInvasion) {
             // skip
           } else if (div.hp > 90 && div.entrench > 1.5 && prov.terrain == 'P' && Math.random() >
-            0.5 && player.light > 60 && player.heavy > 120 & player.averageStrength > 75) {
+            0.5 && player.light > 60 && player.heavy > 120 & player.averageStrength > 75 && (player.divisions > 350 && weather_curve() > 0.7)) {
             let enemy = PORTS.filter(x => ((x.owner != currentPlayer || x.adjacentNotToPlayer(
               player)) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
             let landed = PORTS.filter(x => (x.owner == currentPlayer && x.adjacentNotToPlayer(
@@ -294,7 +301,7 @@ class Ai {
       convertSelectedOnClick(null);
     }
 
-    let i = 0;
+    let i = -1;
     this.units = units;
 
     while (units.length) {

@@ -122,13 +122,13 @@ function load1939Scenario() {
   // ============== map =================
   MAP_DATA = WWIITerrains.map((x, row) => (x.split('').map((v, col) => {
     let isBorder = WWII1939Owners[row][col] == '#';
-	  let o = isBorder ? 1 : parseInt(WWII1939Owners[row][col]);
-	  let slots = [];
+    let o = isBorder ? 1 : parseInt(WWII1939Owners[row][col]);
+    let slots = [];
     let terrain = '@';
-	  if (v == 'c'){
+    if (v == 'c'){
       terrain = 'U';
       slots = Array(1).fill('F');
-	  } else if (v == 'C') {
+    } else if (v == 'C') {
       terrain = 'U';
       slots = Array(25).fill('F');
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
@@ -136,13 +136,14 @@ function load1939Scenario() {
     }
     if (!TERRAINS[terrain]) throw 'Not found ' + v;
     let _col = {supply: 4, terrain: terrain, owner: o, slots: slots, divisions: [], pt: pt(row, col)};
-    
+
     if (terrain != '@' && row >= 23 && row <= 40 && col >= 8 && col <= 28) {
       _col.transferOwner = {cityFalls: [24, 21, 1], newOwner: 1};
     }
-    
+
     if (isBorder) {
-      return {terrain: '@', owner: -1, slots: [], divisions: [], pt: pt(row, col), waitUntil: {time: -900241200, col: _col}};
+      //return {terrain: '@', owner: -1, slots: [], divisions: [], pt: pt(row, col), waitUntil: {time: -900241200, col: _col}};
+      return {terrain: ' ', owner: 1, slots: [], divisions: [], pt: pt(row, col)};
     } else {
       return _col;
     }
@@ -161,15 +162,15 @@ function load1939Scenario() {
   PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 150187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 6500000;
+  PLAYERS[1].manpower = 9500000;
   PLAYERS[1].casualties = 0;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
   PLAYERS[1].growthRate = 0.003;
 
-  PLAYERS[0].light = 100;
-  PLAYERS[0].heavy = 200;
+  PLAYERS[0].light = 0;
+  PLAYERS[0].heavy = 0;
   PLAYERS[1].light = -100;
   PLAYERS[1].heavy = -100;
 
@@ -186,7 +187,7 @@ function load1939Scenario() {
   p3.factoryInLight = 1;
   p3.generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg"},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
   p3.sumAllGeneralTraits;
-  
+
   PLAYERS[1].diplomacy = {};
   PLAYERS[1].diplomacy[p3.playerID] = {warUntil: -900241200};
   p3.diplomacy = {};
@@ -244,7 +245,7 @@ function load1939Scenario() {
 
     v.divisions.forEach(x => x.supply = 4);
   })));
-  
+
   pass();pass();pass();
 
   // ============= misc ==============
@@ -253,4 +254,7 @@ function load1939Scenario() {
 
   reinitCanvas();
   updateInterfaceOnPass();
+
+  diplomacy_change(PLAYERS[0].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -694310400, changeValue: {status: 'WAR'}});
+  diplomacy_change(PLAYERS[1].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -900241200, changeValue: {status: 'WAR'}});
 }

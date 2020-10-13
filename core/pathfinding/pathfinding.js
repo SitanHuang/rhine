@@ -3,11 +3,14 @@ function unit_pathfind(start, end) {
     return row.map(col => {
       let terrain = TERRAINS[col.terrain];
       let w = 0;
-      if (end == currentPlayer) {
+      if (end.owner == currentPlayer) {
         if (col.owner != currentPlayerID) {
-          w += 5;
-          w += col.divisions.length * 2 + 10;
+          w += 10;
+          w += col.divisions.length * 10;
         }
+      }
+      if (col.owner != currentPlayerID && diplomacy_get(col.owner, currentPlayerID).status != 'WAR') {
+        return 0;
       }
       if (col.terrain == '@')
         return 0;

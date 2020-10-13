@@ -121,13 +121,13 @@ function loadWWIIScenario() {
   clearData();
   // ============== map =================
   MAP_DATA = WWIITerrains.map((x, row) => (x.split('').map((v, col) => {
-	  let o = parseInt(WWIIOwners[row][col]);
-	  let slots = [];
+    let o = parseInt(WWIIOwners[row][col]);
+    let slots = [];
     let terrain = '@';
-	  if (v == 'c'){
+    if (v == 'c'){
       terrain = 'U';
       slots = Array(1).fill('F');
-	  } else if (v == 'C') {
+    } else if (v == 'C') {
       terrain = 'U';
       slots = Array(25).fill('F');
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
@@ -224,4 +224,6 @@ function loadWWIIScenario() {
 
   reinitCanvas();
   updateInterfaceOnPass();
+
+  diplomacy_change(PLAYERS[0].playerID, PLAYERS[1].playerID, {status: 'PACT', changeAfter: -694310400, changeValue: {status: 'WAR'}});
 }

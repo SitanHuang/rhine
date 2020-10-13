@@ -312,7 +312,7 @@ function toggleAverageEntrenchOnClick(button) {
           let num = 0;
           prov.divisions.forEach(x => {num += x.entrench});
           num = num / prov.divisions.length;
-          td.style.backgroundColor = getColorFromPercentage(num / 2, [{"pct":0,"color":{"r":180,"g":0,"b":0}},{"pct":0.5,"color":{"r":180,"g":180,"b":0}},{"pct":1,"color":{"r":32,"g":158,"b":32}}]);
+          td.style.backgroundColor = getColorFromPercentage((num - 1).min(0), [{"pct":0,"color":{"r":180,"g":0,"b":0}},{"pct":0.5,"color":{"r":180,"g":180,"b":0}},{"pct":1,"color":{"r":32,"g":158,"b":32}}]);
           let number = document.createElement('number');
           number.innerText = (num * 10).round();
           td.appendChild(number)

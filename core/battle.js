@@ -1,4 +1,5 @@
 function airStrike(div) {
+  if (diplomacy_get(div.playerID, currentPlayerID).status != 'WAR') return;
   let damage = (div.men * 0.2).max(700).round();
   div.men = (div.men - damage).round().min(0);
   div.morale -= 0.2;
@@ -9,6 +10,7 @@ function airStrike(div) {
 
 function airStrikeProv(divs) {
   let damages = 0;
+  if (divs[0] && diplomacy_get(divs[0].playerID, currentPlayerID).status != 'WAR') return;
   divs.forEach(x => (damages += airStrike(x)))
   return damages;
 }
@@ -50,8 +52,8 @@ function battle(d1, d2, d1m) {
   //   t1 /= 4;
   // }
 
-  let rt1 = (t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)).round();
-  let rt2 = (t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)).round();
+  let rt1 = ((t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)) * 0.7).round();
+  let rt2 = ((t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)) * 0.7).round();
 
   d1.men = (d1.men - rt2).min(0);
   d2.men = (d2.men - rt1).min(0);
@@ -63,8 +65,8 @@ function battle(d1, d2, d1m) {
   d1.skill = (d1.skill + (difference / sum / 20).min(0.01)).max(4).round(2)
   d2.skill = (d2.skill + ((t2 - t1) / sum / 20).min(0.01)).max(4).round(2)
 
-  d1.morale = (d1.morale + (difference / sum / 2)).max(2).min(0.05).round(2)
-  d2.morale = (d2.morale + ((t2 - t1) / sum / 2)).max(2).min(0.05).round(2)
+  d1.morale = (d1.morale + (difference / sum)).max(2).min(0.05).round(2)
+  d2.morale = (d2.morale + ((t2 - t1) / sum)).max(2).min(0.05).round(2)
 
 
   sum = d1.morale + d2.morale;

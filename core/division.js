@@ -84,7 +84,10 @@ class Division {
       if (nextProv.terrain == '@') break;
       let divs = nextProv.divisions;
 
-      if (nextPt.owner == this.player || divs.length == 0) {
+      if (nextPt.owner != this.player && diplomacy_get(nextPt.owner.playerID, this.playerID).status != 'WAR') {
+        this.action = [];
+        break;
+      } else if (nextPt.owner == this.player || divs.length == 0) {
         if (nextPt.owner != this.player)
           this.movementProgress-=1.5;
         this.updateLocation(nextPt);

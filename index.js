@@ -93,6 +93,7 @@ $('controls').append(aiThinkButton);
 
 function handlePlayerOnPass() {
   weather_update();
+  diplomacy_check();
   if (!currentPlayer) return;
   let start = new Date().getTime();
   let divs = [];

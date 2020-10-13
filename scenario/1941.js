@@ -227,4 +227,6 @@ function load1941Scenario() {
 
   reinitCanvas();
   updateInterfaceOnPass();
+
+  diplomacy_change(PLAYERS[0].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -694310400, changeValue: {status: 'WAR'}});
 }
