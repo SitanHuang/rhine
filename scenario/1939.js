@@ -234,7 +234,7 @@ function load1939Scenario() {
           type = germanPanzer;
         }
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
-        v.divisions.map(x => {x.skill = type == (germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
+        v.divisions.map(x => {x.skill = (type == germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
         v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
