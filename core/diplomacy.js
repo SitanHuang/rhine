@@ -19,5 +19,6 @@ function diplomacy_change(pid1, pid2, dipObj) {
 }
 
 function diplomacy_get(pid1, pid2) {
+  if (pid1 == pid2) return {};
   return PLAYERS[pid1].diplomacy[pid2];
 }

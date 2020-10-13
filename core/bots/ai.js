@@ -4,7 +4,7 @@ ARMY_COLORS = ['#4a148c', '#b71c1c', '#0d47a1', '#109020', '#827717', '#e65100',
 class Ai {
   constructor(player) {
     this.player = player;
-    this.reCalc();
+//  this.reCalc();
   }
 
   handleBudget() {
