@@ -93,8 +93,8 @@ var WWIITerrains = `
 @@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
 @@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
 @@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fC@***r          mffmfmmc rrr@@@@  *ff r             |
-@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   cf  f  f  |
-@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@c @@@@@@     ff fff|
+@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   Cf  f  f  |
+@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@C @@@@@@     ff fff|
 @@@@@@@@@@@@@mmff   **********f@@fm*rr@@@ cfrrfc  m m     *rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
 @@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@m*mm c@@@  rr  mfff     *    @@@@@@@@@@@@@@@@@@  mmcmmm|
 @@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@pcrrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
@@ -201,7 +201,7 @@ function load1939Scenario() {
   let german = new Template(16300, 24, 14, 'Infanterie-Division', 12, 7);
   let italian = new Template(9400, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzer = new Template(17950, 6, 40, 'Panzer Corps', 3, 20);
-  let soviet = new Template(12100, 14, 5, 'Rifle Division', 4, 2);
+  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
   let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
