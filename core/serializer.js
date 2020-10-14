@@ -1,3 +1,15 @@
+function serializeWorld() {
+  PLAYERS.forEach(x => {
+    x._mapDataFlattened = false;
+  })
+  return dojox.json.ref.toJson({
+    MAP_DATA: MAP_DATA,
+    PLAYERS: PLAYERS,
+    timestamp: timestamp
+  });
+}
+
+
 function deserializeWorld(s) {
   let d = dojox.json.ref.fromJson(s);
   // p1 = d.p1;
