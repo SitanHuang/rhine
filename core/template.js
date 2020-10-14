@@ -40,7 +40,7 @@ class Template {
 
   deployable(player) {
     if (this.speed <= 0.5) return false;
-    if (!this.speed || !this.light || !this.heavy || !this.troop || !this.support || !this.motorized) return false;
+    if (!this.speed || !this.light || !this.heavy || !this.troop) return false;
     if (player.light < (this.light + this.support) || player.heavy < (this.motorized + this.heavy) ||
       player.recruitable <= this.troop) return false;
     return true;
@@ -72,7 +72,7 @@ class Template {
       title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison');
     else if (this.hardness > 0.35)
       title = title.replace('Calvary', 'Motorized');
-    return `Type ${(this.troop / 1000).round()}${(this.light / 10).round()}${(this.heavy / 10).round()} ${title}`;
+    return `${title} ${(this.troop / 1000).round()}${(this.light / 10).round()}${(this.heavy / 10).round()}`;
   }
 
   deploy(player, loc, title) {
