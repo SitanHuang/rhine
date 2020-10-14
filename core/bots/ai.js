@@ -85,7 +85,7 @@ class Ai {
           }
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
           if (player.divisions < 800) {
-            if (Math.random() > 0.8 && player.savedTemplates.length <= 10) { // creates new template
+            if (Math.random() > 0.9 && player.savedTemplates.length <= 6) { // creates new template
               tem.troop = (Math.random() * 20).round() * 1000 + 10000;
               tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(40) + 1;
               tem.light = (budget.newRecruits[0] * Math.random()).round().max(40) + 1;
@@ -123,11 +123,11 @@ class Ai {
               }
             } else { // use last template
               if (tem.deployable(player) && budget.newRecruits[1] >= tem.heavy + tem.motorized && budget.newRecruits[0] >= tem.light + tem.support) {
-                tem.deploy(player, p, tem.codeName);
+                tem.deploy(player, p, tem.defaultName || tem.codeName);
                 budget.newRecruits[1] -= tem.heavy + tem.motorized;
                 budget.newRecruits[0] -= tem.light + tem.support;
                 player.defaultTemplate = tem.deepClone();
-                if (Math.random() > 0.95 && player.savedTemplates.length >= 9) {
+                if (Math.random() > 0.95 && player.savedTemplates.length >= 5) {
                   let i = (Math.random() * player.savedTemplates.length) | 0;
                   player.savedTemplates.splice(i, 1);
                 }
