@@ -120,9 +120,8 @@ function handlePlayerOnPass() {
         }
       }
       if (col.owner != currentPlayerID) continue;
-      if (col.terrain != '@' &&
-        col.divisions.length) {
-        if (Math.random() > 0.5 || !col.supply) {
+      if (col.terrain != '@' && (col.divisions.length || !col.supply)) {
+        if (col.divisions.length ? Math.random() > 0.6 || !col.supply : Math.random() > 0.9) {
           col.supply = 0;
           currentPlayer.cityList.forEach(p => {
             if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);

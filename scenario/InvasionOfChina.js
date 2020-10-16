@@ -60,10 +60,10 @@ var InvasionOfChinaTerrains =
 @@@@@@@@@@@@@@@@@@@@@@@@@@DDDMMM DDDD U         MMMMMMM@@|
 DDDDDDDUMDD@@@@@@@@@@@@@DDDD DD DDDDD          MMM  MMM@@|
 DDDDDDDDMMMMMMDD@@@@@@@UDDDDDDDD U  D        MM     MM@@@|
-DDDDDDDDDDDDDMMMDD@@@@MMMMMM DMMM   D        MM    UM@@@@|
-DDDDDDDDDD DD MMM@@@@@@MM D  MMDDD         @@M       @@@@|
+DDDDDDDDDDDDDMMMDD@@@@MMMMMM DMMM   D       UMM    UM@@@@|
+DDDDDDDDDD DDUMMM@@@@@@MM D  MMDDD         @@M       @@@@|
 DDDDDDDDDDDD MMMMM@@@MU  DDUMMDDMM       U@@@  @ @    @@@|
-DMMMDDDDDDD DD    MMMD****D MMDDMMM      @@@U @@@@     @@|
+DMMMDDDDDDD DD    MMMD****D MMDDMMM   U  @@@U @@@@     @@|
 MMMMUMDDDDDDDD DDD  DDD D******MMU       @@@P@@@@P   U  @|
 MMMMMMDDDDDDD DDDDDDDDMMMMDMM******    @@@@@@@@@@@ @    @|
 DDMMMMMDD D DDDDDD  MMRRRRRMMMMU   **U@@@@@@@@@@@@@@@    |
@@ -71,19 +71,19 @@ DDDDMMMMD DD DDDDDMMMRRMMMRMMM      * P@@@@M@@@@@@@@     |
 DDDDDMMMDDDDD DDUDMRRMMMDDRMMM    UM**  RMMM  P@@@@@@    |
 RRDDDDDMM DDD DDDDRRMMDDDDRMMM     MM* RR**MU@@@@@@@@@  U|
 DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU    *******M@@@@@@@@@@@P @|
-DDDRDDDDDM RRRDDD RMMMDDDDRMMM     * RR*MMM@@@@@@@@@@@@@@|
+DDDRDDDDDM RRRDDD RMMMDUDDRMMM     * RR*MMM@@@@@@@@@@@@@@|
 DDDRDU  DMMRRR DRRRMMMDDDRRDMDD   U*RR *U P@@@@@@@@@@@@@@|
 DDDRD   DDMMMRRRRMMMMDDDUR DMDDD  *RR  *  @@@@@@@@@@@@@@@|
-DDDRD    DDMMMMMMMMMMDDDDRRRRRDDDR**   *  U  @@@@@@@@@@@@|
+DDDRD    DDMMMMMMMMMMDDDDRRRRRDUDR**   *  U  @@@@@@@@@@@@|
 DDDRDDU   DD       DDDDRRD DMRRRRRM* U ***   @@@@@@@@@@@@|
 RRRRRDDMM  D        RRRD  MMDMMMMM *     **   @@@@@@@@@@@|
 RDDDDRDMMM   U    MMM  MMMDDDM   M**    RR*RR @@@@@@@@@@@|
 DDDDDDRMMMM         M    DMMD     *MM  RR *U*RRR@@@@@@@@@|
 DDDDDDDRMMM         MMM M   U  MM U MM R    **R@@@@@@@@@@|
 DDDDDDMRMMM          MMMMMM     MM*MM RR  M  *UP@@@@@@@@@|
-DDDDDDMRMMM  M MM MMMM    MMM     *M RR MMM    @@@@@@@@@@|
+DDDDDDMRMMM  M MM MMMM    MMM     *M RR MMM  U @@@@@@@@@@|
 DDDDDMMMRMMM MMMMMMMMM RRRR M     *MMR MM        @@@@@@@@|
-DDDDDMMMRMRMM MMMMM URRR  RRRRRR  *URR M     U   @@@@@@@@|
+DDDDDMMMRMRMM MMMMM URRR  RRRRRR  *URRUM     U   @@@@@@@@|
 DDDDMMMMMMRRMMMM MMMRRMM MMMRMMRRR*RR RRMMMMMMM  @@@@@@@@|
 DDDMMMMMMMMMRRM   M  MMMM   RM *U**    RRMMMMMMM @@@@@@@@|
 MMMMMMMMMMMMMR  M  MMMUM    RM *MRR   URR MMM   @@@@@@@@@|
@@ -91,15 +91,15 @@ MMMMMMMMMMMM RR      MM   RRRM *MMR    R  M M  @@@@@@@@@@|
 MMMM   MMMM   R          RRU  **MMR MMM  MM M  @@@@@@@@@@|
        RRMM   R         RR  MU*MMRR U MMMMMMU @@@@@@@@@@@|
  RRRRRRRMMM   R         R   MMMMRR     MMMMM P@@@@@@@@@@@|
-RR  RR  M    RR               M RMM    MMMM   @@@@@@@@@@@|
+RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
    RR RRM    R     MM         MRRMMM  MMMM M @@@@ U@@@@@@|
    R R M    RR  MM MM      MMMRRMM   MMMMMMM @@@@P @@@@@@|
    R RRM   RR    MMMM  MM M MMRUM  MMMMMMUM @@@@ MM@@@@@@|
    R  R   R   U  MM MMMM MMM  R*** MM    M  @@@@ M  @@@@@|
   R  RM  RR       MMM      MMMMMM*M      M @@@@@MP@@@@@@@|
-    RRM  R        MMM      MMMMMM*U**     @@@@@@@ @@@@@@@|
+    RRM  R       UMMM      MMMMMM*U**     @@@@@@@ @@@@@@@|
     R M           MM          MMM   * P@@@@@@@@@@@@@@@@@@|
-   RRM            MM RRR            @ @@@@@@@@@@@@@@@@@@@|
+   RRM            MM RRR            @P@@@@@@@@@@@@@@@@@@@|
    R MMMMMM      MMMM   RR         @@@@@@@@@@@@@@@@@@@@@@|
      MMMMMMMMMMMMM MMM U R       P@@@@@@@@@@@@@@@@@@@@@@@|
      MMMMMMMMM       MMM  R    @@@@@@@@@@@@@@@@@@@@@@@@@@`

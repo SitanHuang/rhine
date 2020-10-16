@@ -14,7 +14,7 @@ function unit_pathfind(start, end) {
       }
       if (col.terrain == '@')
         return 0;
-      if (col.supply && col.supply <= 0.05)
+      if (!(col.supply >= 0.05) && col.owner == currentPlayerID)
         return 0;
       return 1 / terrain.movement * 2 + 1 + w;
     })
