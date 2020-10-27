@@ -218,7 +218,7 @@ function load1944Scenario() {
       if (v.owner == 1) {
         let type = Math.random() < 0.98 ? (Math.random() < 0.6 ? german : [germanMilitia, italian, hungarian, romanian].sample()) : germanPanzer;
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
-        v.divisions.forEach(x => {x.skill = Math.random() + 3;x.entrench = Math.random() * 0.5 + 1.5;x.morale = Math.random();x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;});
+        v.divisions.forEach(x => {x.skill = Math.random() * 4;x.entrench = Math.random() * 0.5 + 1.5;x.morale = Math.random();x.men = (Math.random() * 0.5 + 0.35) * x.template.troop;});
       } else if (v.owner == 2) {
         let type = Math.random() < 0.8 ? soviet : (Math.random() < 0.8 ? sovietTank : sovietMilitia);
         v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
