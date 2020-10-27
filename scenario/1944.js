@@ -70,7 +70,7 @@ var EU1944Terrains = `
 @@@@@@@@@@m *m  @@@@@@@@@@@@@@@*    @@@@@@@@@@@@@@@******cffrrfff  ffrrfff  Z  fffrrrrfff|
 @@@@fm c@@ m*mm @@@@@@@@@@@@@@@**   @@@@@@@@@@ @@*cf fffffffrf f   f frrff  *  rrrrfffff |
 @@@@fm   @@@*mmm @@@@@@@@@@@@@@ * @@@@@@@@@@f  @@* f  ffrrrrrf fc******rrrrrrrrrfff fff f|
-@fffff   @@m***  p@@@@@@@@@@@@@ *      @@  ff*cr**  f fffffffff** f fffffffff*fff        |
+@fffff   @@m***  p@@@@@@@@@@@@@ * c    @@  ff*cr**  f fffffffff** f fffffffff*fff        |
 @mmfm   @@@@@mC m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff       c|
 @        @ @Zm**  @@@@@@@@@@@ prr C*f     ff * rr       ff**f  frrrffffffffff*f          |
 @@  mff @@ mm  *  p@@@@@@@      rrr****Z  ff *rr      **c**f frrr ffff ff ****           |
@@ -90,7 +90,7 @@ var EU1944Terrains = `
 @@@@@@@@@@@@   c**  f m  ffmm  mmmmmmmrrCffff    *        m mfr c***** rr  **    f**Z    |
 @@@@@@@@@@@@@p   * rrrrr f     mmmmmm****rmff    C         mmmrr      rr  f **c****      |
 @@@@@@@@@@@@@@rrr*rr   rr     mmmmm***mmmrrf     *   mmm  fmmffr    rrr*    @            |
-@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
+@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*cmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
 @@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
 @@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fZ@***r          mffmfmmc rrr@@@@  *ff r             |
 @@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   Cf  f  f  |
@@ -102,10 +102,10 @@ var EU1944Terrains = `
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fp@@@fCfm  @@@@@@ fc**rrrm    f@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fc@@@@pfmm  @@@@@ f  m crfffff @@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@r@@@@@ mfm c @@@ mm fmmrrrrrr@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ c@@@@@@@cmm   @@ fff m m @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ c@@@@@@@cmm   @@cfff m m @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ f@@@@@@@@fmm @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ f@@@@@@@@@fm @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pf@@@@@@@@@@m @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@pf@@@@@@@@@@mc@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@m@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@c@fmrm@@@@@@@ f ff @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@p  mm@@@@@@@@@@r@@ c@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
@@ -153,8 +153,8 @@ function load1944Scenario() {
   PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 0.01; //.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 17000000;
-  PLAYERS[1].casualties = 4000000;
+  PLAYERS[1].manpower = 20000000;
+  PLAYERS[1].casualties = 5100000;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
@@ -162,8 +162,8 @@ function load1944Scenario() {
 
   PLAYERS[0].light = 1000;
   PLAYERS[0].heavy = 2000;
-  PLAYERS[1].light = -100;
-  PLAYERS[1].heavy = -100;
+  PLAYERS[1].light = -1000;
+  PLAYERS[1].heavy = -1000;
 
   PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":false},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":true},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[1].sumAllGeneralTraits;
@@ -218,7 +218,7 @@ function load1944Scenario() {
       if (v.owner == 1) {
         let type = Math.random() < 0.98 ? (Math.random() < 0.6 ? german : [germanMilitia, italian, hungarian, romanian].sample()) : germanPanzer;
         v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
-        v.divisions.forEach(x => {x.skill = Math.random() * 4;x.entrench = Math.random() * 0.5 + 1.5;x.morale = Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
+        v.divisions.forEach(x => {x.skill = Math.random() + 3;x.entrench = Math.random() * 0.5 + 1.5;x.morale = Math.random();x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;});
       } else if (v.owner == 2) {
         let type = Math.random() < 0.8 ? soviet : (Math.random() < 0.8 ? sovietTank : sovietMilitia);
         v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
