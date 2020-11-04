@@ -108,7 +108,7 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners1941[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(7).fill('F');
+	if (o == 1) slots = Array(3).fill('F');
     else if(Math.random()>0.3) slots = Array(1).fill('F');
 
 	  }
@@ -161,7 +161,7 @@ function loadChina1941Scenario() {
         v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? (Math.random() * 3).round() : Math.ceil(Math.random() * 3 + 3)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 12000 : 7000, (Math.random() * 5 + 10).round(), (Math.random() * 5 + 3).round(), 'Division', 2+(Math.random()*3).round(), 1))))
         v.divisions.forEach(x => {x.skill = Math.random() * 2.5 + 0.5;x.entrench = 2;x.morale = Math.random() + 0.5;x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;});
       } else {
-        v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+2).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 12, 'Division', 10, 5))))
+        v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+1).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14500, 17, 8, 'Division', 6, 3))))
         v.divisions.forEach(x => {x.skill = Math.random() * 1.5 + 1;x.entrench = 0.9 + Math.random();x.morale = 1.25;x.men = (Math.random() * 0.3 + 0.6) * x.template.troop;});
       }
   })));
