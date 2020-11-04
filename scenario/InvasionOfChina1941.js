@@ -108,7 +108,7 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners1941[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(10).fill('F');
+	if (o == 1) slots = Array(9).fill('F');
     else if(Math.random()>0.3) slots = Array(1).fill('F');
 
 	  }
@@ -135,13 +135,15 @@ function loadChina1941Scenario() {
   p2.growthRate = 0.01;
   p2.light = 700;
   p2.heavy = 500;
+  p2.casualties = 2400000;
   p2.factoryInLight = 1;
   let p1 = PLAYERS[1];
   p1.color = 'rgba(120, 40, 40, 0.25)';
   p1.manpower = Math.floor(Math.random() * 500000 + 5000000);
   p1.growthRate = 0.0050;
-  p1.light = -200;
-  p1.heavy = -500;
+  p1.light = -1500;
+  p1.heavy = -2000;
+  p1.casualties = 950000;
   p1.retreatable = 70;
   p1.factoryInLight = 1;
   p1.savedTemplates = [{"#":"Template","troop":28500,"light":32,"heavy":20,"defaultName":"步兵师团","support":10,"motorized":10},{"#":"Template","troop":8500,"light":14,"heavy":20,"defaultName":"炮兵联队","support":7,"motorized":0},{"#":"Template","troop":4500,"light":8,"heavy":10,"defaultName":"铁道联队","support":4,"motorized":5},{"#":"Template","troop":19000,"light":22,"heavy":14,"defaultName":"警备三单位制师团","support":8,"motorized":7},{"#":"Template","troop":8000,"light":4,"heavy":26,"defaultName":"装甲车队","support":2,"motorized":13},{"#":"Template","troop":18000,"light":6,"heavy":40,"defaultName":"装甲师团","support":3,"motorized":20},{"#":"Template","troop":4000,"light":6,"heavy":6,"defaultName":"侦察小队","support":3,"motorized":3}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
