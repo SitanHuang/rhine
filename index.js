@@ -51,6 +51,7 @@ function playerSelectionScreen(alreadyWWII) {
   let innerHTML = '<h1>Select players</h1><table style="width:70%;margin: auto;">';
   if (!alreadyWWII)
     innerHTML = `<h1>Scenarios:</h1>
+      <p><button onclick="loadChina1941Scenario();playerSelectionScreen(1)">Load 1941 China scenario</button></p>
       <p><button onclick="load1944Scenario();playerSelectionScreen(1)">Load 1944 Europe scenario</button></p>
       <p><button onclick="load1941Scenario();playerSelectionScreen(1)">Load 1941 Europe scenario</button></p>
       <p><button onclick="load1939Scenario();playerSelectionScreen(1)">Load 1939 Europe scenario</button></p>` + innerHTML;

@@ -98,9 +98,9 @@ DEFAULT_REPAINTCANVAS_CALLBACK = td => {
           SELECTED_UNITS = SELECTED_UNITS.concat(prov.divisions);
         else
           SELECTED_UNITS = [].concat(prov.divisions)
-      else
+      else if (!shiftDown)
         SELECTED_UNITS = [];
-    } else
+    } else if (!shiftDown)
       SELECTED_UNITS = [];
     repaintRightList();
   }
@@ -129,6 +129,12 @@ function repaintProv(td) {
   }
 
 
+  td.onmouseenter = () => {
+    if (mouseDown && shiftDown) {
+      console.log(`Click: ${td.pt}`)
+      if (colCallback) colCallback(td);
+    }
+  };
   td.onclick = () => {
     console.log(`Click: ${td.pt}`)
     if (colCallback) colCallback(td);

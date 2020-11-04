@@ -27,10 +27,14 @@ function createFloatingDIV(text, clientX, clientY) {
 }
 
 let shiftDown = false;
+let mouseDown = false;
 
 window.onkeyup = function (evt) {
   evt = evt || window.event;
-  shiftDown = evt.shiftKey;
+  if (!(shiftDown = evt.shiftKey)) {
+    jQuery($map_container).attr('class', 'dragscroll');
+    dragscroll.reset();
+  }
 }
 
 window.onkeydown = function (evt) {
@@ -42,9 +46,17 @@ window.onkeydown = function (evt) {
   let tagName = document.activeElement.tagName.toLowerCase();
   if (tagName == 'input') return;
   evt = evt || window.event;
-  shiftDown = evt.shiftKey;
+  if (shiftDown = evt.shiftKey) {
+    jQuery($map_container).attr('class', '');
+    dragscroll.reset();
+  }
   var charCode = evt.which || evt.keyCode;
   var charStr = String.fromCharCode(charCode).toUpperCase();
+  if (charStr == 'H') {
+    SELECTED_UNITS.length = (SELECTED_UNITS.length / 2).floor();
+    repaintRightList();
+    return false;
+  }
   for (button of document.getElementsByClassName('shortcut')) {
     if (button.dataset.key && button.dataset.key.toUpperCase() == charStr) {
       button.onclick();
@@ -53,3 +65,10 @@ window.onkeydown = function (evt) {
     }
   }
 };
+
+window.onmousedown = () => { mouseDown = true  };
+window.onmouseup = () => { mouseDown = false  };
+
+jQuery(window).blur(function(){
+  shiftDown = mouseDown = false;
+});
