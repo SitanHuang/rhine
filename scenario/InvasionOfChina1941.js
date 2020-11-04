@@ -131,7 +131,7 @@ function loadChina1941Scenario() {
   let p2 = PLAYERS[0];
   p2.color = 'rgba(120, 173, 206, 0.25)'
   p2.retreatable = 30;
-  p2.manpower = Math.floor(Math.random() * 50000 + 6000000);
+  p2.manpower = Math.floor(Math.random() * 500000 + 9000000);
   p2.growthRate = 0.01;
   p2.light = 1500;
   p2.heavy = 500;
