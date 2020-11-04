@@ -158,8 +158,8 @@ function loadChina1941Scenario() {
     if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
       if (v.owner == 0) {
         if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 && v.terrain == 'U') v.fort = true;
-        v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? (Math.random() * 12).round() : Math.ceil(Math.random() * 2 + 3)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 7000, (Math.random() * 5 + 9).round(), (Math.random() * 5).round(), 'Division', 2, 1))))
-        v.divisions.forEach(x => {x.skill = Math.random() * 2 + 0.8;x.entrench = 2;x.morale = Math.random() + 0.5;x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;});
+        v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? (Math.random() * 8).round() : Math.ceil(Math.random() * 3 + 3)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 12000 : 7000, (Math.random() * 5 + 10).round(), (Math.random() * 5 + 3).round(), 'Division', 2+(Math.random()*3).round(), 1))))
+        v.divisions.forEach(x => {x.skill = Math.random() * 3.5 + 0.5;x.entrench = 2;x.morale = Math.random() + 0.5;x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;});
       } else {
         v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+1).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 12, 'Division', 10, 5))))
         v.divisions.forEach(x => {x.skill = Math.random() * 1.5 + 1;x.entrench = 0.9;x.morale = 1;x.men = (Math.random() * 0.3 + 0.6) * x.template.troop;});
