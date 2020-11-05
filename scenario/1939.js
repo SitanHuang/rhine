@@ -179,7 +179,7 @@ function load1939Scenario() {
 
   window.p3 = new Player();
   p3.color = 'rgba(150, 0, 0, 0.2)';
-  p3.manpower = 6000000;
+  p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
   p3.light = -1800;
   p3.factories = 0;
