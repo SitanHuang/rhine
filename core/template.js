@@ -90,6 +90,7 @@ class Template {
     t.defaultName = this.defaultName.deepClone();
     t.support = this.support;
     t.motorized = this.motorized;
+    t.irremovable = this.irremovable;
     return t;
   }
 
