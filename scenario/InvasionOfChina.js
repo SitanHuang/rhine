@@ -113,7 +113,7 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
 
 	  }
     if (!TERRAINS[v]) throw 'Not found.'
-    return {terrain: v, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
+    return {terrain: v, supply: 1, owner: o, slots: slots, divisions: [], pt: pt(row, col)}
 
   })));
 
