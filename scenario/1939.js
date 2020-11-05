@@ -200,9 +200,11 @@ function load1939Scenario() {
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
   let german = new Template(16300, 24, 14, 'Infanterie-Division', 12, 7);
   let italian = new Template(9400, 16, 6, 'Intalian Infantry Division', 8, 3);
-  let germanPanzer = new Template(17950, 6, 40, 'Panzer Corps', 3, 20);
+  let germanPanzer = new Template(17950, 6, 46, 'Panzer Corps', 3, 23);
   let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
   let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
+  
+  german.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
@@ -220,7 +222,7 @@ function load1939Scenario() {
     if (v.owner == 0) {
       let type = Math.random() < 0.7 ? british : american;
       if (v.terrain == 'P' || v.terrain == 'U')
-        v.divisions = Array((Math.random() * 3).round() + 2).fill(0).map(() => (new Division(v.owner, ++british_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++british_i + 'th ' + type.defaultName, pt(row, col), type)));
       else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0) {
         v.divisions = Array((Math.random() * 2).round() + 1).fill(0).map(() => (new Division(v.owner, ++british_i + 'th French Division', pt(row, col), french)));
       }
@@ -233,7 +235,7 @@ function load1939Scenario() {
         if (row >= 19 && row <= 23 && col >= 20 && col <= 27) {
           type = germanPanzer;
         }
-        v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
