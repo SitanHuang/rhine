@@ -127,9 +127,10 @@ class Ai {
                 budget.newRecruits[1] -= tem.heavy + tem.motorized;
                 budget.newRecruits[0] -= tem.light + tem.support;
                 player.defaultTemplate = tem.deepClone();
-                if (Math.random() > 0.95 && player.savedTemplates.length >= 5) {
+                if (Math.random() > 0.90 && player.savedTemplates.length >= 5) {
                   let i = (Math.random() * player.savedTemplates.length) | 0;
-                  player.savedTemplates.splice(i, 1);
+                  if (player.savedTemplates[i] && !player.savedTemplates[i].irremovable)
+                    player.savedTemplates.splice(i, 1);
                 }
               }
             }
