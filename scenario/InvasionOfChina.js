@@ -92,7 +92,7 @@ MMMM   MMMM   R          RRU  **MMR MMM  MM M  @@@@@@@@@@|
        RRMM   R         RR  MU*MMRR U MMMMMMU @@@@@@@@@@@|
  RRRRRRRMMM   R         R   MMMMRR     MMMMM P@@@@@@@@@@@|
 RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
-   RR RRM    R     MM         MRRMMM  MMMM M @@@@ U@@@@@@|
+   RR RRM    R     MM         MRRMMM  MMMM M @@@@  @@@@@@|
    R R M    RR  MM MM      MMMRRMM   MMMMMMM @@@@P @@@@@@|
    R RRM   RR    MMMM  MM M MMRUM  MMMMMMUM @@@@ MM@@@@@@|
    R  R   R   U  MM MMMM MMM  R*** MM    M  @@@@ M  @@@@@|
@@ -150,7 +150,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 15 ? 4 : Math.ceil(Math.random() * 9 + 20)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 8000 : 6000, 10, 3, 'Division', 1, 1))))
+      v.divisions = Array(v.terrain == 'P' || v.terrain == 'D' || row < 15 ? 4 : Math.ceil(Math.random() * 9 + 20)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 9000 : 6000, 10, 3, 'Division', 1, 1))))
     else
       v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 12, 'Division', 10, 5))))
 })));
@@ -160,13 +160,13 @@ pt(27, 46).prov.divisions = Array(22).fill(0).map(() => (new Division(1, 'Infant
   .concat(Array(5).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(18000, 14, 32, 'Tank Division', 7, 16)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(3).fill(0).map(() => {
-  let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(19000, 20, 35, '', 10, 10))
+  let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(20000, 20, 35, '', 10, 17))
   d.skill = 1.5;
   return d;
 })
 Array(8).fill(0).map(() => {
   let d = new Division(0, 'Nanjing Garrisons', pt(25, 43), new Template(20000, 14, 6, 'Nanjing Garrisons', 7, 3))
-  d.skill = 2;
+  d.skill = 4;
 })
 Array(8).fill(0).map(() => {
   let d = new Division(0, 'Infantry Division', pt(25, 43), new Template(13000, 14, 5))
