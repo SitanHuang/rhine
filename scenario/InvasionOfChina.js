@@ -226,7 +226,7 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'D' || v.terrain == 'P' || (row < 11 && col < 31) ? 5 : Math.ceil(Math.random() * 10 + 10)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 9000 : 6000, 10, 3, 'Division', 1, 1))))
+      v.divisions = Array(v.terrain == 'D' || v.terrain == 'P' || (row < 11 && col < 31) ? 5 : Math.ceil(Math.random() * 10 + 10)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 7000, 10+(Math.random()*3).round(), 3, 'Division', 1+(Math.random()*4).round(), 1))))
     else
       v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 12, 'Division', 10, 5))))
 })));
