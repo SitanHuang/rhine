@@ -134,7 +134,7 @@ class Ai {
                 }
               }
             }
-            
+
           }
         } else {
           if (player.constructionPoints > 1500 & Math.random() > 0.9) {
@@ -314,7 +314,9 @@ class Ai {
         `Player ${player.playerID} disbanded ${SELECTED_UNITS.length} units`
       );
       player.defaultTemplate = MINIMAL_TEMPLATE.deepClone();
+      disableSound = true;
       convertSelectedOnClick(null);
+      disableSound = false;
     }
 
     let i = -1;

@@ -92,8 +92,10 @@ DEFAULT_REPAINTCANVAS_CALLBACK = td => {
     let pt = td.pt;
     let prov = pt.prov;
     let num = prov.divisions.length;
+    disableSound = true;
     if (pt.owner == currentPlayer) {
       if (num > 0) {
+        disableSound = false;
         if (shiftDown)
           SELECTED_UNITS = SELECTED_UNITS.concat(prov.divisions);
         else
@@ -103,6 +105,7 @@ DEFAULT_REPAINTCANVAS_CALLBACK = td => {
     } else if (!shiftDown)
       SELECTED_UNITS = [];
     repaintRightList();
+    disableSound = false;
   }
 };
 

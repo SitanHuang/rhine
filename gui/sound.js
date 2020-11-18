@@ -1,3 +1,5 @@
+var disableSound = false;
+
 function SoundPlayer(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
@@ -7,11 +9,12 @@ function SoundPlayer(src) {
   this.sound.volumn = 1;
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
-  
+
   this.end = Infinity;
-  
+
   let that = this;
   this.play = function () {
+    if (disableSound) return;
     this.sound.play();
     that.end = Infinity;
   };
@@ -20,6 +23,7 @@ function SoundPlayer(src) {
     that.end = Infinity;
   };
   this.playSprite = function (begin, end) {
+    if (disableSound) return;
     that.sound.currentTime = begin;
     that.end = end;
     that.sound.play();
