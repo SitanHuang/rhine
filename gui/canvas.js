@@ -93,12 +93,12 @@ DEFAULT_REPAINTCANVAS_CALLBACK = td => {
     let prov = pt.prov;
     let num = prov.divisions.length;
     if (pt.owner == currentPlayer) {
-      if (num > 0)
+      if (num > 0) {
         if (shiftDown)
           SELECTED_UNITS = SELECTED_UNITS.concat(prov.divisions);
         else
           SELECTED_UNITS = [].concat(prov.divisions)
-      else if (!shiftDown)
+      } else if (!shiftDown)
         SELECTED_UNITS = [];
     } else if (!shiftDown)
       SELECTED_UNITS = [];
@@ -140,7 +140,9 @@ function repaintProv(td) {
     if (colCallback) colCallback(td);
   };
   td.oncontextmenu = () => {
-    if (colRightClickCallback) colRightClickCallback(td);
+    if (colRightClickCallback) {
+      colRightClickCallback(td);
+    }
     return false;
   }
 }

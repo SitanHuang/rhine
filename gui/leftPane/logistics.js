@@ -358,6 +358,7 @@ function buildFactoryOnClick(button) {
     currentPlayer.constructionPoints -= 550;
     colCallback = null;
     button.parentNode.children[3].style.display = 'none';
+    buttonsPlayer.playSprite(15 + 3/60, 17 + 15/60);
     updateLogistics();
     repaintCanvas();
   }
@@ -385,6 +386,7 @@ function buildFortOnClick(button) {
     currentPlayer.constructionPoints -= 150;
     colCallback = null;
     button.parentNode.children[3].style.display = 'none';
+    buttonsPlayer.playSprite(15 + 3/60, 17 + 15/60);
     updateLogistics();
     repaintCanvas();
   }
@@ -477,4 +479,7 @@ function updateLogistics() {
   <br><br><br>
   <p>V1.0.2</p>
   `;
+  jQuery('#left-content button:not([data-custom-sound])').bind( "click", function() {
+    buttonsPlayer.playSprite(7 + 3/60, 7 + 14/60);
+  });
 }

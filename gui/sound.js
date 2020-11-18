@@ -3,16 +3,37 @@ function SoundPlayer(src) {
   this.sound.src = src;
   this.sound.setAttribute("preload", "auto");
   this.sound.setAttribute("controls", "none");
-  this.sound.loop = true;
+  this.sound.loop = false;
   this.sound.volumn = 1;
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
+  
+  this.end = Infinity;
+  
+  let that = this;
   this.play = function () {
     this.sound.play();
+    that.end = Infinity;
   };
   this.stop = function () {
     this.sound.pause();
+    that.end = Infinity;
   };
+  this.playSprite = function (begin, end) {
+    that.sound.currentTime = begin;
+    that.end = end;
+    that.sound.play();
+  };
+  that.sound.addEventListener('timeupdate', function(ev) {
+    if (that.sound.currentTime > that.end) {
+      that.sound.pause();
+    }
+  },false);
   this.play();
 }
-new SoundPlayer('gui/music/LOLS5.mp3');
+var buttonsPlayer = new SoundPlayer('gui/music/buttons.webm');
+var navyPlayer = new SoundPlayer('gui/music/navy.webm');
+var assignPlayer = new SoundPlayer('gui/music/assign.webm');
+var startPlayer = new SoundPlayer('gui/music/start.webm');
+var convertPlayer = new SoundPlayer('gui/music/convert.webm');
+var miscPlayer = new SoundPlayer('gui/music/misc.webm');

@@ -1,3 +1,77 @@
+var ChineseCivilWarTrigger = function () {
+  if (pt(0, 0).prov.callTrigger != 'ChineseCivilWarTrigger()') return false;
+  if (PLAYERS[1].cities <= 4 ||
+    (PLAYERS[0].cities >= 10 && Math.random() > 0.8 && timestamp > -769392000)) { // 8/15/1945
+    PLAYERS[1].manpower = 0;
+    PLAYERS[1].color='rgba(250, 220, 137, 0.25)';
+
+    MAP_DATA.forEach((x, r) => {
+      x.forEach((col, c) => {
+        if (!col) return;
+        col.supply = 4;
+        col.fort = false;
+        if (r >= 8 && c >= 49 && r <= 17) { // Korea
+          col.terrain = '@';col.slots = [];
+        } else if (r >= 39 && c >= 48) { // Taiwan
+          col.owner = 0;
+          col.divisions.forEach(d => d.playerID = 0);
+        } else if (col.owner == 1 && Math.random() > 0.05) {
+          col.divisions = [];
+        }
+      })
+    });
+
+
+    window.p3 = PLAYERS[2] || new Player();
+    p3.color = 'rgba(150, 0, 0, 0.2)';
+    p3.manpower = 10000000;
+    p3.growthRate = 0.01;
+    p3.light = PLAYERS[1].light + 5000;
+    p3.factories = 0;
+    p3.heavy = PLAYERS[1].heavy + 2000;
+    p3.constructionPoints = 2000 + (Math.random() * 2000).round();
+    p3.setAI = true;
+    PLAYERS[1].light = PLAYERS[1].heavy = 0;
+    p3.factoryInLight = 1;
+    p3.originalCities = 10;
+    p3.casualties = 0;
+    p3.generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg"},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
+    p3.sumAllGeneralTraits;
+
+    [pt(15, 16),pt(16, 16),pt(16, 17),pt(17, 17),pt(18, 17),pt(19, 17),pt(20, 17),pt(21, 17),pt(22, 17),pt(23, 17),pt(24, 17),pt(24, 18),pt(24, 19),pt(24, 20),pt(23, 20),pt(23, 21),pt(23, 22),pt(22, 23),pt(23, 23),pt(23, 23),pt(22, 24),pt(21, 25),pt(22, 25),pt(21, 25),pt(21, 26),pt(20, 26),pt(19, 26),pt(18, 26),pt(18, 27),pt(17, 27),pt(16, 27),pt(16, 28),pt(15, 28),pt(14, 28),pt(14, 29),pt(13, 29),pt(12, 28),pt(12, 27),pt(12, 26),pt(12, 25),pt(12, 24),pt(12, 23),pt(12, 22),pt(12, 21),pt(13, 21),pt(13, 20),pt(13, 19),pt(13, 18),pt(14, 18),pt(14, 17),pt(14, 16),pt(15, 15),pt(15, 18),pt(15, 17),pt(16, 17),pt(16, 18),pt(17, 18),pt(18, 18),pt(19, 18),pt(20, 18),pt(21, 18),pt(22, 18),pt(23, 18),pt(23, 19),pt(22, 19),pt(21, 19),pt(20, 19),pt(19, 19),pt(18, 19),pt(17, 19),pt(16, 19),pt(15, 19),pt(14, 19),pt(14, 20),pt(15, 20),pt(16, 20),pt(17, 20),pt(18, 20),pt(19, 20),pt(20, 20),pt(21, 20),pt(22, 20),pt(22, 21),pt(21, 21),pt(20, 21),pt(19, 21),pt(18, 21),pt(17, 21),pt(16, 21),pt(15, 21),pt(14, 21),pt(14, 22),pt(13, 22),pt(13, 23),pt(13, 24),pt(13, 25),pt(13, 26),pt(14, 26),pt(15, 26),pt(16, 26),pt(17, 26),pt(17, 25),pt(18, 25),pt(19, 25),pt(20, 25),pt(20, 24),pt(21, 24),pt(21, 23),pt(20, 23),pt(19, 23),pt(19, 24),pt(18, 24),pt(17, 24),pt(16, 24),pt(16, 25),pt(15, 25),pt(14, 25),pt(14, 24),pt(14, 23),pt(15, 23),pt(15, 22),pt(16, 22),pt(17, 22),pt(18, 22),pt(19, 22),pt(20, 22),pt(21, 22),pt(22, 22),pt(16, 23),pt(17, 23),pt(18, 23),pt(15, 24),pt(13, 27),pt(14, 27),pt(15, 27),pt(11, 30),pt(10, 30),pt(10, 30),pt(9, 31),pt(9, 32),pt(8, 32),pt(7, 32),pt(7, 31),pt(7, 30),pt(6, 30),pt(6, 29),pt(6, 28),pt(5, 28),pt(5, 27),pt(4, 27),pt(4, 26),pt(3, 26),pt(3, 27),pt(3, 28),pt(4, 28),pt(4, 29),pt(5, 29),pt(5, 30),pt(5, 31),pt(6, 31),pt(6, 32),pt(5, 32),pt(4, 32),pt(3, 32),pt(2, 32),pt(2, 31),pt(2, 30),pt(2, 29),pt(2, 28),pt(3, 29),pt(3, 30),pt(3, 31),pt(4, 31),pt(4, 30),pt(10, 38),pt(10, 39),pt(9, 39),pt(10, 31),pt(9, 31),pt(11, 31),pt(8, 33),pt(9, 34),pt(9, 35),pt(10, 35),pt(10, 36),pt(10, 36),pt(10, 37),pt(10, 38),pt(10, 37),pt(3, 33),pt(4, 33),pt(5, 33),pt(6, 33),pt(7, 33),pt(7, 33),pt(2, 33),pt(6, 40),pt(6, 39),pt(5, 39),pt(5, 38),pt(4, 38),pt(4, 37),pt(3, 37),pt(2, 37),pt(2, 36),pt(2, 35),pt(2, 34),pt(3, 34),pt(4, 34),pt(5, 34),pt(6, 34),pt(7, 34),pt(8, 34),pt(8, 34),pt(8, 34),pt(8, 34),pt(8, 35),pt(8, 35),pt(8, 36),pt(9, 36),pt(9, 37),pt(9, 38),pt(8, 38),pt(8, 39),pt(8, 40),pt(7, 40),pt(6, 40),pt(6, 41),pt(7, 41),pt(7, 40),pt(7, 39),pt(7, 38),pt(7, 37),pt(8, 37),pt(8, 36),pt(7, 36),pt(7, 35),pt(6, 35),pt(6, 34),pt(5, 35),pt(4, 35),pt(3, 35),pt(2, 35),pt(3, 35),pt(3, 36),pt(4, 36),pt(5, 36),pt(6, 36),pt(6, 37),pt(6, 38),pt(6, 37),pt(5, 37),pt(5, 36),pt(15, 45),pt(15, 44),pt(15, 45),pt(15, 45),pt(15, 46),pt(15, 46),pt(15, 46),pt(15, 45),pt(16, 44),pt(16, 44),pt(16, 43),pt(16, 42),pt(15, 43),pt(14, 43),pt(15, 42),pt(15, 41),pt(16, 41),pt(16, 40),pt(17, 40),pt(17, 39),pt(17, 38),pt(16, 38),pt(16, 37),pt(16, 38),pt(15, 39),pt(16, 39),pt(15, 40),pt(19, 39),pt(20, 39),pt(18, 39),pt(18, 41),pt(18, 42),pt(17, 42),pt(17, 41),pt(17, 40),pt(18, 40),pt(19, 40),pt(19, 41),pt(19, 42),pt(20, 41),pt(20, 40),pt(21, 40),pt(21, 41),pt(21, 42),pt(21, 43),pt(21, 44),pt(22, 44),pt(23, 45),pt(24, 45),pt(23, 45),pt(23, 44),pt(23, 43),pt(22, 43),pt(22, 42),pt(22, 41),pt(16, 30),pt(17, 30),pt(18, 30),pt(19, 30),pt(20, 30),pt(21, 30),pt(21, 31),pt(21, 32),pt(20, 32),pt(19, 32),pt(19, 33),pt(18, 33),pt(17, 33),pt(17, 34),pt(16, 34),pt(15, 34),pt(15, 33),pt(15, 32),pt(16, 32),pt(16, 31),pt(17, 31),pt(18, 31),pt(19, 31),pt(20, 31),pt(17, 32),pt(16, 32),pt(16, 33),pt(18, 32),pt(26, 34),pt(27, 34),pt(27, 33),pt(28, 33),pt(27, 36),pt(27, 37),pt(26, 37),pt(26, 36),pt(27, 35),pt(26, 35),pt(46, 34),pt(46, 33),pt(47, 33),pt(47, 34),pt(46, 35),pt(46, 34),pt(45, 34),pt(45, 33),pt(44, 33),pt(44, 32),pt(45, 32),pt(48, 33),pt(2, 38),pt(2, 39),pt(1, 39),pt(1, 40),pt(1, 41),pt(1, 42),pt(1, 43),pt(1, 44),pt(1, 45),pt(1, 46),pt(1, 47),pt(1, 48),pt(1, 49),pt(1, 50),pt(1, 51),pt(1, 52),pt(1, 53),pt(2, 53),pt(2, 54),pt(3, 54),pt(4, 54),pt(3, 54),pt(3, 55),pt(2, 55),pt(1, 55),pt(1, 54),pt(2, 52),pt(2, 53),pt(3, 53),pt(4, 53),pt(4, 54),pt(5, 54),pt(5, 53),pt(4, 53),pt(3, 53),pt(3, 52),pt(2, 51),pt(2, 50),pt(2, 49),pt(2, 48),pt(2, 47),pt(2, 46),pt(2, 45),pt(2, 44),pt(2, 43),pt(2, 42),pt(2, 41),pt(2, 40),pt(3, 40),pt(3, 39),pt(4, 39),pt(3, 38)].forEach(p => {
+      p.prov.owner = 2;
+      p.prov.supply = 4;
+      (p.prov.divisions = p.prov.divisions.filter(() => Math.random() > 0.3)).forEach(d => d.playerID = 2);
+      if (p.prov.terrain == 'U') {
+        if (p.row <= 12) {
+          p.prov.slots = Array(15).fill('F');
+        }
+        for (let i = 0;i < Math.random() * 10 + 15;i++)
+          p.prov.divisions.push(new Division(2, 'Militia Division', p, new Template(20000, 12, 4, 'Militia Division', 2, 1)));
+      }
+      p.prov.divisions.forEach(d => { d.playerID = 2; d.morale = 2; d.skill = (d.skill * 1.5).max(4); d.action = []; });
+    });
+
+    diplomacy_change(0, 2, {status: 'PACT', changeAfter: timestamp+3600*24*366*(Math.random()*1.5+1), changeValue: {status: 'WAR'}});
+
+    PLAYERS[2].manpower = PLAYERS[2].manpower.min(PLAYERS[0].manpower);
+    PLAYERS[0].manpower /= 2;
+    PLAYERS[0].growthRate /= 2;
+
+    pt(0, 0).prov.callTrigger = "ChinaDefectTrigger()";
+
+    reinitCanvas();
+  }
+};
+
+var ChinaDefectTrigger = function () {
+  if (pt(0, 0).prov.callTrigger != 'ChinaDefectTrigger()') return false;
+  if (diplomacy_get(0, 2).status=="WAR" && Math.random() > 0.95 && PLAYERS[0].cities && PLAYERS[2].cities) {
+    MAP_DATA.forEach(row=>{row.forEach(col=>{if(col&&col.owner==0&&Math.random()>0.9&&col.divisions.length){col.owner=2;col.divisions.forEach(x => x.playerID=col.owner)}})});
+    delete pt(0, 0).prov.callTrigger;
+  }
+}
+
 var InvasionOfChinaOwners =
 `                                 111111111111111111111111|
                                  111111111111111111111111|
@@ -121,6 +195,8 @@ MAP_DATA = InvasionOfChinaTerrains;
 pt(25, 43).prov.slots = Array(5).fill('F'); // Nanjing
 pt(30, 35).prov.slots = Array(25).fill('F'); // Wuhan
 pt(33, 22).prov.slots = Array(38).fill('F'); // Chongqing
+
+pt(0, 0).prov.callTrigger = 'ChineseCivilWarTrigger()';
 
 
 let p2 = new Player();

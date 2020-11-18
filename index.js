@@ -1,5 +1,3 @@
-alert('Google Chrome is recommended for the best experience.');
-
 reinitCanvas();
 
 window.currentPlayerID = -1;
@@ -64,7 +62,7 @@ function playerSelectionScreen(alreadyWWII) {
     `;
   })
   innerHTML += '</table>' +
-  `<br><br><button onclick="playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>  <button onclick="startObserveMode();observeMode();">Observe Game</button>
+  `<br><br><button onclick="startPlayer.play();playerSelection.remove();if (currentPlayer.setAI) pass()">Start Game</button>  <button onclick="startObserveMode();observeMode();">Observe Game</button>
   <br><br><table style="width:77%">
   `;
   Object.entries(localStorage).forEach((e) => {
@@ -168,6 +166,7 @@ function pass() {
   }
   document.body.append(waiting);
   setTimeout(() => {
+    if (MAP_DATA[0][0].callTrigger) eval(MAP_DATA[0][0].callTrigger);
     handlePlayerOnPass();
     incrementAndUpdateDate();
     if (++currentPlayerID >= PLAYERS.length) {

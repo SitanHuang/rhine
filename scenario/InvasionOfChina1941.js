@@ -127,6 +127,8 @@ function loadChina1941Scenario() {
   pt(30, 35).prov.slots = Array(10).fill('F'); // Wuhan
   pt(33, 22).prov.slots = Array(60).fill('F'); // Chongqing
 
+  pt(0, 0).prov.callTrigger = 'ChineseCivilWarTrigger()';
+
 
   let p2 = PLAYERS[0];
   p2.color = 'rgba(120, 173, 206, 0.25)'

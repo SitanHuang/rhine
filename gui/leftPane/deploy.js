@@ -73,7 +73,8 @@ function navalInvadeOnClick(button) {
       if (td.style.cursor != 'pointer') return;
       SELECTED_UNITS.forEach(x => {
         x.action = [td.pt.navalInvasion];
-      })
+      });
+      navyPlayer.playSprite(0);
       message_token.style.color = 'default';
       message_token.innerText = `Mission launched.`;
       currentPlayer.light -= light;
@@ -183,6 +184,7 @@ function convertSelectedOnClick(button) {
     return;
   }
   if (msg) msg.style.color = 'blue';
+  convertPlayer.playSprite(0);
   let html = 'Successful:<br>';
   html += `Light Equip.: net ${abbreviate(netlight + nets, 2, false, false)}<br>`;
   html += `Heavy Equip.: net ${abbreviate(netheavy + netm, 2, false, false)}<br>`;
@@ -301,7 +303,7 @@ function updateDeploy() {
   <font color="red" style="display:none">Invalid Template</font>
   <font color="blue" style="display:none">Select city</font>
   <tr><td colspan=2>
-  <button onclick="convertSelectedOnClick(this)">Convert Selected</button>
+  <button data-custom-sound onclick="convertSelectedOnClick(this)">Convert Selected</button>
   <font style="display: none;"></font>
   <tr><th><td>
   <button onclick="saveTemplateOnClick(this)">Save</button>
@@ -312,6 +314,9 @@ function updateDeploy() {
   </table>
   `;
   onTemplateSpecsChange();
+  jQuery('#left-content button:not([data-custom-sound])').bind( "click", function() {
+    buttonsPlayer.playSprite(7 + 3/60, 7 + 14/60);
+  });
 }
 
 

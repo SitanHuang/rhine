@@ -103,6 +103,7 @@ function saveGameOnClick() {
 }
 
 function repaintRightList() {
+  if (SELECTED_UNITS.length) buttonsPlayer.playSprite(12 + 47/60, 13 + 8/60);
   removeFloatingDIV();
   tempRightListScrollTop = $right_content.scrollTop;
   let buffer = '';

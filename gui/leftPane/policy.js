@@ -50,7 +50,7 @@ function updatePolicy() {
         html += `${displayName} <font color="${mod < 1 ? 'red' : 'green'}">x${mod}</font>\n`;
       }
       html += `</pre>
-      <button class="${general.selected ? 'active' : ''}"
+      <button data-custom-sound class="${general.selected ? 'active' : ''}"
         onclick='selectGeneralOnClick(this, ${JSON.stringify(rankName)}, ${JSON.stringify(generalName)});'>Select</button>
       <font style="display:none" color=red>Max number reached</font>
       <br><br>`;
@@ -64,6 +64,7 @@ function updatePolicy() {
 }
 
 function selectGeneralOnClick(button, rankName, generalName) {
+  assignPlayer.playSprite(0);
   button.nextElementSibling.style.display = 'none';
   let rank = currentPlayer.generals[rankName];
   let general = rank[generalName];

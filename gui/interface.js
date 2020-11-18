@@ -5,6 +5,14 @@ const $map_container = $('map-container');
 window.colCallback = null;
 window.colRightClickCallback = null;
 
+jQuery('#controls button').bind( "click", function() {
+    buttonsPlayer.playSprite(10 + 36/60, 10 + 50/60);
+  });
+  
+jQuery('#left .tabs').bind( "click", function() {
+    buttonsPlayer.playSprite(8 + 42/60, 8 + 57/60);
+});
+
 function updateInterfaceOnPass() {
   updateLeftPaneOnPass();
   updateRightPaneOnPass();
@@ -71,4 +79,6 @@ window.onmouseup = () => { mouseDown = false  };
 
 jQuery(window).blur(function(){
   shiftDown = mouseDown = false;
+}).bind('beforeunload', function(e){
+    return false;
 });
