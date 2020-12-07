@@ -42,7 +42,7 @@ class Division {
   }
 
   get hardness() {
-    return (this.template.hardness * this.player.tempSumAllGeneralTraits.b).round(2).clamp(0, 0.8);
+    return (this.template.hardness * this.player.tempSumAllGeneralTraits.b).round(2).clamp(0, 0.99);
   }
 
   move() {
@@ -58,11 +58,11 @@ class Division {
     let that = this;
     this.supply = this.loc.prov.supply * this.template.supplyBuff * _weather.supplyCx;
 
-    if (this.supply.round(2) <= 0) {
-      let a = this.men * 0.8;
+    if (this.supply.round(3) <= 0) {
+      let a = this.men * 0.7;
       this.morale = (this.morale / 2).min(0.2);
       this.men = (this.men - a).round().min(0);
-      if (this.men <= 1000) {
+      if (this.men <= 900) {
         this.remove();
         player.casualties += (this.men + a).round();
         return;
@@ -179,6 +179,6 @@ class Division {
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       s *= 1.5;
-    return s * (this.morale).min(0.8).max(1.5) - s * (this.adjacentPenalty / 4)
+    return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
   }
 }
