@@ -97,11 +97,11 @@ class Division {
       } else {
         let that = this;
         divs.forEach(div => {
-          if (this.hp < this.player.retreatable.min(30)) return;
+          if (this.hp < this.player.retreatable.min(5)) return;
           div.movementProgress = -1;
           let results = battle(that, div);
           // if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.hardness / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
-          if (div.hp < div.player.retreatable.min(30) || (div.morale < 0.25)) {
+          if (div.hp < div.player.retreatable.min(5) || (div.morale < 0.25)) {
             div.retreat();
           }
           that.battleInfo.push(results);

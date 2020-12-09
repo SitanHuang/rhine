@@ -81,9 +81,9 @@ class Player {
   }
 
   produce() {
-    this.light += Math.round(this.factoryInLight * Math.random() * 2);
-    this.heavy += Math.round(this.factoryInHeavy * Math.random() * 1.5);
-    this.constructionPoints += Math.round(this.factoryInLight * Math.random() * 2 + this.factoryInHeavy / 2);
+    this.light += Math.round(this.factoryInLight);
+    this.heavy += Math.round(this.factoryInHeavy * 0.7);
+    this.constructionPoints += Math.round(this.factoryInLight + this.factoryInHeavy * 0.7);
   }
 
   growManpower() {

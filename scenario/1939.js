@@ -130,7 +130,7 @@ function load1939Scenario() {
       slots = Array(1).fill('F');
     } else if (v == 'C') {
       terrain = 'U';
-      slots = Array(5).fill('F');
+      slots = Array(10).fill('F');
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
       terrain = v.toUpperCase();
     }

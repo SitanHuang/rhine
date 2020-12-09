@@ -1,6 +1,11 @@
 window.timestamp = -1025049600; // 7/9/1937
 var ChineseCivilWarTrigger = function () {
   if (pt(0, 0).prov.callTrigger != 'ChineseCivilWarTrigger()') return false;
+  if (timestamp > -976573832 && !pt(0, 0).prov.foreignSupplied) {
+    PLAYERS[0].light += 1000;
+    PLAYERS[0].heavy += 500;
+    pt(0, 0).prov.foreignSupplied = true;
+  }
   if (PLAYERS[1].cities <= 4 ||
     (PLAYERS[0].cities >= 10 && Math.random() > 0.8 && timestamp > -769392000)) { // 8/15/1945
     PLAYERS[1].manpower = 0;
@@ -153,9 +158,9 @@ DDDRD    DDMMMMMMMMMMDDDDRRRRRDDDR**   *  U  @@@@@@@@@@@@|
 DDDRDDU   DD       DDDDRRD DMRRRRRM* U ***   @@@@@@@@@@@@|
 RRRRRDDMM  D        RRRD  MMDMMMMM *     **   @@@@@@@@@@@|
 RDDDDRDMMM   U    MMM  MMMDDDM   M**    RR*RR @@@@@@@@@@@|
-DDDDDDRMMMM         M    DMMD     *MM  RR *U*RRR@@@@@@@@@|
-DDDDDDDRMMM         MMM M   U  MM U MM R    **R@@@@@@@@@@|
-DDDDDDMRMMM          MMMMMM     MM*MM RR  M  *UP@@@@@@@@@|
+DDDDDDRMMMM         M    DMMD     *MM  RR U  RRR@@@@@@@@@|
+DDDDDDDRMMM         MMM M   U  MM U MM R      R@@@@@@@@@@|
+DDDDDDMRMMM          MMMMMM     MM*MM RR  M   UP@@@@@@@@@|
 DDDDDDMRMMM  M MM MMMM    MMM     *M RR MMM  U @@@@@@@@@@|
 DDDDDMMMRMMM MMMMMMMMM RRRR M     *MMR MM        @@@@@@@@|
 DDDDDMMMRMRMM MMMMM URRR  RRRRRR  *URRUM     U   @@@@@@@@|
@@ -193,9 +198,9 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
   })));
 
 MAP_DATA = InvasionOfChinaTerrains;
-pt(25, 43).prov.slots = Array(3).fill('F'); // Nanjing
+pt(25, 41).prov.slots = Array(3).fill('F'); // Nanjing
 pt(30, 35).prov.slots = Array(3).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(5).fill('F'); // Chongqing
+pt(33, 22).prov.slots = Array(10).fill('F'); // Chongqing
 
 pt(0, 0).prov.callTrigger = 'ChineseCivilWarTrigger()';
 
@@ -211,7 +216,7 @@ p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = 'rgba(120, 40, 40, 0.25)';
 p1.ai.attackOrderUntil = timestamp + 3.154e+7;
-p1.manpower = Math.floor(Math.random() * 500000 + 5700000);
+p1.manpower = Math.floor(Math.random() * 500000 + 2700000);
 p1.growthRate = 0.0033;
 p1.light = 60;
 p1.heavy = 40;
