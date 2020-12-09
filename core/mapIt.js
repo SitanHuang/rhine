@@ -27,6 +27,15 @@ function adjacentToPlayer(pt, player) {
   })
   return yes == 0 ? false : yes;
 }
+function adjacentNotToPlayerDiplomacy(pt, player) {
+  let yes = 0;
+  pt.adjacents(p => {
+    if (p.prov.owner != player.playerID &&
+      (diplomacy_get(p.prov.owner,player.playerID).status=="WAR" ||
+        (diplomacy_get(p.prov.owner,player.playerID).changeAfter && diplomacy_get(p.prov.owner,player.playerID).changeAfter < timestamp + 7.884E6))) yes++;
+  })
+  return yes == 0 ? false : yes;
+}
 
 function adjacentNotToPlayerUnits(pt, player) {
   let yes = 0;

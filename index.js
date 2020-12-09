@@ -123,21 +123,21 @@ function handlePlayerOnPass() {
         if (col.divisions.length ? Math.random() > 0.6 || !col.supply : Math.random() > 0.9) {
           col.supply = 0;
           currentPlayer.cityList.forEach(p => {
-            if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
+            if (p.eq(col.pt)) col.supply = 1;
             //if (col.supply > 0) return;
             let path = unit_pathfind_friendly_only(col.pt, p).length;
-            if (path < 15 && path > 0) {
+            if (path > 0) {
               //col.supply++;
-              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.5) - (path / 15.0)).round(2)).min(0).max(col.pt.terrain.attrition * 10).max(1);
+              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.5) - (path / 15.0)).round(2)).min(0.02).max(col.pt.terrain.attrition * 10).max(1);
             }
           });
           currentPlayer.ports.forEach(p => {
-            if (p.eq(col.pt)) col.supply = (col.supply + 1).max(1);
+            if (p.eq(col.pt)) col.supply = 1;
             //if (col.supply > 0) return;
             let path = unit_pathfind_friendly_only(col.pt, p).length;
-            if (path < 15 && path > 0) {
+            if (path > 0) {
               //col.supply++;
-              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.2) - (path / 10.0)).round(2)).min(0).max(col.pt.terrain.attrition * 10).max(1);
+              col.supply = Math.max(col.supply, ((col.pt.terrain.movement).min(0.2) - (path / 10.0)).round(2)).min(0.02).max(col.pt.terrain.attrition * 10).max(1);
             }
           })
         }

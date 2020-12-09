@@ -1,3 +1,4 @@
+window.timestamp = -1025049600; // 7/9/1937
 var ChineseCivilWarTrigger = function () {
   if (pt(0, 0).prov.callTrigger != 'ChineseCivilWarTrigger()') return false;
   if (PLAYERS[1].cities <= 4 ||
@@ -148,7 +149,7 @@ DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU    *******M@@@@@@@@@@@P @|
 DDDRDDDDDM RRRDDD RMMMDUDDRMMM     * RR*MMM@@@@@@@@@@@@@@|
 DDDRDU  DMMRRR DRRRMMMDDDRRDMDD   U*RR *U P@@@@@@@@@@@@@@|
 DDDRD   DDMMMRRRRMMMMDDDUR DMDDD  *RR  *  @@@@@@@@@@@@@@@|
-DDDRD    DDMMMMMMMMMMDDDDRRRRRDUDR**   *  U  @@@@@@@@@@@@|
+DDDRD    DDMMMMMMMMMMDDDDRRRRRDDDR**   *  U  @@@@@@@@@@@@|
 DDDRDDU   DD       DDDDRRD DMRRRRRM* U ***   @@@@@@@@@@@@|
 RRRRRDDMM  D        RRRD  MMDMMMMM *     **   @@@@@@@@@@@|
 RDDDDRDMMM   U    MMM  MMMDDDM   M**    RR*RR @@@@@@@@@@@|
@@ -182,7 +183,7 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-	if (o == 1) slots = Array(10).fill('F');
+	if (o == 1) slots = Array(5).fill('F');
     else if(Math.random()>0.3) slots = Array(1).fill('F');
 
 	  }
@@ -192,9 +193,9 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
   })));
 
 MAP_DATA = InvasionOfChinaTerrains;
-pt(25, 43).prov.slots = Array(5).fill('F'); // Nanjing
-pt(30, 35).prov.slots = Array(25).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(38).fill('F'); // Chongqing
+pt(25, 43).prov.slots = Array(3).fill('F'); // Nanjing
+pt(30, 35).prov.slots = Array(3).fill('F'); // Wuhan
+pt(33, 22).prov.slots = Array(5).fill('F'); // Chongqing
 
 pt(0, 0).prov.callTrigger = 'ChineseCivilWarTrigger()';
 
@@ -209,6 +210,7 @@ p2.heavy = 0;
 p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = 'rgba(120, 40, 40, 0.25)';
+p1.ai.attackOrderUntil = timestamp + 3.154e+7;
 p1.manpower = Math.floor(Math.random() * 500000 + 5700000);
 p1.growthRate = 0.0033;
 p1.light = 60;
@@ -226,21 +228,21 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
     PORTS.push(pt(row, col));
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
     if (v.owner == 0)
-      v.divisions = Array(v.terrain == 'D' || v.terrain == 'P' || (row < 11 && col < 31) ? 5 : Math.ceil(Math.random() * 10 + 10)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 7000, 10+(Math.random()*3).round(), 3, 'Division', 1+(Math.random()*4).round(), 1))))
+      v.divisions = Array(v.terrain == 'D' || v.terrain == 'P' || (row < 11 && col < 31) ? 5 : Math.ceil(Math.random() * 4 + 2)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 7000, 10+(Math.random()*3).round(), 3, 'Division', 1+(Math.random()*4).round(), 1))))
     else
-      v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+4).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 20, 12, 'Division', 10, 5))))
+      v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 3)+2).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14000, 18, 14, 'Division', 9, 7))))
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(22).fill(0).map(() => (new Division(1, 'Infantry Regiment', pt(27, 46), new Template(15000, 18, 10, 'Divsion', 9, 5))))
-  .concat(Array(5).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(18000, 14, 32, 'Tank Division', 7, 16)))));
+pt(27, 46).prov.divisions = Array(10).fill(0).map(() => (new Division(1, 'Infantry Division', pt(27, 46), new Template(15000, 18, 14, 'Divsion', 9, 7))))
+  .concat(Array(5).fill(0).map(() => (new Division(1, 'Tank Division', pt(27, 46), new Template(18000, 10, 32, 'Tank Division', 5, 16)))));
 // Nanjing
-pt(25, 43).prov.divisions = Array(3).fill(0).map(() => {
+pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
   let d = new Division(0, 'German Infantry Division', pt(25, 43), new Template(20000, 20, 35, '', 10, 17))
   d.skill = 1.5;
   return d;
 })
 Array(4).fill(0).map(() => {
   let d = new Division(0, 'Nanjing Garrisons', pt(25, 43), new Template(20000, 14, 6, 'Nanjing Garrisons', 7, 3))
-  d.skill = 4;
+  d.skill = 2;
 })

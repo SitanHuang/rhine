@@ -130,7 +130,7 @@ function load1939Scenario() {
       slots = Array(1).fill('F');
     } else if (v == 'C') {
       terrain = 'U';
-      slots = Array(25).fill('F');
+      slots = Array(5).fill('F');
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
       terrain = v.toUpperCase();
     }
@@ -162,7 +162,7 @@ function load1939Scenario() {
   PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 150187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 9500000;
+  PLAYERS[1].manpower = 4500000;
   PLAYERS[1].casualties = 0;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
@@ -181,9 +181,10 @@ function load1939Scenario() {
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
-  p3.light = -1800;
+  p3.light = -800;
   p3.factories = 0;
-  p3.heavy = -900;
+  p3.constructionPoints = 6500;
+  p3.heavy = -500;
   p3.factoryInLight = 1;
   p3.generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg"},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
   p3.sumAllGeneralTraits;
@@ -235,11 +236,11 @@ function load1939Scenario() {
         if (row >= 19 && row <= 23 && col >= 20 && col <= 27) {
           type = germanPanzer;
         }
-        v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 1).round() + 1).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
-        v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 1).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
       }
 

@@ -31,13 +31,15 @@ class Division {
     if (this.supply.round(2) > 0) {
       if (this.hp < 100) {
         let amount = this.template.troop - this.men;
-        amount = Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500).round() * (this.supply).max(2).min(0);
+        amount = (Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500) * (this.supply).max(2).min(0)).round();
         this.newInforced += amount;
         this.player.manpower -= amount;
         this.men = (this.men + amount).round().clamp(0, this.template.troop);
       }
       if (this.morale < 1)
-        this.morale += 0.5 * Math.random() * this.supply;
+        this.morale += 0.5 * Math.random() * this.supply.max(2).min(0);
+      else if (this.morale > 1)
+        this.morale = (this.morale - 0.05).min(1);
     }
   }
 
@@ -59,8 +61,8 @@ class Division {
     this.supply = this.loc.prov.supply * this.template.supplyBuff * _weather.supplyCx;
 
     if (this.supply.round(3) <= 0) {
-      let a = this.men * 0.7;
-      this.morale = (this.morale / 2).min(0.2);
+      let a = this.men * 0.1;
+      this.morale = this.morale.max(0.5);
       this.men = (this.men - a).round().min(0);
       if (this.men <= 900) {
         this.remove();
@@ -125,6 +127,7 @@ class Division {
     let prov = this.prov;
     let that = this;
     prov.divisions = prov.divisions.filter(x => (x != that));
+    this.player.casualties += this.men;
   }
 
   retreat() {
@@ -134,8 +137,8 @@ class Division {
     let that = this;
     this.loc.adjacents(p => {
       if (p.prov.owner == that.player.playerID) provs.push(p)
-    })
-    if (provs.length == 0) return;
+    });
+    if (provs.length == 0) { this.remove(); return; } // encircled
     let dist = provs.sort((x, y) => (x.prov.divisions.length - y.prov.divisions.length))[0];
     this.updateLocation(dist);
     this.action = [];

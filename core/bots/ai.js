@@ -30,6 +30,34 @@ class Ai {
     return budget;
   }
 
+  calcAttackOrder() {
+    let player = this.player;
+    let wcurve = (weather_curve() + 1) / 2;
+
+    if (timestamp > this.attackOrderUntil) {
+      this.attackOrderUntil = null;
+      this.attackOrderLastEnded = timestamp;
+      this.attackOrderLastStarted = null;
+    }
+
+    if (!this.attackOrderUntil && timestamp > (this.attackOrderLastEnded||-Infinity) + 1971002) { // 3 weeks
+      if ((wcurve > 0.2 && player.averageStrength > 95) ||
+          (wcurve > 0.5 && player.averageStrength > 75) ||
+          (wcurve > 0.8 && player.averageStrength > 65)) {
+        this.attackOrderUntil = timestamp + 7.884e+6 * Math.random() * 1.7; // 3 months
+        this.attackOrderLastStarted = timestamp;
+        this.attackOrderLastEnded = null;
+      }
+    } else {
+      if (timestamp > this.attackOrderLastStarted + 1.314e+6) { // half month
+        if (player.averageStrength <= 65 || wcurve < 0.2) {
+          this.attackOrderUntil = -Infinity;
+        }
+      }
+    }
+
+  }
+
   isLosingPopulation() {
     return this.player._populationData.net < -2500;
   }
@@ -40,6 +68,8 @@ class Ai {
     this.adjacentBlocks = [];
     let budget = this.handleBudget();
     let airStrikedCount = 0;
+
+    this.calcAttackOrder();
 
     let order = Math.random() > 0.5;
     for (let row = order ? 0 : MAP_DATA.length - 1; order ? (row < MAP_DATA.length) :
@@ -58,7 +88,8 @@ class Ai {
         }
         if (p.owner != player || prov.terrain == '@') continue;
         if (prov.divisions.length && prov.divisions[0].supply == 0) continue;
-        if (prov.adjacentNotToPlayer > 0) {
+        //if (prov.adjacentNotToPlayer > 0) {
+        if (adjacentNotToPlayerDiplomacy(prov.pt, player)) {
           if (Math.random() > 0.7 && player.constructionPoints > 350 && !prov
             .fort && prov.terrain == 'U') {
             player.constructionPoints -= 150;
@@ -257,7 +288,7 @@ class Ai {
               player.light -= 10;
               player.heavy -= 15;
             }
-          } else if ((player.averageStrength > 75 && Math.random() < wcurve + 0.1) && div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer <
+          } else if (that.attackOrderUntil && div.adjacentNotToPlayer > 0 && (div.adjacentNotToPlayer <
               2 || Math.random() > 0.65) &&
             (div.hp > 60)) {
             div.action = [];

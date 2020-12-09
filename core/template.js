@@ -48,24 +48,25 @@ class Template {
 
   get codeName() {
     let title = '';
+    let div = this.troop > 20000 ? 'Corps' : (this.troop > 9000 ? 'Division' : (this.troop > 4000 ? 'Regiment' : 'Brigade'));
     if (this.speed < 2)
-      title = 'Garrison Division';
+      title = 'Garrison ' + div;
     else if (this.speed < 3)
-      title = 'Heavy () Division';
+      title = 'Heavy () ' + div;
     else if (this.speed < 4)
-      title = '() Division';
+      title = '() ' + div;
     else if (this.speed < 4.5)
-      title = 'Heavy Calvary Division';
+      title = 'Heavy Calvary ' + div;
     else if (this.speed < 5.5)
-      title = 'Calvary Division';
+      title = 'Calvary ' + div;
     else
-      title = 'Light Calvary Division';
+      title = 'Light Calvary ' + div;
     if (this.heavy > this.light)
       title = title.replace('()', 'Artillery');
     else
       title = title.replace('()', 'Infantry');
     if (this.mockSpeed(TERRAINS.M) > 1.5)
-      title = title.replace(' Division', ' Mountaineer Division');
+      title = title.replace(' ' + div, ' Mountaineer ' + div);
     if (this.hardness > 0.7)
       title = title.replace('Calvary', 'Tank');
     else if (this.hardness > 0.5)

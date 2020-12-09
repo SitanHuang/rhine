@@ -129,7 +129,7 @@ function load1941Scenario() {
       slots = Array(1).fill('F');
     } else if (v == 'C') {
       terrain = 'U';
-      slots = Array(25).fill('F');
+      slots = Array(6).fill('F');
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
       terrain = v.toUpperCase();
     }
@@ -155,7 +155,7 @@ function load1941Scenario() {
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
-  PLAYERS[1].growthRate = 0.006168;
+  PLAYERS[1].growthRate = 0.004168;
 
   PLAYERS[0].light = 1000;
   PLAYERS[0].heavy = 2000;
@@ -202,17 +202,17 @@ function load1941Scenario() {
     if (v.owner == 0) {
       let type = Math.random() < 0.7 ? british : american;
       if (v.terrain == 'P' || v.terrain == 'U')
-        v.divisions = Array((Math.random() * 3).round() + 2).fill(0).map(() => (new Division(v.owner, ++british_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 2).round() + 1).fill(0).map(() => (new Division(v.owner, ++british_i + 'th ' + type.defaultName, pt(row, col), type)));
       else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0)
-        v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++british_i + 'th Greek Division', pt(row, col), soviet)));
+        v.divisions = Array((Math.random() * 3).round() + 1).fill(0).map(() => (new Division(v.owner, ++british_i + 'th Greek Division', pt(row, col), soviet)));
     } else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
       if (v.owner == 1 && v.terrain != 'U') {
         let type = Math.random() < 0.9 ? (Math.random() < 0.8 ? german : italian) : germanPanzer;
-        v.divisions = Array((Math.random() * 5).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 1).round() + 2).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.forEach(x => x.skill = Math.random() * 2 + 1);
       } else if (v.owner == 2) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;
-        v.divisions = Array((Math.random() * 4).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 2).round() + 2).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.forEach(x => x.skill = Math.random() * 0.5);
       }
 

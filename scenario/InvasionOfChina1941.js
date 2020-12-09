@@ -74,7 +74,7 @@ DRRDDDDDMMDD  DDDDRMMMDDDDRMMMU    *******M@@@@@@@@@@@P @|
 DDDRDDDDDM RRRDDD RMMMDUDDRMMM     * RR*MMM@@@@@@@@@@@@@@|
 DDDRDU  DMMRRR DRRRMMMDDDRRDMDD   U*RR *U P@@@@@@@@@@@@@@|
 DDDRD   DDMMMRRRRMMMMDDDUR DMDDD  *RR  *  @@@@@@@@@@@@@@@|
-DDDRD    DDMMMMMMMMMMDDDDRRRRRDUDR**   *  U  @@@@@@@@@@@@|
+DDDRD    DDMMMMMMMMMMDDDDRRRRRDDDR**   *  U  @@@@@@@@@@@@|
 DDDRDDU   DD       DDDDRRD DMRRRRRM* U ***   @@@@@@@@@@@@|
 RRRRRDDMM  D        RRRD  MMDMMMMM *    U**   @@@@@@@@@@@|
 RDDDDRDMMM   U    MMM  MMMDDDM   M**    RR*RR @@@@@@@@@@@|
@@ -123,9 +123,9 @@ function loadChina1941Scenario() {
   PLAYERS.forEach(x => delete x._mapDataFlattened);
 
   MAP_DATA = InvasionOfChinaTerrains1941;
-  pt(25, 43).prov.slots = Array(5).fill('F'); // Nanjing
-  pt(30, 35).prov.slots = Array(10).fill('F'); // Wuhan
-  pt(33, 22).prov.slots = Array(60).fill('F'); // Chongqing
+  pt(25, 43).prov.slots = Array(2).fill('F'); // Nanjing
+  pt(30, 35).prov.slots = Array(5).fill('F'); // Wuhan
+  pt(33, 22).prov.slots = Array(20).fill('F'); // Chongqing
 
   pt(0, 0).prov.callTrigger = 'ChineseCivilWarTrigger()';
 
