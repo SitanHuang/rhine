@@ -35,7 +35,7 @@ class Division {
         this.newInforced += amount;
         this.player.manpower -= amount;
 
-        this.skill = (this.men * this.skill + amount * 1) / (this.men + amount);
+        this.skill = (this.men * this.skill + amount * this.skill.max(1)) / (this.men + amount);
 
         this.men = (this.men + amount).round().clamp(0, this.template.troop);
       }
