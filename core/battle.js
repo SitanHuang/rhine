@@ -75,6 +75,8 @@ function battle(d1, d2, d1m) {
 
   return {
     casualties: [rt2, rt1, sum],
+    morales: [d1.morale, d2.morale],
+    damage: [t1, t2],
     percentage: [d1.morale / sum.min(0.1), d2.morale / sum.min(0.1)]
   };
 }
@@ -83,7 +85,9 @@ function combineBattleInfos(infos) {
   infos = infos.filter(x => x)
   let t = {
     casualties: [0, 0, 0],
-    percentage: [0, 0]
+    percentage: [0, 0],
+    morales: [0, 0],
+    damage: [0, 0]
   };
   infos.forEach(info => {
     t.casualties[0] += info.casualties[0];
@@ -91,9 +95,16 @@ function combineBattleInfos(infos) {
     t.casualties[2] += info.casualties[2];
     t.percentage[0] += info.percentage[0];
     t.percentage[1] += info.percentage[1];
+    t.morales[0] += info.morales[0];
+    t.morales[1] += info.morales[1];
+    t.damage[0] += info.damage[0];
+    t.damage[1] += info.damage[1];
   });
   return {
+    num: infos.length,
     casualties: t.casualties,
+    damage: t.damage,
+    morales: [t.morales[0] / infos.length, t.morales[1] / infos.length],
     percentage: [
       t.percentage[0] / infos.length,
       t.percentage[1] / infos.length,

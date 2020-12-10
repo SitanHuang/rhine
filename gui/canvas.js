@@ -37,10 +37,12 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
       let color = 'transparent';
       let avgHP = 0;
       let avgMorale = 0;
+      let attackingDivisions = 0;
       prov.divisions.forEach(x => {
         avgHP += x.hp.min(0);
         avgMorale += x.morale.min(0) * 100;
         battles = battles.concat(x.battleInfo);
+        if (x.battleInfo && x.battleInfo.length) attackingDivisions++;
         if (x.color != 'transparent') color = x.color;
       });
       avgHP /= num;
@@ -53,7 +55,10 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
         let battleInfo = combineBattleInfos(battles);
         mark.style.background = getColorFromPercentage(battleInfo.percentage[0]);
         mark.style.zIndex = 3;
-        mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory, Casualtis: ' + battleInfo.casualties[0].round() + '-' + battleInfo.casualties[1].round() + '(' + (battleInfo.casualties[0] / battleInfo.casualties[1]).round(2) + ')';
+        mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory====\nCasualties: ' + battleInfo.casualties[0].round() + '-' + battleInfo.casualties[1].round() + '(' + (battleInfo.casualties[0] / battleInfo.casualties[1]).round(2) + ')' +
+                    `\nDamage: ${battleInfo.damage[0].round()} - ${battleInfo.damage[1].round()}` +
+                    `\nMorale: ${battleInfo.morales[0].round(1)} - ${battleInfo.morales[1].round(1)}` +
+                    `\n${attackingDivisions} divisions are attacking`;
         td.appendChild(mark);
       }
       if (color != 'transparent' && pt.owner == currentPlayer) {

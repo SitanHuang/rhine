@@ -34,6 +34,9 @@ class Division {
         amount = (Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500) * (this.supply).max(2).min(0)).round();
         this.newInforced += amount;
         this.player.manpower -= amount;
+
+        this.skill = (this.men * this.skill + amount * 1) / (this.men + amount);
+
         this.men = (this.men + amount).round().clamp(0, this.template.troop);
       }
       if (this.morale < 1)
@@ -71,7 +74,7 @@ class Division {
       }
       player.casualties += a.round();
     }
-    
+
     this.action = this.action.filter(x => x.prov.terrain != '@');
 
     if (this.action.length == 0 || (this.hp < 80 && Math.random() > this.morale * 1.2 && this.morale < 1)) {
@@ -163,7 +166,7 @@ class Division {
 
   get hard() {
     let prov = this.prov;
-    let h = this.template.hard * TERRAINS[prov.terrain].attrition * this.skill * this.hp / 100 * this.entrench *
+    let h = this.template.hard * TERRAINS[prov.terrain].attrition * ((this.skill - 1)/3*0.75+1) * this.hp / 100 * this.entrench *
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       h *= 1.5;
@@ -178,7 +181,7 @@ class Division {
   get soft() {
     let prov = this.prov
     let terrain = TERRAINS[prov.terrain];
-    let s = this.template.soft * terrain.attrition * terrain.defense * this.skill * this.hp / 100 * this.entrench *
+    let s = this.template.soft * terrain.attrition * terrain.defense * ((this.skill - 1)/3*0.75+1) * this.hp / 100 * this.entrench *
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       s *= 1.5;
