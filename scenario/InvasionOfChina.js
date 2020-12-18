@@ -6,6 +6,11 @@ var ChineseCivilWarTrigger = function () {
     PLAYERS[0].heavy += 500;
     pt(0, 0).prov.foreignSupplied = true;
   }
+  if (timestamp > -885769139 && !pt(0, 0).prov.pearlHarbor) {
+    PLAYERS[1].growthRate = 0.002;
+    PLAYERS[1].manpower = (PLAYERS[1].manpower -= 500000).min(0).round();
+    pt(0, 0).prov.pearlHarbor = true;
+  }
   if (PLAYERS[1].cities <= 4 ||
     (PLAYERS[0].cities >= 10 && Math.random() > 0.8 && timestamp > -769392000)) { // 8/15/1945
     PLAYERS[1].manpower = 0;
