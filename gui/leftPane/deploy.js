@@ -3,7 +3,7 @@ function onTemplateSpecsChange() {
   let light = parseInt($('deployLightInput').value);
   let heavy = parseInt($('deployHeavyInput').value);
   let support = parseInt($('deploySupportInput').value).max(light / 2).floor();
-  let motorized = parseInt($('deployMotorizedInput').value).max(heavy / 2).floor();
+  let motorized = parseInt($('deployMotorizedInput').value).max(heavy).floor();
   
   $('deploySupportInput').value = support;
   $('deployMotorizedInput').value = motorized;

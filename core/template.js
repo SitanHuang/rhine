@@ -10,7 +10,7 @@ class Template {
     this.defaultName = name || 'Infantry Division';
 
     this.support = (support || (this.light / 10)).max(this.light / 2).floor();
-    this.motorized = (motorized || (this.heavy / (this.heavy + this.light) * 10)).max(this.heavy / 2).floor();
+    this.motorized = (motorized || (this.heavy / (this.heavy + this.light) * 10)).max(this.heavy).floor();
   }
 
   get hardness() {

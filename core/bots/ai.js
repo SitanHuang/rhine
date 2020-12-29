@@ -117,32 +117,32 @@ class Ai {
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
           if (player.divisions < 800) {
             if (Math.random() > 0.9 && player.savedTemplates.length <= 6) { // creates new template
-              tem.troop = (Math.random() * 20).round() * 1000 + 10000;
-              tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(40) + 1;
-              tem.light = (budget.newRecruits[0] * Math.random()).round().max(40) + 1;
+              tem.troop = (Math.random() * 10).round() * 1000 + 10000;
+              tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50) + 1;
+              tem.light = (budget.newRecruits[0] * Math.random()).round().max(30) + 1;
               tem.support = (tem.light / 2 * Math.random()).round();
-              tem.motorized = (tem.heavy / 2 * Math.random()).round();
+              tem.motorized = (tem.heavy * Math.random()).round();
 
               if (player.divisions < 200 && Math.random() > 0.5) { // need quantity over quality
                 tem.troop = (Math.random() * 12).round() * 1000 + 11000;
                 tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(11) + 1;
                 tem.light = (budget.newRecruits[0] * Math.random()).round().max(15) + 1;
                 tem.support = (tem.light / 2 * Math.random()).round();
-                tem.motorized = (tem.heavy / 2 * Math.random()).round();
+                tem.motorized = (tem.heavy * Math.random()).round();
 
                 if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
                   tem.troop = (Math.random() * 18).round() * 1000 + 6500;
                   tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(6) + 1;
                   tem.light = (budget.newRecruits[0] * Math.random()).round().max(6) + 1;
                   tem.support = (tem.light / 2 * Math.random()).round();
-                  tem.motorized = (tem.heavy / 2 * Math.random()).round();
+                  tem.motorized = (tem.heavy * Math.random()).round();
                 }
               }
 
               while ((tem.heavy = (tem.heavy / 2 - 1).floor() * 2) > 5 && (tem.light = (tem.light / 2 - 1).floor() * 2) > 5) {
                 tem.defaultName = tem.codeName;
                 tem.support = tem.support.max((tem.light / 2).floor());
-                tem.motorized = tem.motorized.max((tem.heavy / 2).floor());
+                tem.motorized = tem.motorized.max((tem.heavy).floor());
                 if (tem.deployable(player) && budget.newRecruits[1] >= tem.heavy + tem.motorized && budget.newRecruits[0] >= tem.light + tem.support) {
                   tem.deploy(player, p, tem.codeName);
                   budget.newRecruits[1] -= tem.heavy + tem.motorized;
