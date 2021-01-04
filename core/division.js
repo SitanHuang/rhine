@@ -42,7 +42,7 @@ class Division {
       if (this.morale < 1)
         this.morale += 0.5 * Math.random() * this.supply.max(2).min(0);
       else if (this.morale > 1)
-        this.morale = (this.morale - 0.05).min(1);
+        this.morale = (this.morale - 0.1).min(1);
     }
   }
 
@@ -148,6 +148,14 @@ class Division {
     this.movementProgress = 0;
   }
 
+  get armored() {
+    return this.armor > ARMORED_MIN;
+  }
+
+  get armor() {
+    return this.supply > 0.1 ? this.template.hardness : 0;
+  }
+  
   get hp() {
     return (this.men / this.template.troop * 100).clamp(0, 100)
   }
@@ -185,6 +193,7 @@ class Division {
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       s *= 1.5;
-    return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
+    //return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
+    return s - s * (this.adjacentPenalty / 4)
   }
 }

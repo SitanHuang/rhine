@@ -59,6 +59,10 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
                     `\nDamage: ${battleInfo.damage[0].round()} - ${battleInfo.damage[1].round()}` +
                     `\nMorale: ${battleInfo.morales[0].round(1)} - ${battleInfo.morales[1].round(1)}` +
                     `\n${attackingDivisions} divisions are attacking`;
+        if (battleInfo.armored)
+          mark.title += `\n==== ${battleInfo.armored} armored battles ====` +
+                    `\nEnemies pierced: ${battleInfo.pierced} times` +
+                    `\nPierced by enemy: ${battleInfo.piercedBy} times`;
         td.appendChild(mark);
       }
       if (color != 'transparent' && pt.owner == currentPlayer) {

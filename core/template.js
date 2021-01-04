@@ -1,5 +1,6 @@
-MAX_SPEED = 8
-SPEED_UNIT = 'km/h'
+MAX_SPEED = 8;
+SPEED_UNIT = 'km/h';
+ARMORED_MIN = 0.6;
 
 class Template {
   constructor(troop, light, heavy, name, support, motorized) {
@@ -15,7 +16,8 @@ class Template {
 
   get hardness() {
     // return ((this.motorized + this.heavy) / (this.motorized + this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
-    return (1.3 * Math.pow(this.heavy / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
+    //return (1.3 * Math.pow(this.heavy / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
+    return (this.heavy / (this.heavy + this.light).min(1)).min(0).max(0.99);
   }
   get manpower() {
     return this.troop;
@@ -69,8 +71,8 @@ class Template {
       title = title.replace(' ' + div, ' Mountaineer ' + div);
     if (this.hardness > 0.7)
       title = title.replace('Calvary', 'Tank');
-    else if (this.hardness > 0.5)
-      title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison');
+    else if (this.hardness > 0.6)
+      title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison').replace('Calvary', 'Combined Arms');
     else if (this.hardness > 0.35)
       title = title.replace('Calvary', 'Motorized');
     return `${title} ${(this.troop / 1000).round()}${(this.light / 10).round()}${(this.heavy / 10).round()}`;
@@ -84,6 +86,10 @@ class Template {
     let div = new Division(player.playerID, title, loc, this.deepClone())
     div.skill = 0.2;
     div.men = men;
+  }
+
+  get armored() {
+    return this.hardness > ARMORED_MIN;
   }
 
   deepClone() {

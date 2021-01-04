@@ -203,14 +203,15 @@ function load1939Scenario() {
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
   let german = new Template(17000, 24, 14, 'Infanterie-Division', 12, 7);
   let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
-  let germanPanzer = new Template(17950, 6, 46, 'Panzer Corps', 3, 46);
+  let germanPanzerI = new Template(15050, 4, 30, 'Light Panzer Corps', 2, 30);
+  let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
   let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
   let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
 
-  german.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
+  german.irremovable = germanPanzerI.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
-  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
+  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone()];
   PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone()];
 
     let british_i = 0;
@@ -237,8 +238,9 @@ function load1939Scenario() {
       if (v.owner == 1 && (v.terrain != 'U' || (col == 25 && row == 20)) && !(col >= 51 && row <= 30)) {
         let type = Math.random() < 0.9 ? (row < 35 ? german : italian) : germanPanzer;
         let num = 0;
-        if (row >= 19 && row <= 23 && col >= 20 && col <= 27) {
-          type = Math.random() > 0.3 || !(col == 21 && row == 22) ? german : germanPanzer;
+        if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
+          type = Math.random() > 0.5 || !(col == 21 && row == 22) ? german : germanPanzer;
+          type = Math.random() > 0.8 || !(col == 21 && row == 22) ? german : germanPanzerI;
           num += (Math.random() * 4).round();
         }
         v.divisions = Array((Math.random() * 1.5).round() + 1 + num).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));

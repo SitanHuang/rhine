@@ -2,6 +2,8 @@ function airStrike(div) {
   if (diplomacy_get(div.playerID, currentPlayerID).status != 'WAR') return;
   let damage = (div.men * 0.2).max(700).round();
   div.men = (div.men - damage).round().min(0);
+  let oe = div.entrench;
+  div.entrench = (div.entrench - 0.1).min(Math.min(oe, 1));
   div.morale -= 0.2;
   div.airStriked = true;
   div.player.casualties += damage;
@@ -51,9 +53,24 @@ function battle(d1, d2, d1m) {
   // } else if (Math.random() < d2.hardness) {
   //   t1 /= 4;
   // }
+  //
+  let leastMorale = Math.min(d1.morale, d2.morale).min(0.1).max(1.5);
 
-  let rt1 = ((t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)) * 0.7).round();
-  let rt2 = ((t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)) * 0.7).round();
+  let rt1 = ((t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)) * leastMorale).round();
+  let rt2 = ((t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)) * leastMorale).round();
+
+  let armored = d1.armored || d2.armored ? 1 : 0;
+  let pierced = 0;
+  let piercedBy = 0;
+
+  if (d1.armor > d2.armor && d1.armored) {
+    t2 /= 2;
+    pierced = 1;
+  }
+  if (d2.armor > d1.armor && d2.armored) {
+    t1 /= 2;
+    piercedBy = 1;
+  }
 
   d1.men = (d1.men - rt2).min(0);
   d2.men = (d2.men - rt1).min(0);
@@ -77,6 +94,9 @@ function battle(d1, d2, d1m) {
     casualties: [rt2, rt1, sum],
     morales: [d1.morale, d2.morale],
     damage: [t1, t2],
+    armored: armored,
+    pierced: pierced,
+    piercedBy: piercedBy,
     percentage: [d1.morale / sum.min(0.1), d2.morale / sum.min(0.1)]
   };
 }
@@ -87,6 +107,9 @@ function combineBattleInfos(infos) {
     casualties: [0, 0, 0],
     percentage: [0, 0],
     morales: [0, 0],
+    armored: 0,
+    pierced: 0,
+    piercedBy: 0,
     damage: [0, 0]
   };
   infos.forEach(info => {
@@ -99,11 +122,17 @@ function combineBattleInfos(infos) {
     t.morales[1] += info.morales[1];
     t.damage[0] += info.damage[0];
     t.damage[1] += info.damage[1];
+    t.armored += info.armored;
+    t.pierced += info.pierced;
+    t.piercedBy += info.piercedBy;
   });
   return {
     num: infos.length,
     casualties: t.casualties,
     damage: t.damage,
+    armored: t.armored.round(1),
+    pierced: t.pierced.round(1),
+    piercedBy: t.piercedBy.round(1),
     morales: [t.morales[0] / infos.length, t.morales[1] / infos.length],
     percentage: [
       t.percentage[0] / infos.length,

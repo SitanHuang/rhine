@@ -119,14 +119,14 @@ class Ai {
             if (Math.random() > 0.9 && player.savedTemplates.length <= 6) { // creates new template
               tem.troop = (Math.random() * 10).round() * 1000 + 10000;
               tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50) + 1;
-              tem.light = (budget.newRecruits[0] * Math.random()).round().max(30) + 1;
-              tem.support = (tem.light / 2 * Math.random()).round();
-              tem.motorized = (tem.heavy * Math.random()).round();
+              tem.light = (budget.newRecruits[0] * Math.random()).round().max(25) + 1;
+              tem.support = (tem.light / 2).round();
+              tem.motorized = (tem.heavy).round();
 
               if (player.divisions < 200 && Math.random() > 0.5) { // need quantity over quality
                 tem.troop = (Math.random() * 12).round() * 1000 + 11000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(11) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(15) + 1;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25) + 1;
                 tem.support = (tem.light / 2 * Math.random()).round();
                 tem.motorized = (tem.heavy * Math.random()).round();
 
@@ -230,6 +230,8 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
           if (div.color == 'black') return;
+          if (div.armored && div.armor > 0.7) div.color = ARMY_COLORS[1];
+          else if (div.armored && div.armor > 0.6) div.color = ARMY_COLORS[5];
           // div.color = ARMY_COLORS[(dai++ / dainterval).floor().min(0)] ||
           //   'transparent';
           if (div.skill < 0.8) {
