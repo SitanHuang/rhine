@@ -115,7 +115,7 @@ class Ai {
             prov.slots.push('F');
           }
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
-          if (player.divisions < 800) {
+          if (player.divisions < 800 && prov.terrain == 'U') {
             if (Math.random() > 0.9 && player.savedTemplates.length <= 6) { // creates new template
               if (Math.random() > 0.7) { // tanks
                 tem.troop = (Math.random() * 5).round() * 1000 + 12000;
