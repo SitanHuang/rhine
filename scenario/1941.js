@@ -179,17 +179,30 @@ function load1941Scenario() {
 
   // ============== military =================
 
-  let british = new Template(12100, 18, 9, 'Division', 9, 3);
+  let british = new Template(12100, 18, 9, 'British Division', 9, 3);
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
-  let german = new Template(16300, 24, 12, 'Infanterie-Division', 12, 6);
-  let italian = new Template(8900, 16, 6, 'Intalian Infantry Division', 8, 3);
-  let germanPanzer = new Template(17950, 6, 46, 'Panzer Corps', 3, 46);
-  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 3);
-  let sovietMilitia = new Template(12000, 8, 2, 'Militia Division', 0.1, 0.1);
+  let french = new Template(11090, 12, 6, 'French Division', 2, 1);
+  let german = new Template(17000, 24, 14, 'Infanterie-Division', 12, 7);
+  let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
+  let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
+  let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
+  let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
+  let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
+  let germanArtillery = new Template(4000, 1, 20, 'Anti-Tank Brigade', 1, 1);
+  let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
+  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
+  let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
+  let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
+  let sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
+  let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
+  let sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
+
+  //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
+  germanPanzerII.irremovable = german.irremovable = germanCombinedArms.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = sovietMech.irremovable = sovietTank2.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
-  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone()];
-  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone()];
+  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), germanArtillery.deepClone(), germanCombinedArms.deepClone()];
+  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone(), sovietTank2.deepClone(), sovietMech2.deepClone()];
 
   let british_i = 0;
   let german_i = 0;

@@ -54,7 +54,7 @@ function battle(d1, d2, d1m) {
   //   t1 /= 4;
   // }
   //
-  let leastMorale = Math.min(d1.morale, d2.morale).min(0.1).max(1.5);
+  let leastMorale = Math.min(d1.morale, d2.morale).min(0.05).max(0.7);
 
   let rt1 = ((t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)) * leastMorale).round();
   let rt2 = ((t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)) * leastMorale).round();

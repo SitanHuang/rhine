@@ -203,18 +203,27 @@ function load1939Scenario() {
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
   let german = new Template(17000, 24, 14, 'Infanterie-Division', 12, 7);
   let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
-  let germanPanzerI = new Template(15050, 4, 30, 'Light Panzer Corps', 2, 30);
+  let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
+  let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
   let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
+  let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
+  let germanArtillery = new Template(4000, 1, 20, 'Anti-Tank Brigade', 1, 1);
+  let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
   let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
   let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
+  let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
+  let sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
+  let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
+  let sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
 
-  german.irremovable = germanPanzerI.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
+  //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
+  germanPanzerII.irremovable = german.irremovable = germanCombinedArms.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = sovietMech.irremovable = sovietTank2.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
-  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone()];
-  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone()];
+  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), germanArtillery.deepClone(), germanCombinedArms.deepClone()];
+  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone(), sovietTank2.deepClone(), sovietMech2.deepClone()];
 
-    let british_i = 0;
+  let british_i = 0;
   let german_i = 0;
   let soviet_i = 0;
 
@@ -239,11 +248,14 @@ function load1939Scenario() {
         let type = Math.random() < 0.9 ? (row < 35 ? german : italian) : germanPanzer;
         let num = 0;
         if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
-          type = Math.random() > 0.5 || !(col == 21 && row == 22) ? german : germanPanzer;
-          type = Math.random() > 0.8 || !(col == 21 && row == 22) ? german : germanPanzerI;
           num += (Math.random() * 4).round();
         }
-        v.divisions = Array((Math.random() * 1.5).round() + 1 + num).fill(0).map(() => (new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 1.5).round() + 1 + num).fill(0).map(() => {
+        if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
+          type = Math.random() > 0.8 || !(col == 21 && row == 22) ? (Math.random() > 0.3 ? german : germanMotorized) : (Math.random() > 0.2 ? (Math.random() > 0.5 ? germanPanzerII : germanPanzerI) : germanPanzer);
+        }
+          return new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)
+        });
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
         let type = Math.random() < 0.4 ? soviet : sovietMilitia;

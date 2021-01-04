@@ -117,11 +117,19 @@ class Ai {
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
           if (player.divisions < 800) {
             if (Math.random() > 0.9 && player.savedTemplates.length <= 6) { // creates new template
-              tem.troop = (Math.random() * 10).round() * 1000 + 10000;
-              tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50) + 1;
-              tem.light = (budget.newRecruits[0] * Math.random()).round().max(25) + 1;
-              tem.support = (tem.light / 2).round();
-              tem.motorized = (tem.heavy).round();
+              if (Math.random() > 0.7) { // tanks
+                tem.troop = (Math.random() * 5).round() * 1000 + 12000;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(6) + 1;
+                tem.support = (tem.light / 2).round();
+                tem.motorized = (tem.heavy).round();
+              } else {
+                tem.troop = (Math.random() * 10).round() * 1000 + 10000;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25) + 1;
+                tem.support = (tem.light / 2).round();
+                tem.motorized = (tem.heavy).round();
+              }
 
               if (player.divisions < 200 && Math.random() > 0.5) { // need quantity over quality
                 tem.troop = (Math.random() * 12).round() * 1000 + 11000;
@@ -230,8 +238,8 @@ class Ai {
         if (p.owner != player || prov.terrain == '@') continue;
         prov.divisions.forEach(div => {
           if (div.color == 'black') return;
-          if (div.armored && div.armor > 0.7) div.color = ARMY_COLORS[1];
-          else if (div.armored && div.armor > 0.6) div.color = ARMY_COLORS[5];
+          if (div.armored && div.armor > 0.7 && div.template.troop > 9000) div.color = ARMY_COLORS[1];
+          else if (div.armored && div.template.troop > 9000) div.color = ARMY_COLORS[5];
           // div.color = ARMY_COLORS[(dai++ / dainterval).floor().min(0)] ||
           //   'transparent';
           if (div.skill < 0.8) {

@@ -19,6 +19,7 @@ function onTemplateSpecsChange() {
   $('hardAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHard(terrain), 2, false, false);
   $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT + ` (x${currentPlayer.defaultTemplate.speedBuff.round(2)})`;
   $('hardnessSpan').innerText = currentPlayer.defaultTemplate.hardness.round(2);
+  $('armorSpan').innerText = currentPlayer.defaultTemplate.armor.round(2);
   $('armoredSpan').innerText = (!!currentPlayer.defaultTemplate.armored)+"";
   $('supplyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.supplyBuff, 2, false, false);
   $('casualtyBuff').innerText = abbreviate(getCasualtyReductionFromSupport({template: currentPlayer.defaultTemplate}), 2, false, false);
@@ -282,11 +283,14 @@ function updateDeploy() {
   <th>Speed
   <td id="speedSpan">
   <tr>
-  <th title="Amount of hard attack vs soft attack the division receives">Hardness/Armor
+  <th title="Amount of hard attack vs soft attack the division receives">Hardness
   <td id="hardnessSpan"><br>
   <tr>
   <th title="If armored, division takes half of damage if it can pierce the enemy.">Armored
   <td id="armoredSpan"><br>
+  <tr>
+  <th title="If armored, division takes half of damage if it can pierce the enemy.">Armor
+  <td id="armorSpan"><br>
   <tr>
   <th>Supply factor
   <td id="supplyBuff"><br>

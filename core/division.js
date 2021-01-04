@@ -149,11 +149,11 @@ class Division {
   }
 
   get armored() {
-    return this.armor > ARMORED_MIN;
+    return this.template.armored;
   }
 
   get armor() {
-    return this.supply > 0.1 ? this.template.hardness : 0;
+    return this.supply > 0.1 ? this.template.armor : 0;
   }
   
   get hp() {

@@ -16,7 +16,13 @@ class Template {
 
   get hardness() {
     // return ((this.motorized + this.heavy) / (this.motorized + this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
-    //return (1.3 * Math.pow(this.heavy / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
+    return (1.3 * Math.pow(this.heavy / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
+
+  }
+  get armored() {
+    return this.armor > ARMORED_MIN;
+  }
+  get armor() {
     return (this.heavy / (this.heavy + this.light).min(1)).min(0).max(0.99);
   }
   get manpower() {
@@ -69,9 +75,9 @@ class Template {
       title = title.replace('()', 'Infantry');
     if (this.mockSpeed(TERRAINS.M) > 1.5)
       title = title.replace(' ' + div, ' Mountaineer ' + div);
-    if (this.hardness > 0.7)
+    if (this.armored && this.hardness > 0.7)
       title = title.replace('Calvary', 'Tank');
-    else if (this.hardness > 0.6)
+    else if (this.armored)
       title = title.replace('Infantry', 'Armored Infantry').replace('Garrison', 'Armored Garrison').replace('Calvary', 'Combined Arms');
     else if (this.hardness > 0.35)
       title = title.replace('Calvary', 'Motorized');
