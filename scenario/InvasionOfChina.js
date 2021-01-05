@@ -58,7 +58,7 @@ var ChineseCivilWarTrigger = function () {
           p.prov.slots = Array(15).fill('F');
         }
         for (let i = 0;i < Math.random() * 10 + 15;i++)
-          p.prov.divisions.push(new Division(2, 'Militia Division', p, new Template(20000, 12, 4, 'Militia Division', 2, 1)));
+          p.prov.divisions.push(new Division(2, 'Militia Division', p, new Template(20000, 15, 5, 'Militia Division', 2, 1)));
       }
       p.prov.divisions.forEach(d => { d.playerID = 2; d.morale = 2; d.skill = (d.skill * 1.5).max(4); d.action = []; });
     });
