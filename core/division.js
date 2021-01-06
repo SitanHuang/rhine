@@ -178,6 +178,10 @@ class Division {
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       h *= 1.5;
+    if (this.supply < 0.25)
+      h *= 0.7;
+    else if (this.supply < 0.5)
+      h *= 0.5;
     return h - h * (this.adjacentPenalty / 4);
   }
 
@@ -193,6 +197,10 @@ class Division {
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       s *= 1.5;
+    if (this.supply < 0.25)
+      s *= 0.7;
+    else if (this.supply < 0.5)
+      s *= 0.5;
     //return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
     return s - s * (this.adjacentPenalty / 4)
   }
