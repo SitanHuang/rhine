@@ -157,13 +157,13 @@ function load1939Scenario() {
   PLAYERS[0].color = "rgba(140, 193, 226, 0.2)";
   PLAYERS[0].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8}}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":false},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
   PLAYERS[0].sumAllGeneralTraits;
-  PLAYERS[0].manpower = 11500000;
+  PLAYERS[0].manpower = 5500000;
   PLAYERS[0].casualties = 0;
   PLAYERS[0].divisionMen = 0;
   PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 150187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 4500000;
+  PLAYERS[1].manpower = 3500000;
   PLAYERS[1].casualties = 0;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
@@ -175,17 +175,17 @@ function load1939Scenario() {
   PLAYERS[1].light = -100;
   PLAYERS[1].heavy = -100;
 
-  PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
+  PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[1].sumAllGeneralTraits;
 
   window.p3 = PLAYERS[2] || new Player();
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
-  p3.light = -1200;
+  p3.light = -1500;
   p3.factories = 0;
   //p3.constructionPoints = 6500;
-  p3.heavy = -800;
+  p3.heavy = -1000;
   p3.factoryInLight = 1;
   p3.generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg"},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
   p3.sumAllGeneralTraits;
@@ -201,26 +201,27 @@ function load1939Scenario() {
   let british = new Template(12100, 18, 9, 'British Division', 9, 3);
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
-  let german = new Template(17000, 24, 14, 'Infanterie-Division', 12, 7);
+  let german = new Template(17000, 26, 16, 'Infanterie-Division', 13, 8);
+  let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 7);
   let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
   let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
   let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
-  let germanArtillery = new Template(4000, 1, 20, 'Anti-Tank Brigade', 1, 1);
+  let germanArtillery = new Template(8000, 2, 40, 'Anti-Tank Brigade', 1, 7);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
-  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
-  let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
+  let soviet = new Template(14000, 12, 6, 'Rifle Division', 5, 2);
+  let sovietMilitia = new Template(9000, 8, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
   let sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
   let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
   let sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
-  germanPanzerII.irremovable = german.irremovable = germanCombinedArms.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = sovietMech.irremovable = sovietTank2.irremovable = true;
+  germanPanzerII.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
-  PLAYERS[1].savedTemplates = [german.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), germanArtillery.deepClone(), germanCombinedArms.deepClone()];
+  PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), germanArtillery.deepClone(), germanCombinedArms.deepClone()];
   PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone(), sovietTank2.deepClone(), sovietMech2.deepClone()];
 
   let british_i = 0;
@@ -279,4 +280,13 @@ function load1939Scenario() {
 
   diplomacy_change(PLAYERS[0].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -694310400, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[1].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -900241200, changeValue: {status: 'WAR'}});
+
+  pt(0, 0).prov.callTrigger = "trigger_german_ai_attack()";
+
+}
+function trigger_german_ai_attack() {
+  if (diplomacy_get(1,2).status == 'WAR') {
+    PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.051e+7;
+    pt(0, 0).prov.callTrigger = "";
+  }
 }

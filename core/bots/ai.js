@@ -114,27 +114,31 @@ class Ai {
             player.constructionPoints -= 550;
             prov.slots.push('F');
           }
+          let removableIDs = [];
+          player.savedTemplates.forEach((x, i) => {
+            if (!x.irremovable) removableIDs.push(i);
+          });
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
           if (player.divisions < 800 && prov.terrain == 'U') {
-            if (Math.random() > 0.9 && player.savedTemplates.length <= 6) { // creates new template
+            if (Math.random() > 0.9 && removableIDs.length <= 6) { // creates new template
               if (Math.random() > 0.7) { // tanks
                 tem.troop = (Math.random() * 5).round() * 1000 + 12000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70) + 1;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70).min(20) + 1;
                 tem.light = (budget.newRecruits[0] * Math.random()).round().max(6) + 1;
                 tem.support = (tem.light / 2).round();
                 tem.motorized = (tem.heavy).round();
               } else {
                 tem.troop = (Math.random() * 10).round() * 1000 + 10000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25) + 1;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50).min(10) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25).min(20) + 1;
                 tem.support = (tem.light / 2).round();
                 tem.motorized = (tem.heavy).round();
               }
 
               if (player.divisions < 200 && Math.random() > 0.5) { // need quantity over quality
                 tem.troop = (Math.random() * 12).round() * 1000 + 11000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25) + 1;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25).min(15) + 1;
                 tem.support = (tem.light / 2 * Math.random()).round();
                 tem.motorized = (tem.heavy * Math.random()).round();
 
@@ -166,8 +170,9 @@ class Ai {
                 budget.newRecruits[1] -= tem.heavy + tem.motorized;
                 budget.newRecruits[0] -= tem.light + tem.support;
                 player.defaultTemplate = tem.deepClone();
-                if (Math.random() > 0.90 && player.savedTemplates.length >= 5) {
-                  let i = (Math.random() * player.savedTemplates.length) | 0;
+
+                if (Math.random() > 0.80 && removableIDs.length >= 5) {
+                  let i = removableIDs.sample();
                   if (player.savedTemplates[i] && !player.savedTemplates[i].irremovable)
                     player.savedTemplates.splice(i, 1);
                 }
@@ -186,11 +191,11 @@ class Ai {
       }
     }
 
-//    if (Math.random() < 0.05) this.adjacentBlocks = this.adjacentBlocks.sort((p1, p2) => {
-//      let a = -(p1.prov.slots.length) + p1.prov.divisions.length - p1.prov.terrain.defense;
-//    let b = -(p2.prov.slots.length) + p2.prov.divisions.length - p2.prov.terrain.defense;
-//    return a - b;
-//  });
+    this.adjacentBlocks = this.adjacentBlocks.sort((p1, p2) => {
+      //let a = -(p1.prov.slots.length) + p1.prov.divisions.length - p1.prov.terrain.defense;
+      //let b = -(p2.prov.slots.length) + p2.prov.divisions.length - p2.prov.terrain.defense;
+      return p1.prov.divisions.length / TERRAINS[p1.prov.terrain].movement - p2.prov.divisions.length / TERRAINS[p2.prov.terrain].movement;
+    });
 
     player.retreatable = 0;
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
@@ -260,7 +265,7 @@ class Ai {
           }*/
           let retreatable = 60;
           let battleInfo = combineBattleInfos(div.battleInfo);
-          if (div.battleInfo.length && (battleInfo.casualties[0] / battleInfo.casualties[1]) > 3) {
+          if (div.battleInfo.length && ((battleInfo.casualties[0] / battleInfo.casualties[1]) > 2 || !PLAYERS[1].ai.attackOrderUntil)) {
               div.action = [];
               return;
           } else if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {
