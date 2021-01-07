@@ -203,14 +203,14 @@ function load1939Scenario() {
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
   let german = new Template(17000, 26, 16, 'Infanterie-Division', 13, 8);
   let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 7);
-  let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
+  let italian = new Template(10000, 16, 7, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
   let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
   let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
-  let germanArtillery = new Template(8000, 2, 40, 'Anti-Tank Brigade', 1, 7);
+  let germanArtillery = new Template(8500, 2, 40, 'Anti-Tank Regiment', 1, 7);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
-  let soviet = new Template(14000, 12, 6, 'Rifle Division', 5, 2);
+  let soviet = new Template(14000, 12, 6, 'Rifle Division', 2, 1);
   let sovietMilitia = new Template(9000, 8, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
   let sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);

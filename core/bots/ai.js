@@ -121,33 +121,34 @@ class Ai {
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
           if (player.divisions < 800 && prov.terrain == 'U') {
             if (Math.random() > 0.9 && removableIDs.length <= 6) { // creates new template
+              delete tem.irremovable;
               if (Math.random() > 0.7) { // tanks
                 tem.troop = (Math.random() * 5).round() * 1000 + 12000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70).min(20) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(6) + 1;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70).min(35) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(5) + 1;
                 tem.support = (tem.light / 2).round();
                 tem.motorized = (tem.heavy).round();
               } else {
                 tem.troop = (Math.random() * 10).round() * 1000 + 10000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50).min(10) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25).min(20) + 1;
+                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50).min(15) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(50).min(20) + 1;
                 tem.support = (tem.light / 2).round();
-                tem.motorized = (tem.heavy).round();
+                tem.motorized = (tem.heavy / 2).round();
               }
 
-              if (player.divisions < 200 && Math.random() > 0.5) { // need quantity over quality
+              if (player.divisions < 190 && Math.random() > 0.5) { // need quantity over quality
                 tem.troop = (Math.random() * 12).round() * 1000 + 11000;
                 tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
                 tem.light = (budget.newRecruits[0] * Math.random()).round().max(25).min(15) + 1;
                 tem.support = (tem.light / 2 * Math.random()).round();
-                tem.motorized = (tem.heavy * Math.random()).round();
+                tem.motorized = (tem.heavy / 2* Math.random()).round();
 
                 if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
                   tem.troop = (Math.random() * 18).round() * 1000 + 6500;
-                  tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(6) + 1;
-                  tem.light = (budget.newRecruits[0] * Math.random()).round().max(6) + 1;
+                  tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
+                  tem.light = (budget.newRecruits[0] * Math.random()).round() + 1;
                   tem.support = (tem.light / 2 * Math.random()).round();
-                  tem.motorized = (tem.heavy * Math.random()).round();
+                  tem.motorized = (tem.heavy / 2 * Math.random()).round();
                 }
               }
 
@@ -171,7 +172,7 @@ class Ai {
                 budget.newRecruits[0] -= tem.light + tem.support;
                 player.defaultTemplate = tem.deepClone();
 
-                if (Math.random() > 0.80 && removableIDs.length >= 5) {
+                if (Math.random() > 0.70 && removableIDs.length >= 5) {
                   let i = removableIDs.sample();
                   if (player.savedTemplates[i] && !player.savedTemplates[i].irremovable)
                     player.savedTemplates.splice(i, 1);
