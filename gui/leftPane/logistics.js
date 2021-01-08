@@ -403,16 +403,16 @@ function updateLogistics() {
 = ${abbreviate(currentPlayer._populationData.net, 1, false, false)}</small><br>
   </tr>
   <tr>
+  <th>
+  <td>(+${(currentPlayer.growthRate * 100).round(3)}%)
+  </tr>
+  <tr>
   <th>Total Casualties
   <td>${abbreviate(currentPlayer.casualties, 2, false, false)}
   </tr>
   <tr>
   <th>Average Strength
   <td>${currentPlayer.averageStrength.round(2)}%
-  </tr>
-  <tr>
-  <th>
-  <td>(+${(currentPlayer.growthRate * 100).round(3)}%)
   </tr>
   <tr>
   <th>Cities

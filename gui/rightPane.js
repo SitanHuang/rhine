@@ -44,7 +44,7 @@ function showDivisionDetailOnFloat(i, td) {
   </table>
   `;
   createFloatingDIV(buffer, td.getBoundingClientRect().left - 350,
-    td.getBoundingClientRect().top.clamp(0, window.innerHeight - 500));
+    td.getBoundingClientRect().top.clamp(0, window.innerHeight - 650));
 }
 
 function removeDivisionFromList(i) {
