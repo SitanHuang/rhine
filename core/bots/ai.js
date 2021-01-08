@@ -44,7 +44,7 @@ class Ai {
       if ((wcurve > 0.2 && player.averageStrength > 95) ||
           (wcurve > 0.5 && player.averageStrength > 75) ||
           (wcurve > 0.8 && player.averageStrength > 65)) {
-        this.attackOrderUntil = timestamp + 7.884e+6 * Math.random() * 1.7; // 3 months
+        this.attackOrderUntil = timestamp + 7.884e+6 * (Math.random() * 0.666 + 1); // 3-5 months
         this.attackOrderLastStarted = timestamp;
         this.attackOrderLastEnded = null;
       }
@@ -125,34 +125,37 @@ class Ai {
               if (Math.random() > 0.7) { // tanks
                 tem.troop = (Math.random() * 5).round() * 1000 + 12000;
                 tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70).min(35) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(5) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(5).min(1);
                 tem.support = (tem.light / 2).round();
                 tem.motorized = (tem.heavy).round();
               } else {
                 tem.troop = (Math.random() * 10).round() * 1000 + 10000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50).min(15) + 1;
+                //tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50).min(15) + 1;
                 tem.light = (budget.newRecruits[0] * Math.random()).round().max(50).min(20) + 1;
+                tem.heavy = (budget.newRecruits[1]).max(tem.light / 2).round().min(1);
                 tem.support = (tem.light / 2).round();
                 tem.motorized = (tem.heavy / 2).round();
               }
 
               if (player.divisions < 190 && Math.random() > 0.5) { // need quantity over quality
                 tem.troop = (Math.random() * 12).round() * 1000 + 11000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(25).min(15) + 1;
+                //tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
+                tem.light = (budget.newRecruits[0] * Math.random()).round().max(30).min(15) + 1;
+                tem.heavy = (budget.newRecruits[1]).max(tem.light / 2).round().min(1);
                 tem.support = (tem.light / 2 * Math.random()).round();
-                tem.motorized = (tem.heavy / 2* Math.random()).round();
+                tem.motorized = (tem.heavy / 2 * Math.random()).round();
 
                 if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
                   tem.troop = (Math.random() * 18).round() * 1000 + 6500;
-                  tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
+                  //tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
                   tem.light = (budget.newRecruits[0] * Math.random()).round() + 1;
-                  tem.support = (tem.light / 2 * Math.random()).round();
-                  tem.motorized = (tem.heavy / 2 * Math.random()).round();
+                  tem.heavy = (budget.newRecruits[1]).max(tem.light / 2).round().min(1);
+                  tem.support = (tem.light / 3 * Math.random()).round();
+                  tem.motorized = (tem.heavy / 4 * Math.random()).round();
                 }
               }
 
-              while ((tem.heavy = (tem.heavy / 2 - 1).floor() * 2) > 5 && (tem.light = (tem.light / 2 - 1).floor() * 2) > 5) {
+              while ((tem.heavy = (tem.heavy / 2 - 1).floor() * 2) > 2 && (tem.light = (tem.light / 2 - 1).floor() * 2) > 2) {
                 tem.defaultName = tem.codeName;
                 tem.support = tem.support.max((tem.light / 2).floor());
                 tem.motorized = tem.motorized.max((tem.heavy).floor());
@@ -266,7 +269,7 @@ class Ai {
           }*/
           let retreatable = 60;
           let battleInfo = combineBattleInfos(div.battleInfo);
-          if (div.battleInfo.length && ((battleInfo.casualties[0] / battleInfo.casualties[1]) > 2 || !PLAYERS[1].ai.attackOrderUntil)) {
+          if (div.battleInfo.length && ((battleInfo.casualties[0] / battleInfo.casualties[1]) > 2.5 || !PLAYERS[1].ai.attackOrderUntil)) {
               div.action = [];
               return;
           } else if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {

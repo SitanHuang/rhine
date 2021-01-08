@@ -30,9 +30,14 @@ class Template {
   }
 
   get soft() {
-    return (this.troop / 100 *
-      (this.light) + this.support * 100) + this.hard / 2;
+    let h = (this.troop / 100 + this.motorized * 100) / 20 + 500 * this.heavy;
+    return ((this.troop / 100 *
+      (this.light) + this.support * 100) + h / 2) * 1.2;
   }
+  get hard() {
+    return ((this.troop / 100 + this.motorized * 100) / 20 + 500 * this.heavy) * 0.2;
+  }
+
 
   get supplyBuff() {
     return this.speedBuff.min(1) * this.entrenchBuff;
@@ -105,10 +110,6 @@ class Template {
     t.motorized = this.motorized;
     t.irremovable = this.irremovable;
     return t;
-  }
-
-  get hard() {
-    return (this.troop / 100 + this.motorized * 100) / 20 + 500 * this.heavy;
   }
 
   mockHard(terrain) {
