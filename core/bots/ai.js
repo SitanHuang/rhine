@@ -120,7 +120,7 @@ class Ai {
           });
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
           if (player.divisions < 800 && prov.terrain == 'U') {
-            if (Math.random() > 0.9 && removableIDs.length <= 6) { // creates new template
+            if (Math.random() > 0.9 && player.savedTemplates.length <= 8) { // creates new template
               delete tem.irremovable;
               if (Math.random() > 0.7) { // tanks
                 tem.troop = (Math.random() * 5).round() * 1000 + 12000;
@@ -172,7 +172,7 @@ class Ai {
                 budget.newRecruits[0] -= tem.light + tem.support;
                 player.defaultTemplate = tem.deepClone();
 
-                if (Math.random() > 0.70 && removableIDs.length >= 5) {
+                if (Math.random() > 0.70 && removableIDs.length && player.savedTemplates.length > 8) {
                   let i = removableIDs.sample();
                   if (player.savedTemplates[i] && !player.savedTemplates[i].irremovable)
                     player.savedTemplates.splice(i, 1);

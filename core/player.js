@@ -89,7 +89,8 @@ class Player {
   growManpower() {
     let growthFromRate = this.manpower * this.growthRate / 3;
     let fixedGrowth = this.cities * 100000 * (this.growthRate) * 2;
-    this.manpower = (this.manpower + growthFromRate + fixedGrowth).round().max(this.cities * 500000);
+    this.manpower = (this.manpower + fixedGrowth).round().max(this.cities * 500000);
+    //this.manpower = (this.manpower + growthFromRate + fixedGrowth).round().max(this.cities * 500000);
     this.growthRate = (0.00001 + this.growthRate).max(0.01);
 
     this.__populationData = {

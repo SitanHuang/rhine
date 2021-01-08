@@ -77,13 +77,12 @@ class Division {
 
     this.action = this.action.filter(x => x.prov.terrain != '@');
 
-    if (this.action.length == 0 || (this.hp < 80 && Math.random() > this.morale * 1.2 && this.morale < 1)) {
+    if (this.action.length == 0 || (this.hp < 80 && Math.random() > this.morale * 1.2)) {
       this.movementProgress = 0;
       return;
     }
     this.movementProgress += this.speed * _weather.movementCx;
     while (this.movementProgress >= 1 && this.action.length > 0) {
-      this.movementProgress-=0.5;
       let nextPt = this.action[0];
       let nextProv = nextPt.prov;
       if (nextProv.terrain == '@') break;
@@ -94,7 +93,9 @@ class Division {
         break;
       } else if (nextPt.owner == this.player || divs.length == 0) {
         if (nextPt.owner != this.player)
-          this.movementProgress-=1.5;
+          this.movementProgress -= 1;
+        else
+          this.movementProgress -= 1 * _weather.movementCx;
         this.updateLocation(nextPt);
         this.action.shift();
       } else {
@@ -109,7 +110,8 @@ class Division {
           }
           that.battleInfo.push(results);
         });
-        break;
+        if (nextProv.divisions.length != 0) break;
+        //break;
       }
     }
   }
@@ -117,7 +119,8 @@ class Division {
   updateLocation(newLoc) {
     let prov = this.prov;
     let that = this;
-    prov.divisions = prov.divisions.filter(x => (x != that));
+    //prov.divisions = prov.divisions.filter(x => (x != that));
+    let i = 0; prov.divisions.forEach((x, j) => { if (x == that) i = j; }); prov.divisions.splice(i, 1);
     this.loc = newLoc;
     this.prov.divisions.push(this);
     if (this.prov.owner != this.playerID)
