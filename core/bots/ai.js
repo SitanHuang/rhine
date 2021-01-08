@@ -95,7 +95,7 @@ class Ai {
             player.constructionPoints -= 150;
             prov.fort = true;
           }
-          if (prov.supply > 0.1) this.adjacentBlocks.push(p);
+          if (prov.supply > 0.01) this.adjacentBlocks.push(p);
           if (p.owner != player && player.factories > 90 && player.light > 10 && player.heavy > 20 && Math.random() > 0.8) {
             p.adjacents((p) => {
               let pro = p.prov;
@@ -119,7 +119,7 @@ class Ai {
             if (!x.irremovable) removableIDs.push(i);
           });
           let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
-          if (player.divisions < 800 && prov.terrain == 'U') {
+          if (player.divisions < 400 && prov.terrain == 'U') {
             if (Math.random() > 0.9 && player.savedTemplates.length <= 8) { // creates new template
               delete tem.irremovable;
               if (Math.random() > 0.7) { // tanks
@@ -255,28 +255,29 @@ class Ai {
             div.action = [];
             return;
           }
-          if (div.supply <= 0 && div.men < 10000 && Math.random() > 0.3) {
+          if (div.supply <= 0 && div.adjacentPenalty >= 3 && Math.random() > 0.3) {
             SELECTED_UNITS.push(div);
             return;
           }
-          /*if ((div.skill > 1.5 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
-              0.25) && Math.random() > 0.7) ||
-            (player.divisions > 200 && player.averageStrength < 76 && div
-              .hp < 60 && Math.random() > 0.75) && (player.divisions > 100 || Math.random() > 0.9)) {
-            if (player.divisions > 150)
+          if ((div.skill > 1.2 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
+              0.27) && Math.random() > 0.7) ||
+            (player.averageStrength < 76 && div.hp < 60 && Math.random() > 0.75)) {
+            if (player.divisions > 350)
               SELECTED_UNITS.push(div);
             return;
-          }*/
+          }
           let retreatable = 60;
           let battleInfo = combineBattleInfos(div.battleInfo);
           if (div.battleInfo.length && ((battleInfo.casualties[0] / battleInfo.casualties[1]) > 2.5 || !PLAYERS[1].ai.attackOrderUntil)) {
-              div.action = [];
-              return;
-          } else if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {
-            if (!div.action[0] && div.action[
+            if (div.action[0] && !div.action[
               0]._navalInvasion)
               div.action = [];
-            return;
+              return;
+          //} else if (player._populationData.net < 0 && Math.random() > 0.05 && div.action.length && div.action[0].prov.owner != player.playerID) {
+            //if (div.action[0] && !div.action[
+              //0]._navalInvasion)
+              //div.action = [];
+            //return;
           } else if (div.action.length > 0 ||
             (prov.terrain == 'U' && prov.divisions.length < 5 && Math.random() >
               0.5)) {

@@ -1,11 +1,13 @@
 var _manpowerData = [];
 var _armysizeData = [];
+var _armydmgData = [];
 var _factoryData = [];
 var _casualtiesData = [];
 
 function clearData() {
   _manpowerData = [];
   _armysizeData = [];
+  _armydmgData = [];
   _factoryData = [];
   _casualtiesData = [];
 }
@@ -18,6 +20,9 @@ function updateData() {
   mp = {date: new Date(timestamp * 1000)};
   PLAYERS.forEach((x, i) => mp['p' + i] = (x.divisionMen / 1000000) || NaN);
   _armysizeData.push(mp);
+  mp = {date: new Date(timestamp * 1000)};
+  PLAYERS.forEach((x, i) => mp['p' + i] = (x.divisionDamage / 1000000) || NaN);
+  _armydmgData.push(mp);
   mp = {date: new Date(timestamp * 1000)};
   PLAYERS.forEach((x, i) => mp['p' + i] = (x.factories) || NaN);
   _factoryData.push(mp);
@@ -49,6 +54,8 @@ function observeMode() {
   <div id="armySizeGraph" style="width: ${width}px;height: ${height}px"></div>
   <strong>&nbsp;Factories</strong>
   <div id="factoryGraph" style="width: ${width}px;height: ${height}px"></div>
+  <strong>&nbsp;Army Damage</strong>
+  <div id="armyDmgGraph" style="width: ${width}px;height: ${height}px"></div>
   `;
 
   updateData();
@@ -77,6 +84,14 @@ function observeMode() {
     asChart = asChart.addSerie(i == 0 ? _armysizeData : null,{x:'date',y:'p' + i},{interpolate:'monotone', color: PLAYERS[i].color.replace('0.2', '1')});
 
   asChart('#armySizeGraph');
+  var adChart = d3_timeseries()
+    // .yscale.domain([0])
+    .width(width)
+    .height(height);
+  for (let i = 0;i < PLAYERS.length;i++)
+    adChart = adChart.addSerie(i == 0 ? _armydmgData : null,{x:'date',y:'p' + i},{interpolate:'monotone', color: PLAYERS[i].color.replace('0.2', '1')});
+
+  adChart('#armyDmgGraph');
   var fChart = d3_timeseries()
     // .yscale.domain([0])
     .width(width)

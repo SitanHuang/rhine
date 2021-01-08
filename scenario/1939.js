@@ -192,7 +192,6 @@ function load1939Scenario() {
 
   PLAYERS[1].diplomacy = {};
   PLAYERS[1].diplomacy[p3.playerID] = {warUntil: -900241200};
-  PLAYERS[1].ai.attackOrderUntil = -925487144;
   p3.diplomacy = {};
   p3.diplomacy[PLAYERS[1].playerID] = {warUntil: -900241200};
 
@@ -201,7 +200,7 @@ function load1939Scenario() {
   let british = new Template(12100, 18, 9, 'British Division', 9, 3);
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
-  let german = new Template(17000, 26, 16, 'Infanterie-Division', 13, 8);
+  let german = new Template(17000, 22, 12, 'Infanterie-Division', 11, 8);
   let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 7);
   let italian = new Template(10000, 16, 7, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
@@ -213,16 +212,16 @@ function load1939Scenario() {
   let soviet = new Template(14000, 12, 6, 'Rifle Division', 2, 1);
   let sovietMilitia = new Template(9000, 8, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
-  let sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
+  let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
   let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
-  let sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
+  let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
   germanPanzerII.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), germanArtillery.deepClone(), germanCombinedArms.deepClone()];
-  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone(), sovietTank2.deepClone(), sovietMech2.deepClone()];
+  PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone()];
 
   let british_i = 0;
   let german_i = 0;
@@ -242,7 +241,7 @@ function load1939Scenario() {
         v.divisions = Array((Math.random() * 2).round() + 1 + num).fill(0).map(() => (new Division(v.owner, ++british_i + 'th French Division', pt(row, col), french)));
       }
       if (row >= 23) {
-        v.divisions.map(x => {x.morale = 0.2 + Math.random() * 0.3;x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
+        v.divisions.map(x => {x.morale = 0.2 + Math.random() * 0.3;x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;x.skill=Math.random()+0.2});
       }
     } else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
       if (v.owner == 1 && (v.terrain != 'U' || (col == 25 && row == 20)) && !(col >= 51 && row <= 30)) {
@@ -253,7 +252,7 @@ function load1939Scenario() {
         }
         v.divisions = Array((Math.random() * 1.5).round() + 1 + num).fill(0).map(() => {
         if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
-          type = Math.random() > 0.8 || !(col == 21 && row == 22) ? (Math.random() > 0.3 ? german : germanMotorized) : (Math.random() > 0.2 ? (Math.random() > 0.5 ? germanPanzerII : germanPanzerI) : germanPanzer);
+          type = Math.random() > 0.8 || !(col == 21 && row == 22) ? (Math.random() > 0.3 ? german : germanMotorized) : (Math.random() > 0.3 ? (Math.random() > 0.4 ? germanPanzerII : germanPanzerI) : germanPanzer);
         }
           return new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)
         });
@@ -272,7 +271,9 @@ function load1939Scenario() {
 
   // ============= misc ==============
   window.timestamp = -935539200; // 5/10/1940
+  PLAYERS[0].ai.attackOrderLastEnded = timestamp;
   PLAYERS[1].ai.attackOrderLastStarted = timestamp;
+  PLAYERS[1].ai.attackOrderUntil = timestamp + 1.577e+7*1.5;
   window.timeIncrement = 518400 / 2; // 3 days
 
   reinitCanvas();
@@ -286,7 +287,11 @@ function load1939Scenario() {
 }
 function trigger_german_ai_attack() {
   if (diplomacy_get(1,2).status == 'WAR') {
+    PLAYERS[1].growthRate = 0.0001;
+    PLAYERS[0].growthRate = 0.005; // 0.0029563933
     PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;
+    PLAYERS[2].savedTemplates.push(___sovietMech2.deepClone());
+    PLAYERS[2].savedTemplates.push(___sovietTank2.deepClone());
     pt(0, 0).prov.callTrigger = "";
   }
 }
