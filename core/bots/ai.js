@@ -195,11 +195,13 @@ class Ai {
       }
     }
 
+    let lowestStack = 1;
     this.adjacentBlocks = this.adjacentBlocks.sort((p1, p2) => {
+      lowestStack = Math.min(p1.prov.divisions.length, lowestStack).min(1);
       //let a = -(p1.prov.slots.length) + p1.prov.divisions.length - p1.prov.terrain.defense;
       //let b = -(p2.prov.slots.length) + p2.prov.divisions.length - p2.prov.terrain.defense;
       return p1.prov.divisions.length / TERRAINS[p1.prov.terrain].movement - p2.prov.divisions.length / TERRAINS[p2.prov.terrain].movement;
-    });
+    }).filter(x => x.prov.divisions.length < (Math.sqrt(lowestStack) * 10) || Math.random() < 0.1);
 
     player.retreatable = 0;
     player.factoryInLight = Math.floor(player.factories * (player.heavy / (
