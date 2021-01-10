@@ -56,6 +56,10 @@ button:active, button.active, select:active {
   transition: none;
 }
 
+button[disabled] {
+  cursor: not-allowed;
+}
+
 input, select {
   height: 32px;
   padding: 0 10px;

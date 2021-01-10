@@ -5,6 +5,11 @@ function onFactoryRatioChange(slider) {
   $('heavyNum').innerText = currentPlayer.factoryInHeavy;
   $('constructionNum').innerText = Math.round(value + currentPlayer.factoryInHeavy / 2);
 }
+function onReserveRatioChange(slider) {
+  let value = parseInt(slider.value);
+  currentPlayer.percentReserved = value;
+  $('reserveNum').innerText = value;
+}
 
 const REPAINT_SHOW_FACTORIES_CALLBACK = td => {
   let pt = td.pt;
@@ -446,9 +451,16 @@ function updateLogistics() {
   </table>
   <strong>Production ratio:</strong>
   <input type="range" min="1" max="${currentPlayer.factories}" value="${currentPlayer.factoryInLight}" class="slider"
-    oninput="onFactoryRatioChange(this)">
+    oninput="onFactoryRatioChange(this); document.getElementById('queueInfoArea').innerHTML = renderQueueInfo()">
   Light: <span id="lightNum">${currentPlayer.factoryInLight}</span><br>
   Heavy: <span id="heavyNum">${currentPlayer.factoryInHeavy}</span><br><br>
+  <strong>Minimum % reserved:</strong>
+  <input type="range" min="0" max="100" value="${currentPlayer.percentReserved}" class="slider"
+  oninput="onReserveRatioChange(this); document.getElementById('queueInfoArea').innerHTML = renderQueueInfo()">
+  <span id="reserveNum">${currentPlayer.percentReserved}</span>%<br><br>
+  <div id="queueInfoArea">
+  ${renderQueueInfo()}
+  </div><br>
   Construction: <span id="constructionNum">${Math.round(currentPlayer.factoryInLight + currentPlayer.factoryInHeavy / 2)}</span><br><br>
   <table class="statistic">
   <tr>

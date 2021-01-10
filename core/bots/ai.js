@@ -9,23 +9,24 @@ class Ai {
 
   handleBudget() {
     let budget = {
-      newRecruits: [],
       airStrike: []
     };
     // save 10%
     let available = (Math.min(this.player.light, this.player.heavy) * 0.9).floor().min(0);
-    let rate = 1;
-    if (this.player.divisions < 150) rate = 1;
-    else if (this.player.divisions < 250) rate = 0.95;
-    else if (this.player.divisions < 300) rate = 0.9;
-    else if (this.player.divisions < 400) rate = 0.3;
-    else rate = 0.1;
-    //if (this.player.divisions > 250) rate = 0.4;
+    let rate = 0;
+    if (this.player.divisions < 150) { rate = 0; this.player.activateReserve(1) }
+    else if (this.player.divisions < 200) { rate = 10; if (Math.max(this.player.light, this.player.heavy) > 500) this.player.activateReserve(0.7) }
+    else if (this.player.divisions < 250) { rate = 30; if (Math.max(this.player.light, this.player.heavy) > 1000) this.player.activateReserve(0.5) }
+    else if (this.player.divisions < 300) { rate = 40; if (Math.max(this.player.light, this.player.heavy) > 1500) this.player.activateReserve(0.5) }
+    else if (this.player.divisions < 350) { rate = 70; if (Math.max(this.player.light, this.player.heavy) > 1500) this.player.activateReserve(0.5) }
+    else if (this.player.divisions < 400) { rate = 80; if (Math.max(this.player.light, this.player.heavy) > 2000) this.player.activateReserve(0.5) }
+    else rate = 95;
+    this.player.percentReserved = rate;
 
-    if (this.player._populationData.net < -100) rate = 0.01;
+    // if (this.player._populationData.net < -100) rate = 0.01;
 
-    budget.newRecruits = [(available * rate).floor(), (available * rate).floor()];
-    budget.airStrike = (available - budget.newRecruits[0]) / 20;
+    budget.airStrike = (available) / 10;
+    budget.rate = rate;
 
     return budget;
   }
@@ -62,12 +63,137 @@ class Ai {
     return this.player._populationData.net < -2500;
   }
 
+  manageTemplates() {
+    let player = this.player;
+    if (player.queue.length >= 20 && player.savedTemplates.length > 2) return;
+    let removableIDs = [];
+    player.savedTemplates.forEach((x, i) => {
+      if (!x.irremovable) removableIDs.push(i);
+    });
+    let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
+    if (player.savedTemplates.length <= 8) { // creates new template
+      delete tem.irremovable;
+      if (Math.random() > 0.5) { // tanks
+        tem.troop = (Math.random() * 5).round() * 1000 + 12000;
+        tem.heavy = (70 * Math.random()).round().min(35) + 1;
+        tem.light = (5 * Math.random()).round().min(1);
+        tem.support = (tem.light / 2).round();
+        tem.motorized = (tem.heavy).round();
+      } else {
+        tem.troop = (Math.random() * 10).round() * 1000 + 10000;
+        tem.light = (50 * Math.random()).round().min(20) + 1;
+        tem.heavy = (tem.light * Math.random()).round().min(4);
+        tem.support = (tem.light / 2).round();
+        tem.motorized = (tem.heavy / 2).round();
+      }
+
+      if (player.divisions < 190 && Math.random() > 0.5) { // need quantity over quality
+        tem.troop = (Math.random() * 12).round() * 1000 + 11000;
+        //tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
+        tem.light = (30 * Math.random()).round().min(15) + 1;
+        tem.heavy = (tem.light / 2 * Math.random()).round().min(1);
+        tem.support = (tem.light / 2 * Math.random()).round();
+        tem.motorized = (tem.heavy / 2 * Math.random()).round();
+
+        if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
+          tem.troop = (Math.random() * 18).round() * 1000 + 6500;
+          //tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
+          tem.light = (10 * Math.random()).round() + 1;
+          tem.heavy = (tem.light / 2 * Math.random()).round().min(1);
+          tem.support = (tem.light / 3 * Math.random()).round();
+          tem.motorized = (tem.heavy / 4 * Math.random()).round();
+        }
+      }
+
+      while ((tem.heavy = (tem.heavy - 1).floor()) > 1 && (tem.light = (tem.light - 1).floor()) > 1) {
+        tem.defaultName = tem.codeName;
+        tem.support = tem.support.max((tem.light / 2).floor());
+        tem.motorized = tem.motorized.max((tem.heavy).floor());
+        if (tem.deployable(player, true)) {
+          player.defaultTemplate = tem.deepClone();
+          player.savedTemplates.push(tem.deepClone());
+          break;
+        }
+      }
+    } else if (Math.random() > 0.80 && removableIDs.length && player.savedTemplates.length > 8) {
+      let i = removableIDs.sample();
+      if (player.savedTemplates[i] && !player.savedTemplates[i].irremovable)
+        player.savedTemplates.splice(i, 1);
+    }
+  }
+
+  manageQueue() {
+    let player = this.player;
+
+    let cityList = player.cityList.filter(x => !x.adjacentNotToPlayer(player)).sort((a, b) => b.prov.slots.length - a.prov.slots.length);
+    if (cityList.length == 0) cityList = player.cityList.sort((a, b) => b.adjacentToPlayer(player) - a.adjacentToPlayer(player));
+
+    player.queueDist = Math.random() > 0.8 ? cityList[0] : cityList.sample();
+
+    if (player.savedTemplates.length < 2) return;
+    if (player.divisions < 150 && player.queue.length <= 50) {
+      /*
+      50 least equipment
+      20 random
+      */
+      let x = player.savedTemplates.sort((a, b) => (a.light + a.support + a.heavy + a.motorized) - (b.light + b.support + b.heavy + b.motorized))[0];
+      for (let i = 0;i < 50;i++) {
+        add_queue(new_queue(x));
+      }
+
+      for (let i = 0;i < 20;i++) {
+        add_queue(new_queue(player.savedTemplates.sample()));
+      }
+    } else if (player.queue.length == 0 && player.divisions < 400) {
+      /*
+      2 hardest non armor
+      2 highest armor
+      2 fastest
+      2 most attack
+      4 most men
+      3 least equipment
+      5 random
+      */
+      add_queue(new_queue(player.savedTemplates.sort((a, b) => (b.armored ? 0 : b.hardness) - (a.armored ? 0 : a.hardness))[0]));
+      add_queue(new_queue(player.savedTemplates.sort((a, b) => (b.armored ? 0 : b.hardness) - (a.armored ? 0 : a.hardness))[0]));
+
+      add_queue(new_queue(player.savedTemplates.sort((a, b) => (b.armored ? b.armor : 0) - (a.armored ? a.armor : 0))[0]));
+      add_queue(new_queue(player.savedTemplates.sort((a, b) => (b.armored ? b.armor : 0) - (a.armored ? a.armor : 0))[0]));
+
+      let x = player.savedTemplates.sort((a, b) => (b.soft + b.hard) - (a.soft + a.hard))[0];
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+
+      x = player.savedTemplates.sort((a, b) => (b.speed) - (a.speed))[0];
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+
+      x = player.savedTemplates.sort((a, b) => (b.troop) - (a.troop))[0];
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+
+      x = player.savedTemplates.sort((a, b) => (a.light + a.support + a.heavy + a.motorized) - (b.light + b.support + b.heavy + b.motorized))[0];
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+
+      add_queue(new_queue(player.savedTemplates.sample()));
+      add_queue(new_queue(player.savedTemplates.sample()));
+      add_queue(new_queue(player.savedTemplates.sample()));
+      add_queue(new_queue(player.savedTemplates.sample()));
+      add_queue(new_queue(player.savedTemplates.sample()));
+    }
+  }
+
   reCalc() {
     let player = this.player;
     this.cities = [];
     this.adjacentBlocks = [];
     let budget = this.handleBudget();
     let airStrikedCount = 0;
+    let queueInfo = queue_info();
 
     this.calcAttackOrder();
 
@@ -114,76 +240,6 @@ class Ai {
             player.constructionPoints -= 550;
             prov.slots.push('F');
           }
-          let removableIDs = [];
-          player.savedTemplates.forEach((x, i) => {
-            if (!x.irremovable) removableIDs.push(i);
-          });
-          let tem = player.savedTemplates.length ? player.savedTemplates.sample().deepClone() : player.defaultTemplate.deepClone();
-          if (player.divisions < 400 && prov.terrain == 'U') {
-            if (Math.random() > 0.9 && player.savedTemplates.length <= 8) { // creates new template
-              delete tem.irremovable;
-              if (Math.random() > 0.7) { // tanks
-                tem.troop = (Math.random() * 5).round() * 1000 + 12000;
-                tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(70).min(35) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(5).min(1);
-                tem.support = (tem.light / 2).round();
-                tem.motorized = (tem.heavy).round();
-              } else {
-                tem.troop = (Math.random() * 10).round() * 1000 + 10000;
-                //tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(50).min(15) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(50).min(20) + 1;
-                tem.heavy = (budget.newRecruits[1]).max(tem.light / 2).round().min(1);
-                tem.support = (tem.light / 2).round();
-                tem.motorized = (tem.heavy / 2).round();
-              }
-
-              if (player.divisions < 190 && Math.random() > 0.5) { // need quantity over quality
-                tem.troop = (Math.random() * 12).round() * 1000 + 11000;
-                //tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
-                tem.light = (budget.newRecruits[0] * Math.random()).round().max(30).min(15) + 1;
-                tem.heavy = (budget.newRecruits[1]).max(tem.light / 2).round().min(1);
-                tem.support = (tem.light / 2 * Math.random()).round();
-                tem.motorized = (tem.heavy / 2 * Math.random()).round();
-
-                if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
-                  tem.troop = (Math.random() * 18).round() * 1000 + 6500;
-                  //tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
-                  tem.light = (budget.newRecruits[0] * Math.random()).round() + 1;
-                  tem.heavy = (budget.newRecruits[1]).max(tem.light / 2).round().min(1);
-                  tem.support = (tem.light / 3 * Math.random()).round();
-                  tem.motorized = (tem.heavy / 4 * Math.random()).round();
-                }
-              }
-
-              while ((tem.heavy = (tem.heavy / 2 - 1).floor() * 2) > 2 && (tem.light = (tem.light / 2 - 1).floor() * 2) > 2) {
-                tem.defaultName = tem.codeName;
-                tem.support = tem.support.max((tem.light / 2).floor());
-                tem.motorized = tem.motorized.max((tem.heavy).floor());
-                if (tem.deployable(player) && budget.newRecruits[1] >= tem.heavy + tem.motorized && budget.newRecruits[0] >= tem.light + tem.support) {
-                  tem.deploy(player, p, tem.codeName);
-                  budget.newRecruits[1] -= tem.heavy + tem.motorized;
-                  budget.newRecruits[0] -= tem.light + tem.support;
-                  player.defaultTemplate = tem.deepClone();
-                  player.savedTemplates.push(tem.deepClone());
-                  break;
-                }
-              }
-            } else { // use last template
-              if (tem.deployable(player) && budget.newRecruits[1] >= tem.heavy + tem.motorized && budget.newRecruits[0] >= tem.light + tem.support) {
-                tem.deploy(player, p, tem.defaultName || tem.codeName);
-                budget.newRecruits[1] -= tem.heavy + tem.motorized;
-                budget.newRecruits[0] -= tem.light + tem.support;
-                player.defaultTemplate = tem.deepClone();
-
-                if (Math.random() > 0.70 && removableIDs.length && player.savedTemplates.length > 8) {
-                  let i = removableIDs.sample();
-                  if (player.savedTemplates[i] && !player.savedTemplates[i].irremovable)
-                    player.savedTemplates.splice(i, 1);
-                }
-              }
-            }
-
-          }
         } else {
           if (player.constructionPoints > 1500 & Math.random() > 0.9) {
             if (prov.slots.filter(x => (x == 'F')).length >= p.terrain.slots)
@@ -203,11 +259,19 @@ class Ai {
       return p1.prov.divisions.length / TERRAINS[p1.prov.terrain].movement - p2.prov.divisions.length / TERRAINS[p2.prov.terrain].movement;
     }).filter(x => x.prov.divisions.length < (Math.sqrt(lowestStack) * 10) || Math.random() < 0.1);
 
+    this.manageTemplates();
+    this.manageQueue();
+
     player.retreatable = 0;
-    player.factoryInLight = Math.floor(player.factories * (player.heavy / (
-      player.heavy + player.light + 1))).min(1).max(player.factories);
-    if (player.light < 0)
-      player.factoryInLight = player.factories;
+    player.factoryInLight = (Math.floor(player.factories * (player.heavy /  // old way
+      (player.heavy + player.light + 1))).min(1).max(player.factories) * (budget.rate / 100) +
+      queueInfo.recLightFactory * (1 - budget.rate / 100)).round().min(1).max(player.factories); // new way
+    if (player.light < 0) player.factoryInLight = player.factories;
+    else if (player.heavy < 0) player.factoryInLight = Math.min(player.factories, 1);
+
+    if (player.queue.length > 30 && player.divisions > 150) clear_queue();
+    if (player.light < -500 || player.heavy < -500) clear_queue();
+    deploy_all_queue();
   }
 
   think() {
@@ -297,8 +361,7 @@ class Ai {
           } else if (div.hp > retreatable && div.action[0] && div.action[
               0]._navalInvasion) {
             // skip
-          } else if (div.hp > 90 && div.entrench > 1.5 && prov.terrain == 'P' && Math.random() >
-            0.5 && player.light > 60 && player.heavy > 120 & player.averageStrength > 75 && (player.divisions > 350 && weather_curve() > 0.7)) {
+          } else if (div.hp > 80 && prov.terrain == 'P' && player.light > 200 && player.heavy > 300 & player.averageStrength > 75 && (player.divisions > 300 && weather_curve() > 0.7)) {
             let enemy = PORTS.filter(x => ((x.owner != currentPlayer || x.adjacentNotToPlayer(
               player)) && !x.eq(div.loc))).sort((x, y) => (Math.random() - 0.5));
             let landed = PORTS.filter(x => (x.owner == currentPlayer && x.adjacentNotToPlayer(

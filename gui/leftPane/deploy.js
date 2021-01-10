@@ -4,10 +4,10 @@ function onTemplateSpecsChange() {
   let heavy = parseInt($('deployHeavyInput').value);
   let support = parseInt($('deploySupportInput').value).max(light / 2).floor();
   let motorized = parseInt($('deployMotorizedInput').value).max(heavy).floor();
-  
+
   $('deploySupportInput').value = support;
   $('deployMotorizedInput').value = motorized;
-  
+
   currentPlayer.defaultTemplate.troop = manpower;
   currentPlayer.defaultTemplate.light = light;
   currentPlayer.defaultTemplate.heavy = heavy;
@@ -139,6 +139,50 @@ function deployOnClick(button) {
   }
 }
 
+function queueLocOnClick(button) {
+  let template = currentPlayer.defaultTemplate;
+  button.nextElementSibling.style.display = 'block';
+  repaintCanvas(td => {
+    REPAINTCANVAS_CALLBACK_UNITS(td);
+    let pt = td.pt;
+    if (pt.owner == currentPlayer && pt.prov.terrain == 'U')
+      td.style.cursor = 'pointer';
+    else
+      td.style.cursor = 'not-allowed';
+  });
+  colCallback = td => {
+    if (td.style.cursor != 'pointer') return;
+    button.nextElementSibling.style.display = 'none';
+    currentPlayer.queueDist = td.pt;
+    updateDeploy();
+    repaintCanvas();
+  }
+}
+
+function deployALlOnClick() {
+  deploy_all_queue();
+  updateDeploy();
+  repaintCanvas();
+}
+
+function queueOnClick(button) {
+  let max = shiftDown ? 5 : 1;
+  for (let i = 0;i < max;i++) {
+    let tem = currentPlayer.defaultTemplate;
+    let msg = button ? button.nextElementSibling : {style:{}};
+    msg.style.display = 'block';
+    if (Math.min(currentPlayer.light, currentPlayer.heavy) < 0) {
+      msg.innerText = 'Negative stockpile'
+    } else if (tem.deployable(currentPlayer, true)) {
+      msg.style.display = 'none';
+      add_queue(new_queue(tem));
+      updateDeploy();
+    } else {
+      msg.innerText = 'Invalid template'
+    }
+  }
+}
+
 var MINIMAL_TEMPLATE = new Template(242, 1, 1, '', 0.1, 0.1);
 MINIMAL_TEMPLATE.defaultName = 'Temporary Squad';
 
@@ -156,7 +200,7 @@ function convertSelectedOnClick(button) {
   let nets = 0;
   let netm = 0;
   let dst = currentPlayer.defaultTemplate.deepClone();
-  if (!dst.deployable(currentPlayer)) {
+  if (!dst.deployable(currentPlayer, true)) {
     if (msg) msg.style.color = 'red';
     if (msg) msg.innerText = 'Invalid Template';
     if (msg) msg.style.display = 'block';
@@ -235,7 +279,7 @@ function updateDeploy() {
   <button class="shortcut" onclick="airStrikeOnClick(this)" data-key='s'>Deploy</button><br>
   Key: S
   </table>
-  <br><header>Edit Division Template</header><br>
+  <br><header>Division Template Editor</header><br>
   <table class="statistic">
   <tr>
   <th>Manpower
@@ -305,13 +349,14 @@ function updateDeploy() {
   <tr>
   <th colspan=2><input value="${currentPlayer.defaultTemplate.defaultName}" style="width: 100%" id="templateNameInput"
     onkeyup="onTemplateSpecsChange()">
-  <tr><th><button onclick="$('templateNameInput').value = (currentPlayer.defaultTemplate.codeName);onTemplateSpecsChange()">AutoName</button><br>
-  <td class="small">Key: D
-  <button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button>
+  <tr><td style="text-align: left;" class="small"><button onclick="$('templateNameInput').value = (currentPlayer.defaultTemplate.codeName);onTemplateSpecsChange()">AutoName</button><br>
+  <button class="shortcut" onclick="queueOnClick(this)" style="margin-top: 2px">Queue</button>Shift: 5x
+  <font color="red" style="display:none; font-weight: normal">Invalid Template</font>
+  <td class="small">
+  Key: D <button class="shortcut" onclick="deployOnClick(this)" data-key='d'>Deploy</button>
   <font color="red" style="display:none">Invalid Template</font>
   <font color="blue" style="display:none">Select city</font>
-  <tr><td colspan=2>
-  <button data-custom-sound onclick="convertSelectedOnClick(this)">Convert Selected</button>
+  <button data-custom-sound onclick="convertSelectedOnClick(this)" style="margin-top: 2px">Convert</button>
   <font style="display: none;"></font>
   <tr><th><td>
   <button onclick="saveTemplateOnClick(this)">Save</button>
@@ -319,6 +364,17 @@ function updateDeploy() {
   <br><header>Saved Templates</header><br>
   <table class="statistic">
   ${renderSavedTemplates()}
+  </table>
+  <br><header>Divisions in Queue</header><br>
+  ${renderQueueInfo()}
+  <button onclick="queueLocOnClick(this)">Select Location</button>
+  <font color="blue" style="display:none">Select city</font>
+  ${currentPlayer.queueDist ? `<a href="#" onclick="pt${currentPlayer.queueDist.toString()}.td.scrollIntoViewIfNeeded();pt${currentPlayer.queueDist.toString()}.td.style.background = 'rgba(0, 0, 0, 0.4)';">` + currentPlayer.queueDist.toString() + ' Urbun</a>' : 'None'}
+  <br>
+  <button onclick="deployALlOnClick()" style="margin-top: 2px">Deploy All</button> <button onclick="clear_queue();updateDeploy()" style="margin-top: 2px">Delete all</button>
+  <br>
+  <table class="statistic">
+  ${renderQueueList()}
   </table>
   `;
   onTemplateSpecsChange();
@@ -334,6 +390,37 @@ function renderSavedTemplates() {
     buffer += `<tr><th style="vertical-align: middle;border-bottom: 1px solid grey;">${tem.defaultName}<td width="100px">
 	<button onclick="currentPlayer.savedTemplates.splice(${i}, 1);updateDeploy()">❌</button>`+
 	`<button style="vertical-align: top;font-size: 20px;" onclick="currentPlayer.defaultTemplate = currentPlayer.savedTemplates[${i}].deepClone();updateDeploy()">⤊</button>`;
+  });
+  return buffer;
+}
+
+function renderQueueInfo() {
+  let i = queue_info();
+  let buffer = `
+  <p style="font-size: 14px;line-height: 1.5em">
+  <b>${i.d}</b> divisions in queue<br>
+  <b>${i.l} / ${i.nl}</b> light, <b>${i.h} / ${i.nh}</b> heavy<br>
+  <b>${abbreviate(i.t, 2, false, false)}/${abbreviate(i.nt, 2, false, false)}</b> men<br>
+  Delivery date: <b>${new Date(i.delivery * 1000).toLocaleDateString("en-US")}</b><br>
+  Recommend <b style="cursor:pointer" onclick="currentPlayer.factoryInLight = ${i.recLightFactory};if(this.parentElement.parentElement.id=='queueInfoArea')updateLogistics()">${i.recLightFactory}</b> factories in light
+  </p>
+  `;
+  return buffer;
+}
+
+
+function renderQueueList() {
+  let buffer = '';
+  currentPlayer.queue.forEach((q, i) => {
+    let lh = q.l + q.h;
+    let nlh = q.nl + q.nh;
+    buffer += `<tr><th style="text-align: center;max-width: 20px;"><span class="fraction" title="Light equipments"><span>${q.l}</span><span>${q.nl}</span></span>
+    <th style="text-align: center;max-width: 20px;"><span class="fraction" title="Heavy equipments"><span>${q.h}</span><span>${q.nh}</span></span>
+    <th style="vertical-align: middle;">${q.tem.defaultName}
+    <div style="background: rgb(145,205,16);width: ${lh/nlh*100}%;height: 3px"></div>
+    <td width="100px">
+	<button onclick="del_queue(${i});updateDeploy()">❌</button>` +
+	`<button style="vertical-align: top;font-size: 20px;" ${queue_deployable(i) ? '' : 'disabled'} onclick="deploy_queue(${i});updateDeploy();repaintCanvas()">D</button>`;
   });
   return buffer;
 }

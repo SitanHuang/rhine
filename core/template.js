@@ -51,11 +51,11 @@ class Template {
     return this.motorized / (this.troop / 2000) + 0.9;
   }
 
-  deployable(player) {
+  deployable(player, skipStockCheck) {
     if (this.speed <= 0.5) return false;
     if (!this.speed || !this.light || !this.heavy || !this.troop) return false;
-    if (player.light < (this.light + this.support) || player.heavy < (this.motorized + this.heavy) ||
-      player.recruitable <= this.troop) return false;
+    if (player.recruitable <= this.troop) return false;
+    if (!skipStockCheck && (player.light < (this.light + this.support) || player.heavy < (this.motorized + this.heavy))) return false;
     return true;
   }
 
@@ -89,14 +89,20 @@ class Template {
     return `${title} ${(this.troop / 1000).round()}${(this.light / 10).round()}${(this.heavy / 10).round()}`;
   }
 
-  deploy(player, loc, title) {
-    let men = Math.ceil(this.troop / 15);
-    player.light -= this.light + this.support;
-    player.heavy -= this.heavy + this.motorized;
-    player.manpower -= men;
+  deploy(player, loc, title, queue) {
     let div = new Division(player.playerID, title, loc, this.deepClone())
-    div.skill = 0.2;
-    div.men = men;
+    let men = Math.ceil(this.troop / 15);
+    if (!queue) {
+      player.light -= this.light + this.support;
+      player.heavy -= this.heavy + this.motorized;
+      player.manpower -= men;
+      div.skill = 0.2;
+      div.men = men;
+    } else {
+      player.manpower -= men;
+      div.men = men + queue.t;
+      div.skill = div.hp / 100;
+    }
   }
 
   get armored() {

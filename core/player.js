@@ -1,4 +1,5 @@
 PLAYERS = [];
+HEAVY_EQUIPMENT_COEF = 0.7; // one factory produces 0.7 heavy equipments per turn
 
 class Player {
   constructor() {
@@ -16,12 +17,17 @@ class Player {
     this.originalCities = this.calcCities();
     this.factories = 0;
 
-    this.light = 200;
-    this.heavy = 100;
+    this.queue = [];
+    this.queueDist = null;
+    this.percentReserved = 20;
+    this._light = 0;
+    this._heavy = 0;
+    this.light = 0;
+    this.heavy = 0;
     this.constructionPoints = 0;
     this.divisions = 0;
 
-    this.defaultTemplate = new Template(8000, 20, 5);
+    this.defaultTemplate = new Template(9000, 20, 5, 'Infantry Division', 8, 0);
     this.savedTemplates = [this.defaultTemplate];
 
     this.retreatable = 10;
@@ -36,6 +42,37 @@ class Player {
     this.averageStrength = 100;
 
     this.diplomacy = {};
+  }
+
+  get light() {
+    return this._light;
+  }
+  set light(x) {
+    this.__set_equipment(x, '_light');
+  }
+  get heavy() {
+    return this._heavy;
+  }
+  set heavy(x) {
+    this.__set_equipment(x, '_heavy');
+  }
+
+  __set_equipment(x, n) {
+    let d = x - this[n];
+    if (d <= 0 || this[n] < 0) {
+      this[n] = x;
+    } else {
+      let res = (this.percentReserved / 100 * d).floor();
+      let q = this.__queue_equipment_request(n).clamp(0, d - res);
+      res += d - q - res; // spare after fulfilling Q goes to reserve
+      this[n] += res;
+      fill_queue(n, q);
+    }
+  }
+
+  __queue_equipment_request(n) {
+    let i = queue_info();
+    return n == '_light' ? (i.nl - i.l) : (i.nh - i.h);
   }
 
   get mapDataFlattened() {
@@ -80,10 +117,30 @@ class Player {
     return h;
   }
 
+  get _heavyProductionPerTurn() {
+    return Math.round(this.factoryInHeavy * HEAVY_EQUIPMENT_COEF);
+  }
+  get _lightProductionPerTurn() {
+    return Math.round(this.factoryInLight);
+  }
+
   produce() {
-    this.light += Math.round(this.factoryInLight);
-    this.heavy += Math.round(this.factoryInHeavy * 0.7);
-    this.constructionPoints += Math.round(this.factoryInLight + this.factoryInHeavy * 0.7);
+    this.light += this._lightProductionPerTurn;
+    this.heavy += this._heavyProductionPerTurn;
+    this.constructionPoints += Math.round(this.factoryInLight + this.factoryInHeavy * HEAVY_EQUIPMENT_COEF);
+  }
+
+  activateReserve(amount) {
+    amount = amount || 1;
+    let l = (this.light * amount).floor();
+    let h = (this.heavy * amount).floor();
+    let oldPerc = this.percentReserved;
+    this.percentReserved = 0;
+    this._light -= l;
+    this._heavy -= h;
+    this.light += l;
+    this.heavy += h;
+    this.percentReserved = oldPerc;
   }
 
   growManpower() {
@@ -139,6 +196,9 @@ class Player {
         return false;
       }).length;
     this.averageStrength = (this.averageStrength / this.divisions).round(2);
+
+    this.largestCity = this.cityList.sort((a, b) => b.prov.slots.length - a.prov.slots.length)[0];
+    if (this.queueDist && this.queueDist.prov.owner != this.playerID) this.queueDist = null;
     return this.cities;
   }
 }

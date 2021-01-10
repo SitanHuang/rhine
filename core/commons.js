@@ -29,6 +29,9 @@ Number.prototype.explicitSign = function () {
 Number.prototype.floor = function () {
   return Math.floor(this);
 };
+Number.prototype.ceil = function () {
+  return Math.ceil(this);
+};
 
 $ = (x) => {
   return document.getElementById(x);
