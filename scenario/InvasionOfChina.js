@@ -2,13 +2,17 @@ window.timestamp = -1025049600; // 7/9/1937
 var ChineseCivilWarTrigger = function () {
   if (pt(0, 0).prov.callTrigger != 'ChineseCivilWarTrigger()') return false;
   if (timestamp > -976573832 && !pt(0, 0).prov.foreignSupplied) {
-    PLAYERS[0].light += 1000;
-    PLAYERS[0].heavy += 500;
+    PLAYERS[0].light += 2000;
+    PLAYERS[0].heavy += 350;
     pt(0, 0).prov.foreignSupplied = true;
   }
   if (timestamp > -885769139 && !pt(0, 0).prov.pearlHarbor) {
-    PLAYERS[1].growthRate = 0.002;
-    PLAYERS[1].manpower = (PLAYERS[1].manpower -= 500000).min(0).round();
+    PLAYERS[1].growthRate = 0.001;
+    PLAYERS[1].light = -2000;
+    PLAYERS[1].heavy = -1000;
+    PLAYERS[0].light += 1000;
+    PLAYERS[0].heavy += 1000;
+    PLAYERS[1].manpower = (PLAYERS[1].manpower -= 700000).min(0).round();
     pt(0, 0).prov.pearlHarbor = true;
   }
   if (PLAYERS[1].cities <= 4 ||
@@ -23,11 +27,13 @@ var ChineseCivilWarTrigger = function () {
         col.fort = false;
         if (r >= 8 && c >= 49 && r <= 17) { // Korea
           col.terrain = '@';col.slots = [];
-        } else if (r >= 39 && c >= 48) { // Taiwan
+        } else if ((r >= 39 && c >= 48) || col.terrain == 'P') { // Taiwan
           col.owner = 0;
           col.divisions.forEach(d => d.playerID = 0);
         } else if (col.owner == 1 && Math.random() > 0.05) {
           col.divisions = [];
+          if (Math.random() > 0.7)
+            col.owner = 0;
         }
       })
     });
@@ -68,6 +74,8 @@ var ChineseCivilWarTrigger = function () {
     PLAYERS[2].manpower = PLAYERS[2].manpower.min(PLAYERS[0].manpower);
     PLAYERS[0].manpower /= 2;
     PLAYERS[0].growthRate /= 2;
+    PLAYERS[0].ai.attackOrderUntil = timestamp + 3.154e+7;
+    PLAYERS[2].ai.attackOrderLastEnded = timestamp + 3.154e+7;
 
     pt(0, 0).prov.callTrigger = "ChinaDefectTrigger()";
 
@@ -215,20 +223,22 @@ p2.color = 'rgba(140, 193, 226, 0.25)'
 p2.retreatable = 30;
 p2.manpower = Math.floor(Math.random() * 50000 + 6000000);
 p2.growthRate = 0.0075;
-p2._light = 0;
-p2._heavy = 0;
+p2._light = -200;
+p2._heavy = -100;
 p2.factoryInLight = 40;
 let p1 = new Player();
 p1.color = 'rgba(120, 40, 40, 0.25)';
 p1.ai.attackOrderUntil = timestamp + 3.154e+7;
 p1.manpower = Math.floor(Math.random() * 500000 + 2000000);
-p1.growthRate = 0.002;
+p1.growthRate = 0.001;
 p1._light = 60;
 p1._heavy = 40;
 p1.retreatable = 30;
 p1.factoryInLight = 1;
 p1.savedTemplates = [{"#":"Template","troop":28500,"light":32,"heavy":20,"defaultName":"步兵师团","support":10,"motorized":10},{"#":"Template","troop":8500,"light":14,"heavy":20,"defaultName":"炮兵联队","support":7,"motorized":0},{"#":"Template","troop":4500,"light":8,"heavy":10,"defaultName":"铁道联队","support":4,"motorized":5},{"#":"Template","troop":19000,"light":22,"heavy":14,"defaultName":"警备三单位制师团","support":8,"motorized":7},{"#":"Template","troop":8000,"light":4,"heavy":26,"defaultName":"装甲车队","support":2,"motorized":13},{"#":"Template","troop":18000,"light":6,"heavy":40,"defaultName":"装甲师团","support":3,"motorized":20},{"#":"Template","troop":4000,"light":6,"heavy":6,"defaultName":"侦察小队","support":3,"motorized":3}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
-p2.savedTemplates = [{"#":"Template","troop":16000,"light":18,"heavy":10,"defaultName":"步兵师","support":9,"motorized":0},{"#":"Template","troop":12000,"light":12,"heavy":10,"defaultName":"骑兵师","support":6,"motorized":5},{"#":"Template","troop":22000,"light":40,"heavy":10,"defaultName":"野战步兵师","support":20,"motorized":5},{"#":"Template","troop":15000,"light":18,"heavy":18,"defaultName":"摩托化步兵师","support":9,"motorized":9},{"#":"Template","troop":23000,"light":6,"heavy":20,"defaultName":"装甲集团军","support":3,"motorized":10},{"#":"Template","troop":4000,"light":4,"heavy":4,"defaultName":"武警大队","support":2,"motorized":2},{"#":"Template","troop":10000,"light":12,"heavy":4,"defaultName":"民兵团","support":2,"motorized":0}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
+p2.savedTemplates = [{"#":"Template","troop":16000,"light":18,"heavy":10,"defaultName":"步兵师","support":9,"motorized":0},{"#":"Template","troop":12000,"light":12,"heavy":10,"defaultName":"骑兵师","support":6,"motorized":5},{"#":"Template","troop":22000,"light":40,"heavy":10,"defaultName":"野战步兵师","support":20,"motorized":5},{"#":"Template","troop":15000,"light":18,"heavy":18,"defaultName":"摩托化步兵师","support":9,"motorized":9},{"#":"Template","troop":10000,"light":12,"heavy":4,"defaultName":"民兵团","support":2,"motorized":0}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
+p2.savedTemplates.push(new Template(10000, 12, 2, 'Division', 3, 0))
+p2.savedTemplates.push(new Template(8000, 9, 2, 'Division', 1, 0))
 
 let divisions = 0;
 

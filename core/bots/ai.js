@@ -21,8 +21,13 @@ class Ai {
     else if (this.player.divisions < 350) { rate = 70; if (Math.max(this.player.light, this.player.heavy) > 1500) this.player.activateReserve(0.5) }
     else if (this.player.divisions < 400) { rate = 80; if (Math.max(this.player.light, this.player.heavy) > 2000) this.player.activateReserve(0.5) }
     else rate = 95;
-    this.player.percentReserved = rate;
 
+    if (this.player.factories < 50) {
+      rate = (rate / 4).floor();
+      if (Math.max(this.player.light, this.player.heavy) > 200) this.player.activateReserve(1)
+    }
+
+    this.player.percentReserved = rate;
     // if (this.player._populationData.net < -100) rate = 0.01;
 
     budget.airStrike = (available) / 10;
@@ -87,22 +92,22 @@ class Ai {
         tem.motorized = (tem.heavy / 2).round();
       }
 
-      if (player.divisions < 190 && Math.random() > 0.5) { // need quantity over quality
+      if (player.divisions < 200 && Math.random() > 0.5) { // need quantity over quality
         tem.troop = (Math.random() * 12).round() * 1000 + 11000;
         //tem.heavy = (budget.newRecruits[1] * Math.random()).round().max(15).min(5) + 1;
-        tem.light = (30 * Math.random()).round().min(15) + 1;
+        tem.light = (30 * Math.random()).round().min(15).max(player.factories / 2) + 1;
         tem.heavy = (tem.light / 2 * Math.random()).round().min(1);
         tem.support = (tem.light / 2 * Math.random()).round();
         tem.motorized = (tem.heavy / 2 * Math.random()).round();
 
-        if (player.divisions < 150 && Math.random() > 0.2) { // need quantity over quality
-          tem.troop = (Math.random() * 18).round() * 1000 + 6500;
-          //tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
-          tem.light = (10 * Math.random()).round() + 1;
-          tem.heavy = (tem.light / 2 * Math.random()).round().min(1);
-          tem.support = (tem.light / 3 * Math.random()).round();
-          tem.motorized = (tem.heavy / 4 * Math.random()).round();
-        }
+      }
+      if ((player.divisions < 150 || player.factories < 50) && Math.random() > 0.2) { // need quantity over quality
+        tem.troop = (Math.random() * 18).round() * 1000 + 6500;
+        //tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
+        tem.light = (10 * Math.random()).round() + 1;
+        tem.heavy = (tem.light / 2 * Math.random()).round().min(1);
+        tem.support = (tem.light / 3 * Math.random()).round();
+        tem.motorized = (tem.heavy / 4 * Math.random()).round();
       }
 
       while ((tem.heavy = (tem.heavy - 1).floor()) > 1 && (tem.light = (tem.light - 1).floor()) > 1) {
@@ -144,7 +149,15 @@ class Ai {
       for (let i = 0;i < 20;i++) {
         add_queue(new_queue(player.savedTemplates.sample()));
       }
-    } else if (player.queue.length == 0 && player.divisions < 400) {
+    } else if (player.divisions < 250 && player.factories < 50 && player.queue.length < 30) {
+      let x = player.savedTemplates.sort((a, b) => (a.light + a.support + a.heavy + a.motorized) - (b.light + b.support + b.heavy + b.motorized))[0];
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+      add_queue(new_queue(x));
+
+      add_queue(new_queue(player.savedTemplates.sample()));
+    } else if (player.queue.length == 0) {
       /*
       2 hardest non armor
       2 highest armor
@@ -269,7 +282,7 @@ class Ai {
     if (player.light < 0) player.factoryInLight = player.factories;
     else if (player.heavy < 0) player.factoryInLight = Math.min(player.factories, 1);
 
-    if (player.queue.length > 30 && player.divisions > 150) clear_queue();
+    if (player.queue.length > 40 && player.divisions > 150) clear_queue();
     if (player.light < -500 || player.heavy < -500) clear_queue();
     deploy_all_queue();
   }
@@ -325,13 +338,13 @@ class Ai {
             SELECTED_UNITS.push(div);
             return;
           }
-          if ((div.skill > 1.2 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
-              0.27) && Math.random() > 0.7) ||
-            (player.averageStrength < 76 && div.hp < 60 && Math.random() > 0.75)) {
-            if (player.divisions > 350)
-              SELECTED_UNITS.push(div);
-            return;
-          }
+          // if ((div.skill > 1.2 && div.morale < 0.5 && (div.hp < 25 || div.morale <=
+          //     0.27) && Math.random() > 0.7) ||
+          //   (player.averageStrength < 76 && div.hp < 60 && Math.random() > 0.75)) {
+          //   if (player.divisions > 350)
+          //     SELECTED_UNITS.push(div);
+          //   return;
+          // }
           let retreatable = 60;
           let battleInfo = combineBattleInfos(div.battleInfo);
           if (div.battleInfo.length && ((battleInfo.casualties[0] / battleInfo.casualties[1]) > 2.5 || !PLAYERS[1].ai.attackOrderUntil)) {

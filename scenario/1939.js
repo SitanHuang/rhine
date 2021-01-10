@@ -168,7 +168,7 @@ function load1939Scenario() {
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
-  PLAYERS[1].growthRate = 0.003;
+  PLAYERS[1].growthRate = 0.002;
 
   PLAYERS[0].light = 0;
   PLAYERS[0].heavy = 0;

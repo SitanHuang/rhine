@@ -29,7 +29,7 @@ var InvasionOfChinaOwners1941 = `
 000000000000000000000000000000000010011110000111111111111|
 000000000000000000000000000000000011111100001111111111111|
 000000000000000000000000000000000011111000001111111111111|
-000000000000000000000000000000000111111000001011111111111|
+000000000000000000000000000000000111111000001111111111111|
 000000000000000000000000000000000010111000000001111111111|
 000000000000000000000000000000000000010000000000111111111|
 000000000000000000000000000000000000000000000000111111111|
@@ -135,21 +135,21 @@ function loadChina1941Scenario() {
   p2.retreatable = 30;
   p2.manpower = Math.floor(Math.random() * 500000 + 9000000);
   p2.growthRate = 0.01;
-  p2.light = 1500;
-  p2.heavy = 500;
+  p2.light = -2500;
+  p2.heavy = -600;
   p2.casualties = 2400000;
   p2.factoryInLight = 1;
   let p1 = PLAYERS[1];
   p1.color = 'rgba(120, 40, 40, 0.25)';
   p1.manpower = Math.floor(Math.random() * 500000 + 5000000);
   p1.growthRate = 0.0050;
-  p1.light = -1500;
-  p1.heavy = -2000;
+  p1.light = -150;
+  p1.heavy = -200;
   p1.casualties = 950000;
-  p1.retreatable = 70;
+  p1.retreatable = 0;
   p1.factoryInLight = 1;
   p1.savedTemplates = [{"#":"Template","troop":28500,"light":32,"heavy":20,"defaultName":"步兵师团","support":10,"motorized":10},{"#":"Template","troop":8500,"light":14,"heavy":20,"defaultName":"炮兵联队","support":7,"motorized":0},{"#":"Template","troop":4500,"light":8,"heavy":10,"defaultName":"铁道联队","support":4,"motorized":5},{"#":"Template","troop":19000,"light":22,"heavy":14,"defaultName":"警备三单位制师团","support":8,"motorized":7},{"#":"Template","troop":8000,"light":4,"heavy":26,"defaultName":"装甲车队","support":2,"motorized":13},{"#":"Template","troop":18000,"light":6,"heavy":40,"defaultName":"装甲师团","support":3,"motorized":20},{"#":"Template","troop":4000,"light":6,"heavy":6,"defaultName":"侦察小队","support":3,"motorized":3}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
-  p2.savedTemplates = [{"#":"Template","troop":16000,"light":18,"heavy":10,"defaultName":"步兵师","support":9,"motorized":0},{"#":"Template","troop":12000,"light":12,"heavy":10,"defaultName":"骑兵师","support":6,"motorized":5},{"#":"Template","troop":22000,"light":40,"heavy":10,"defaultName":"野战步兵师","support":20,"motorized":5},{"#":"Template","troop":15000,"light":18,"heavy":18,"defaultName":"摩托化步兵师","support":9,"motorized":9},{"#":"Template","troop":23000,"light":6,"heavy":20,"defaultName":"装甲集团军","support":3,"motorized":10},{"#":"Template","troop":4000,"light":4,"heavy":4,"defaultName":"武警大队","support":2,"motorized":2},{"#":"Template","troop":10000,"light":12,"heavy":4,"defaultName":"民兵团","support":2,"motorized":0}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
+  p2.savedTemplates = [{"#":"Template","troop":16000,"light":18,"heavy":10,"defaultName":"步兵师","support":9,"motorized":0},{"#":"Template","troop":12000,"light":12,"heavy":10,"defaultName":"骑兵师","support":6,"motorized":5},{"#":"Template","troop":22000,"light":40,"heavy":10,"defaultName":"野战步兵师","support":20,"motorized":5},{"#":"Template","troop":15000,"light":18,"heavy":18,"defaultName":"摩托化步兵师","support":9,"motorized":9},{"#":"Template","troop":4000,"light":4,"heavy":4,"defaultName":"武警大队","support":2,"motorized":2},{"#":"Template","troop":10000,"light":12,"heavy":4,"defaultName":"民兵团","support":2,"motorized":0}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
 
   let divisions = 0;
 
@@ -160,10 +160,10 @@ function loadChina1941Scenario() {
     if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P')
       if (v.owner == 0) {
         if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 && v.terrain == 'U') v.fort = true;
-        v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? (Math.random() * 3).round() : Math.ceil(Math.random() * 3 + 3)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 12000 : 7000, (Math.random() * 5 + 10).round(), (Math.random() * 5 + 3).round(), 'Division', 2+(Math.random()*3).round(), 1))))
+        v.divisions = Array(v.terrain == 'P' || v.terrain == 'U' ? (Math.random() * 3).round() : Math.ceil(Math.random() * 1 + 2)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 12000 : 7000, (Math.random() * 5 + 10).round(), (Math.random() * 5 + 3).round(), 'Division', 2+(Math.random()*3).round(), 1))))
         v.divisions.forEach(x => {x.skill = Math.random() * 2.5 + 0.5;x.entrench = 2;x.morale = Math.random() + 0.5;x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;});
       } else {
-        v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 2)+2).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14500, 14, 6, 'Division', 6, 2))))
+        v.divisions = Array(v.terrain == 'U' ? 1 : Math.ceil(Math.random() * 1)+1).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(14500, 14, 6, 'Division', 6, 2))))
         v.divisions.forEach(x => {x.skill = Math.random() * 1.5 + 1;x.entrench = 0.9 + Math.random();x.morale = 1.25;x.men = (Math.random() * 0.3 + 0.6) * x.template.troop;});
       }
   })));

@@ -452,8 +452,10 @@ function updateLogistics() {
   <strong>Production ratio:</strong>
   <input type="range" min="1" max="${currentPlayer.factories}" value="${currentPlayer.factoryInLight}" class="slider"
     oninput="onFactoryRatioChange(this); document.getElementById('queueInfoArea').innerHTML = renderQueueInfo()">
-  Light: <span id="lightNum">${currentPlayer.factoryInLight}</span><br>
-  Heavy: <span id="heavyNum">${currentPlayer.factoryInHeavy}</span><br><br>
+  Light: <span id="lightNum">${currentPlayer.factoryInLight}</span>, Heavy: <span id="heavyNum">${currentPlayer.factoryInHeavy}</span><br>
+  <button onclick="currentPlayer.activateReserve(0.5);updateLogistics()">-50% Reserve</button>
+  <button onclick="currentPlayer.activateReserve(1);updateLogistics()">-100% Reserve</button>
+  <br>
   <strong>Minimum % reserved:</strong>
   <input type="range" min="0" max="100" value="${currentPlayer.percentReserved}" class="slider"
   oninput="onReserveRatioChange(this); document.getElementById('queueInfoArea').innerHTML = renderQueueInfo()">
