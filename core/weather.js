@@ -9,11 +9,11 @@ function weather_curve(t) {
 function weather_update() {
   let c = weather_curve();
   window._weather = {
-    // from 0.7 to 1.1, mid at 0.9 (mar and sep)
-    supplyCx: (c / 5 + 0.9),
+    // from 0.55 to 1.05, mid at 0.8 (mar and sep)
+    supplyCx: (c / 4 + 0.8),
     // from 0.47 to 1.1, mid at 0.8 (mar and sep)
     movementCx: Math.min(c / 3 + 0.8, 1.1),
-    // from 1 to 1.4, mid at 1.2 (mar and sep)
-    defenseCx: (-c / 5 + 1.2) 
+    // from 0.95 to 1.6, mid at 1.1 (mar and sep)
+    defenseCx: Math.max(-c / 2.5 + 1.1 + Math.abs(c / 10), 0.95) 
   };
 }

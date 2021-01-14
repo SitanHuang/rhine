@@ -70,20 +70,20 @@ var WWIITerrains = `
 @@@@@@@@@@m *m  @@@@@@@@@@@@@@@*    @@@@@@@@@@@@@@@******cffrrfff  ffrrfff  C  fffrrrrfff|
 @@@@fm c@@ m*mm @@@@@@@@@@@@@@@**   @@@@@@@@@@ @@*cf fffffffrf f   f frrff  *  rrrrfffff |
 @@@@fm   @@@*mmm @@@@@@@@@@@@@@ * @@@@@@@@@@f  @@* f  ffrrrrrf fc******rrrrrrrrrfff fff f|
-@fffff   @@m***  p@@@@@@@@@@@@@ *      @@  ff*cr**  f fffffffff** f fffffffff*fff        |
+@fffff   @@m***  p@@@@@@@@@@@@@ *    cp@@  ff*cr**  f fffffffff** f fffffffff*fff        |
 @mmfm   @@@@@mc m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff       c|
-@        @ @Cm**  @@@@@@@@@@@ prr c*f     ff * rr       ff**f  frrrffffffffff*f          |
-@@  mff @@ mm  *  p@@@@@@@      rrr****C  ff *rr      **c**f frrr ffff ff ****           |
+@        @ @Cm**  @@@@@@@@@@@cprr c*f     ff * rr       ff**f  frrrffffffffff*f          |
+@@  mff @@ mm  *  p@@@@@@@      rrr****c  ff *rr      **c**f frrr ffff ff ****           |
 @@   fcp@@  m  ***C p@@@@@       f**fff*fff****c****c**    ff r fffffc***c*ffff          |
 @   ff  @@@ m    *   @@@@  c**c   *rrmm**c**f rrrff          frfffffffffff*ffff          |
 @m mff@@@ mm  rr Crp@@@@ rrr  ****cmrrrmf *f  ffrr           frrffff fffff*f         fff |
-@@ p@@@@@  m   rrrr@@@@    rrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
+@@ p@@@@@  m   rrrr@@@@ C  rrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
 @@@@@@@@@@@C******p@@ p   fffrmmm** mmrr  *        rrr**********rrf    f   ***           |
 @@@@@@@@@@ *    p@@@@    cfffrrr** m   rrrrmm  f c**fr        f******c*ff    *f   f      |
 @@@@@@@@@  p@@@@@@@@     m****c*m  m  fmmmrmm   f  * r        f  frr  ****f***c      fff |
 @@@@@@@@pc@@@@@@@@@     f**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
 @@@@@@@@@@@@@@@ @@       *fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
-@@@@@@@@@@@@@@@ p    c**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
+@@@@@@@@@@@@@@@ p    C**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
 @@@@@@@@@@  f       **f*  fffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff      **ff**c ffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff   *** fmm  ffm rrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
@@ -163,17 +163,17 @@ function load1939Scenario() {
   PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 150187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 3500000;
+  PLAYERS[1].manpower = 3000000;
   PLAYERS[1].casualties = 0;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
   // PLAYERS[1].growthRate = 482790/67349000; // 0.0071684806
-  PLAYERS[1].growthRate = 0.002;
+  PLAYERS[1].growthRate = 0.001;
 
-  PLAYERS[0].light = 0;
-  PLAYERS[0].heavy = 0;
-  PLAYERS[1].light = -100;
-  PLAYERS[1].heavy = -100;
+  PLAYERS[0].light = 500;
+  PLAYERS[0].heavy = 500;
+  PLAYERS[1].light = 100;
+  PLAYERS[1].heavy = 100;
 
   PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[1].sumAllGeneralTraits;
@@ -182,7 +182,7 @@ function load1939Scenario() {
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 10000000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
-  p3.light = -3000;
+  p3.light = -2000;
   p3.factories = 0;
   //p3.constructionPoints = 6500;
   p3.heavy = -500;
@@ -200,9 +200,9 @@ function load1939Scenario() {
   let british = new Template(12100, 18, 9, 'British Division', 9, 3);
   let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
-  let german = new Template(17000, 22, 12, 'Infanterie-Division', 11, 8);
+  let german = new Template(17000, 20, 10, 'Infanterie-Division', 9, 4);
   let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 7);
-  let italian = new Template(10000, 16, 7, 'Intalian Infantry Division', 8, 3);
+  let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
   let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
   let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
@@ -258,7 +258,7 @@ function load1939Scenario() {
         });
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
-        let type = Math.random() < 0.4 ? soviet : sovietMilitia;
+        let type = Math.random() < 0.7 ? soviet : sovietMilitia;
         v.divisions = Array((Math.random() * 1).round() + 3).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
       }
@@ -287,8 +287,11 @@ function load1939Scenario() {
 }
 function trigger_german_ai_attack() {
   if (diplomacy_get(1,2).status == 'WAR') {
+    let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
+    let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
     PLAYERS[1].growthRate = 0.0001;
     PLAYERS[0].growthRate = 0.005; // 0.0029563933
+    PLAYERS[0].constructionPoints += 550 * 20;
     PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;
     PLAYERS[2].savedTemplates.push(___sovietMech2.deepClone());
     PLAYERS[2].savedTemplates.push(___sovietTank2.deepClone());

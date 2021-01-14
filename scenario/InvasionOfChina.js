@@ -256,15 +256,15 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
         v.divisions = Array(Math.ceil(Math.random() * 2 + 2)).fill(0).map(() => (new Division(v.owner, `Divsion, ${((++divisions)/2).floor()}th Army Group`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 9+(Math.random()*3).round(), 2, 'Division', 1+(Math.random()*3).round(), 0))))
     } else {
       v.divisions = [];
-      let b = 6;
+      let b = 5;
       if (!(row <= 6 || col <= 30)) {
-        b = 5;
-        v.divisions = Array((1).round()).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(20000, 22, 14, 'Division', 10, 6))));
+        b = 4;
+        v.divisions = Array((1).round()).fill(0).map(() => (new Division(v.owner, 'Infantry Division', pt(row, col), new Template(16000, 18, 12, 'Division', 7, 0))));
       }
       if (row > 6 && row <= 11 && col > 30) {
-        Array((Math.random()*3).round()).fill(0).forEach(() => (new Division(v.owner, 'Tank Battalion', pt(row, col), new Template(4000, 4, 12, 'Division', 2, 12))));
+        Array((Math.random()*2).round()).fill(0).forEach(() => (new Division(v.owner, 'Tank Battalion', pt(row, col), new Template(4000, 4, 12, 'Division', 2, 10))));
       }
-      Array(v.terrain == 'U' ? 1 : b).fill(0).forEach(() => (new Division(v.owner, 'Infantry Battalion', pt(row, col), new Template(4000, 7, 4, 'Division', 3, 1))));
+      Array(v.terrain == 'U' ? 1 : b).fill(0).forEach(() => (new Division(v.owner, 'Infantry Battalion', pt(row, col), new Template(4000, 7, 4, 'Division', 2, 0))));
       v.divisions.forEach(x => x.skill = (Math.random()*3+1).round(2));
     }
 })));
