@@ -33,7 +33,6 @@ function SoundPlayer(src) {
       that.sound.pause();
     }
   },false);
-  this.play();
 }
 var buttonsPlayer = new SoundPlayer('gui/music/buttons.webm');
 var navyPlayer = new SoundPlayer('gui/music/navy.webm');

@@ -83,7 +83,7 @@ var WWIITerrains = `
 @@@@@@@@@  p@@@@@@@@     m****c*m  m  fmmmrmm   f  * r        f  frr  ****f***c      fff |
 @@@@@@@@pc@@@@@@@@@     f**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
 @@@@@@@@@@@@@@@ @@       *fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
-@@@@@@@@@@@@@@@ p    C**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
+@@@@@@@@@@@@@@@ p    c**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
 @@@@@@@@@@  f       **f*  fffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff      **ff**c ffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff   *** fmm  ffm rrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
@@ -93,8 +93,8 @@ var WWIITerrains = `
 @@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
 @@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
 @@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fc@***r          mffmfmmc rrr@@@@  *ff r             |
-@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   cf  f  f  |
-@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@C @@@@@@     ff fff|
+@@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   Cf  f  f  |
+@@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@c @@@@@@     ff fff|
 @@@@@@@@@@@@@mmff   **********f@@fm*rr@@@ cfrrfc  m m     *rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
 @@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@m*mm c@@@  rr  mfff     *    @@@@@@@@@@@@@@@@@@  mmcmmm|
 @@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@pcrrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
@@ -163,7 +163,7 @@ function load1939Scenario() {
   PLAYERS[0].factories = 0;
   PLAYERS[0].growthRate = 150187/47080000; // 0.0029563933
   PLAYERS[1].color = "rgba(96, 96, 96, 0.2)";
-  PLAYERS[1].manpower = 3000000;
+  PLAYERS[1].manpower = 2000000;
   PLAYERS[1].casualties = 0;
   PLAYERS[1].divisionMen = 0;
   PLAYERS[1].factories = 0;
@@ -172,10 +172,11 @@ function load1939Scenario() {
 
   PLAYERS[0].light = 500;
   PLAYERS[0].heavy = 500;
-  PLAYERS[1].light = 100;
-  PLAYERS[1].heavy = 100;
+  PLAYERS[1].light = 1000;
+  PLAYERS[1].heavy = 1000;
 
-  PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
+//   PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
+  PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[1].sumAllGeneralTraits;
 
   window.p3 = PLAYERS[2] || new Player();
@@ -198,29 +199,29 @@ function load1939Scenario() {
   // ============== military =================
 
   let british = new Template(12100, 18, 9, 'British Division', 9, 3);
-  let american = new Template(11600, 18, 8, 'US Infantry Division', 9, 4);
+  let american = new Template(11600, 17, 10, 'US Infantry Division', 9, 4);
   let french = new Template(11090, 12, 6, 'French Division', 2, 1);
-  let german = new Template(17000, 20, 10, 'Infanterie-Division', 9, 4);
-  let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 7);
+  let german = new Template(17000, 25, 13, 'Infanterie-Division', 12, 7);
+  let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 20);
   let italian = new Template(10000, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
   let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
   let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
-  let germanArtillery = new Template(8500, 2, 40, 'Anti-Tank Regiment', 1, 7);
+//   let germanArtillery = new Template(8500, 2, 40, 'Anti-Tank Regiment', 1, 7);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
   let soviet = new Template(14000, 12, 6, 'Rifle Division', 2, 1);
   let sovietMilitia = new Template(9000, 8, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
-  let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
+  let sovietTank2 = window.___sovietTank2 = new Template(6000, 4, 13, 'Tank Regiment', 1, 13);
   let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
-  let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
+  let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 12);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
   germanPanzerII.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
-  PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), germanArtillery.deepClone(), germanCombinedArms.deepClone()];
+  PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), /*germanArtillery.deepClone(),*/ germanCombinedArms.deepClone()];
   PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone(), sovietTank2.deepClone(), sovietMech2.deepClone()];
 
   let british_i = 0;
@@ -245,16 +246,18 @@ function load1939Scenario() {
       }
     } else if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
       if (v.owner == 1 && (v.terrain != 'U' || (col == 25 && row == 20)) && !(col >= 51 && row <= 30)) {
-        let type = Math.random() < 0.9 ? (row < 35 ? german : italian) : germanPanzer;
+        let type = Math.random() < 0.8 ? (row < 35 ? german : italian) : germanPanzer;
         let num = 0;
         if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
-          num += (Math.random() * 4).round();
+          num += (Math.random() * 5).round();
         }
-        v.divisions = Array((Math.random() * 1.5).round() + 1 + num).fill(0).map(() => {
-        if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
-          type = Math.random() > 0.8 || !(col == 21 && row == 22) ? (Math.random() > 0.3 ? german : germanMotorized) : (Math.random() > 0.3 ? (Math.random() > 0.4 ? germanPanzerII : germanPanzerI) : germanPanzer);
-        }
-          return new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type)
+        v.divisions = Array((Math.random() * 3).round() + 2 + num).fill(0).map(() => {
+          if (row >= 19 && row <= 23 && col >= 21 && col <= 27) {
+            type = Math.random() > 0.9 || !(col == 21 && row == 22) ? (Math.random() > 0.2 ? german : germanMotorized) : (Math.random() > 0.3 ? (Math.random() > 0.4 ? germanPanzerII : germanPanzerI) : germanPanzer);
+          }
+          let d = new Division(v.owner, ++german_i + 'th ' + type.defaultName, pt(row, col), type);
+          d.skill = Math.random() * 2 + 2;
+          return d;
         });
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 3 : 1) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
@@ -274,27 +277,50 @@ function load1939Scenario() {
   PLAYERS[0].ai.attackOrderLastEnded = timestamp;
   PLAYERS[1].ai.attackOrderLastStarted = timestamp;
   PLAYERS[1].ai.attackOrderUntil = timestamp + 1.577e+7*1.5;
-  window.timeIncrement = 518400 / 2; // 3 days
+  window.timeIncrement = 518400 / 3 / 1.166666; // 2/1.16 days
 
   reinitCanvas();
   updateInterfaceOnPass();
 
-  diplomacy_change(PLAYERS[0].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -694310400, changeValue: {status: 'WAR'}});
+  diplomacy_change(PLAYERS[0].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -594081028, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[1].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -900241200, changeValue: {status: 'WAR'}});
 
-  pt(0, 0).prov.callTrigger = "trigger_german_ai_attack()";
+  pt(0, 0).prov.callTrigger = "trigger_german_ai_attack(0)";
 
 }
-function trigger_german_ai_attack() {
+function trigger_german_ai_attack(num) {
   if (diplomacy_get(1,2).status == 'WAR') {
-    let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
-    let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
-    PLAYERS[1].growthRate = 0.0001;
-    PLAYERS[0].growthRate = 0.005; // 0.0029563933
-    PLAYERS[0].constructionPoints += 550 * 20;
-    PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;
-    PLAYERS[2].savedTemplates.push(___sovietMech2.deepClone());
-    PLAYERS[2].savedTemplates.push(___sovietTank2.deepClone());
-    pt(0, 0).prov.callTrigger = "";
+    if (num == 0) {
+      let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
+      let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
+      PLAYERS[1].growthRate = 0.0001;
+      PLAYERS[0].growthRate = 0.005; // 0.0029563933
+      PLAYERS[0].constructionPoints += 550 * 20;
+      PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;
+      PLAYERS[2].savedTemplates.push(___sovietMech2.deepClone());
+      PLAYERS[2].savedTemplates.push(___sovietTank2.deepClone());
+      MAP_DATA.forEach(r => r.forEach(c => {if (c && c.owner == 2){c.divisions.forEach(x => {x.morale = 0;x.entrench=0;x.skill=0.7;airStrike(x)})}}));
+      pt(0, 0).prov.callTrigger = "trigger_german_ai_attack(1)";
+    } else if (num == 1 && window.timestamp > -880929896) { // first wave supply 02/01/1942
+      PLAYERS[2].light += 700;
+      PLAYERS[2].heavy += 1000;
+      if (MAP_DATA[12][88].owner == 2) {
+        Array(98).fill(0).forEach((x, i) => {
+          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 16, 10, 'Siberian Division', 7, 5));
+          d.skill = Math.random() * 2 + 2;
+        });
+      }
+      pt(0, 0).prov.callTrigger = "trigger_german_ai_attack(2)";
+    } else if (num == 2 && window.timestamp > -862613096) { // second wave supply 09/01/1942
+      PLAYERS[2].heavy += 4000;
+      PLAYERS[2].heavy += 6000;
+      PLAYERS[1].light -= 3000;
+      PLAYERS[1].heavy -= 5000;
+      PLAYERS[2].constructionPoints += 550 * 30;
+      PLAYERS[1].constructionPoints -= 550 * 20;
+      PLAYERS[0].constructionPoints += 550 * 30;
+      
+      pt(0, 0).prov.callTrigger = "";
+    }
   }
 }
