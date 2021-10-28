@@ -64,7 +64,7 @@ var WWIITerrains = `
 @@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffrr@fff*cfffff ff fff  fff    fffff  |
 @@@@@@@mmmmmmff@@@@@@@@@@@@@@@@c**@@@c      @@ @@@@fffrff***fffffff ffff  ****C  fff fff |
 @@@@@@@mmmcmmc@@@@@@@@@@@@@@@@  * @@@@      @@@@@@@fffr***ffff fffc********ff          ff|
-@@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@    cp@@@@@@@ ffffff  ffffffffffffffffffff  ff ffff|
+@@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@    cp@@@@@@@ ffffff  ffffffffffffffffffff  ffcffff|
 @@@@@@@@@fmm**@@@@@@@@@@@@@@@@ ** @@@@   @@@@@@@@@@fff*ffffffrrrrrrrrff fffffffffffffffff|
 @@@@@@@@@@  *  @@@@@@@@@@@@@@@p*   c r @@@@@@@@@@@@fff*ffffffrf fff rrff ffff  ffffffrrrr|
 @@@@@@@@@@m *m  @@@@@@@@@@@@@@@*    @@@@@@@@@@@@@@@******cffrrfff  ffrrfff  C  fffrrrrfff|
@@ -74,30 +74,30 @@ var WWIITerrains = `
 @mmfm   @@@@@mc m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff       c|
 @        @ @cm**  @@@@@@@@@@@cprr c*f     ff * rr       ff**f  frrrffffffffff*f          |
 @@  mff @@ mm  *  p@@@@@@@   F  rrr****C  ff *rr      **c**f frrr ffff ff ****           |
-@@   fcp@@  m  ***c p@@@@@  FF   f**fff*fff****c****c**    ff r fffffc***c*ffff          |
+@@   fcp@@  m  ***c p@@@@@  FF   f**fff*fff****c****c**    ff r fffffc***c*ffff    c     |
 @   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff          frfffffffffff*ffff          |
 @m mff@@@ mm  rr Crp@@@@ rrrF ****cmrrrmf *f  ffrr           frrffff fffff*f         fff |
 @@ p@@@@@  m   rrrr@@@@ CFFrrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
-@@@@@@@@@@@c******p@@ p  Ffffrmmm** mmrr  *        rrr**********rrf    f   ***           |
+@@@@@@@@@@@C******p@@ p  Ffffrmmm** mmrr  *        rrr**********rrf    f   ***          c|
 @@@@@@@@@@ *    p@@@@   Fcfffrrr** m   rrrrmm  f c**fr        f******c*ff    *f   f      |
 @@@@@@@@@  p@@@@@@@@    fm****c*m  m  fmmmrmm   f  * r        f  frr  ****f***c      fff |
 @@@@@@@@pc@@@@@@@@@     F**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
 @@@@@@@@@@@@@@@ @@     FF*fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
-@@@@@@@@@@@@@@@ p    C****FmFFrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
+@@@@@@@@@@@@@@@ p    c****FmFFrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
 @@@@@@@@@@  f       **f* Ffffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
 @@@@@@@@  cff      **ff**cFffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
 @@@@@@@@@@ffff   *** fmm  ffmFrrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
 @@@@@@@@@@@@   c**  f m  ffmm Fmmmmmmmrrcffff    *        m mfr c***** rr  **    f**C    |
 @@@@@@@@@@@@@p   * rrrrr f    Fmmmmmm****rmff    c         mmmrr      rr  f **c****      |
 @@@@@@@@@@@@@@rrr*rr   rr     mmmmm***mmmrrf     *   mmm  fmmffr    rrr*    @            |
-@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
+@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@      cfff |
 @@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
 @@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fc@***r          mffmfmmc rrr@@@@  *ff r             |
 @@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   Cf  f  f  |
 @@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@c @@@@@@     ff fff|
 @@@@@@@@@@@@@mmff   **********f@@fm*rr@@@ cfrrfc  m m     *rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
 @@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@m*mm c@@@  rr  mfff     *    @@@@@@@@@@@@@@@@@@  mmcmmm|
-@@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@pcrrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
+@@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@pcrrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmc|
 @@@@@@@@@@@@@@@@@@mmmmm@@@@@@@@ff@@f**mm@@@@@@  ffrrrr  c     @@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fp@@@fCfm  @@@@@@ fc**rrrm    f@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fc@@@@pfmm  @@@@@ f  m crfffff @@@@@@@@@@@@@@@@@@@@@@@@@@@|
@@ -195,7 +195,7 @@ function load1936Scenario() {
   p3.light = -10000;
   p3.factories = 0;
   //p3.constructionPoints = 6500;
-  p3.heavy = -7000;
+  p3.heavy = -10000;
   p3.factoryInLight = 1;
   p3.generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg"},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":true}}};
   p3.sumAllGeneralTraits;
@@ -218,7 +218,7 @@ function load1936Scenario() {
   french.irremovable = true;
   let german = new Template(17000, 25, 13, 'Infanterie-Division', 12, 7);
   let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 20);
-  let italian = new Template(12000, 16, 8, 'Intalian Infantry Division', 8, 3);
+  let italian = new Template(12000, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
   let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
   let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
@@ -313,6 +313,7 @@ function trigger_german_ai_attack1936(num) {
     } else if (num == 1 && window.timestamp > -880929896) { // first wave supply 02/01/1942
       PLAYERS[2].light += 700;
       PLAYERS[2].heavy += 1000;
+      PLAYERS[0].manpower += 3500000;
       if (MAP_DATA[12][88].owner == 2) {
         Array(98).fill(0).forEach((x, i) => {
           let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 16, 10, 'Siberian Division', 7, 5));
@@ -323,10 +324,10 @@ function trigger_german_ai_attack1936(num) {
     } else if (num == 2 && window.timestamp > -862613096) { // second wave supply 09/01/1942
       PLAYERS[2].heavy += 4000;
       PLAYERS[2].heavy += 6000;
-      PLAYERS[1].light -= 5000;
-      PLAYERS[1].heavy -= 8000;
+      PLAYERS[1].light = -5000;
+      PLAYERS[1].heavy = -8000;
       PLAYERS[2].constructionPoints += 550 * 30;
-      PLAYERS[1].constructionPoints -= 550 * 50;
+      PLAYERS[1].constructionPoints = -550 * 50;
       PLAYERS[0].constructionPoints += 550 * 30;
 
       pt(0, 0).prov.callTrigger = "";
