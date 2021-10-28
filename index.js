@@ -52,7 +52,8 @@ function playerSelectionScreen(alreadyWWII) {
       <p><button onclick="loadChina1941Scenario();playerSelectionScreen(1)">Load 1941 China scenario</button></p>
       <p><button onclick="load1944Scenario();playerSelectionScreen(1)">Load 1944 Europe scenario</button></p>
       <p><button onclick="load1941Scenario();playerSelectionScreen(1)">Load 1941 Europe scenario</button></p>
-      <p><button onclick="load1939Scenario();playerSelectionScreen(1)">Load 1939 Europe scenario</button></p>` + innerHTML;
+      <p><button onclick="load1939Scenario();playerSelectionScreen(1)">Load 1939 Europe scenario</button></p>
+      <p><button onclick="load1936Scenario();playerSelectionScreen(1)">Load 1936 Europe scenario</button></p>` + innerHTML;
   PLAYERS.forEach((p, i) => {
     innerHTML += `
     <tr>
