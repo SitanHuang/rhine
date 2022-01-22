@@ -142,9 +142,10 @@ function handlePlayerOnPass() {
             }
           })
         }
+        col.menAttacking = 0;
         col.divisions.forEach(div => {
           div.airStriked = false;
-          divs.push(div)
+          divs.push(div);
         });
       }
     }

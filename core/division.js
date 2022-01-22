@@ -98,11 +98,16 @@ class Division {
         this.updateLocation(nextPt);
         this.action.shift();
       } else {
-        let that = this;
+        if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
+
+        let maxWidth = nextPt.terrain.width;
+        let exceeded = ((nextProv.menAttacking || 0) + that.men - maxWidth).min(0);
+        let widthPenalty = (1 - maxWidth / (exceeded + maxWidth));
+        nextProv.menAttacking += that.men;
         divs.forEach(div => {
           if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
           div.movementProgress = -1;
-          let results = battle(that, div, that.prov.terrain, div.prov.terrain);
+          let results = battle(that, div, widthPenalty, maxWidth);
           // if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.hardness / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
           if (div.hp < div.player.retreatable.min(5) || (div.morale < 0.25)) {
             div.retreat();

@@ -58,6 +58,8 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
         mark.title = (battleInfo.percentage[0] * 100).round(2) + '% toward victory====\nCasualties: ' + battleInfo.casualties[0].round() + '-' + battleInfo.casualties[1].round() + '(' + (battleInfo.casualties[0] / battleInfo.casualties[1]).round(2) + ')' +
                     `\nDamage: ${battleInfo.damage[0].round()} - ${battleInfo.damage[1].round()}` +
                     `\nMorale: ${battleInfo.morales[0].round(1)} - ${battleInfo.morales[1].round(1)}` +
+                    `\nAvg terrain max: ${battleInfo.maxWidth.round()}` +
+                    `\nAvg width penalty: ${battleInfo.attackingWidthPenalty}%` +
                     `\n${attackingDivisions} divisions are attacking`;
         if (battleInfo.armored)
           mark.title += `\n==== ${battleInfo.armored} armored battles ====` +

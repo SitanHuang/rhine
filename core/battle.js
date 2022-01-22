@@ -21,13 +21,13 @@ function getCasualtyReductionFromSupport(div) {
   return ((div.template.support/div.template.manpower*1000).max(0.75) + Math.pow(div.template.hardness, 2) * 0.8).min(0).max(0.85);
 }
 
-function battle(d1, d2, ter1, ter2) {
+function battle(d1, d2, attackingWidthPenalty, maxWidth) {
   // ter1 = TERRAINS[ter1];
   // ter2 = TERRAINS[ter2];
 
-  let s1 = d1.softAttack;
+  let s1 = d1.softAttack * (1 - attackingWidthPenalty);
   let s2 = d2.softDefense;
-  let h1 = d1.hardAttack;
+  let h1 = d1.hardAttack * (1 - attackingWidthPenalty);
   let h2 = d2.hardDefense;
   let factor = 2.5 * 2;
 
@@ -99,6 +99,8 @@ function battle(d1, d2, ter1, ter2) {
     casualties: [rt2, rt1, sum],
     morales: [d1.morale, d2.morale],
     damage: [t1, t2],
+    attackingWidthPenalty: attackingWidthPenalty,
+    maxWidth: maxWidth,
     armored: armored,
     pierced: pierced,
     piercedBy: piercedBy,
@@ -113,7 +115,9 @@ function combineBattleInfos(infos) {
     percentage: [0, 0],
     morales: [0, 0],
     armored: 0,
+    attackingWidthPenalty: 0,
     pierced: 0,
+    maxWidth: 0,
     piercedBy: 0,
     damage: [0, 0]
   };
@@ -128,17 +132,21 @@ function combineBattleInfos(infos) {
     t.damage[0] += info.damage[0];
     t.damage[1] += info.damage[1];
     t.armored += info.armored;
+    t.maxWidth += info.maxWidth;
     t.pierced += info.pierced;
     t.piercedBy += info.piercedBy;
+    t.attackingWidthPenalty += info.attackingWidthPenalty;
   });
   return {
     num: infos.length,
     casualties: t.casualties,
     damage: t.damage,
+    maxWidth: t.maxWidth / infos.length,
     armored: t.armored.round(1),
     pierced: t.pierced.round(1),
     piercedBy: t.piercedBy.round(1),
     morales: [t.morales[0] / infos.length, t.morales[1] / infos.length],
+    attackingWidthPenalty: (t.attackingWidthPenalty / infos.length * 100).round(),
     percentage: [
       t.percentage[0] / infos.length,
       t.percentage[1] / infos.length,
