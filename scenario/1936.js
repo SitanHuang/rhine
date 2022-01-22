@@ -73,14 +73,14 @@ var WWIITerrains1936 = `
 @fffff   @@m***  p@@@@@@@@@@@@@ *    cp@@  cf*cr**  f fffffffff** f fffffffff*fff        |
 @mmfm   @@@@@mc m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff       c|
 @        @ @cm**  @@@@@@@@@@@cprr c*f     ff * rr       ff**f  frrrffffffffff*f          |
-@@  mff @@ mm  *  p@@@@@@@   F  rrr****C  ff *rr      **c**f frrr ffff ff ****           |
-@@   fcp@@  m  ***c p@@@@@  FF   f**fff*fff****c****c**    ff r fffffc***c*ffff    c     |
-@   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff          frfffffffffff*ffff          |
-@m mff@@@ mm  rr Crp@@@@ rrrF ****cmrrrmf *f  ffrr           frrffff fffff*f         fff |
-@@ p@@@@@  m   rrrr@@@@ CFFrrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
-@@@@@@@@@@@C******p@@ p  Ffffrmmm** mmrr  *        rrr**********rrf    f   ***          c|
-@@@@@@@@@@ *    p@@@@   Fcfffrrr** m   rrrrmm  f c**fr        f******c*ff    *f   f      |
-@@@@@@@@@  p@@@@@@@@    fm****c*m  m  fmmmrmm   f  * r        f  frr  ****f***c      fff |
+@@  mff @@ mm  *  p@@@@@@@   F  rrr****C  ff *rr      **c~~f~frrr ffff ff ****           |
+@@   fcp@@  m  ***c p@@@@@  FF   f**fff*fff****c****c**~~~~ff r fffffc***c*ffff    c     |
+@   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff     ~~~~ frfffffffffff*ffff          |
+@m mff@@@ mm  rr Crp@@@@ rrrF ****cmrrrmf *f  ffrr  ~~~~~ ~~~~rrffff fffff*f         fff |
+@@ p@@@@@  m   rrrr@@@@ CFFrrrmm  * m rf f*ff  f rrr   ~~~c~~~~rrf ffff   **   ffff      |
+@@@@@@@@@@@C******p@@ p  Ffffrmmm** mmrr  *        rrr~~~~~*****rrf    f   ***          c|
+@@@@@@@@@@ *    p@@@@   Fcfffrrr** m   rrrrmm  f c**fr  ~~~~~~f******c*ff    *f   f      |
+@@@@@@@@@  p@@@@@@@@    fm****c*m  m  fmmmrmm   f  * r        f~~frr  ****f***c      fff |
 @@@@@@@@pc@@@@@@@@@     F**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
 @@@@@@@@@@@@@@@ @@     FF*fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
 @@@@@@@@@@@@@@@ p    c****FmFFrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
@@ -131,7 +131,7 @@ function load1936Scenario() {
     } else if (v == 'C') {
       terrain = 'U';
       slots = Array(4).fill('F');
-    } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
+    } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*' || v == '~') {
       terrain = v.toUpperCase();
     } else if (v == 'F') {
       terrain = ' ';

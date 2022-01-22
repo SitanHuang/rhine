@@ -51,7 +51,7 @@ window.TERRAINS = {
     width: 10000,
     color: 'green',
     defense: 1.5,
-    attrition: 0.7,
+    attrition: 0.6,
     movement: 0.2, // 5
     slots: 1
   },
@@ -72,6 +72,16 @@ window.TERRAINS = {
     color: '#a0a001',
     defense: 0.9,
     attrition: 0.6,
+    movement: 0.1, // 10
+    slots: 0
+  },
+  "~": {
+    name: 'Marsh',
+    render: '░░',
+    width: 30000,
+    color: '#a0a001',
+    defense: 1.2,
+    attrition: 0.4,
     movement: 0.1, // 10
     slots: 0
   },

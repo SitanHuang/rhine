@@ -64,42 +64,42 @@ var WWIITerrains = `
 @@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffrr@fff*cfffff ff fff  fff    fffff  |
 @@@@@@@mmmmmmff@@@@@@@@@@@@@@@@c**@@@c      @@ @@@@fffrff***fffffff ffff  ****C  fff fff |
 @@@@@@@mmmcmmc@@@@@@@@@@@@@@@@  * @@@@      @@@@@@@fffr***ffff fffc********ff          ff|
-@@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@    cp@@@@@@@ ffffff  ffffffffffffffffffff  ff ffff|
+@@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@    cp@@@@@@@ ffffff  ffffffffffffffffffff  ffcffff|
 @@@@@@@@@fmm**@@@@@@@@@@@@@@@@ ** @@@@   @@@@@@@@@@fff*ffffffrrrrrrrrff fffffffffffffffff|
 @@@@@@@@@@  *  @@@@@@@@@@@@@@@p*   c r @@@@@@@@@@@@fff*ffffffrf fff rrff ffff  ffffffrrrr|
 @@@@@@@@@@m *m  @@@@@@@@@@@@@@@*    @@@@@@@@@@@@@@@******cffrrfff  ffrrfff  C  fffrrrrfff|
 @@@@fm c@@ m*mm @@@@@@@@@@@@@@@**   @@@@@@@@@@ @@*cf fffffffrf f   f frrff  *  rrrrfffff |
 @@@@fm   @@@*mmm @@@@@@@@@@@@@@ * @@@@@@@@@@f  @@* f  ffrrrrrf fc******rrrrrrrrrfff fff f|
-@fffff   @@m***  p@@@@@@@@@@@@@ *    cp@@  ff*cr**  f fffffffff** f fffffffff*fff        |
+@fffff   @@m***  p@@@@@@@@@@@@@ *    cp@@  cf*cr**  f fffffffff** f fffffffff*fff        |
 @mmfm   @@@@@mc m @@@@@@@@@@@@@r***        ff*f rff   ff ff*c***fff ffffff ff*fff       c|
-@        @ @Cm**  @@@@@@@@@@@cprr c*f     ff * rr       ff**f  frrrffffffffff*f          |
-@@  mff @@ mm  *  p@@@@@@@      rrr****c  ff *rr      **c**f frrr ffff ff ****           |
-@@   fcp@@  m  ***C p@@@@@       f**fff*fff****c****c**    ff r fffffc***c*ffff          |
-@   ff  @@@ m    *   @@@@  c**c   *rrmm**c**f rrrff          frfffffffffff*ffff          |
-@m mff@@@ mm  rr Crp@@@@ rrr  ****cmrrrmf *f  ffrr           frrffff fffff*f         fff |
-@@ p@@@@@  m   rrrr@@@@ C  rrrmm  * m rf f*ff  f rrr      c  ffrrf ffff   **   ffff      |
-@@@@@@@@@@@C******p@@ p   fffrmmm** mmrr  *        rrr**********rrf    f   ***           |
-@@@@@@@@@@ *    p@@@@    cfffrrr** m   rrrrmm  f c**fr        f******c*ff    *f   f      |
-@@@@@@@@@  p@@@@@@@@     m****c*m  m  fmmmrmm   f  * r        f  frr  ****f***c      fff |
-@@@@@@@@pc@@@@@@@@@     f**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
-@@@@@@@@@@@@@@@ @@       *fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
-@@@@@@@@@@@@@@@ p    c**** m rrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
-@@@@@@@@@@  f       **f*  fffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
-@@@@@@@@  cff      **ff**c ffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
-@@@@@@@@@@ffff   *** fmm  ffm rrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
-@@@@@@@@@@@@   c**  f m  ffmm  mmmmmmmrrcffff    *        m mfr c***** rr  **    f**C    |
-@@@@@@@@@@@@@p   * rrrrr f     mmmmmm****rmff    c         mmmrr      rr  f **c****      |
+@        @ @cm**  @@@@@@@@@@@cprr c*f     ff * rr       ff**f  frrrffffffffff*f          |
+@@  mff @@ mm  *  p@@@@@@@   F  rrr****C  ff *rr      **c~~f~frrr ffff ff ****           |
+@@   fcp@@  m  ***c p@@@@@  FF   f**fff*fff****c****c**~~~~ff r fffffc***c*ffff    c     |
+@   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff     ~~~~ frfffffffffff*ffff          |
+@m mff@@@ mm  rr Crp@@@@ rrrF ****cmrrrmf *f  ffrr  ~~~~~ ~~~~rrffff fffff*f         fff |
+@@ p@@@@@  m   rrrr@@@@ CFFrrrmm  * m rf f*ff  f rrr   ~~~c~~~~rrf ffff   **   ffff      |
+@@@@@@@@@@@C******p@@ p  Ffffrmmm** mmrr  *        rrr~~~~~*****rrf    f   ***          c|
+@@@@@@@@@@ *    p@@@@   Fcfffrrr** m   rrrrmm  f c**fr  ~~~~~~f******c*ff    *f   f      |
+@@@@@@@@@  p@@@@@@@@    fm****c*m  m  fmmmrmm   f  * r        f~~frr  ****f***c      fff |
+@@@@@@@@pc@@@@@@@@@     F**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
+@@@@@@@@@@@@@@@ @@     FF*fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
+@@@@@@@@@@@@@@@ p    c****FmFFrfmf mm mfm*r  mmmmff*ffffrrrrr        rr         f        |
+@@@@@@@@@@  f       **f* Ffffmrfmrrrrrrf**m mfmmmmm*mmmmmfffrr fff    rrr f  f           |
+@@@@@@@@  cff      **ff**cFffmrmmrfc  rf*fffmmmmmmm*mmmmmmcffrrf        r           f    |
+@@@@@@@@@@ffff   *** fmm  ffmFrrrrfff rm*ffffff  ***m     mmmfr      ***r**c             |
+@@@@@@@@@@@@   c**  f m  ffmm Fmmmmmmmrrcffff    *        m mfr c***** rr  **    f**C    |
+@@@@@@@@@@@@@p   * rrrrr f    Fmmmmmm****rmff    c         mmmrr      rr  f **c****      |
 @@@@@@@@@@@@@@rrr*rr   rr     mmmmm***mmmrrf     *   mmm  fmmffr    rrr*    @            |
-@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@       fff |
+@@@@@@@@@@@@@@@  **  f cr f rrrfmmm*mmmm fr    ***   fff  fmff rr  @r  * @@@@@      cfff |
 @@@@@@@@@@@@@@@f  *fmf  r  rrmmfffm*f***ffr c***    mfffff m    r @@@@@r@@@@@       fff  |
 @@@@@@@@@@@@@@@fff*mmfmfrmrrrmmc ff*fc@***r          mffmfmmc rrr@@@@  *ff r             |
 @@@@@@@@@@@@@@@fc****fffmrrmmm rrrr*  @@ffrrrmm  m    mmmmm**rr  @@@@@@cff@@   Cf  f  f  |
 @@@@@@@@@@@@@@fffffm*mfmrrfmm*******r @@@ mfrf       mmm  **rrff@@@@@@c @@@@@@     ff fff|
 @@@@@@@@@@@@@mmff   **********f@@fm*rr@@@ cfrrfc  m m     *rr f@@@@@@@@@@@@@@@@@@22mmmmmm|
 @@@@@@@@@@@@@mm    fcmmfrcmcm@@@@@m*mm c@@@  rr  mfff     *    @@@@@@@@@@@@@@@@@@  mmcmmm|
-@@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@pcrrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmm|
+@@@@@@@@@@@@@@@mmmmmmmm@@@mp@@@@f@f**mm @@@@pcrrrrr f********p@@@@@@@@@@@@@@@@@@@@@@@ mmc|
 @@@@@@@@@@@@@@@@@@mmmmm@@@@@@@@ff@@f**mm@@@@@@  ffrrrr  c     @@@@@@@@@@@@@@@@@@@@@@@@@@@|
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fp@@@fcfm  @@@@@@ fc**rrrm    f@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fp@@@fCfm  @@@@@@ fc**rrrm    f@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@fc@@@@pfmm  @@@@@ f  m crfffff @@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@r@@@@@ mfm c @@@ mm fmmrrrrrr@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ c@@@@@@@cmm   @@ fff m m @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
@@ -131,8 +131,10 @@ function load1939Scenario() {
     } else if (v == 'C') {
       terrain = 'U';
       slots = Array(10).fill('F');
-    } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
+    } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*' || v == '~') {
       terrain = v.toUpperCase();
+    } else if (v == 'F') {
+      terrain = ' ';
     }
     if (!TERRAINS[terrain]) throw 'Not found ' + v;
     let _col = {supply: 4, terrain: terrain, owner: o, slots: slots, divisions: [], pt: pt(row, col)};
