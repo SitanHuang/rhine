@@ -22,9 +22,13 @@ function showDivisionDetailOnFloat(i, td) {
   <tr><th><br><td><br>
   <tr><th><u> Specs </u><td class="small"><u>(Terrain ${div.loc.terrain.name})</u>
   <tr><th>Soft Attack
-  <td>${abbreviate(div.soft, 2, false, false)}
+  <td>${abbreviate(div.softAttack, 2, false, false)}
   <tr><th>Hard Attack
-  <td>${abbreviate(div.hard, 2, false, false)}
+  <td>${abbreviate(div.hardAttack, 2, false, false)}
+  <tr><th>Soft Defense
+  <td>${abbreviate(div.softDefense, 2, false, false)}
+  <tr><th>Hard Defense
+  <td>${abbreviate(div.hardDefense, 2, false, false)}
   <tr><th>Speed
   <td>${div.speed.round(2)}${SPEED_UNIT}
   <tr><th>Hardness

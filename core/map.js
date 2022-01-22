@@ -38,16 +38,19 @@ window.TERRAINS = {
   ' ': {
     name: 'Plain',
     render: ' ',
+    // from analysis of WWII troop densities
+    width: 60000, // in men, for attacking
     defense: 1,
-    attrition: 0.9,
+    attrition: 1,
     movement: 0.75, // 1.11111111
     slots: 5
   },
   M: {
     name: 'Mountain',
     render: '⛰️',
+    width: 10000,
     color: 'green',
-    defense: 3,
+    defense: 1.5,
     attrition: 0.7,
     movement: 0.2, // 5
     slots: 1
@@ -55,8 +58,9 @@ window.TERRAINS = {
   F: {
     name: 'Forest',
     render: '🌲',
+    width: 30000,
     color: 'green',
-    defense: 1,
+    defense: 1.2,
     attrition: 0.8,
     movement: 0.5, // 2
     slots: 0
@@ -64,26 +68,29 @@ window.TERRAINS = {
   D: {
     name: 'Desert',
     render: '░░',
+    width: 60000,
     color: '#a0a001',
-    defense: 1.2,
-    attrition: 0.4,
+    defense: 0.9,
+    attrition: 0.6,
     movement: 0.1, // 10
     slots: 0
   },
   R: {
     name: 'River',
     render: '🌫️',
+    width: 80000,
     color: 'blue',
-    defense: 2,
-    attrition: 0.4,
+    defense: 1.5,
+    attrition: 1.2,
     movement: 2, // 1
     slots: 0
   },
   '*': {
     name: 'Rail',
     render: '#',
+    width: 100000,
     color: 'black',
-    defense: 3,
+    defense: 1,
     attrition: 1.3,
     movement: 3, // 1
     slots: 0
@@ -91,27 +98,29 @@ window.TERRAINS = {
   P: {
     name: 'Port',
     render: '⚓',
+    width: 250000,
     defense: 1.5,
-    attrition: 1.3,
+    attrition: 1.5,
     movement: 1.2, // 1
     slots: 30
   },
   U: {
     name: 'Urban',
     render: '🏙️',
+    width: 500000,
     color: '#db4437',
-    defense: 5,
-    attrition: 1.3,
+    defense: 2,
+    attrition: 1.5,
     movement: 1,
     slots: 60
   },
   '@': {
-	name: 'Non-accessible',
-  render: '',
-  color: 'transparent',
-	defense: 0,
-	attrition: 0,
-	movement: -10,
-	slots: 0
+    name: 'Non-accessible',
+    render: '',
+    color: 'transparent',
+    defense: 0,
+    attrition: 0,
+    movement: -10,
+    slots: 0
   }
 }

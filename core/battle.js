@@ -21,11 +21,14 @@ function getCasualtyReductionFromSupport(div) {
   return ((div.template.support/div.template.manpower*1000).max(0.75) + Math.pow(div.template.hardness, 2) * 0.8).min(0).max(0.85);
 }
 
-function battle(d1, d2, d1m) {
-  let s1 = d1.soft;
-  let s2 = d2.soft * _weather.defenseCx;
-  let h1 = d1.hard;
-  let h2 = d2.hard * _weather.defenseCx;
+function battle(d1, d2, ter1, ter2) {
+  // ter1 = TERRAINS[ter1];
+  // ter2 = TERRAINS[ter2];
+
+  let s1 = d1.softAttack;
+  let s2 = d2.softDefense;
+  let h1 = d1.hardAttack;
+  let h2 = d2.hardDefense;
   let factor = 2.5 * 2;
 
   /*let as1 = (s1 - s2).min(0) + s1 * factor;
@@ -72,8 +75,10 @@ function battle(d1, d2, d1m) {
     piercedBy = 1;
   }
 
-  d1.men = (d1.men - rt2).min(0);
-  d2.men = (d2.men - rt1).min(0);
+  rt1 = rt1.max(d2.men);
+  rt2 = rt2.max(d1.men);
+  d1.men = d1.men - rt2;
+  d2.men = d2.men - rt1;
   d1.player.casualties += rt2;
   d2.player.casualties += rt1;
 
@@ -88,7 +93,7 @@ function battle(d1, d2, d1m) {
 
   sum = d1.morale + d2.morale;
 
-  if (d2.hp <= 2 || d2.men <= 400 ) d2.remove();
+  if (d2.hp <= 2 || d2.men <= 400) d2.remove();
 
   return {
     casualties: [rt2, rt1, sum],

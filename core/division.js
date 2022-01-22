@@ -69,7 +69,6 @@ class Division {
       this.men = (this.men - a).round().min(0);
       if (this.men <= 900) {
         this.remove();
-        player.casualties += (this.men + a).round();
         return;
       }
       player.casualties += a.round();
@@ -92,7 +91,7 @@ class Division {
         this.action = [];
         break;
       } else if (nextPt.owner == this.player || divs.length == 0) {
-        if (nextPt.owner != this.player)
+        if (nextPt.owner == this.player)
           this.movementProgress -= 1;
         else
           this.movementProgress -= 1 * _weather.movementCx;
@@ -103,7 +102,7 @@ class Division {
         divs.forEach(div => {
           if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
           div.movementProgress = -1;
-          let results = battle(that, div);
+          let results = battle(that, div, that.prov.terrain, div.prov.terrain);
           // if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.hardness / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
           if (div.hp < div.player.retreatable.min(5) || (div.morale < 0.25)) {
             div.retreat();
@@ -175,16 +174,32 @@ class Division {
     return Math.max(adjacentNotToPlayer(this.loc, this.player) - 1, 0);
   }
 
+  get hardAttack() {
+    return this.hard * this.loc.terrain.attrition * (0.6 + this.supply.max(2) * 0.4); // supply up to +-40%
+  }
+  
+  get softAttack() {
+    return this.soft * this.loc.terrain.attrition * (0.7 + this.supply.max(2) * 0.3); // supply up to +-30%
+  }
+
+  get hardDefense() {
+    return this.hard * _weather.defenseCx * this.loc.terrain.defense;
+  }
+
+  get softDefense() {
+    return this.soft * _weather.defenseCx * this.loc.terrain.defense;
+  }
+
   get hard() {
     let prov = this.prov;
-    let h = this.template.hard * TERRAINS[prov.terrain].attrition * ((this.skill - 1)/3*0.75+1) * this.hp / 100 * this.entrench *
+    let h = this.template.hard * ((this.skill - 1)/3*0.75+1) * this.hp / 100 * this.entrench *
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       h *= 1.5;
     if (this.supply < 0.25)
-      h *= 0.7;
+      h *= 0.7; // -30%
     else if (this.supply < 0.5)
-      h *= 0.5;
+      h *= 0.5; // -50%
     return h - h * (this.adjacentPenalty / 4);
   }
 
@@ -195,15 +210,14 @@ class Division {
 
   get soft() {
     let prov = this.prov
-    let terrain = TERRAINS[prov.terrain];
-    let s = this.template.soft * terrain.attrition * terrain.defense * ((this.skill - 1)/3*0.75+1) * this.hp / 100 * this.entrench *
+    let s = this.template.soft * ((this.skill - 1)/3*0.75+1) * this.hp / 100 * this.entrench *
       this.player.tempSumAllGeneralTraits.o;
     if (prov.fort)
       s *= 1.5;
     if (this.supply < 0.25)
-      s *= 0.7;
+      s *= 0.9; // -10%
     else if (this.supply < 0.5)
-      s *= 0.5;
+      s *= 0.7; // -30%
     //return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
     return s - s * (this.adjacentPenalty / 4)
   }

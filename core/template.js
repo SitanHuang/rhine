@@ -118,12 +118,45 @@ class Template {
     return t;
   }
 
-  mockHard(terrain) {
+  get productionCost() {
+    return Math.ceil(
+      1 / HEAVY_EQUIPMENT_COEF * (this.heavy + this.motorized) +
+      this.light + this.support +
+      // also account for lost construction points
+      (1 - HEAVY_EQUIPMENT_COEF).min(0) * (this.heavy + this.motorized)
+    );
+  }
+
+  get productionEfficiency() {
+    return ((this.hard + this.soft) / this.productionCost).round();
+  }
+
+  get manpowerEfficiency() {
+    return ((this.hard + this.soft) / this.troop).round(2);
+  }
+
+  get manpowerEfficiencyPierced() {
+    return ((this.hard + this.soft) * 2 / this.troop).round(2);
+  }
+
+  get productionEfficiencyPierced() {
+    return ((this.hard + this.soft) / this.productionCost * 2).round();
+  }
+
+  mockHardAttack(terrain) {
     return this.hard * terrain.attrition;
   }
 
-  mockSoft(terrain) {
-    return this.soft * terrain.attrition * terrain.defense;
+  mockSoftAttack(terrain) {
+    return this.soft * terrain.attrition;
+  }
+  
+  mockHardDefense(terrain) {
+    return this.hard * terrain.defense;
+  }
+
+  mockSoftDefense(terrain) {
+    return this.soft * terrain.defense;
   }
 
   mockSpeed(terrain) {

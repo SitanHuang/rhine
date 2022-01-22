@@ -15,8 +15,10 @@ function onTemplateSpecsChange() {
   currentPlayer.defaultTemplate.motorized = motorized;
   currentPlayer.defaultTemplate.defaultName = $('templateNameInput').value.deepClone();
   let terrain = TERRAINS[$('templateTerrainSelect').value];
-  $('softAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockSoft(terrain), 2, false, false);
-  $('hardAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHard(terrain), 2, false, false);
+  $('softAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockSoftAttack(terrain), 2, false, false);
+  $('hardAttackSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHardAttack(terrain), 2, false, false);
+  $('softDefenseSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockSoftDefense(terrain), 2, false, false);
+  $('hardDefenseSpan').innerText = abbreviate(currentPlayer.defaultTemplate.mockHardDefense(terrain), 2, false, false);
   $('speedSpan').innerText = currentPlayer.defaultTemplate.mockSpeed(terrain) + SPEED_UNIT + ` (x${currentPlayer.defaultTemplate.speedBuff.round(2)})`;
   $('hardnessSpan').innerText = currentPlayer.defaultTemplate.hardness.round(2);
   $('armorSpan').innerText = currentPlayer.defaultTemplate.armor.round(2);
@@ -302,7 +304,22 @@ function updateDeploy() {
   <td><input type=number value="${currentPlayer.defaultTemplate.motorized}"
     id="deployMotorizedInput" oninput="onTemplateSpecsChange()">
   <tr>
-  <tr><th><td><br>
+  <tr>
+  <th>Cost
+  <td>
+  ${currentPlayer.defaultTemplate.productionCost}
+  <tr>
+  <th>Power/cost
+  <td>
+  ${currentPlayer.defaultTemplate.productionEfficiency}
+  ${currentPlayer.defaultTemplate.armored ?
+    `(${currentPlayer.defaultTemplate.productionEfficiencyPierced})` : ''}
+  <tr>
+  <th>Power/man
+  <td>
+  ${currentPlayer.defaultTemplate.manpowerEfficiency}
+  ${currentPlayer.defaultTemplate.armored ?
+    `(${currentPlayer.defaultTemplate.manpowerEfficiencyPierced})` : ''}
   <tr>
   <th>View Specs Under:<td>
   <tr>
@@ -323,6 +340,12 @@ function updateDeploy() {
   <tr>
   <th>Hard Attack
   <td id="hardAttackSpan">
+  <tr>
+  <th>Soft Defense
+  <td id="softDefenseSpan"><br>
+  <tr>
+  <th>Hard Defense
+  <td id="hardDefenseSpan">
   <tr>
   <th>Speed
   <td id="speedSpan">
