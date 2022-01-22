@@ -26,6 +26,13 @@ function onTemplateSpecsChange() {
   $('supplyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.supplyBuff, 2, false, false);
   $('casualtyBuff').innerText = abbreviate(getCasualtyReductionFromSupport({template: currentPlayer.defaultTemplate}), 2, false, false);
   $('entrenchBuff').innerText = abbreviate(currentPlayer.defaultTemplate.entrenchBuff, 2, false, false);
+  $('costSpan').innerText = currentPlayer.defaultTemplate.productionCost;
+  $('powerCostSpan').innerText = (currentPlayer.defaultTemplate.productionEfficiency + ' ' +
+                                 (currentPlayer.defaultTemplate.armored ?
+                                 `(${currentPlayer.defaultTemplate.productionEfficiencyPierced})` : ''));
+  $('powerManSpan').innerText = (currentPlayer.defaultTemplate.manpowerEfficiency + ' ' +
+                                (currentPlayer.defaultTemplate.armored ?
+                                `(${currentPlayer.defaultTemplate.manpowerEfficiencyPierced})` : ''));
 }
 
 const REPAINT_DEPLOY_CALLBACK = td => {
@@ -306,20 +313,16 @@ function updateDeploy() {
   <tr>
   <tr>
   <th>Cost
-  <td>
-  ${currentPlayer.defaultTemplate.productionCost}
+  <td id="costSpan">
+  <br>
   <tr>
   <th>Power/cost
-  <td>
-  ${currentPlayer.defaultTemplate.productionEfficiency}
-  ${currentPlayer.defaultTemplate.armored ?
-    `(${currentPlayer.defaultTemplate.productionEfficiencyPierced})` : ''}
+  <td id="powerCostSpan">
+  <br>
   <tr>
   <th>Power/man
-  <td>
-  ${currentPlayer.defaultTemplate.manpowerEfficiency}
-  ${currentPlayer.defaultTemplate.armored ?
-    `(${currentPlayer.defaultTemplate.manpowerEfficiencyPierced})` : ''}
+  <td id="powerManSpan">
+  <br>
   <tr>
   <th>View Specs Under:<td>
   <tr>
