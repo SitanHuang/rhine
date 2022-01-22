@@ -2,6 +2,10 @@
 
 The game will have you play full military tactics and planning.
 
+### 2018-
+Ok i've been updating the game many times a year and changes
+are no longer logged; wiki is also outdated. Figure things on your own
+
 ### v1.0.2 9/7/18
 * added army summaries
 
