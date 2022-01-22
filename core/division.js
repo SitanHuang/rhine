@@ -101,7 +101,7 @@ class Division {
       } else {
         let that = this;
         divs.forEach(div => {
-          if (this.hp < this.player.retreatable.min(5)) return;
+          if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
           div.movementProgress = -1;
           let results = battle(that, div);
           // if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.hardness / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
@@ -158,7 +158,7 @@ class Division {
   get armor() {
     return this.supply > 0.1 ? this.template.armor : 0;
   }
-  
+
   get hp() {
     return (this.men / this.template.troop * 100).clamp(0, 100)
   }
