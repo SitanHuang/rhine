@@ -10,8 +10,8 @@ var ChineseCivilWarTrigger = function () {
     PLAYERS[1].growthRate = 0.001;
     PLAYERS[1].light = -2000;
     PLAYERS[1].heavy = -1000;
-    PLAYERS[0].light += 3000;
-    PLAYERS[0].heavy += 2500;
+    PLAYERS[0].light += 2000;
+    PLAYERS[0].heavy += 800;
     PLAYERS[0].constructionPoints += 550 * 10;
     PLAYERS[1].constructionPoints -= 550 * 10;
     PLAYERS[1].manpower = (PLAYERS[1].manpower -= 700000).min(0).round();
@@ -19,7 +19,7 @@ var ChineseCivilWarTrigger = function () {
   }
   if (PLAYERS[1].cities <= 4 ||
     (PLAYERS[0].cities >= 10 && Math.random() > 0.8 && timestamp > -769392000)) { // 8/15/1945
-    PLAYERS[1].manpower = 0;
+    PLAYERS[1].growthRate = PLAYERS[1].manpower = 0;
     PLAYERS[1].color='rgba(250, 220, 137, 0.25)';
 
     MAP_DATA.forEach((x, r) => {
@@ -188,7 +188,7 @@ MMMM   MMMM   R          RRU  **MMR MMM  MM M  @@@@@@@@@@|
  RRRRRRRMMM   R         R   MMMMRR     MMMMM P@@@@@@@@@@@|
 RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
    RR RRM    R     MM         MRRMMM  MMMM M @@@@  @@@@@@|
-   R R M    RR  MM MM      MMMRRMM   MMMMMMM @@@@P @@@@@@|
+   R R M    RR  MM MM      MMMRRMM   MMMMMMM @@@@PU@@@@@@|
    R RRM   RR    MMMM  MM M MMRUM  MMMMMMUM @@@@ MM@@@@@@|
    R  R   R   U  MM MMMM MMM  R*** MM    M  @@@@ M  @@@@@|
   R  RM  RR       MMM      MMMMMM*M      M @@@@@MP@@@@@@@|
@@ -262,13 +262,13 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
         v.divisions.map(x => {x.skill = 0.2 + Math.random();x.men = (Math.random() * 0.5 + 0.5) * x.template.troop;x.entrench = Math.random() + 0.9});
     } else {
       v.divisions = [];
-      let b = 5;
+      let b = 3;
       if (!(row <= 6 || col <= 30)) {
-        b = 4;
+        b = 2;
         v.divisions = Array((1).round()).fill(0).map(() => (new Division(v.owner, '步兵师团', pt(row, col), new Template(16000, 20, 12, 'Division', 5, 5))));
       }
       if (row > 6 && row <= 11 && col > 30) {
-        Array((Math.random()*2).round()).fill(0).forEach(() => (new Division(v.owner, '装甲中队', pt(row, col), new Template(4000, 4, 12, 'Division', 1, 12))));
+        Array((Math.random()).round()).fill(0).forEach(() => (new Division(v.owner, '装甲中队', pt(row, col), new Template(4000, 4, 12, 'Division', 1, 12))));
       }
       Array(v.terrain == 'U' ? 1 : b).fill(0).forEach(() => (new Division(v.owner, '步兵联队', pt(row, col), new Template(4000, 8, 4, 'Division', 2, 4))));
       v.divisions.forEach(x => x.skill = x.entrench = (Math.random()*2.5+1.5).round(2));
@@ -276,16 +276,16 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(10).fill(0).map(() => (new Division(1, '步兵师团', pt(27, 46), new Template(14000, 18, 14, 'Divsion', 9, 7))))
-  .concat(Array(12).fill(0).map(() => (new Division(1, '步兵联队', pt(27, 46), new Template(4000, 8, 4, 'Tank Division', 3, 4)))))
-  .concat(Array(9).fill(0).map(() => (new Division(1, '装甲中队', pt(27, 46), new Template(4000, 4, 12, 'Tank Division', 2, 12)))));
+pt(27, 46).prov.divisions = Array(9).fill(0).map(() => (new Division(1, '步兵师团', pt(27, 46), new Template(14000, 18, 14, 'Divsion', 9, 7))))
+  .concat(Array(10).fill(0).map(() => (new Division(1, '步兵联队', pt(27, 46), new Template(4000, 8, 4, 'Tank Division', 3, 4)))))
+  .concat(Array(3).fill(0).map(() => (new Division(1, '装甲中队', pt(27, 46), new Template(4000, 4, 12, 'Tank Division', 2, 12)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
-  let d = new Division(0, `第${++divisions}德械师`, pt(25, 43), new Template(14000, 20, 10, '', 10, 5))
-  d.skill = 0.8;
+  let d = new Division(0, `第${++divisions}德械师`, pt(25, 43), new Template(15000, 20, 10, '', 10, 7))
+  d.skill = 2;
   return d;
 })
-Array(4).fill(0).map(() => {
+Array(5).fill(0).map(() => {
   let d = new Division(0, '南京警备', pt(25, 43), new Template(13000, 14, 6, 'Nanjing Garrisons', 7, 3))
   d.skill = 2;
 })
