@@ -142,12 +142,14 @@ class Ai2 extends Ai {
                   let def = x.hardDefense * (div.hardness);
                   def += x.softDefense * (1 - div.hardness);
 
+                  def = Math.sqrt(def);
+
                   if (div.armor > x.armor && div.armored) {
                     def /= 2;
                   } else if (x.armor) {
                     def *= 2;
                   }
-                  return Math.sqrt(def);
+                  return def;
                 }).reduce((a, b) => a + b, 0);
                 if (divs.length)
                   totalDefense /= divs.length;
