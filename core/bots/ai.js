@@ -313,9 +313,6 @@ class Ai {
     let player = this.player;
     let that = this;
     SELECTED_UNITS = [];
-    let wcurve = (weather_curve() + 1) / 2;
-    let dai = 0;
-    let dainterval = player.divisions.min(1) / ARMY_COLORS.length;
     let currentNavalInvasion = null;
 
     for (let row = 0; row < MAP_DATA.length; row++) {

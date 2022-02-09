@@ -30,7 +30,8 @@ function unit_pathfind(start, end) {
 function unit_pathfind_friendly_only(start, end) {
   window.graphWithWeight = graphWithWeight || new Graph(MAP_DATA.map(row => {
     return row.map(col => {
-      return col.owner == currentPlayerID ? (col.terrain == '@' ? 0 : 1) : 0;
+      let terrain = TERRAINS[col.terrain];
+      return col.owner == currentPlayerID ? (col.terrain == '@' ? 0 : (adjacentNotToPlayer(pt(row, col), currentPlayerID) ? 99 : (1 + 1 / terrain.movement))) : 0;
     })
   }));
   let startWithWeight = graphWithWeight.grid[start.row][start.col];

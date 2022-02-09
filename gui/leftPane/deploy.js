@@ -192,7 +192,7 @@ function queueOnClick(button) {
   }
 }
 
-var MINIMAL_TEMPLATE = new Template(242, 1, 1, '', 0.1, 0.1);
+var MINIMAL_TEMPLATE = new Template(400, 1, 1, '', 0.1, 0.1);
 MINIMAL_TEMPLATE.defaultName = 'Temporary Squad';
 
 function convertSelectedOnClick(button) {
