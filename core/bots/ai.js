@@ -288,6 +288,10 @@ class Ai {
   }
 
   think() {
+    if (this.player.ai2) {
+      (this.ai2 = this.ai2 || new Ai2(this.player)).think();
+      return;
+    }
     let start = new Date().getTime();
     this.reCalc();
     this.assignUnits();

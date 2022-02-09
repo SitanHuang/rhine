@@ -28,6 +28,10 @@ function setAIFor(i, btn) {
   btn.className = btn.className.length ? '' : 'active';
   PLAYERS[i].setAI = !PLAYERS[i].setAI;
 }
+function setAI2For(i, btn) {
+  btn.className = btn.className.length ? '' : 'active';
+  PLAYERS[i].ai2 = !PLAYERS[i].ai2;
+}
 
 let playerSelection = document.createElement('waiting');
 
@@ -59,7 +63,8 @@ function playerSelectionScreen(alreadyWWII) {
     <tr>
     <th>Player ${i}
     <td style="background: ${p.color.replace('0.2', '1')}">&nbsp;
-    <td><button onclick='setAIFor(${i}, this)'>set AI</button>
+    <td><button onclick='setAIFor(${i}, this)' class="${p.setAI ? 'active' : ''}">set AI</button>
+    <td><button onclick='setAI2For(${i}, this)' class="${p.ai2 ? 'active' : ''}">allow expert AI</button>
     `;
   })
   innerHTML += '</table>' +

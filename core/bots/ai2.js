@@ -1,5 +1,15 @@
 class Ai2 extends Ai {
 
+  think() {
+    let start = new Date().getTime();
+    this.reCalc();
+    this.assignUnits();
+    this.assignGenerals();
+    console.log(
+      `AI2 ${this.player.playerID}: finished in ${new Date().getTime() - start}ms`
+    )
+  }
+
   reCalc() {
     let player = this.player;
     this.cities = [];
@@ -155,7 +165,10 @@ class Ai2 extends Ai {
                   totalDefense /= divs.length;
                 let myAttack = Math.sqrt((div.hardAttack + div.softAttack) * (div.supply.max(1) * 0.7 + 0.3));
                 let absDiff = totalDefense / myAttack;
-                if (absDiff < 1.2) {
+                if (absDiff <= 0.1) {
+                  div.action = [adj];
+                  added = true;
+                } else if (absDiff < 1.2) {
                   plannedAttacks.push([div, adj, absDiff]);
                   added = true;
                 }

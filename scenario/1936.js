@@ -62,7 +62,7 @@ var WWIITerrains1936 = `
 @@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffcfffffffffffffffffffffffff|
 @@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@C@@cff*****fffffffffff  f ff  f ffff|
 @@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffrr@fff*cfffff ff fff  fff    fffff  |
-@@@@@@@mmmmmmff@@@@@@@@@@@@@@@@c**@@@c      @@ @@@@fffrff***fffffff ffff  ****C  fff fff |
+@@@@@@@mmmmmmff@@@@@@@@@@@@@@@@c**@@@c      @@ @@@@fffrff***fffffff ffff  ****c  fff fff |
 @@@@@@@mmmcmmc@@@@@@@@@@@@@@@@  * @@@@      @@@@@@@fffr***ffff fffc********ff          ff|
 @@@@@@p@@ffmm*@@@@@@@@@@p@@@@@  *  @@@    cp@@@@@@@ ffffff  ffffffffffffffffffff  ffcffff|
 @@@@@@@@@fmm**@@@@@@@@@@@@@@@@ ** @@@@   @@@@@@@@@@fff*ffffffrrrrrrrrff fffffffffffffffff|
@@ -190,7 +190,7 @@ function load1936Scenario() {
 
   window.p3 = PLAYERS[2] || new Player();
   p3.color = 'rgba(150, 0, 0, 0.2)';
-  p3.manpower = 5000000;
+  p3.manpower = 800000;
   p3.growthRate = 2012000/162039470; // 0.01241672785
   p3.light = -10000;
   p3.factories = 0;
@@ -225,7 +225,7 @@ function load1936Scenario() {
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
 //   let germanArtillery = new Template(8500, 2, 40, 'Anti-Tank Regiment', 1, 7);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
-  let soviet = new Template(14000, 12, 6, 'Rifle Division', 2, 1);
+  let soviet = new Template(14000, 12, 6, 'Rifle Division', 2, 2);
   let sovietMilitia = new Template(9000, 8, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(18000, 4, 55, 'Tank Division', 2, 55);
   let sovietTank2 = window.___sovietTank2 = new Template(6000, 4, 13, 'Tank Regiment', 2, 13);
@@ -272,7 +272,7 @@ function load1936Scenario() {
         });
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 1 : 3) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
-        let type = Math.random() < 0.8 ? soviet : sovietMilitia;
+        let type = Math.random() < 0.5 ? soviet : Math.random() < 0.2 ? Math.random() < 0.5 ? sovietTank : sovietMech : sovietMilitia;
         v.divisions = Array((Math.random() * 1).round() + 2).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
       }
@@ -314,9 +314,10 @@ function trigger_german_ai_attack1936(num) {
       PLAYERS[2].light += 1400;
       PLAYERS[2].heavy += 2000;
       PLAYERS[0].manpower += 10000000;
+      PLAYERS[0].growthRate *= 2;
       if (MAP_DATA[12][88].owner == 2) {
         Array(98).fill(0).forEach((x, i) => {
-          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 16, 10, 'Siberian Division', 7, 5));
+          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 14, 10, 'Siberian Division', 4, 3));
           d.skill = Math.random() * 2 + 2;
         });
       }
@@ -326,7 +327,7 @@ function trigger_german_ai_attack1936(num) {
       PLAYERS[2].heavy += 6000;
       PLAYERS[1].light = -5000;
       PLAYERS[1].heavy = -8000;
-      PLAYERS[1].growthRate = 0.002;
+      // PLAYERS[1].growthRate = 0.002;
       PLAYERS[2].constructionPoints += 550 * 30;
       PLAYERS[1].constructionPoints = -550 * 50;
       PLAYERS[0].constructionPoints += 550 * 30;
