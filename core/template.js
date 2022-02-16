@@ -142,6 +142,13 @@ class Template {
   get productionEfficiencyPierced() {
     return ((this.hard + this.soft) / this.productionCost * 2).round();
   }
+  get manpowerEfficiencyPiercedAttacking() {
+    return ((this.hard + this.soft) * 4 / this.troop).round(2);
+  }
+
+  get productionEfficiencyPiercedAttacking() {
+    return ((this.hard + this.soft) / this.productionCost * 4).round();
+  }
 
   mockHardAttack(terrain) {
     return this.hard * terrain.attrition;

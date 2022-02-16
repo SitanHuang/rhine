@@ -67,7 +67,7 @@ function battle(d1, d2, attackingWidthPenalty, maxWidth) {
   let piercedBy = 0;
 
   if (d1.armor > d2.armor && d1.armored) {
-    t2 /= 2;
+    t2 /= 4; // attacking side gets additional 50%
     pierced = 1;
   }
   if (d2.armor > d1.armor && d2.armored) {

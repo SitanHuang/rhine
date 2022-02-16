@@ -233,7 +233,7 @@ function load1936Scenario() {
   let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 12);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
-  italian.irremovable = sovietTank.irremovable = sovietMech.irremovable = sovietMech2.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = germanPanzerI.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
+  italian.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = germanPanzerI.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), /*germanArtillery.deepClone(),*/ germanCombinedArms.deepClone(), sovietMech.deepClone(), sovietMech2.deepClone()];
@@ -302,7 +302,7 @@ function trigger_german_ai_attack1936(num) {
     if (num == 0) {
       let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
       let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 2);
-      PLAYERS[1].growthRate = 0.002;
+      // PLAYERS[1].growthRate = 0.002;
       PLAYERS[0].growthRate = 0.005; // 0.0029563933
       PLAYERS[0].constructionPoints += 550 * 20;
       PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;

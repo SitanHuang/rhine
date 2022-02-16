@@ -155,7 +155,7 @@ class Ai2 extends Ai {
                   def = Math.sqrt(def);
 
                   if (div.armor > x.armor && div.armored) {
-                    def /= 2;
+                    def /= 4; // attacking deals additional 50% damage
                   } else if (x.armor) {
                     def *= 2;
                   }

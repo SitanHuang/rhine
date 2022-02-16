@@ -29,10 +29,12 @@ function onTemplateSpecsChange() {
   $('costSpan').innerText = currentPlayer.defaultTemplate.productionCost;
   $('powerCostSpan').innerText = (currentPlayer.defaultTemplate.productionEfficiency + ' ' +
                                  (currentPlayer.defaultTemplate.armored ?
-                                 `(${currentPlayer.defaultTemplate.productionEfficiencyPierced})` : ''));
+                                 `(${currentPlayer.defaultTemplate.productionEfficiencyPierced} D/
+                                  ${currentPlayer.defaultTemplate.productionEfficiencyPiercedAttacking} A)` : ''));
   $('powerManSpan').innerText = (currentPlayer.defaultTemplate.manpowerEfficiency + ' ' +
                                 (currentPlayer.defaultTemplate.armored ?
-                                `(${currentPlayer.defaultTemplate.manpowerEfficiencyPierced})` : ''));
+                                `(${currentPlayer.defaultTemplate.manpowerEfficiencyPierced} D/
+                                  ${currentPlayer.defaultTemplate.manpowerEfficiencyPiercedAttacking} A)` : ''));
 }
 
 const REPAINT_DEPLOY_CALLBACK = td => {
