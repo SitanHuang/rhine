@@ -111,6 +111,9 @@ class Ai {
       }
 
       while ((tem.heavy = (tem.heavy - 1).floor()) > 1 && (tem.light = (tem.light - 1).floor()) > 1) {
+        if (tem.manpowerEfficiency <= 0.65)
+            break;
+        
         tem.defaultName = tem.codeName;
         tem.support = tem.support.max((tem.light / 2).floor());
         tem.motorized = tem.motorized.max((tem.heavy).floor());
