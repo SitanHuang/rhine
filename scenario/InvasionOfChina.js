@@ -50,6 +50,7 @@ var ChineseCivilWarTrigger = function () {
     p3.heavy = PLAYERS[1].heavy + 5000;
     p3.constructionPoints = 2000 + (Math.random() * 2000).round();
     p3.setAI = true;
+    p3.ai2 = true;
     PLAYERS[1].light = PLAYERS[1].heavy = 0;
     p3.factoryInLight = 1;
     p3.originalCities = 10;
