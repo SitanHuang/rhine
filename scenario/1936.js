@@ -8,23 +8,23 @@ var WWII1936Owners = `
 00000000000000000000000000000000000000000000000000022222222222222222222222222222222222222|
 00000000000000000000000000000000000000000000000000022222222222222222222222222222222222222|
 000000000000000000000000000000000000000000000000000#2222222222222222222222222222222222222|
-0000000000000000000000000000000000000000000000100000##22222222222222222222222222222222222|
-000000000000000000000000000000011000000000001110010000##222222222222222222222222222222222|
-0000000000000000000000000000000111111111011011111100000#222222222222222222222222222222222|
-00000000000000000000000000000001111111111110111111100000###222222222222222222222222222222|
-00000000000000000000000000000011111111111100111111000000000#22222222222222222222222222222|
-00000000000000000000000000000011111111111000001110000000000#22222222222222222222222222222|
-00000000000000000000000000000011111111111000000000000000000#22222222222222222222222222222|
-00000000000000000000000000000111111111111100000000000000000#22222222222222222222222222222|
-0000000000000000000000000000011111111111110000000000000000##22222222222222222222222222222|
-000000000000000000000000000001111111111111100000000000000#2222222222222222222222222222222|
-000000000000000000000000000011111111111111111100000000000#2222222222222222222222222222222|
-0000000000000000000000000000111111111111111111000000000000#222222222222222222222222222222|
-00000000000000000000000000001111111111111111100000000000000#22222222222222222222222222222|
-00000000000000000000000000001111111111111111111000000000000#22222222222222222222222222222|
-00000000000000000000000000000111111111111111111110000000000#22222222222222222222222222222|
-0000000000000000000000000000000111111111111111111110000000#222222222222222222222222222222|
-0000000000000000000000000000000001111111111111111111111100#222222222222222222222222222222|
+0000000000000000000000000000000000000000000000133333##22222222222222222222222222222222222|
+000000000000000000000000000000011000000000001113313333##222222222222222222222222222222222|
+0000000000000000000000000000000111111111011311111133333#222222222222222222222222222222222|
+00000000000000000000000000000001111111111113111111133333###222222222222222222222222222222|
+00000000000000000000000000000011111111111133111111333333333#22222222222222222222222222222|
+00000000000000000000000000000011111111111333331113333333333#22222222222222222222222222222|
+00000000000000000000000000000011111111111333333333333333333#22222222222222222222222222222|
+00000000000000000000000000000111111111111133333333333333333#22222222222222222222222222222|
+0000000000000000000000000000011111111111113333333333333333##22222222222222222222222222222|
+000000000000000000000000000001111111111111133333333333333#2222222222222222222222222222222|
+000000000000000000000000000011111111111111111133333333333#2222222222222222222222222222222|
+0000000000000000000000000000111111111111111111333333333333#222222222222222222222222222222|
+00000000000000000000000000001111111111111111133333333333333#22222222222222222222222222222|
+00000000000000000000000000001111111111111111111333333333333#22222222222222222222222222222|
+00000000000000000000000000000111111111111111111113333333333#22222222222222222222222222222|
+0000000000000000000000000000000111111111111111111113333333#222222222222222222222222222222|
+0000000000000000000000000000000001111111111111111111111133#222222222222222222222222222222|
 00000000000000000000000000000000011111111111111111111111111##2222222222222222222222222222|
 0000000000000000000000000000000011111111111111111111111111111##22222222222222222222222222|
 000000000000000000000000000000001111111111111111111111111111111#2222222222222222222222222|
@@ -208,6 +208,14 @@ function load1936Scenario() {
   PLAYERS[0].diplomacy[1] = {warUntil: -957226693};
   PLAYERS[1].diplomacy[0] = {warUntil: -957226693};
 
+  window.p4 = PLAYERS[3] || new Player();
+  p4.manpower = 900000;
+  p4.growthRate = 0.0035;
+  p4.light = -500;
+  p4.heavy = 0;
+  p4.sumAllGeneralTraits;
+  p4.color = 'rgba(155, 15, 71, 0.15)';
+
   // ============== military =================
 
   let british = new Template(12100, 18, 9, 'British Division', 9, 3);
@@ -231,6 +239,9 @@ function load1936Scenario() {
   let sovietTank2 = window.___sovietTank2 = new Template(6000, 4, 13, 'Tank Regiment', 2, 13);
   let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
   let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 12);
+  let polishRegiment = new Template(2700, 6, 4, 'Brigade', 2, 0.1);
+  let polishCalvary = new Template(4000, 6, 7, 'Calvary Regiment', 2, 1);
+  let polishArmored = new Template(2000, 1, 3, 'Armored Brigade', 0.1, 3);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
   italian.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = germanPanzerI.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
@@ -238,6 +249,7 @@ function load1936Scenario() {
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), /*germanArtillery.deepClone(),*/ germanCombinedArms.deepClone(), sovietMech.deepClone(), sovietMech2.deepClone()];
   PLAYERS[2].savedTemplates = [soviet.deepClone(), sovietMilitia.deepClone(), sovietTank.deepClone(), sovietMech.deepClone(), sovietTank2.deepClone(), sovietMech2.deepClone()];
+  PLAYERS[3].savedTemplates = [polishRegiment, polishCalvary, /*polishArmored*/];
 
   let british_i = 0;
   let german_i = 0;
@@ -273,7 +285,12 @@ function load1936Scenario() {
         v.divisions.map(x => {x.skill = (type == germanPanzer ? 1 : 3) + Math.random();x.morale = 2;});
       } else if (v.owner == 2 && (v.terrain == 'P' || v.terrain == 'U')) {
         let type = Math.random() < 0.5 ? soviet : Math.random() < 0.2 ? Math.random() < 0.5 ? sovietTank : sovietMech : sovietMilitia;
-        v.divisions = Array((Math.random() * 1).round() + 2).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions = Array((Math.random() * 2).round() + 4).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
+        v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
+      } else if (v.owner == 3 && (v.terrain == 'P' || v.terrain == 'U')) {
+        v.divisions = Array((Math.random() * 2).round() + 4).fill(0)
+                        .map(() => (Math.random() < 0.7 ? polishRegiment : (Math.random() < 0.7 ? polishCalvary : polishArmored)))
+                        .map((x) => (new Division(v.owner, x.defaultName, pt(row, col), x)));
         v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
       }
 
@@ -293,11 +310,18 @@ function load1936Scenario() {
   diplomacy_change(PLAYERS[0].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -594081028, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[1].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -900241200, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[0].playerID, PLAYERS[1].playerID, {status: 'PACT', changeAfter: -957226693, changeValue: {status: 'WAR'}});
+  diplomacy_change(PLAYERS[3].playerID, PLAYERS[1].playerID, {status: 'PACT', changeAfter: -957226693, changeValue: {status: 'WAR'}});
+  diplomacy_change(PLAYERS[3].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -952035530, changeValue: {status: 'WAR'}});
+  diplomacy_change(PLAYERS[0].playerID, PLAYERS[3].playerID, {status: 'PACT'});
 
   pt(0, 0).prov.callTrigger = "trigger_german_ai_attack1936(0)";
 
 }
 function trigger_german_ai_attack1936(num) {
+  if (PLAYERS[3] && diplomacy_get(1,3).status == 'WAR' && diplomacy_get(2,3).status != 'WAR' &&
+      MAP_DATA[15][47].owner == 1) { // if warsaw taken by germany, then after 9/20, otherwise, after 11/1
+    diplomacy_change(PLAYERS[3].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -955837130, changeValue: {status: 'WAR'}});
+  }
   if (diplomacy_get(1,2).status == 'WAR') {
     if (num == 0) {
       let sovietTank2 = window.___sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
