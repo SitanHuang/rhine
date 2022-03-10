@@ -13,8 +13,10 @@ $('controls').append($date_token);
 let _dateTempI = 0;
 
 function incrementAndUpdateDate() {
-  if (_dateTempI++ % 3 == 0) {
-    timestamp += timeIncrement + (Math.random() * 86400 * 5).round();
+  // if (_dateTempI++ % 3 == 0) {
+  if (_dateTempI++ % PLAYERS.length == 0) {
+    // timestamp += timeIncrement + (Math.random() * 86400 * 5).round();
+    timestamp += timeIncrement;
   }
   let date = new Date(timestamp * 1000);
   $date_token.innerHTML = date.toLocaleDateString("en-US");
