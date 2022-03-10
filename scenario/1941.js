@@ -58,7 +58,7 @@ var WWII1941Owners = `
   .split('\n');
 
 
-var WWIITerrains = `
+var WWIITerrains1941 = `
 @@@@@mmf@fmmm@@@@@@@@@@@@@@@  p@@@@         c@@@ @@@ff@@fffffffcfffffffffffffffffffffffff|
 @@@@@mf@fmmmmmm@@@@@@@@@@@@@@@@@@@@@        @@  @@@@@C@@cff*****fffffffffff  f ff  f ffff|
 @@@@@fmmmmmmmmf@@@@@@@@@@@@@@@@@@ @@@       @@  @@@ffrr@fff*cfffff ff fff  fff    fffff  |
@@ -120,7 +120,7 @@ var WWIITerrains = `
 function load1941Scenario() {
   clearData();
   // ============== map =================
-  MAP_DATA = WWIITerrains.map((x, row) => (x.split('').map((v, col) => {
+  MAP_DATA = WWIITerrains1941.map((x, row) => (x.split('').map((v, col) => {
     let o = parseInt(WWII1941Owners[row][col]);
     let slots = [];
     let terrain = '@';

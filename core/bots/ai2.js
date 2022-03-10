@@ -33,7 +33,7 @@ class Ai2 extends Ai {
           continue;
         }
         if (prov.terrain == '@') continue;
-        
+
         if (prov.divisions.length && prov.divisions[0].supply == 0) {
           prov.divisions.forEach(x => SELECTED_UNITS.push(x))
           continue;
@@ -228,11 +228,10 @@ class Ai2 extends Ai {
       //})
     }
 
-    /*
     this.airStrikeTargets = this.airStrikeTargets
-    .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
+      .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
     attackAirStrikes = attackAirStrikes
-    .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
+      .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
 
     this.airStrikeTargets = attackAirStrikes.concat(this.airStrikeTargets);
 
@@ -244,6 +243,5 @@ class Ai2 extends Ai {
         airStrikeProv(prov.divisions);
       }
     }
-    */
   }
 }

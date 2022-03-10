@@ -30,7 +30,7 @@ class Ai {
     this.player.percentReserved = rate;
     // if (this.player._populationData.net < -100) rate = 0.01;
 
-    budget.airStrike = (available) / 10;
+    budget.airStrike = Math.floor(Math.min(this.player.light / 5, this.player.heavy / 10) / 10);
     budget.rate = rate;
 
     return budget;
