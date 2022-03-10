@@ -4,7 +4,7 @@ window.currentPlayerID = -1;
 window.currentPlayer = null;
 
 window.timestamp = -1025049600; // 7/9/1937
-window.timeIncrement = 518400; // 6 days
+window.timeIncrement = 518400 + 2.16e+8; // 6 days + 2.5 (compatibility for previous randomness)
 
 var $date_token = document.createElement('strong');
 

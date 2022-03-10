@@ -279,7 +279,7 @@ function load1939Scenario() {
   PLAYERS[0].ai.attackOrderLastEnded = timestamp;
   PLAYERS[1].ai.attackOrderLastStarted = timestamp;
   PLAYERS[1].ai.attackOrderUntil = timestamp + 1.577e+7*1.5;
-  window.timeIncrement = 518400 / 3 / 1.166666; // 2/1.16 days
+  window.timeIncrement = 518400 / 3 / 1.166666 + 2.16e+8; // 2/1.16 days
 
   reinitCanvas();
   updateInterfaceOnPass();
@@ -321,7 +321,7 @@ function trigger_german_ai_attack(num) {
       PLAYERS[2].constructionPoints += 550 * 30;
       PLAYERS[1].constructionPoints -= 550 * 20;
       PLAYERS[0].constructionPoints += 550 * 30;
-      
+
       pt(0, 0).prov.callTrigger = "";
     }
   }

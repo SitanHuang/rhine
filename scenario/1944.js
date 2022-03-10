@@ -233,7 +233,7 @@ function load1944Scenario() {
   // ============= misc ==============
 //  window.timestamp = -900241200; // 6/22/1941
   window.timestamp = -795657600; // 10/15/1944
-  window.timeIncrement = 518400 / 2; // 3 days
+  window.timeIncrement = 518400 / 2 + 2.16e+8; // 3 days
 
   reinitCanvas();
   updateInterfaceOnPass();
