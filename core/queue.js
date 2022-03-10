@@ -31,7 +31,7 @@ function queue_info() {
   let ph = (currentPlayer._heavyProductionPerTurn * (1 - currentPlayer.percentReserved / 100)).ceil();
   let pl = (currentPlayer._lightProductionPerTurn * (1 - currentPlayer.percentReserved / 100)).ceil();
   let totalTurns = Math.max((t.nh - t.h) / ph, (t.nl - t.l) / pl).ceil();
-  let duration = timeIncrement * totalTurns;
+  let duration = timeIncrement * totalTurns * PLAYERS.length;
   t.duration = duration;
   t.delivery = duration + timestamp;
   t.recLightFactory = ((t.nl - t.l) / ((t.nh - t.h) / HEAVY_EQUIPMENT_COEF + (t.nl - t.l)) * currentPlayer.factories).min(1).max(currentPlayer.factories).round() || currentPlayer.factories;
