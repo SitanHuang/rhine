@@ -228,6 +228,7 @@ class Ai2 extends Ai {
       //})
     }
 
+    /*
     this.airStrikeTargets = this.airStrikeTargets
     .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
     attackAirStrikes = attackAirStrikes
@@ -243,5 +244,6 @@ class Ai2 extends Ai {
         airStrikeProv(prov.divisions);
       }
     }
+    */
   }
 }
