@@ -20,7 +20,7 @@ class Template {
 
   }
   get armored() {
-    return this.armor > ARMORED_MIN;
+    return this.armor > ARMORED_MIN && this.heavy >= 10 && this.motorized >= 5;
   }
   get armor() {
     return (this.heavy / (this.heavy + this.light).min(1)).min(0).max(0.99);
@@ -105,10 +105,6 @@ class Template {
     }
   }
 
-  get armored() {
-    return this.hardness > ARMORED_MIN;
-  }
-
   deepClone() {
     let t = new Template(this.troop, this.light, this.heavy);
     t.defaultName = this.defaultName.deepClone();
@@ -157,7 +153,7 @@ class Template {
   mockSoftAttack(terrain) {
     return this.soft * terrain.attrition;
   }
-  
+
   mockHardDefense(terrain) {
     return this.hard * terrain.defense;
   }
