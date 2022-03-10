@@ -302,7 +302,7 @@ function load1936Scenario() {
 
   // ============= misc ==============
   window.timestamp = -1059866766; // 5/1/36
-  window.timeIncrement = 518400 / 4 / 1.166666 + 2.16e+8; // 2/1.16 days
+  window.timeIncrement = 518400 / 4 / 1.166666 + 216000; // 2/1.16 days
 
   reinitCanvas();
   updateInterfaceOnPass();

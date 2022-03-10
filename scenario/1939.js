@@ -279,7 +279,7 @@ function load1939Scenario() {
   PLAYERS[0].ai.attackOrderLastEnded = timestamp;
   PLAYERS[1].ai.attackOrderLastStarted = timestamp;
   PLAYERS[1].ai.attackOrderUntil = timestamp + 1.577e+7*1.5;
-  window.timeIncrement = 518400 / 3 / 1.166666 + 2.16e+8; // 2/1.16 days
+  window.timeIncrement = 518400 / 3 / 1.166666 + 216000; // 2/1.16 days
 
   reinitCanvas();
   updateInterfaceOnPass();
