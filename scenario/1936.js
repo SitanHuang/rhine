@@ -244,7 +244,7 @@ function load1936Scenario() {
   let polishArmored = new Template(2000, 1, 3, 'Armored Brigade', 0.1, 3);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
-  italian.irremovable = germanMotorized.irremovable = germanPanzer.irremovable = germanPanzerI.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
+  germanMotorized.irremovable = germanPanzer.irremovable = germanPanzerI.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
 
   PLAYERS[0].savedTemplates = [british.deepClone(), american.deepClone()];
   PLAYERS[1].savedTemplates = [german.deepClone(), germanSS.deepClone(), italian.deepClone(), germanPanzer.deepClone(), germanPanzerI.deepClone(), germanPanzerII.deepClone(), germanMotorized.deepClone(), /*germanArtillery.deepClone(),*/ germanCombinedArms.deepClone(), sovietMech.deepClone(), sovietMech2.deepClone()];
@@ -318,9 +318,23 @@ function load1936Scenario() {
 
 }
 function trigger_german_ai_attack1936(num) {
+
   if (PLAYERS[3] && diplomacy_get(1,3).status == 'WAR' && diplomacy_get(2,3).status != 'WAR' &&
       MAP_DATA[15][47].owner == 1) { // if warsaw taken by germany, then after 9/20, otherwise, after 11/1
     diplomacy_change(PLAYERS[3].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -955837130, changeValue: {status: 'WAR'}});
+  }
+  if (timestamp >= diplomacy_get(0, 1).changeAfter - 5.256e+6 && !pt(0, 0).prov.italyArmy &&
+      MAP_DATA[40][37].owner == 1) {
+    pt(0, 0).prov.italyArmy = true;
+
+    PLAYERS[1].light += 200;
+    PLAYERS[1].heavy += 100;
+
+    let italian = new Template(12000, 16, 6, 'Intalian Infantry Division', 8, 3);
+    // 1.6m in rome
+    for (let men = 0;men < 1600000;men += 12000) {
+      new Division(1, italian.defaultName, pt(40, 37), italian);
+    }
   }
   if (diplomacy_get(1,2).status == 'WAR') {
     if (num == 0) {

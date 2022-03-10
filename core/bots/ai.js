@@ -70,7 +70,8 @@ class Ai {
 
   manageTemplates() {
     let player = this.player;
-    if (player.queue.length >= 20 && player.savedTemplates.length > 2) return;
+    if ((player.queue.length >= 20 && player.savedTemplates.length > 2) ||
+        player.light < 0 || player.heavy < 0) return;
     let removableIDs = [];
     player.savedTemplates.forEach((x, i) => {
       if (!x.irremovable) removableIDs.push(i);
@@ -113,7 +114,7 @@ class Ai {
       while ((tem.heavy = (tem.heavy - 1).floor()) > 1 && (tem.light = (tem.light - 1).floor()) > 1) {
         if (tem.manpowerEfficiency <= 0.65)
             break;
-        
+
         tem.defaultName = tem.codeName;
         tem.support = tem.support.max((tem.light / 2).floor());
         tem.motorized = tem.motorized.max((tem.heavy).floor());
