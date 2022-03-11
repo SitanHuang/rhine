@@ -181,7 +181,7 @@ function load1936Scenario() {
 
   PLAYERS[0].light = 0;
   PLAYERS[0].heavy = -6000;
-  PLAYERS[1].light = -4000;
+  PLAYERS[1].light = -2000;
   PLAYERS[1].heavy = 0;
 
 //   PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
@@ -192,7 +192,7 @@ function load1936Scenario() {
   p3.color = 'rgba(150, 0, 0, 0.2)';
   p3.manpower = 800000;
   p3.growthRate = 0.004; // 0.01241672785
-  p3.light = -13000;
+  p3.light = -14000;
   p3.factories = 0;
   //p3.constructionPoints = 6500;
   p3.heavy = -9000;
@@ -211,7 +211,7 @@ function load1936Scenario() {
   window.p4 = PLAYERS[3] || new Player();
   p4.manpower = 900000;
   p4.growthRate = 0.0035;
-  p4.light = -500;
+  p4.light = -400;
   p4.heavy = 0;
   p4.sumAllGeneralTraits;
   p4.color = 'rgba(155, 15, 71, 0.15)';
@@ -239,9 +239,9 @@ function load1936Scenario() {
   let sovietTank2 = window.___sovietTank2 = new Template(6000, 4, 13, 'Tank Regiment', 2, 13);
   let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
   let sovietMech2 = window.___sovietMech2 = new Template(6000, 6, 12, 'Mechanized Regiment', 3, 12);
-  let polishRegiment = new Template(2700, 6, 4, 'Brigade', 2, 0.1);
-  let polishCalvary = new Template(4000, 6, 7, 'Calvary Regiment', 2, 1);
-  let polishArmored = new Template(2000, 1, 3, 'Armored Brigade', 0.1, 3);
+  let polishRegiment = new Template(3000, 6, 4, 'Brigade', 2, 0.1);
+  let polishCalvary = new Template(4500, 6, 7, 'Calvary Regiment', 2, 1);
+  let polishArmored = new Template(4000, 2, 10, 'Armored Brigade', 1, 10);
 
   //german.irremovable = germanPanzerI.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
   germanMotorized.irremovable = germanPanzer.irremovable = germanPanzerI.irremovable = german.irremovable = germanSS.irremovable = germanCombinedArms.irremovable = germanPanzerII.irremovable = germanPanzer.irremovable = british.irremovable = american.irremovable = soviet.irremovable = true;
@@ -288,7 +288,7 @@ function load1936Scenario() {
         v.divisions = Array((Math.random() * 2).round() + 4).fill(0).map(() => (new Division(v.owner, ++soviet_i + 'th ' + type.defaultName, pt(row, col), type)));
         v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});
       } else if (v.owner == 3 && (v.terrain == 'P' || v.terrain == 'U')) {
-        v.divisions = Array((Math.random() * 2).round() + 4).fill(0)
+        v.divisions = Array((Math.random() * 2).round() + 6).fill(0)
                         .map(() => (Math.random() < 0.7 ? polishRegiment : (Math.random() < 0.7 ? polishCalvary : polishArmored)))
                         .map((x) => (new Division(v.owner, x.defaultName, pt(row, col), x)));
         v.divisions.map(x => {x.skill = 0.3 + Math.random();x.men = (Math.random() * 0.5 + 0.3) * x.template.troop;});

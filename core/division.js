@@ -28,7 +28,7 @@ class Division {
   }
 
   reinforce() {
-    if (this.supply.round(2) > 0) {
+    if (Math.random() < Math.min(2, this.supply) / 4) {
       if (this.hp < 100) {
         let amount = this.template.troop - this.men;
         amount = (Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500) * (this.supply).max(2).min(0)).round();
@@ -182,7 +182,7 @@ class Division {
   get hardAttack() {
     return this.hard * this.loc.terrain.attrition * (0.6 + this.supply.max(2) * 0.4); // supply up to +-40%
   }
-  
+
   get softAttack() {
     return this.soft * this.loc.terrain.attrition * (0.7 + this.supply.max(2) * 0.3); // supply up to +-30%
   }
