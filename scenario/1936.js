@@ -181,7 +181,7 @@ function load1936Scenario() {
 
   PLAYERS[0].light = 0;
   PLAYERS[0].heavy = -6000;
-  PLAYERS[1].light = -2000;
+  PLAYERS[1].light = -1700;
   PLAYERS[1].heavy = 0;
 
 //   PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
@@ -225,11 +225,11 @@ function load1936Scenario() {
   let french = new Template(12090, 14, 6, 'French Division', 4, 1);
   french.irremovable = true;
   let german = new Template(17000, 25, 13, 'Infanterie-Division', 12, 7);
-  let germanSS = new Template(14000, 24, 20, 'Waffen-SS Division', 12, 20);
+  let germanSS = new Template(18000, 24, 20, 'Waffen-SS Division', 12, 10);
   let italian = new Template(12000, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
   let germanPanzerII = new Template(17000, 6, 40, 'Panzer II Corps', 3, 40);
-  let germanPanzer = new Template(17950, 6, 55, 'Panzer III Corps', 3, 55);
+  let germanPanzer = new Template(23000, 6, 55, 'Panzer III Corps', 3, 55);
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
 //   let germanArtillery = new Template(8500, 2, 40, 'Anti-Tank Regiment', 1, 7);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
@@ -330,7 +330,7 @@ function trigger_german_ai_attack1936(num) {
 
     MAP_DATA.forEach(r => r.forEach(c => {if (c && c.owner == 1){c.divisions.forEach(x => {x.skill = Math.max(x.skill, 2 + Math.random() * 2);})}}));
 
-    let italian = new Template(12000, 16, 6, 'Intalian Infantry Division', 8, 3);
+    let italian = new Template(14000, 18, 8, 'Intalian Infantry Division', 9, 2);
     // 1.6m in rome
     for (let men = 0;men < 1600000;men += 12000) {
       new Division(1, italian.defaultName, pt(40, 37), italian);
