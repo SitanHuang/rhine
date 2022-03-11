@@ -59,9 +59,6 @@ function battle(d1, d2, attackingWidthPenalty, maxWidth) {
   //
   let leastMorale = Math.min(d1.morale, d2.morale).min(0.05).max(0.7);
 
-  let rt1 = ((t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)) * leastMorale).round();
-  let rt2 = ((t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)) * leastMorale).round();
-
   let armored = d1.armored || d2.armored ? 1 : 0;
   let pierced = 0;
   let piercedBy = 0;
@@ -74,6 +71,9 @@ function battle(d1, d2, attackingWidthPenalty, maxWidth) {
     t1 /= 2;
     piercedBy = 1;
   }
+
+  let rt1 = ((t1 - t1 * (getCasualtyReductionFromSupport(d2) - getCasualtyReductionFromSupport(d1)).min(0)) * leastMorale).round();
+  let rt2 = ((t2 - t2 * (getCasualtyReductionFromSupport(d1) - getCasualtyReductionFromSupport(d2)).min(0)) * leastMorale).round();
 
   rt1 = rt1.max(d2.men);
   rt2 = rt2.max(d1.men);

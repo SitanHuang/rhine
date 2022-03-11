@@ -28,7 +28,7 @@ class Division {
   }
 
   reinforce() {
-    if (Math.random() < Math.min(2, this.supply) / 4) {
+    if (Math.random() < Math.min(2, this.supply) / 5) {
       if (this.hp < 100) {
         let amount = this.template.troop - this.men;
         amount = (Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500) * (this.supply).max(2).min(0)).round();
@@ -39,11 +39,11 @@ class Division {
 
         this.men = (this.men + amount).round().clamp(0, this.template.troop);
       }
-      if (this.morale < 1)
-        this.morale += 0.5 * Math.random() * this.supply.max(2).min(0);
-      else if (this.morale > 1)
-        this.morale = (this.morale - 0.1).min(1);
     }
+    if (this.morale < 1)
+      this.morale += 0.2 * this.supply.max(2).min(0);
+    else if (this.morale > 1)
+      this.morale = (this.morale - 0.1).min(1);
   }
 
   get hardness() {
