@@ -233,8 +233,8 @@ function load1936Scenario() {
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
 //   let germanArtillery = new Template(8500, 2, 40, 'Anti-Tank Regiment', 1, 7);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
-  let soviet = new Template(14000, 10, 3, 'Rifle Division', 0.1, 0.1);
-  let sovietMilitia = new Template(9000, 4, 1, 'Militia Division', 0.1, 0.1);
+  let soviet = new Template(14000, 18, 6, 'Rifle Division', 1, 0.1);
+  let sovietMilitia = new Template(9000, 5, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(18000, 4, 55, 'Tank Division', 2, 55);
   let sovietTank2 = window.___sovietTank2 = new Template(6000, 4, 13, 'Tank Regiment', 2, 13);
   let sovietMech = new Template(16000, 16, 30, 'Mechanized Corps', 6, 20);
@@ -351,7 +351,7 @@ function trigger_german_ai_attack1936(num) {
       PLAYERS[0].growthRate *= 2;
       if (MAP_DATA[12][88].owner == 2) {
         Array(98).fill(0).forEach((x, i) => {
-          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 14, 10, 'Siberian Division', 4, 3));
+          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 18, 11, 'Siberian Division', 5, 3));
           d.skill = Math.random() * 2 + 2;
         });
       }

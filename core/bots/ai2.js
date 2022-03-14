@@ -148,23 +148,28 @@ class Ai2 extends Ai {
               if (adj.terrain == '@') return;
               let divs = adj.prov.divisions;
               if (adj.owner != player) {
-                let totalDefense = divs.map(x => {
+                let absDiff = divs.map(x => {
                   let def = x.hardDefense * (div.hardness);
                   def += x.softDefense * (1 - div.hardness);
 
                   def = Math.sqrt(def);
 
+                  let atk = Math.sqrt((
+                    div.hardAttack * (x.hardness) + div.softAttack * (1 - x.hardness)
+                  ) * (div.supply.max(1) * 0.7 + 0.3));
+
                   if (div.armor > x.armor && div.armored) {
                     def /= 4; // attacking deals additional 50% damage
                   } else if (x.armor) {
-                    def *= 2;
+                    atk /= 2;
                   }
-                  return def;
-                }).reduce((a, b) => a + b, 0);
+
+                  return def / atk;
+                }).reduce((a, b) => a + b, 0)
+                ;
                 if (divs.length)
-                  totalDefense /= divs.length;
-                let myAttack = Math.sqrt((div.hardAttack + div.softAttack) * (div.supply.max(1) * 0.7 + 0.3));
-                let absDiff = totalDefense / myAttack;
+                  absDiff /= divs.length;
+
                 if (absDiff <= 0.1) {
                   div.action = [adj];
                   added = true;
@@ -182,7 +187,7 @@ class Ai2 extends Ai {
       }
     }
 
-    let rate = _weather.defenseCx < 1 ? (losingPop ? 0.3 : 0.6) : (losingPop ? 0.15 : 0.3);
+    let rate = _weather.defenseCx < 1 ? (losingPop ? 0.6 : 0.8) : (losingPop ? 0.15 : 0.3);
     let maxAttacks = Math.min(plannedAttacks.length, Math.floor(plannedAttacks.length * rate));
     plannedAttacks = plannedAttacks.sort((a, b) => a[2] - b[2]);
     for (let i = 0;i < plannedAttacks.length;i++) {
