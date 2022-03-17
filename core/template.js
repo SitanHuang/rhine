@@ -16,7 +16,7 @@ class Template {
 
   get hardness() {
     // return ((this.motorized + this.heavy) / (this.motorized + this.heavy + this.light) / 1.5).round(2).min(0).max(0.9);
-    return (1.3 * Math.pow(this.heavy / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
+    return (1.3 * Math.pow((this.heavy + this.motorized) / 2 / (this.heavy + this.light).min(1), 1.7)).min(0).max(0.99);
 
   }
   get armored() {
