@@ -16,6 +16,7 @@ class Ai2 extends Ai {
     this.airStrikeTargets = [];
     SELECTED_UNITS = [];
     this.adjacentBlocks = [];
+    this.enemyCities = [];
 
     let budget = this.budget = this.handleBudget();
     let queueInfo = queue_info();
@@ -28,8 +29,12 @@ class Ai2 extends Ai {
         let p = pt(row, col);
         let prov = p.prov;
         if (p.owner != player) {
-          if (((prov.terrain == 'U' || prov.terrain == 'P') && prov.divisions.length >= 3) || prov.divisions.length >= 5)
-            this.airStrikeTargets.push(p.prov);
+          if (diplomacy_get(player.playerID, prov.owner).status == "WAR") {
+            if (((prov.terrain == 'U' || prov.terrain == 'P') && prov.divisions.length >= 3) || prov.divisions.length >= 5)
+              this.airStrikeTargets.push(prov);
+            if (prov.terrain == 'U')
+              this.enemyCities.push(p);
+          }
           continue;
         }
         if (prov.terrain == '@') continue;
@@ -95,6 +100,9 @@ class Ai2 extends Ai {
     let plannedAttacks = [];
     let currentNavalInvasion = null;
     let losingPop = this.isLosingPopulation();
+
+    let avgDist = 0;
+    let avgDistLgth = 0;
 
     for (let row = 0; row < MAP_DATA.length; row++) {
       let rowData = MAP_DATA[row];
@@ -173,8 +181,14 @@ class Ai2 extends Ai {
                 if (absDiff <= 0.1) {
                   div.action = [adj];
                   added = true;
-                } else if (absDiff < 1.2) {
-                  plannedAttacks.push([div, adj, absDiff]);
+                } else if (absDiff < 1.1) {
+                  let dist = 100;
+                  for (let p of that.enemyCities) {
+                    dist = Math.min(dist, Math.pow(p.row - adj.row, 2) + Math.pow(p.col - adj.col, 2));
+                  }
+                  avgDist += dist;
+                  avgDistLgth++;
+                  plannedAttacks.push([div, adj, absDiff, dist]);
                   added = true;
                 }
               }
@@ -186,6 +200,10 @@ class Ai2 extends Ai {
         });
       }
     }
+
+    avgDist /= avgDistLgth;
+    if (avgDist && avgDist != Infinity)
+      plannedAttacks.forEach(x => x[2] += (x[3] / avgDist) * 0.25);
 
     let rate = _weather.defenseCx < 1 ? (losingPop ? 0.6 : 0.8) : (losingPop ? 0.15 : 0.3);
     let maxAttacks = Math.min(plannedAttacks.length, Math.floor(plannedAttacks.length * rate));
@@ -218,9 +236,9 @@ class Ai2 extends Ai {
       if (++i >= this.adjacentBlocks.length) i = 0;
       let end = that.adjacentBlocks[i];
       if (!end) break;
-      units = units.sort((x2, x1) => (Math.abs(x1.loc.row - end.row) + Math.abs(
-        x1.loc.col - end.col)) - (Math.abs(x2.loc.row - end.row) + Math.abs(
-        x2.loc.col - end.col)));
+      units = units.sort((x2, x1) => (Math.pow(x1.loc.row - end.row, 2) + Math.pow(
+        x1.loc.col - end.col, 2)) - (Math.pow(x2.loc.row - end.row, 2) + Math.pow(
+        x2.loc.col - end.col, 2)));
       let div = units.pop();
       let start = div.loc;
       //u.forEach(div => {

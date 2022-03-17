@@ -342,8 +342,17 @@ function trigger_german_ai_attack1936(num) {
       PLAYERS[0].growthRate = 0.005; // 0.0029563933
       PLAYERS[0].constructionPoints += 550 * 20;
       PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;
-      MAP_DATA.forEach(r => r.forEach(c => {if (c && c.owner == 2){c.divisions.forEach(x => {airStrike(x);x.morale = 0.1;x.entrench=0.1;x.skill=0.6;x.supply=0.1;})}}));
-      pt(0, 0).prov.callTrigger = "trigger_german_ai_attack1936(1)";
+      MAP_DATA.forEach(r => r.forEach(c => {
+        if (c && c.owner == 2){c.divisions.forEach(x => {airStrike(x);x.morale = 0.1;x.entrench=0.1;x.skill=0.6;x.supply=0.1;})}
+        if (c && c.owner == 1){c.divisions.forEach(x => {x.morale += 0.4;x.entrench += 0.5; x.skill += Math.random() * 2; x.supply = 4;})}
+      }));
+      pt(0, 0).prov.callTrigger = "trigger_german_ai_attack1936(0.5)";
+    } else if (num == 0.5) {
+      MAP_DATA.forEach(r => r.forEach(c => {
+        if (c && c.owner == 2){c.divisions.forEach(x => {airStrike(x);x.morale = 0.1;x.entrench=0.1;x.skill=0.6;x.supply=0.1;})}
+      }));
+      if (window.timestamp > -899269698) // 7/3/1941
+        pt(0, 0).prov.callTrigger = "trigger_german_ai_attack1936(1)";
     } else if (num == 1 && window.timestamp > -880929896) { // first wave supply 02/01/1942
       PLAYERS[2].light += 1400;
       PLAYERS[2].heavy += 2000;
