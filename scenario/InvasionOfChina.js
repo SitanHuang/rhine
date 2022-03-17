@@ -252,9 +252,9 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
   if (v.pt.adjacentNotToPlayer(v.pt.owner) > 0 || v.terrain == 'P' || v.terrain == 'U')
     if (v.owner == 0) {
       if ((v.terrain == 'U' || v.terrain == 'P') && row >= 13 && col >= 20)
-        v.divisions = Array(4).fill(0).map(() => (new Division(v.owner, `第${(++divisions).floor()}步兵师`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 5+(Math.random()*3).round(), 2, 'Division', 1+(Math.random()*3).round(), 0))))
+        v.divisions = Array(4).fill(0).map(() => (new Division(v.owner, `第${(++divisions).floor()}步兵师`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 5+(Math.random()*3).round(), 2, 'Division', 1, 0))))
       else if (v.terrain == 'D' || (row < 11 && col < 31))
-        v.divisions = Array(2).fill(0).map(() => (new Division(v.owner, `第${(++divisions).floor()}步兵师`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 5+(Math.random()*3).round(), 2, 'Division', 1+(Math.random()*3).round(), 0))))
+        v.divisions = Array(2).fill(0).map(() => (new Division(v.owner, `第${(++divisions).floor()}步兵师`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 5+(Math.random()*3).round(), 2, 'Division', 1, 0))))
       else if (v.terrain != 'U')
         v.divisions = Array(Math.ceil(Math.random() * 2 + 2)).fill(0).map(() => (new Division(v.owner, `第${(++divisions).floor()}步兵师`, pt(row, col), new Template(Math.random() > 0.7 ? 10000 : 8000, 6+(Math.random()*3).round(), 1, 'Division', 1+(Math.random()*3).round(), 0))))
       if (row >= 25 && row <= 30 && col >= 45)
@@ -269,9 +269,9 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
         v.divisions = Array((1).round()).fill(0).map(() => (new Division(v.owner, '步兵师团', pt(row, col), new Template(16000, 20, 12, 'Division', 5, 5))));
       }
       if (row > 6 && row <= 11 && col > 30) {
-        Array((Math.random()).round()).fill(0).forEach(() => (new Division(v.owner, '装甲中队', pt(row, col), new Template(4000, 4, 12, 'Division', 1, 12))));
+        Array((Math.random()).round()).fill(0).forEach(() => (new Division(v.owner, '装甲中队', pt(row, col), new Template(4000, 4, 12, 'Division', 2, 12))));
       }
-      Array(v.terrain == 'U' ? 1 : b).fill(0).forEach(() => (new Division(v.owner, '步兵联队', pt(row, col), new Template(4000, 8, 4, 'Division', 2, 4))));
+      Array(v.terrain == 'U' ? 1 : b).fill(0).forEach(() => (new Division(v.owner, '步兵联队', pt(row, col), new Template(5000, 6, 4, 'Division', 3, 4))));
       v.divisions.forEach(x => x.skill = x.entrench = (Math.random()*2.5+1.5).round(2));
     }
 })));
