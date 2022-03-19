@@ -129,10 +129,10 @@ function load1944Scenario() {
       slots = Array(1).fill('F');
     } else if (v == 'C') {
       terrain = 'U';
-      slots = Array(25).fill('F');
+      slots = Array(5).fill('F');
     } else if (v == 'Z') {
       terrain = 'U';
-      slots = Array(40).fill('F');
+      slots = Array(4).fill('F');
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*') {
       terrain = v.toUpperCase();
     }
