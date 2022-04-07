@@ -311,7 +311,7 @@ function load1936Scenario() {
   diplomacy_change(PLAYERS[1].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -900241200, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[0].playerID, PLAYERS[1].playerID, {status: 'PACT', changeAfter: -957226693, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[3].playerID, PLAYERS[1].playerID, {status: 'PACT', changeAfter: -957226693, changeValue: {status: 'WAR'}});
-  diplomacy_change(PLAYERS[3].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -952035530, changeValue: {status: 'WAR'}});
+  // diplomacy_change(PLAYERS[3].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -952035530, changeValue: {status: 'WAR'}});
   diplomacy_change(PLAYERS[0].playerID, PLAYERS[3].playerID, {status: 'PACT'});
 
   pt(0, 0).prov.callTrigger = "trigger_german_ai_attack1936(0)";
@@ -320,7 +320,7 @@ function load1936Scenario() {
 function trigger_german_ai_attack1936(num) {
 
   if (PLAYERS[3] && diplomacy_get(1,3).status == 'WAR' && diplomacy_get(2,3).status != 'WAR' &&
-      MAP_DATA[15][47].owner == 1) { // if warsaw taken by germany, then after 9/20, otherwise, after 11/1
+      MAP_DATA[15][47].owner == 1) { // if warsaw taken by germany, then after 9/20, otherwise, WILL NOT HAPPEN (edit: NOT after 11/1)
     diplomacy_change(PLAYERS[3].playerID, PLAYERS[2].playerID, {status: 'PACT', changeAfter: -955837130, changeValue: {status: 'WAR'}});
     MAP_DATA.forEach(r => r.forEach(c => {if (c && c.owner == 3){c.divisions.forEach(x => {airStrike(x);})}}));
   }
