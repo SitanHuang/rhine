@@ -75,11 +75,11 @@ var WWIITerrains1936 = `
 @        @ @cm**  @@@@@@@@@@@cprr c*f     ff * rr       ff**f  frrrffffffffff*f          |
 @@  mff @@ mm  *  p@@@@@@@   F  rrr****C  ff *rr      **c~~f~frrr ffff ff ****           |
 @@   fcp@@  m  ***c p@@@@@  FF   f**fff*fff****c****c**~~~~ff r fffffc***c*ffff    c     |
-@   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff     ~~~~ frfffffffffff*ffff          |
-@m mff@@@ mm  rr Crp@@@@ rrrF ****cmrrrmf *f  ffrr  ~~~~~ ~~~~rrffff fffff*f         fff |
-@@ p@@@@@  m   rrrr@@@@ CFFrrrmm  * m rf f*ff  f rrr   ~~~c~~~~rrf ffff   **   ffff      |
-@@@@@@@@@@@C******p@@ p  Ffffrmmm** mmrr  *        rrr~~~~~*****rrf    f   ***          c|
-@@@@@@@@@@ *    p@@@@   Fcfffrrr** m   rrrrmm  f c**fr  ~~~~~~f******c*ff    *f   f      |
+@   ff  @@@ m    *   @@@@  c**c   *rrmm**C**f rrrff     ~~~~~~rfffffffffff*ffff          |
+@m mff@@@ mm  rr Crp@@@@ rrrF ****cmrrrmf *f  ffrr  ~~~~~~~~~~~rffff fffff*f         fff |
+@@ p@@@@@  m   rrrr@@@@ CFFrrrmm  * m rf f*ff  f rrr   ~~~c~~~~~rf ffff   **   ffff      |
+@@@@@@@@@@@C******p@@ p  Ffffrmmm** mmrr  *        rrr~~~~~~~~~~rrf    f   ***          c|
+@@@@@@@@@@ *    p@@@@   Fcfffrrr** m   rrrrmm  f c**fr  ~~~~~~f~*****c*ff    *f   f      |
 @@@@@@@@@  p@@@@@@@@    fm****c*m  m  fmmmrmm   f  * r        f~~frr  ****f***c      fff |
 @@@@@@@@pc@@@@@@@@@     F**fmrrr mm  fmm cr  mm    **rc        c f rr   ff    **   ffff  |
 @@@@@@@@@@@@@@@ @@     FF*fmmrmfff   ffm  r  fmfff * rrrr    f   f  rrf   f  f ********c |
