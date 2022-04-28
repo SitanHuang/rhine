@@ -127,6 +127,8 @@ function handlePlayerOnPass() {
         }
       }
       if (col.owner != currentPlayerID) continue;
+      if (col.terrain != '@')
+        delete col.airStriked;
       if (col.terrain != '@' && (col.divisions.length || !col.supply)) {
         if (col.divisions.length ? Math.random() > 0.6 || !col.supply : Math.random() > 0.9) {
           col.supply = 0;
@@ -151,7 +153,7 @@ function handlePlayerOnPass() {
         }
         col.menAttacking = 0;
         col.divisions.forEach(div => {
-          div.airStriked = false;
+          delete div.airStriked;
           divs.push(div);
         });
       }

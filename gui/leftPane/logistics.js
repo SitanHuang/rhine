@@ -3,7 +3,7 @@ function onFactoryRatioChange(slider) {
   currentPlayer.factoryInLight = value;
   $('lightNum').innerText = value;
   $('heavyNum').innerText = currentPlayer.factoryInHeavy;
-  $('constructionNum').innerText = Math.round(value + currentPlayer.factoryInHeavy / 2);
+  $('constructionNum').innerText = Math.round(value + currentPlayer.factoryInHeavy * HEAVY_EQUIPMENT_COEF + (currentPlayer.cities || 0) / 10);
 }
 function onReserveRatioChange(slider) {
   let value = parseInt(slider.value);
@@ -11,6 +11,26 @@ function onReserveRatioChange(slider) {
   $('reserveNum').innerText = value;
 }
 
+const REPAINT_SHOW_ANTIAIR_CALLBACK = td => {
+  let pt = td.pt;
+  let prov = pt.prov;
+  let num = antiAirInProv(prov);
+  td.style.cursor = 'pointer';
+  if (pt.owner == currentPlayer) {
+    if(num > 0) {
+      let number = document.createElement('number');
+      number.innerText = num;
+      number.title = `+${Math.round(antiAirEvadeChance(num) * 1000) / 10}% air strike evasion chance` +
+                     `\nBy building 1 more AA this number will become ${Math.round(antiAirEvadeChance(num + 1) * 1000) / 10}%`;
+      td.appendChild(number)
+      if (num >= pt.terrain.slots) {
+        td.style.cursor = 'not-allowed';
+      }
+    }
+  } else {
+    td.style.cursor = 'not-allowed';
+  }
+};
 const REPAINT_SHOW_FACTORIES_CALLBACK = td => {
   let pt = td.pt;
   let prov = pt.prov;
@@ -42,6 +62,22 @@ const REPAINT_SHOW_SUPPLY_CALLBACK = td => {
   }
 };
 
+function toggleAntiAirOnClick(button) {
+  if (button.showing) {
+    button.className = '';
+    button.showing = false;
+    repaintCanvas();
+  } else {
+    button.className = 'active';
+    button.showing = true;
+    let oldCallback = colCallback;
+    colCallback = td => {
+      toggleAntiAirOnClick(button);
+      colCallback(td)
+    }
+    repaintCanvas(REPAINT_SHOW_ANTIAIR_CALLBACK);
+  }
+}
 function toggleFactoriesOnClick(button) {
   if (button.showing) {
     button.className = '';
@@ -346,6 +382,28 @@ function toggleSuppliesOnClick(button) {
   }
 }
 
+function buildAntiAirOnClick(button) {
+  if (currentPlayer.constructionPoints < 150) {
+    button.parentNode.children[2].style.display = 'block';
+    return;
+  }
+  button.parentNode.children[3].style.display = 'block';
+  repaintCanvas(REPAINT_SHOW_ANTIAIR_CALLBACK);
+  colCallback = (td) => {
+    let pt = td.pt;
+    let prov = pt.prov;
+    let num = factoriesInProv(prov);
+    if (td.style.cursor == 'not-allowed') return;
+    prov.slots.push('A');
+    currentPlayer.constructionPoints -= 150;
+    colCallback = null;
+    button.parentNode.children[3].style.display = 'none';
+    buttonsPlayer.playSprite(15 + 3/60, 17 + 15/60);
+    updateLogistics();
+    repaintCanvas();
+  }
+}
+
 function buildFactoryOnClick(button) {
   if (currentPlayer.constructionPoints < 550) {
     button.parentNode.children[2].style.display = 'block';
@@ -480,9 +538,16 @@ function updateLogistics() {
   <font style="display: none" color="red">Not enough pts</font>
   <font style="display: none">Select location</font>
   <td>550 pts
+  <tr>
+  <th>
+  <button onclick="buildAntiAirOnClick(this)">Build Anti Air</button><br>
+  <font style="display: none" color="red">Not enough pts</font>
+  <font style="display: none">Select location</font>
+  <td>150 pts
   </table>
   <br>
   <button onclick="toggleFactoriesOnClick(this)">Toggle Factories View</button><br><br>
+  <button onclick="toggleAntiAirOnClick(this)">Toggle Anti-Air View</button><br><br>
   <button onclick="toggleSuppliesOnClick(this)">Toggle Supplies View</button><br><br>
   <button onclick="toggleStrengthByMenOnClick(this)">Toggle Strength View (By Men)</button><br><br>
   <button onclick="toggleAverageStrengthOnClick(this)">Toggle Average Strength View (By men)</button><br><br>

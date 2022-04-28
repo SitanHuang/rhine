@@ -127,7 +127,7 @@ class Player {
   produce() {
     this.light += this._lightProductionPerTurn;
     this.heavy += this._heavyProductionPerTurn;
-    this.constructionPoints += Math.round(this.factoryInLight + this.factoryInHeavy * HEAVY_EQUIPMENT_COEF);
+    this.constructionPoints += Math.round((this.cities || 0) / 10 + this.factoryInLight + this.factoryInHeavy * HEAVY_EQUIPMENT_COEF);
   }
 
   activateReserve(amount) {

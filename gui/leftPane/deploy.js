@@ -108,16 +108,22 @@ function airStrikeOnClick(button) {
     repaintCanvas(td => {
       REPAINTCANVAS_CALLBACK_UNITS(td);
       let pt = td.pt;
-      if (pt.owner != currentPlayer && pt.prov.divisions.length && !pt.prov.divisions[0].airStriked)
+      if (pt.owner != currentPlayer && !pt.prov.divisions[0]?.airStriked && !pt.prov.airStriked)
         td.style.cursor = 'pointer';
       else
         td.style.cursor = 'not-allowed';
     });
     colCallback = td => {
       if (td.style.cursor != 'pointer') return;
-      let damages = airStrikeProv(td.pt.prov.divisions);
+      let ofacs = factoriesInProv(td.pt.prov);
+      let oaa = antiAirInProv(td.pt.prov);
+      let [damages, facs] = airStrikeProv(td.pt.prov);
       message_token.style.color = 'default';
-      message_token.innerText = `${abbreviate(damages, 1, false, false)} damages.`;
+      message_token.innerText = `${abbreviate(damages, 1, false, false)} damages. \n`;
+      if (facs) {
+        message_token.innerText += `${ofacs - factoriesInProv(td.pt.prov)} factories &`;
+        message_token.innerText += ` ${oaa - antiAirInProv(td.pt.prov)} AA destroyed.`;
+      }
       currentPlayer.light -= 5;
       currentPlayer.heavy -= 10;
       repaintCanvas();

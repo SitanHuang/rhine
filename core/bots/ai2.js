@@ -14,6 +14,7 @@ class Ai2 extends Ai {
     let player = this.player;
     this.cities = [];
     this.airStrikeTargets = [];
+    this.cityStrikeTargets = [];
     SELECTED_UNITS = [];
     this.adjacentBlocks = [];
     this.enemyCities = [];
@@ -30,8 +31,11 @@ class Ai2 extends Ai {
         let prov = p.prov;
         if (p.owner != player) {
           if (diplomacy_get(player.playerID, prov.owner).status == "WAR") {
-            if (((prov.terrain == 'U' || prov.terrain == 'P') && prov.divisions.length >= 3) || prov.divisions.length >= 5)
+            if ((prov.terrain == 'U' || prov.terrain == 'P') && prov.slots.length)
+              this.cityStrikeTargets.push(prov);
+            else if (prov.divisions.length >= 5)
               this.airStrikeTargets.push(prov);
+
             if (prov.terrain == 'U')
               this.enemyCities.push(p);
           }
@@ -54,10 +58,21 @@ class Ai2 extends Ai {
         } else if (prov.terrain == 'U' || prov.terrain == 'P') {
           this.cities.push(p);
           if (prov.terrain == 'P') this.adjacentBlocks.push(p);
-          if (player.constructionPoints > 550 && Math.random() > 0.7 &&
-            prov.slots.filter(x => (x == 'F')).length < p.terrain.slots) {
+          let facs = factoriesInProv(prov);
+          let aa = antiAirInProv(prov);
+          if (player.constructionPoints > 550 && Math.random() < 0.1 + facs / 40  &&
+            prov.slots.length < p.terrain.slots) {
             player.constructionPoints -= 550;
             prov.slots.push('F');
+          } else if (player.constructionPoints > 150 &&
+            Math.random() > antiAirEvadeChance(prov) &&
+            (
+              (Math.random() < facs / 100 && aa * 2 < facs - 1) ||
+              (prov.terrain == 'P' && prov.divisions.length / 5 > aa && this.isLosingPopulation())
+            ) &&
+            prov.slots.length < p.terrain.slots) {
+            player.constructionPoints -= 150;
+            prov.slots.push('A');
           }
         } else {
           if (player.constructionPoints > 1500 & Math.random() > 0.9) {
@@ -251,19 +266,24 @@ class Ai2 extends Ai {
       //})
     }
 
+    this.cityStrikeTargets = this.cityStrikeTargets
+      .sort((a, b) => b.slots.length - a.slots.length);
+    if (this.budget.airStrike < this.cityStrikeTargets.length)
+      this.cityStrikeTargets.splice(Math.floor(this.budget.airStrike * Math.random()));
+
     this.airStrikeTargets = this.airStrikeTargets
       .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
     attackAirStrikes = attackAirStrikes
       .sort((a, b) => b.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0) - a.divisions.map(x => x.template.troop).reduce((a, b) => a + b, 0));
 
-    this.airStrikeTargets = attackAirStrikes.concat(this.airStrikeTargets);
+    this.airStrikeTargets = this.cityStrikeTargets.concat(attackAirStrikes).concat(this.airStrikeTargets);
 
     let airStrikedCount = 0;
     for (let prov of this.airStrikeTargets) {
       if (airStrikedCount++ < this.budget.airStrike) {
         player.light -= 5;
         player.heavy -= 10;
-        airStrikeProv(prov.divisions);
+        airStrikeProv(prov);
       }
     }
   }

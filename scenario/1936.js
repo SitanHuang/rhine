@@ -128,9 +128,11 @@ function load1936Scenario() {
     if (v == 'c'){
       terrain = 'U';
       slots = Array(1).fill('F');
+      if (Math.random() > 0.7)
+        slots.push('A');
     } else if (v == 'C') {
       terrain = 'U';
-      slots = Array(4).fill('F');
+      slots = Array(4).fill('F').concat(Array(2).fill('A'));
     } else if (v == 'p' || v == 'm' || v == ' ' || v == 'f' || v == 'd' || v == 'r' || v == '*' || v == '~') {
       terrain = v.toUpperCase();
     } else if (v == 'F') {
@@ -146,6 +148,9 @@ function load1936Scenario() {
       divisions: [],
       pt: pt(row, col)
     };
+
+    if (_col.fort)
+      _col.slots.push('A');
 
     if (terrain != '@' && row >= 23 && row <= 40 && col >= 8 && col <= 28)
       _col.transferOwner = {cityFalls: [24, 21, 1], newOwner: 1};

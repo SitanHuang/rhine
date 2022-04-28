@@ -221,12 +221,12 @@ class Ai {
       for (let col = 0; col < rowData.length; col++) {
         let p = pt(row, col);
         let prov = p.prov;
-        if (p.owner != player && (prov.terrain == 'U' || prov.terrain == 'P') && prov.divisions.length >= 3 && Math.random() > 0.8) {
+        if (p.owner != player && (prov.terrain == 'U' || prov.terrain == 'P') && (prov.divisions.length >= 3 || prov.divisions.length) && Math.random() > 0.8) {
           let pro = p.prov;
           if (airStrikedCount++ < budget.airStrike) {
             player.light -= 5;
             player.heavy -= 10;
-            airStrikeProv(pro.divisions);
+            airStrikeProv(pro);
           }
         }
         if (p.owner != player || prov.terrain == '@') continue;
@@ -245,17 +245,23 @@ class Ai {
               if (airStrikedCount++ < budget.airStrike) {
                 player.light -= 5;
                 player.heavy -= 10;
-                airStrikeProv(pro.divisions);
+                airStrikeProv(pro);
               }
             })
           }
         } else if (prov.terrain == 'U' || prov.terrain == 'P') {
           this.cities.push(p);
           if (prov.terrain == 'P') this.adjacentBlocks.push(p);
+          let facs = factoriesInProv(prov);
           if (player.constructionPoints > 550 && Math.random() > 0.7 &&
-            prov.slots.filter(x => (x == 'F')).length < p.terrain.slots) {
+            prov.slots.length < p.terrain.slots) {
             player.constructionPoints -= 550;
             prov.slots.push('F');
+          } else if (player.constructionPoints > 150 && Math.random() < facs / 70  &&
+            Math.random() > antiAirEvadeChance(prov) && antiAirInProv(prov) * 5 < facs - 5 &&
+            prov.slots.length < p.terrain.slots) {
+            player.constructionPoints -= 150;
+            prov.slots.push('A');
           }
         } else {
           if (player.constructionPoints > 1500 & Math.random() > 0.9) {

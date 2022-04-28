@@ -1,20 +1,45 @@
+function antiAirEvadeChance(prov) {
+  let aa = isNaN(prov) ? antiAirInProv(prov) : prov;
+  return -1/(aa / 10 + 1) + 1;
+}
+
 function airStrike(div) {
+  let chance = antiAirEvadeChance(div.prov);
   if (diplomacy_get(div.playerID, currentPlayerID).status != 'WAR') return;
+  div.airStriked = true;
+  if (Math.random() <= chance) return;
   let damage = (div.men * 0.2).max(700).round();
   div.men = (div.men - damage).round().min(0);
   let oe = div.entrench;
-  div.entrench = (div.entrench - 0.1).min(Math.min(oe, 1));
-  div.morale -= 0.2;
-  div.airStriked = true;
+  div.entrench = (div.entrench - 0.2).min(Math.min(oe, 1));
+  div.morale *= 0.8;
   div.player.casualties += damage;
+
+  if (div.prov.supply) div.prov.supply *= 0.8;
+
   return damage.round().min(0);
 }
 
-function airStrikeProv(divs) {
+function airStrikeProv(prov) {
   let damages = 0;
-  if (divs[0] && diplomacy_get(divs[0].playerID, currentPlayerID).status != 'WAR') return;
-  divs.forEach(x => (damages += airStrike(x)))
-  return damages;
+
+  let divs = prov.divisions;
+  if (diplomacy_get(prov.owner, currentPlayerID).status != 'WAR') return;
+
+  prov.airStriked = true;
+
+  divs.forEach(x => (damages += airStrike(x)));
+
+  if (Math.random() < 0.05) {
+    let facs = 0;
+    prov.slots = prov.slots.filter(x => !(Math.random() > antiAirEvadeChance(prov) && (Math.random() <= (1 - facs / 5) ? ++facs : 0)));
+    PLAYERS[prov.owner].constructionPoints += 100;
+    if (facs)
+      console.log(`${facs} buildings bombed ${currentPlayerID} -> ${prov.owner}`);
+    return [damages, facs];
+  }
+
+  return [damages, 0];
 }
 
 function getCasualtyReductionFromSupport(div) {

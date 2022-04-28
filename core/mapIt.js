@@ -1,6 +1,9 @@
 function factoriesInProv(prov) {
   return prov.slots.filter(x => (x == 'F')).length;
 }
+function antiAirInProv(prov) {
+  return prov.slots.filter(x => (x == 'A')).length;
+}
 
 function getOrReturn(pt, callback) {
   let col = null;

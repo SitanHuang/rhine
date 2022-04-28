@@ -78,15 +78,13 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
   } else {
     if (!window.politicalView) td.style.background = pt.owner.color.replace('0.2', '0.5');
   }
-  if (num > 0) {
-    let as = prov.divisions.filter(x => x.airStriked).length;
-    if (as > 0) {
-      let mark = document.createElement('mark');
-      mark.innerText = ' ';
-      mark.title = `${as} divisions are air-striked.`
-      mark.className = 'airStrike';
-      td.appendChild(mark);
-    }
+  let as = prov.divisions.filter(x => x.airStriked).length;
+  if (prov.airStriked || as > 0) {
+    let mark = document.createElement('mark');
+    mark.innerText = ' ';
+    mark.title = `${as} divisions are air-striked.`
+    mark.className = 'airStrike';
+    td.appendChild(mark);
   }
 }
 
