@@ -7,7 +7,7 @@ function airStrike(div) {
   let chance = antiAirEvadeChance(div.prov);
   if (diplomacy_get(div.playerID, currentPlayerID).status != 'WAR') return;
   div.airStriked = true;
-  if (Math.random() <= chance) return;
+  if (Math.random() <= chance) return 0;
   let damage = (div.men * 0.2).max(800).round();
   div.men = (div.men - damage).round().min(0);
   let oe = div.entrench;
