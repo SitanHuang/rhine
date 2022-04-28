@@ -204,7 +204,7 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
 	  let o = InvasionOfChinaOwners[row][col] == '1' ? 1 : 0;
 	  let slots = [];
 	  if (v == 'U'){
-      if (o == 1) slots = Array(3).fill('F').concat(['A', 'A']);
+      if (o == 1) slots = Array(3).fill('F').concat(['A', 'A', 'A']);
       else if(Math.random()>0.8) slots = Array(1).fill('F');
 	  }
     if (!TERRAINS[v]) throw 'Not found.'
