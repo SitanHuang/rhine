@@ -346,7 +346,7 @@ function trigger_german_ai_attack1936(num) {
     if (num == 0) {
       // PLAYERS[1].growthRate = 0.002;
       PLAYERS[0].growthRate = 0.005; // 0.0029563933
-      PLAYERS[0].constructionPoints += 550 * 20;
+      PLAYERS[0].constructionPoints += 550 * 20 + 150 * 20;
       PLAYERS[1].ai.attackOrderUntil = -900241200 + 1.577e+7;
       MAP_DATA.forEach(r => r.forEach(c => {
         if (c && c.owner == 2){c.divisions.forEach(x => {airStrike(x);x.morale = 0.1;x.entrench=0.1;x.skill -= 0.6;x.supply=0.1;})}
@@ -372,14 +372,16 @@ function trigger_german_ai_attack1936(num) {
       }
       pt(0, 0).prov.callTrigger = "trigger_german_ai_attack1936(2)";
     } else if (num == 2 && window.timestamp > -862613096) { // second wave supply 09/01/1942
+      PLAYERS[2].light += 3000;
       PLAYERS[2].heavy += 4000;
-      PLAYERS[2].heavy += 6000;
       PLAYERS[1].light = -5000;
       PLAYERS[1].heavy = -8000;
       PLAYERS[1].growthRate /= 2;
       PLAYERS[2].constructionPoints += 550 * 30;
       PLAYERS[1].constructionPoints = -550 * 50;
-      PLAYERS[0].constructionPoints += 550 * 30;
+      PLAYERS[0].constructionPoints += 550 * 30 + 150*20;
+      PLAYERS[0].heavy += 2000;
+      PLAYERS[0].light += 3000;
 
       pt(0, 0).prov.callTrigger = "";
     }
