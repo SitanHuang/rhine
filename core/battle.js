@@ -8,14 +8,15 @@ function airStrike(div) {
   if (diplomacy_get(div.playerID, currentPlayerID).status != 'WAR') return;
   div.airStriked = true;
   if (Math.random() <= chance) return;
-  let damage = (div.men * 0.2).max(700).round();
+  let damage = (div.men * 0.2).max(800).round();
   div.men = (div.men - damage).round().min(0);
   let oe = div.entrench;
-  div.entrench = (div.entrench - 0.2).min(Math.min(oe, 1));
-  div.morale *= 0.8;
+  div.entrench *= 0.7;
+  div.morale *= 0.7;
   div.player.casualties += damage;
+  div.movementProgress -= 1;
 
-  if (div.prov.supply) div.prov.supply *= 0.8;
+  if (div.prov.supply) div.prov.supply *= 0.7;
 
   return damage.round().min(0);
 }
