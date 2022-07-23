@@ -31,6 +31,8 @@ function showDivisionDetailOnFloat(i, td) {
   <td>${abbreviate(div.hardDefense, 2, false, false)}
   <tr><th>Speed
   <td>${(div.speed * _weather.movementCx).round(2)}${SPEED_UNIT}
+  <tr><th>Reinforce Rate
+  <td>${div.reinforceRate.round(2)}
   <tr><th>Hardness
   <td>${div.hardness.round(2)}
   <tr><th>Armor

@@ -24,8 +24,9 @@ function onTemplateSpecsChange() {
   $('armorSpan').innerText = currentPlayer.defaultTemplate.armor.round(2);
   $('armoredSpan').innerText = (!!currentPlayer.defaultTemplate.armored)+"";
   $('supplyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.supplyBuff, 2, false, false);
-  $('casualtyBuff').innerText = abbreviate(getCasualtyReductionFromSupport({template: currentPlayer.defaultTemplate}), 2, false, false);
+  $('casualtyBuff').innerText = abbreviate(currentPlayer.defaultTemplate.casualtyReductionFromSupport_Battle, 2, false, false);
   $('entrenchBuff').innerText = abbreviate(currentPlayer.defaultTemplate.entrenchBuff, 2, false, false);
+  $('reinforceRate').innerText = abbreviate(currentPlayer.defaultTemplate.reinforceRate, 2, false, false);
   $('costSpan').innerText = currentPlayer.defaultTemplate.productionCost;
   $('powerCostSpan').innerText = (currentPlayer.defaultTemplate.productionEfficiency + ' ' +
                                  (currentPlayer.defaultTemplate.armored ?
@@ -378,6 +379,9 @@ function updateDeploy() {
   <tr>
   <th>Entrench factor
   <td id="entrenchBuff"><br>
+  <tr>
+  <th>Reinforce Rate
+  <td id="reinforceRate"><br>
   <tr><th><td><br>
   <tr><th>Title:<td><br>
   <tr>

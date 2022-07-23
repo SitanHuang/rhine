@@ -188,15 +188,15 @@ class Ai2 extends Ai {
                   }
 
                   return def / atk;
-                }).reduce((a, b) => a + b, 0)
-                ;
+                }).reduce((a, b) => a + b, 0);
+                
                 if (divs.length)
                   absDiff /= divs.length;
 
                 if (absDiff <= 0.1) {
                   div.action = [adj];
                   added = true;
-                } else if (absDiff < 1.1) {
+                } else if (absDiff < 1.2) {
                   let dist = 100;
                   for (let p of that.enemyCities) {
                     dist = Math.min(dist, Math.pow(p.row - adj.row, 2) + Math.pow(p.col - adj.col, 2));

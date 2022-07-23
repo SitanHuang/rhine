@@ -44,7 +44,7 @@ function airStrikeProv(prov) {
 }
 
 function getCasualtyReductionFromSupport(div) {
-  return ((div.template.support/div.template.manpower*1000).max(0.75) + Math.pow(div.template.hardness, 2) * 0.8).min(0).max(0.85);
+  return div.casualtyReductionFromSupport_Battle;
 }
 
 function battle(d1, d2, attackingWidthPenalty, maxWidth) {
@@ -119,7 +119,7 @@ function battle(d1, d2, attackingWidthPenalty, maxWidth) {
 
   sum = d1.morale + d2.morale;
 
-  if (d2.hp <= 2 || d2.men <= 400) d2.remove();
+  if (d2.hp <= 2 || d2.men <= (d2.divs ? d2.divs * 400 : 400)) d2.remove();
 
   return {
     casualties: [rt2, rt1, sum],
@@ -144,6 +144,10 @@ function combineBattleInfos(infos) {
     attackingWidthPenalty: 0,
     pierced: 0,
     maxWidth: 0,
+    reinforcedBattles: 0,
+    avgReinforcedDivs: 0,
+    reinforcedBattlesDef: 0,
+    avgReinforcedDivsDef: 0,
     piercedBy: 0,
     damage: [0, 0]
   };
@@ -162,6 +166,11 @@ function combineBattleInfos(infos) {
     t.pierced += info.pierced;
     t.piercedBy += info.piercedBy;
     t.attackingWidthPenalty += info.attackingWidthPenalty;
+    t.attackingWidthPenalty += info.attackingWidthPenalty;
+    t.avgReinforcedDivs += info.reinforced || 0;
+    t.reinforcedBattles += info.reinforced ? 1 : 0;
+    t.avgReinforcedDivsDef += info.reinforcedDef || 0;
+    t.reinforcedBattlesDef += info.reinforcedDef ? 1 : 0;
   });
   return {
     num: infos.length,
@@ -171,6 +180,10 @@ function combineBattleInfos(infos) {
     armored: t.armored.round(1),
     pierced: t.pierced.round(1),
     piercedBy: t.piercedBy.round(1),
+    avgReinforcedDivs: (t.avgReinforcedDivs / t.reinforcedBattles || 0).round(1),
+    reinforcedBattles: t.reinforcedBattles || 0,
+    avgReinforcedDivsDef: (t.avgReinforcedDivsDef / t.reinforcedBattlesDef || 0).round(1),
+    reinforcedBattlesDef: t.reinforcedBattlesDef || 0,
     morales: [t.morales[0] / infos.length, t.morales[1] / infos.length],
     attackingWidthPenalty: (t.attackingWidthPenalty / infos.length * 100).round(),
     percentage: [

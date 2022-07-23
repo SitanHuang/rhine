@@ -60,7 +60,8 @@ REPAINTCANVAS_CALLBACK_UNITS = td => {
                     `\nMorale: ${battleInfo.morales[0].round(1)} - ${battleInfo.morales[1].round(1)}` +
                     `\nAvg terrain max: ${battleInfo.maxWidth.round()}` +
                     `\nAvg width penalty: ${battleInfo.attackingWidthPenalty}%` +
-                    `\n${attackingDivisions} divisions are attacking`;
+                    `\n${attackingDivisions} divisions are attacking` +
+                    `\n${battleInfo.reinforcedBattles + battleInfo.reinforcedBattlesDef} reinforced groups (atk: ${battleInfo.avgReinforcedDivs}div/bat, def: ${battleInfo.avgReinforcedDivsDef}div/bat)`;
         if (battleInfo.armored)
           mark.title += `\n==== ${battleInfo.armored} armored battles ====` +
                     `\nEnemies pierced: ${battleInfo.pierced} times` +

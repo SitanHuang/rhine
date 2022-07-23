@@ -364,6 +364,38 @@ function toggleAverageEntrenchOnClick(button) {
     });
   }
 }
+function toggleAverageReinforceOnClick(button) {
+  if (button.showing) {
+    button.className = '';
+    button.showing = false;
+    repaintCanvas();
+  } else {
+    button.className = 'active';
+    button.showing = true;
+    let oldCallback = colCallback;
+    colCallback = td => {
+    }
+    repaintCanvas(function (td) {
+      let pt = td.pt;
+      let prov = pt.prov;
+      td.style.cursor = 'pointer';
+      if (pt.owner == currentPlayer) {
+        td.style.backgroundColor = 'white';
+        if(prov.divisions.length > 0) {
+          let num = 0;
+          prov.divisions.forEach(x => {num += x.reinforceRate});
+          num = num / prov.divisions.length;
+          td.style.backgroundColor = getColorFromPercentage(num, [{"pct":0,"color":{"r":180,"g":0,"b":0}},{"pct":0.5,"color":{"r":180,"g":180,"b":0}},{"pct":1,"color":{"r":32,"g":158,"b":32}}]);
+          let number = document.createElement('number');
+          number.innerText = (num * 100).round();
+          td.appendChild(number)
+        }
+      } else {
+        td.style.backgroundColor = 'grey';
+      }
+    });
+  }
+}
 
 function toggleSuppliesOnClick(button) {
   if (button.showing) {
@@ -555,6 +587,7 @@ function updateLogistics() {
   <button onclick="toggleAverageSkillOnClick(this)">Toggle Average Skill View</button><br><br>
   <button onclick="toggleAverageHardnessOnClick(this)">Toggle Average Hardness View</button><br><br>
   <button onclick="toggleAverageEntrenchOnClick(this)">Toggle Average Entrench View</button><br><br>
+  <button onclick="toggleAverageReinforceOnClick(this)">Toggle Average Reinforce View</button><br><br>
   <br><br><br>
   <p>V1.0.2</p>
   `;

@@ -123,6 +123,10 @@ class Template {
     );
   }
 
+  get reinforceRate() {
+    return (Math.pow(this.speedBuff / 2 + this.entrenchBuff, 2) / 100 / 3 * this.speed).max(0.75);
+  }
+
   get productionEfficiency() {
     return ((this.hard + this.soft) / this.productionCost).round();
   }
@@ -160,6 +164,10 @@ class Template {
 
   mockSoftDefense(terrain) {
     return this.soft * terrain.defense;
+  }
+
+  get casualtyReductionFromSupport_Battle() {
+    return ((this.support / this.manpower * 1000).max(0.75) + Math.pow(this.hardness, 2) * 0.8).min(0).max(0.85);
   }
 
   mockSpeed(terrain) {

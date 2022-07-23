@@ -92,26 +92,74 @@ class Division {
         break;
       } else if (nextPt.owner == this.player || divs.length == 0) {
         if (nextPt.owner == this.player)
-          this.movementProgress -= 1;
+          this.movementProgress -= 1 * _weather.movementCx.max(1);
         else
-          this.movementProgress -= 1 * _weather.movementCx;
+          this.movementProgress -= 1 * _weather.movementCx.min(1);
         this.updateLocation(nextPt);
         this.action.shift();
       } else {
         if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
 
-        let maxWidth = nextPt.terrain.width;
-        let exceeded = ((nextProv.menAttacking || 0) + that.men - maxWidth).min(0);
-        let widthPenalty = (1 - maxWidth / (exceeded + maxWidth));
-        nextProv.menAttacking += that.men;
-        divs.forEach(div => {
-          if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
-          div.movementProgress = -1;
-          let results = battle(that, div, widthPenalty, maxWidth);
-          // if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.hardness / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
-          if (div.hp < div.player.retreatable.min(5) || (div.morale < 0.25)) {
-            div.retreat();
+        let reinforcedDivs = [];
+
+        // if (Math.random() < that.reinforceRate)
+        nextPt.adjacents(adj => {
+          if (adj.terrain == '@') return;
+          let divs = adj.prov.divisions;
+          if (adj.owner == that.player) {
+            for (let i = 0;i < divs.length;i++) {
+              let div = divs[i];
+              if (div.action[0]?.eq(nextPt) &&
+                  div.morale >= .25 &&
+                  div.hp >= div.player.retreatable.min(5) &&
+                  Math.random() < div.reinforceRate &&
+                  div.movementProgress + div.speed * _weather.movementCx >= 1) {
+                div.movementProgress -= 1 * _weather.movementCx;
+                reinforcedDivs.push(div);
+              }
+            }
           }
+        });
+
+        let atkDiv = that;
+        if (reinforcedDivs.length) {
+          reinforcedDivs.push(that);
+          atkDiv = new ReinforcedDivisionWrapper(reinforcedDivs);
+        }
+
+        let maxWidth = nextPt.terrain.width;
+        let exceeded = ((nextProv.menAttacking || 0) + atkDiv.men - maxWidth).min(0);
+        let widthPenalty = (1 - maxWidth / (exceeded + maxWidth));
+        nextProv.menAttacking += atkDiv.men;
+        divs.forEach(div => {
+          if (atkDiv.hp < that.player.retreatable.min(5) || (atkDiv.morale < 0.25)) return;
+
+          let defReinforcedDivs = [];
+          for (let i = 0; i < divs.length; i++) {
+            let div2 = divs[i];
+            if (div2.morale >= .25 &&
+              div2.hp >= div2.player.retreatable.min(5) &&
+              Math.random() < div2.reinforceRate) {
+              div2.movementProgress = -1;
+              defReinforcedDivs.push(div2);
+            }
+          }
+
+          let defDiv = div;
+          if (defReinforcedDivs.length) {
+            defReinforcedDivs.push(div);
+            defDiv = new ReinforcedDivisionWrapper(defReinforcedDivs);
+          }
+
+          div.movementProgress = -1;
+
+          let results = battle(atkDiv, defDiv, widthPenalty, maxWidth);
+          // if (div.hp < div.player.retreatable.min(30) || (div.hp < 85 && Math.random() < this.hardness / 3) || (Math.random() > div.morale * 1.2 && div.morale < 1)) {
+          if (defDiv.hp < div.player.retreatable.min(5) || (defDiv.morale < 0.25)) {
+            defDiv.retreat();
+          }
+          results.reinforced = reinforcedDivs.length;
+          results.reinforcedDef = defReinforcedDivs.length;
           that.battleInfo.push(results);
         });
         if (nextProv.divisions.length != 0) break;
@@ -212,6 +260,13 @@ class Division {
     return (this.template.speed * TERRAINS[this.prov.terrain].movement *
       this.player.tempSumAllGeneralTraits.s).round(2);
   }
+  get reinforceRate() {
+    return (Math.pow(this.template.speedBuff / 2 * TERRAINS[this.prov.terrain].movement.max(1) *
+      this.player.tempSumAllGeneralTraits.s + this.template.entrenchBuff, 2) / 100
+      / 3 * this.speed.max(6) *
+      this.entrench.max(2).min(0.8) *
+      ((this.morale - 1) / 10 + 1)).round(2).max(0.75).min(0.03);
+  }
 
   get soft() {
     let prov = this.prov
@@ -225,5 +280,112 @@ class Division {
       s *= 0.7; // -30%
     //return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
     return s - s * (this.adjacentPenalty / 4)
+  }
+
+  get casualtyReductionFromSupport_Battle() {
+    return this.template.casualtyReductionFromSupport_Battle;
+  }
+}
+
+class ReinforcedDivisionWrapper {
+  constructor(divs) {
+    this.divs = divs;
+    this.player = divs[0].player;
+
+    this.resum();
+
+    this.weightedAvgByMen('hardness');
+    this.weightedAvgByMen('morale');
+    this.weightedAvgByMen('armor');
+    this.weightedAvgByMen('skill');
+    this.weightedAvgByMen('casualtyReductionFromSupport_Battle');
+  }
+
+  resum() {
+    const that = this;
+
+    const sumFields = [
+      'softAttack',
+      'softDefense',
+      'hardAttack',
+      'hardDefense',
+      '_men'
+    ];
+
+    for (let j = 0; j < sumFields.length; j++) {
+      const key = sumFields[j];
+      this[key] = 0;
+      for (let i = 0; i < this.divs.length; i++) {
+        const div = this.divs[i];
+        this[key] = (this[key] || 0) + div[key.replace('_', '')];
+      }
+    }
+    this.divRatios = this.divs.map(x => x.men / (that.men + 1));
+  }
+
+  get casualtyReductionFromSupport_Battle() {
+    return this._casualtyReductionFromSupport_Battle;
+  }
+  get men() {
+    return this._men;
+  }
+  get hardness() {
+    return this._hardness;
+  }
+  get armor() {
+    return this._armor;
+  }
+  set men(x) {
+    this.weightedDeductionByMen('men', x, 0);
+  }
+  get morale() {
+    return this._morale;
+  }
+  set morale(x) {
+    this.weightedDeductionByMen('morale', x, 2);
+  }
+  get skill() {
+    return this._skill;
+  }
+  set skill(x) {
+    this.weightedDeductionByMen('skill', x, 2);
+  }
+
+  get hp() {
+    this.weightedAvgByMen('hp');
+    return this._hp;
+  }
+
+  weightedDeductionByMen(key, nx, round) {
+    let delta = nx - this['_' + key];
+    for (let i = 0; i < this.divs.length; i++) {
+      let div = this.divs[i];
+      let d2 = !isNaN(round) ? (delta * this.divRatios[i]).round(round) : delta * this.divRatios[i];
+      div[key] += d2;
+    }
+    this['_' + key] += delta;
+    this.resum();
+  }
+
+  remove() {
+    this.divs.forEach(x => x.remove());
+  }
+  retreat() {
+    this.divs.forEach(x => x.retreat());
+  }
+
+  get armored() {
+    for (let i = 0; i < this.divs.length; i++)
+      if (this.divs[i].armored)
+        return true;
+    return false;
+  }
+
+  weightedAvgByMen(key) {
+    this['_' + key] = 0;
+    for (let i = 0; i < this.divs.length; i++) {
+      let div = this.divs[i];
+      this['_' + key] += div[key] * this.divRatios[i];
+    }
   }
 }

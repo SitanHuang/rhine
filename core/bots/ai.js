@@ -103,7 +103,7 @@ class Ai {
 
       }
       if ((player.divisions < 150 || player.factories < 50) && Math.random() > 0.2) { // need quantity over quality
-        tem.troop = (Math.random() * 18).round() * 1000 + 6500;
+        tem.troop = (Math.random() * 10).round() * 1000 + 5000;
         //tem.heavy = (budget.newRecruits[1] * Math.random()).round() + 1;
         tem.light = (10 * Math.random()).round() + 1;
         tem.heavy = (tem.light / 2 * Math.random()).round().min(1);
