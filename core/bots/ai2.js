@@ -220,7 +220,7 @@ class Ai2 extends Ai {
     if (avgDist && avgDist != Infinity)
       plannedAttacks.forEach(x => x[2] += (x[3] / avgDist) * 0.25);
 
-    let rate = _weather.defenseCx < 1 ? (losingPop ? 0.6 : 0.8) : (losingPop ? 0.15 : 0.3);
+    let rate = _weather.defenseCx < 1.2 ? (losingPop ? 0.65 : 0.85) : (losingPop ? 0.15 : 0.3);
     let maxAttacks = Math.min(plannedAttacks.length, Math.floor(plannedAttacks.length * rate));
     plannedAttacks = plannedAttacks.sort((a, b) => a[2] - b[2]);
     for (let i = 0;i < plannedAttacks.length;i++) {
