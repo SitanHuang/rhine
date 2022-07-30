@@ -15,11 +15,11 @@ class Ai {
     let available = (Math.min(this.player.light, this.player.heavy) * 0.9).floor().min(0);
     let rate = 0;
     if (this.player.divisions < 150) { rate = 0; this.player.activateReserve(1) }
-    else if (this.player.divisions < 200) { rate = 10; if (Math.max(this.player.light, this.player.heavy) > 500) this.player.activateReserve(0.7) }
-    else if (this.player.divisions < 250) { rate = 30; if (Math.max(this.player.light, this.player.heavy) > 1000) this.player.activateReserve(0.5) }
-    else if (this.player.divisions < 300) { rate = 40; if (Math.max(this.player.light, this.player.heavy) > 1500) this.player.activateReserve(0.5) }
-    else if (this.player.divisions < 350) { rate = 70; if (Math.max(this.player.light, this.player.heavy) > 1500) this.player.activateReserve(0.5) }
-    else if (this.player.divisions < 400) { rate = 80; if (Math.max(this.player.light, this.player.heavy) > 2000) this.player.activateReserve(0.5) }
+    else if (this.player.divisions < 200) { rate = 5; if (Math.max(this.player.light, this.player.heavy) > this.player.factories * 25) this.player.activateReserve(0.8) }
+    else if (this.player.divisions < 250) { rate = 10; if (Math.max(this.player.light, this.player.heavy) > this.player.factories * 25 * 1.5) this.player.activateReserve(0.7) }
+    else if (this.player.divisions < 300) { rate = 30; if (Math.max(this.player.light, this.player.heavy) > this.player.factories * 25 * 2) this.player.activateReserve(0.6) }
+    else if (this.player.divisions < 350) { rate = 50; if (Math.max(this.player.light, this.player.heavy) > this.player.factories * 25 * 2.5) this.player.activateReserve(0.5) }
+    else if (this.player.divisions < 400) { rate = 60; if (Math.max(this.player.light, this.player.heavy) > this.player.factories * 25 * 3) this.player.activateReserve(0.5) }
     else rate = 95;
 
     if (this.player.factories < 50) {
