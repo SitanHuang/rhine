@@ -2,8 +2,8 @@ window.timestamp = -1025049600; // 7/9/1937
 var ChineseCivilWarTrigger = function () {
   if (pt(0, 0).prov.callTrigger != 'ChineseCivilWarTrigger()') return false;
   if (timestamp > -976573832 && !pt(0, 0).prov.foreignSupplied) {
-    PLAYERS[0].light += 500;
-    PLAYERS[0].heavy += 800;
+    PLAYERS[0].light += 700;
+    PLAYERS[0].heavy += 950;
     PLAYERS[0].constructionPoints += 550 * 10;
     pt(0, 0).prov.foreignSupplied = true;
   }
@@ -11,8 +11,8 @@ var ChineseCivilWarTrigger = function () {
     PLAYERS[1].growthRate = 0.001;
     PLAYERS[1].light = -2500;
     PLAYERS[1].heavy = -3000;
-    PLAYERS[0].light += 2000;
-    PLAYERS[0].heavy += 800;
+    PLAYERS[0].light += 1900;
+    PLAYERS[0].heavy += 700;
     PLAYERS[0].constructionPoints += 550 * 10;
     PLAYERS[1].constructionPoints -= 550 * 20;
     PLAYERS[1].manpower = (PLAYERS[1].manpower -= 1000000).min(0).round();
@@ -78,6 +78,7 @@ var ChineseCivilWarTrigger = function () {
     PLAYERS[2].manpower = PLAYERS[2].manpower.min(PLAYERS[0].manpower);
     PLAYERS[0].manpower /= 4;
     PLAYERS[0].growthRate /= 4;
+    delete PLAYERS[1].ai2;
     PLAYERS[0].ai.attackOrderUntil = PLAYERS[2].ai.attackOrderUntil = timestamp + 3.154e+7;
     //PLAYERS[2].ai.attackOrderLastEnded = timestamp + 3.154e+7;
 
@@ -214,9 +215,9 @@ RR  RR  M    RR     U         M RMM    MMMM   @@@@@@@@@@@|
   })));
 
 MAP_DATA = InvasionOfChinaTerrains;
-pt(25, 41).prov.slots = Array(3).fill('F'); // Nanjing
+pt(25, 42).prov.slots = Array(2).fill('F'); // Nanjing
 pt(30, 35).prov.slots = Array(3).fill('F'); // Wuhan
-pt(33, 22).prov.slots = Array(5).fill('F'); // Chongqing
+pt(33, 22).prov.slots = Array(6).fill('F'); // Chongqing
 
 pt(0, 0).prov.callTrigger = 'ChineseCivilWarTrigger()';
 
@@ -226,20 +227,20 @@ p2.color = 'rgba(140, 193, 226, 0.25)'
 p2.retreatable = 30;
 p2.manpower = Math.floor(Math.random() * 50000 + 6000000);
 p2.growthRate = 0.0075;
-p2._light = 300;
-p2._heavy = 300;
+p2._light = -100;
+p2._heavy = -100;
 p2.factoryInLight = 1;
 let p1 = new Player();
 p1.color = 'rgba(120, 40, 40, 0.25)';
 p1.ai.attackOrderUntil = timestamp + 3.154e+7;
 p1.manpower = Math.floor(Math.random() * 500000 + 2000000);
-p1.growthRate = 0.002;
+p1.growthRate = 0.0015;
 p1._light = 100;
 p1._heavy = 200;
 p1.retreatable = 30;
 p1.factoryInLight = 1;
 p1.savedTemplates = [{"#":"Template","troop":28500,"light":32,"heavy":20,"defaultName":"步兵师团","support":10,"motorized":10},{"#":"Template","troop":8500,"light":14,"heavy":20,"defaultName":"炮兵联队","support":7,"motorized":0},{"#":"Template","troop":4500,"light":8,"heavy":10,"defaultName":"铁道联队","support":4,"motorized":5},{"#":"Template","troop":19000,"light":22,"heavy":14,"defaultName":"警备三单位制师团","support":8,"motorized":7},{"#":"Template","troop":8000,"light":4,"heavy":26,"defaultName":"装甲车队","support":2,"motorized":13},{"#":"Template","troop":18000,"light":6,"heavy":40,"defaultName":"装甲师团","support":3,"motorized":20},{"#":"Template","troop":4000,"light":6,"heavy":6,"defaultName":"侦察小队","support":3,"motorized":3}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;x.irremovable=true;return t});
-p2.savedTemplates = [{"#":"Template","troop":16000,"light":18,"heavy":10,"defaultName":"步兵军团","support":9,"motorized":0},{"#":"Template","troop":10000,"light":12,"heavy":4,"defaultName":"民兵团","support":2,"motorized":0}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
+p2.savedTemplates = [{"#":"Template","troop":16000,"light":18,"heavy":8,"defaultName":"步兵军团","support":4,"motorized":1},{"#":"Template","troop":10000,"light":10,"heavy":4,"defaultName":"民兵团","support":2,"motorized":0}].map(x => {let t = new Template(x.troop, x.light, x.heavy, x.defaultName, x.support, x.motorized);t.defaultName = x.defaultName;return t});
 p2.savedTemplates.push(new Template(10000, 12, 2, '步兵师', 3, 0))
 p2.savedTemplates.push(new Template(8000, 9, 2, '步兵师', 1, 0))
 
@@ -288,7 +289,7 @@ pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
 })
 Array(5).fill(0).map(() => {
   let d = new Division(0, '南京警备', pt(25, 43), new Template(13000, 14, 6, 'Nanjing Garrisons', 7, 6))
-  d.skill = 3;
+  d.skill = (3 + Math.random()).round(2);
 })
 PLAYERS[0].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8}}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg","selected":false}}};
 PLAYERS[0].sumAllGeneralTraits;
