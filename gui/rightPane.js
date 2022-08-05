@@ -135,6 +135,8 @@ function repaintRightList() {
   });
   let ds = {};
   let dn = {};
+  let dm = {};
+  let dm2 = {};
   let sum = 0;
   let highestPerc = 0.0;
   MAP_DATA.forEach(row => {
@@ -145,7 +147,11 @@ function repaintRightList() {
 			let t = (div.soft + div.hard) * div.hardness * div.morale;
 			ds[div.color] = ds[div.color] || 0;
 			dn[div.color] = dn[div.color] || 0;
+			dm[div.color] = dm[div.color] || 0;
+			dm2[div.color] = dm2[div.color] || 0;
 			ds[div.color] += t;
+			dm[div.color] += div.men.round();
+			dm2[div.color] += div.template.troop;
 			dn[div.color]++;
 			sum += t;
 		  }
@@ -158,12 +164,17 @@ function repaintRightList() {
   });
   let summaryHTML = '';
   Object.getOwnPropertyNames(ds).forEach(color => {
-	summaryHTML += `<div style="width: ${ds[color] / (sum + 0.01) / highestPerc * 100}%;background: ${color};height: 5px;"> </div>
-	<span>${dn[color]} divs</span><br>
+	summaryHTML += `
+  <div style="width: ${ds[color] / (sum + 0.01) / highestPerc * 100}%;background: ${color};height: 5px;"> </div>
+	<span>${dn[color]} divs, ${abbreviate(dm[color], 1, false, false)} / ${abbreviate(dm2[color], 1, false, false)}</span><br>
 	`;
   });
+  let selected = 0;
+  SELECTED_UNITS.forEach(x => selected += x.men.round());
+  selected = selected ? `-&#62; ${abbreviate(selected, 1, false, false)} men selected` : '';
   $right_content.innerHTML = `
   ${summaryHTML}
+  ${selected}
   <table class="divisions">
   <tr>
   <td>
