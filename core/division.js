@@ -28,7 +28,7 @@ class Division {
   }
 
   reinforce() {
-    if (Math.random() < Math.min(2, this.supply) / 5) {
+    if (Math.random() < Math.min(2, this.supply) / 4) {
       if (this.hp < 100) {
         let amount = this.template.troop - this.men;
         amount = (Math.min(Math.sqrt(amount * 50), this.player.recruitable / 500) * (this.supply).max(2).min(0)).round();
@@ -236,11 +236,11 @@ class Division {
   }
 
   get hardAttack() {
-    return this.hard * this.loc.terrain.attrition * (0.3 + this.supply.max(1) * 0.7); // supply up to +-70%
+    return this.hard * this.loc.terrain.attrition;
   }
 
   get softAttack() {
-    return this.soft * this.loc.terrain.attrition * (0.4 + this.supply.max(1) * 0.6); // supply up to +-60%
+    return this.soft * this.loc.terrain.attrition;
   }
 
   get hardDefense() {
@@ -258,9 +258,9 @@ class Division {
     if (prov.fort)
       h *= 1.5;
     if (this.supply < 0.25)
-      h *= 0.7; // -30%
-    else if (this.supply < 0.5)
       h *= 0.5; // -50%
+    else if (this.supply < 0.5)
+      h *= 0.7; // -30%
     return h - h * (this.adjacentPenalty / 4);
   }
 
@@ -283,9 +283,9 @@ class Division {
     if (prov.fort)
       s *= 1.5;
     if (this.supply < 0.25)
-      s *= 0.9; // -10%
-    else if (this.supply < 0.5)
       s *= 0.7; // -30%
+    else if (this.supply < 0.5)
+      s *= 0.9; // -10%
     //return s * (this.morale).min(0.8).max(1.2) - s * (this.adjacentPenalty / 4)
     return s - s * (this.adjacentPenalty / 4)
   }
