@@ -91,18 +91,20 @@ class Division {
         this.action = [];
         break;
       } else if (nextPt.owner == this.player || divs.length == 0) {
+        this.updateLocation(nextPt);
+        
         if (nextPt.owner == this.player) {
           this.movementProgress -= 1 * _weather.movementCx.max(1);
         } else {
+          this.movementProgress -= 1 * _weather.movementCx.min(1);
+          
           // new supply is capped at 50% * weather of previous
           // if entering enemy territory
-          this.supply = Math.min(
+          this.supply = this.loc.prov.supply = Math.min(
             this.supply * 0.5 * _weather.supplyCx,
             this.loc.prov.supply * this.template.supplyBuff * _weather.supplyCx
           );
-          this.movementProgress -= 1 * _weather.movementCx.min(1);
         }
-        this.updateLocation(nextPt);
 
         this.action.shift();
       } else {
