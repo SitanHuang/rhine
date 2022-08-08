@@ -235,12 +235,13 @@ class Division {
     return Math.max(adjacentNotToPlayer(this.loc, this.player) - 1, 0);
   }
 
+  // this.hard & this.soft already reduced by supply once
   get hardAttack() {
-    return this.hard * this.loc.terrain.attrition;
+    return this.hard * this.loc.terrain.attrition * (0.5 + this.supply.max(1) * 0.5); // supply up to +-50%;
   }
 
   get softAttack() {
-    return this.soft * this.loc.terrain.attrition;
+    return this.soft * this.loc.terrain.attrition * (0.7 + this.supply.max(1) * 0.3); // supply up to +-30%;
   }
 
   get hardDefense() {
