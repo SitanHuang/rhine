@@ -91,11 +91,19 @@ class Division {
         this.action = [];
         break;
       } else if (nextPt.owner == this.player || divs.length == 0) {
-        if (nextPt.owner == this.player)
+        if (nextPt.owner == this.player) {
           this.movementProgress -= 1 * _weather.movementCx.max(1);
-        else
+        } else {
+          // new supply is capped at 50% * weather of previous
+          // if entering enemy territory
+          this.supply = Math.min(
+            this.supply * 0.5 * _weather.supplyCx,
+            this.loc.prov.supply * this.template.supplyBuff * _weather.supplyCx
+          );
           this.movementProgress -= 1 * _weather.movementCx.min(1);
+        }
         this.updateLocation(nextPt);
+
         this.action.shift();
       } else {
         if (that.hp < that.player.retreatable.min(5) || (that.morale < 0.25)) return;
@@ -228,11 +236,11 @@ class Division {
   }
 
   get hardAttack() {
-    return this.hard * this.loc.terrain.attrition * (0.6 + this.supply.max(2) * 0.4); // supply up to +-40%
+    return this.hard * this.loc.terrain.attrition * (0.3 + this.supply.max(2) * 0.7); // supply up to +-70%
   }
 
   get softAttack() {
-    return this.soft * this.loc.terrain.attrition * (0.7 + this.supply.max(2) * 0.3); // supply up to +-30%
+    return this.soft * this.loc.terrain.attrition * (0.4 + this.supply.max(2) * 0.6); // supply up to +-60%
   }
 
   get hardDefense() {
