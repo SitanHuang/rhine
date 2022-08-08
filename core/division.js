@@ -236,11 +236,11 @@ class Division {
   }
 
   get hardAttack() {
-    return this.hard * this.loc.terrain.attrition * (0.3 + this.supply.max(2) * 0.7); // supply up to +-70%
+    return this.hard * this.loc.terrain.attrition * (0.3 + this.supply.max(1) * 0.7); // supply up to +-70%
   }
 
   get softAttack() {
-    return this.soft * this.loc.terrain.attrition * (0.4 + this.supply.max(2) * 0.6); // supply up to +-60%
+    return this.soft * this.loc.terrain.attrition * (0.4 + this.supply.max(1) * 0.6); // supply up to +-60%
   }
 
   get hardDefense() {
