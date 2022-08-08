@@ -229,7 +229,7 @@ function load1936Scenario() {
   american.irremovable = true;
   let french = new Template(12090, 14, 6, 'French Division', 4, 1);
   french.irremovable = true;
-  let german = new Template(17000, 24, 12, 'Infanterie-Division', 11, 4);
+  let german = new Template(17000, 20, 12, 'Infanterie-Division', 10, 4);
   let germanSS = new Template(18000, 24, 20, 'Waffen-SS Division', 12, 10);
   let italian = new Template(12000, 16, 6, 'Intalian Infantry Division', 8, 3);
   let germanPanzerI = new Template(15050, 4, 30, 'Panzer Corps', 2, 30);
@@ -336,7 +336,7 @@ function trigger_german_ai_attack1936(num) {
 
     MAP_DATA.forEach(r => r.forEach(c => {if (c && c.owner == 1){c.divisions.forEach(x => {x.skill = Math.max(x.skill, 2 + Math.random() * 2);})}}));
 
-    let italian = new Template(14000, 18, 8, 'Intalian Infantry Division', 9, 2);
+    let italian = new Template(14000, 16, 8, 'Intalian Infantry Division', 5, 2);
     // 1.6m in rome
     for (let men = 0;men < 1600000;men += 12000) {
       new Division(1, italian.defaultName, pt(40, 37), italian);
@@ -364,9 +364,11 @@ function trigger_german_ai_attack1936(num) {
       PLAYERS[2].heavy += 2000;
       PLAYERS[0].manpower += 10000000;
       PLAYERS[0].growthRate *= 2;
+      PLAYERS[1].growthRate /= 2;
+      PLAYERS[2].growthRate *= 2;
       if (MAP_DATA[12][88].owner == 2) {
         Array(98).fill(0).forEach((x, i) => {
-          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 18, 11, 'Siberian Division', 5, 3));
+          let d = new Division(2, PLAYERS[2].divisions + i + 'th Siberian Division', pt(12, 88), new Template(14500, 20, 11, 'Siberian Division', 10, 3));
           d.skill = Math.random() * 2 + 2;
         });
       }
@@ -376,7 +378,7 @@ function trigger_german_ai_attack1936(num) {
       PLAYERS[2].heavy += 4000;
       PLAYERS[1].light = -5000;
       PLAYERS[1].heavy = -8000;
-      PLAYERS[1].growthRate /= 3;
+      PLAYERS[1].growthRate /= 2;
       PLAYERS[2].constructionPoints += 550 * 30;
       PLAYERS[1].constructionPoints = -550 * 50;
       PLAYERS[0].constructionPoints += 550 * 30 + 150*20;
