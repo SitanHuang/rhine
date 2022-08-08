@@ -278,8 +278,8 @@ MAP_DATA.forEach((x, row) => (x.forEach((v, col) => {
 })));
 PORTS = PORTS.sort(() => (Math.random() - 0.5));
 // Shanghai
-pt(27, 46).prov.divisions = Array(9).fill(0).map(() => (new Division(1, '步兵师团', pt(27, 46), new Template(14000, 18, 14, 'Divsion', 9, 7))))
-  .concat(Array(10).fill(0).map(() => (new Division(1, '步兵联队', pt(27, 46), new Template(4000, 8, 4, 'Tank Division', 3, 4)))))
+pt(27, 46).prov.divisions = Array(9).fill(0).map(() => (new Division(1, '步兵师团', pt(27, 46), new Template(14000, 18, 11, 'Divsion', 9, 1))))
+  .concat(Array(10).fill(0).map(() => (new Division(1, '步兵联队', pt(27, 46), new Template(4000, 8, 4, 'Tank Division', 3, 1)))))
   .concat(Array(3).fill(0).map(() => (new Division(1, '装甲中队', pt(27, 46), new Template(4000, 4, 12, 'Tank Division', 2, 12)))));
 // Nanjing
 pt(25, 43).prov.divisions = Array(2).fill(0).map(() => {
