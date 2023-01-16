@@ -165,7 +165,7 @@ function load1941Scenario() {
   PLAYERS[1].light = -100;
   PLAYERS[1].heavy = -100;
 
-  PLAYERS[1].generals = {"Generalissimo":{"Chiang Kai-Shek":{"desc":"President, Republic Of China","path":"scenario/ChineseGenerals/GeneralissimoChiangKaiShek.jpg","mod":{"o":1.1,"b":1.1,"s":1,"e":1.1},"selected":false},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":true}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":false},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
+  PLAYERS[1].generals = {"Generalissimo":{"Oberkommando":{"desc":"Military High Command","path":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Chef_des_Oberkommandos_der_Wehrmacht_als_Generalfeldmarschall.svg/330px-Chef_des_Oberkommandos_der_Wehrmacht_als_Generalfeldmarschall.svg.png","mod":{"o":1.4,"b":1.3,"s":1.5,"e":2},"selected":true},"Game Founder":{"desc":"Programmer","path":"scenario/ChineseGenerals/GeneralissimoSitanHuang.jpg","mod":{"o":0.8,"b":1.4,"s":1.2,"e":0.8},"selected":false}},"Field Marshal":{"Hu Zong-Nan":{"desc":"Eagle of the Northwest","path":"scenario/ChineseGenerals/FieldMarshalHuZongNan.jpg","mod":{"o":1.3,"b":0.9,"s":0.8,"e":0.9},"selected":true},"Li Zong-ren":{"desc":"Vice President, Republic Of China","path":"scenario/ChineseGenerals/FieldMarshalLiZongRen.jpg","mod":{"o":1,"b":1.3,"s":0.8,"e":1},"selected":false},"Gao Zhi-hang":{"desc":"Modern Warfare Expert","mod":{"o":0.8,"b":1.3,"s":1.3,"e":0.7},"path":"scenario/ChineseGenerals/FieldMarshalGaoZhihang.jpg","selected":true},"Zhu De":{"desc":"Pioneers of Liberation","mod":{"o":1.3,"b":1.2,"s":0.9,"e":0.8},"path":"scenario/ChineseGenerals/FieldMarshalZhuDe.jpg","selected":true},"Xiao Yi-Su":{"desc":"Minister of National Defense, Republic Of China","mod":{"o":1,"b":0.8,"s":0.7,"e":1.5},"path":"scenario/ChineseGenerals/FieldMarshalXiaoYiSu.jpg"}}};
   PLAYERS[1].sumAllGeneralTraits;
 
   window.p3 = new Player();
@@ -192,7 +192,7 @@ function load1941Scenario() {
   let germanMotorized = new Template(17000, 14, 23, 'Motorized Division', 7, 23);
   let germanArtillery = new Template(4000, 1, 20, 'Anti-Tank Brigade', 1, 1);
   let germanCombinedArms = new Template(20000, 24, 42, 'Combined Arms Crops', 12, 42);
-  let soviet = new Template(14100, 16, 10, 'Rifle Division', 5, 2);
+  let soviet = new Template(18100, 16, 10, 'Rifle Division', 5, 2);
   let sovietMilitia = new Template(10000, 8, 1, 'Militia Division', 0.1, 0.1);
   let sovietTank = new Template(12000, 4, 34, 'Tank Division', 2, 34);
   let sovietTank2 = new Template(6000, 2, 15, 'Tank Regiment', 1, 5);
